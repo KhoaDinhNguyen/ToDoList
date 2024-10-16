@@ -12,13 +12,12 @@ const getUsers = (req, res, next) => {
         if (error) {
             throw error;
         }
-        console.log(result)
         res.status(200).json(result.rows);
     })
 }
 
 const getUserName = (req, res, next) => {
-    pool.query(`SELECT password FROM users WHERE username = '${req.body.username}'`, (error, result) => {
+    pool.query(`SELECT password FROM users WHERE name = '${req.body.username}'`, (error, result) => {
         if (error) {
             throw error;
         }
@@ -30,7 +29,7 @@ const getUserName = (req, res, next) => {
 const validateUserName = (req, res, next) => {
     const password = req.body.password;
     if (password === res.password) {
-        pool.query(`SELECT * FROM users WHERE username = '${req.body.username}'`, (_, result) => {
+        pool.query(`SELECT * FROM users WHERE name = '${req.body.username}'`, (_, result) => {
             res.status(200).json({ ...result.rows[0], message: 'Found'});
         });
     }

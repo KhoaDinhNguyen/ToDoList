@@ -3,12 +3,13 @@ import './App.css';
 import Login from './app/Login';
 import Root from './app/Root';
 import Authen from './app/Authen';
+import User from './app/User';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter(createRoutesFromElements(
-  <Route path="ToDoList" element={<Root/>}>
+  <Route path="/" element={<Root/>}>
     <Route path="login" element={<Login/>}/>
-    <Route path="authen" element={<Authen/>}/>
+    <Route path=":username" element={<User/>}/>
   </Route>
 ));
 
