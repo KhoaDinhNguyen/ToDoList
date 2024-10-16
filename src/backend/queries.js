@@ -23,7 +23,7 @@ const getUserName = (req, res, next) => {
         }
         res.password = result.rows[0].password;
         next();
-    })
+    });
 }
 
 const validateUserName = (req, res, next) => {
@@ -37,8 +37,19 @@ const validateUserName = (req, res, next) => {
         res.status(404).json({message: 'Not found', error: 'The passord or username is incorrect'});
     }
 }
+
+const getProjects = (req, res, next) => {
+    const userName = req.params.user;
+    pool.query(`SELECT * FROM users u JOIN projects p ON u.name = p.user_name WHERE u.name = '${userName}';`, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        res.status(200).json(result.rows);
+    });
+}
 module.exports = {
     getUsers,
     getUserName,
-    validateUserName
+    validateUserName,
+    getProjects
 }

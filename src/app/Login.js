@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { userNameLoginSlice, passwordLoginSlice } from "../features/signIn/signInSlice";
 import { useNavigate } from "react-router-dom";
 
-const url = "http://localhost:8080/ToDoList/authen";
+const endpoint = "http://localhost:8080/login";
 
 function Login() {
     
@@ -22,7 +22,7 @@ function Login() {
     const onClickLogin = async () => {
         const data = JSON.stringify({username: username, password: password});
         try {
-            const response = await fetch(url, {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 body: data,
                 headers: {
@@ -31,7 +31,6 @@ function Login() {
             })
             if (response.ok) {
                 const jsonResponse = await response.json();
-                console.log(jsonResponse);
                 navigate(`/${jsonResponse.name}`);
             }
         }

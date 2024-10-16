@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static('public'));
 
 app.get('/', query.getUsers);
-app.post('/ToDoList/authen', query.getUserName, query.validateUserName);
+app.post('/login', query.getUserName, query.validateUserName);
+app.get('/:user', query.getProjects);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
