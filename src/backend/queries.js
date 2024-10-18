@@ -38,9 +38,9 @@ const validateUserName = (req, res, next) => {
     }
 }
 
-const getProjects = (req, res, next) => {
+const getDatabase = (req, res, next) => {
     const userName = req.params.user;
-    pool.query(`SELECT * FROM users u JOIN projects p ON u.name = p.user_name WHERE u.name = '${userName}';`, (err, result) => {
+    pool.query(`SELECT * FROM user_project_task WHERE user_account = '${userName}';`, (err, result) => {
         if (err) {
             throw err;
         }
@@ -51,5 +51,5 @@ module.exports = {
     getUsers,
     getUserName,
     validateUserName,
-    getProjects
+    getDatabase
 }

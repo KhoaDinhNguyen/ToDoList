@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { userNameLoginSlice, passwordLoginSlice } from "../features/signIn/signInSlice";
+import { fullNameSlice, passwordSlice } from "../features/fetchingData/userDataSlice";
 import { useNavigate } from "react-router-dom";
 
 const endpoint = "http://localhost:8080/login";
@@ -31,7 +32,9 @@ function Login() {
             })
             if (response.ok) {
                 const jsonResponse = await response.json();
-                navigate(`/${jsonResponse.name}`);
+                dispatch(fullNameSlice.actions.initialize(jsonResponse.full_name));
+                dispatch(passwordSlice.actions.initialize(jsonResponse.password));
+                navigate(`/user/${jsonResponse.name}`);
             }
         }
         catch (error) {
