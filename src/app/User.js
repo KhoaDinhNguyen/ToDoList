@@ -1,8 +1,9 @@
 import { Outlet, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { projectsSlice, tasksSlice } from "../features/fetchingData/databaseDataSlice.js";
+import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
-
+import ListProject from "../components/Project.js";
 const url = "http://localhost:8080/";
 
 const fetchData = (url) => {
@@ -22,9 +23,10 @@ const fetchData = (url) => {
 function User(){
     const dispatch = useDispatch();
     const params = useParams();
+    const fullName = useSelector((state) => state[fullNameSlice.name]);
     const userName = params.username;
     const endpoint = url + userName;
-
+    
     useEffect(() => {
         fetchData(endpoint).then(data => {
             dispatch(tasksSlice.actions.initialize(data));
@@ -35,8 +37,8 @@ function User(){
 
     return (
         <>
-            <p>{userName}</p>
-            <p></p>
+            <p>{userName} - Full name: {fullName}</p>
+            <ListProject />
         </>
     )
 }
@@ -50,19 +52,4 @@ function UserHeader() {
     )
 }
 
-function ListProject(prop) {
-    const projects = prop.projects;
-    const projectsList = [];
-    for(const project of projects) {
-        projectsList.push(<li key={project.name}><p className="project">{project.name}</p></li>);
-    }
-
-    return (
-        <>
-            <ul>
-                {projectsList}
-            </ul>
-        </>
-    )
-}
 export {UserHeader, User};
