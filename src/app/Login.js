@@ -34,7 +34,7 @@ function Login() {
                 const jsonResponse = await response.json();
                 dispatch(fullNameSlice.actions.initialize(jsonResponse.full_name));
                 dispatch(passwordSlice.actions.initialize(jsonResponse.password));
-                navigate(`/user/${jsonResponse.name}`);
+                navigate(`/ToDoList/user/${jsonResponse.name}`);
             }
         }
         catch (error) {
