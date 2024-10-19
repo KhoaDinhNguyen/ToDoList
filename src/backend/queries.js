@@ -21,8 +21,13 @@ const getUserName = (req, res, next) => {
         if (error) {
             throw error;
         }
-        res.password = result.rows[0].password;
-        next();
+        else if (result.rows.length === 0) {
+            res.status(400).json({message: 'Not found', error: 'The passord or username is incorrect'});
+        }
+        else {
+            res.password = result.rows[0].password;
+            next();
+        }
     });
 }
 
@@ -34,7 +39,7 @@ const validateUserName = (req, res, next) => {
         });
     }
     else {
-        res.status(404).json({message: 'Not found', error: 'The passord or username is incorrect'});
+        res.status(400).json({message: 'Not found', error: 'The passord or username is incorrect'});
     }
 }
 
