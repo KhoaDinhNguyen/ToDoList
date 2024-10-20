@@ -33,7 +33,8 @@ function Login() {
                 body: data,
                 headers: {
                     'Content-type' : 'application/json'
-                }
+                },
+                credentials: 'include'
             })
             const jsonResponse = await response.json();
             setLoading(false);

@@ -1,20 +1,20 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { projectsSlice, tasksSlice } from "../features/fetchingData/databaseDataSlice.js";
 import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
 import ListProject from "../components/Project.js";
-const url = "http://localhost:8080/";
+
+const url = "http://localhost:8080/user/";
+
 
 const fetchData = (url) => {
     return new Promise((resolve, reject) => {
-        fetch(url)
-        .then(response => {
-            if(!response.ok) {
-                throw new Error("Network..")
-            }
-            return response.json();
+        fetch(url, {
+            method: 'GET',
+            credentials: 'include'
         })
+        .then(response => response.json())
         .then(data => resolve(data))
         .catch(error => reject(error));
     })
@@ -23,16 +23,26 @@ const fetchData = (url) => {
 function User(){
     const dispatch = useDispatch();
     const params = useParams();
+    const navigate = useNavigate();
     const fullName = useSelector((state) => state[fullNameSlice.name]);
     const userName = params.username;
     const endpoint = url + userName;
     
     useEffect(() => {
+        console.log(endpoint);
         fetchData(endpoint).then(data => {
-            dispatch(tasksSlice.actions.initialize(data));
-            dispatch(projectsSlice.actions.initialize(data));
-        }).catch(error => {throw error});
-    }, [endpoint, dispatch]);
+            console.log(data);
+            if (data.error === 'BAD CREDENTIALS') {
+                navigate('/ToDoList/login');
+            }
+            else {
+                dispatch(tasksSlice.actions.initialize(data));
+                dispatch(projectsSlice.actions.initialize(data));
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    }, [endpoint, dispatch, navigate]);
     
 
     return (
@@ -43,10 +53,10 @@ function User(){
     )
 }
 
+
 function UserHeader() {
     return (
         <>
-            <p>This is header</p>
             <Outlet/>
         </>
     )

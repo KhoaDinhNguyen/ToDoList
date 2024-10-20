@@ -1,6 +1,7 @@
-import { useSearchParams } from "react-router-dom";
 
-function Authen() {
+
+function Authen(props) {
+
     return (
         <>
             <h1>Waiting</h1>

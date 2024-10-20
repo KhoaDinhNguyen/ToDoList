@@ -8,17 +8,13 @@ const pool = new Pool({
 })
 
 const getUsers = (req, res, next) => {
-    pool.query("SELECT * FROM users", (error, result) => {
-        if (error) {
-            throw error;
-        }
-        res.status(200).json(result.rows);
-    })
+    res.status(200).send("START");
 }
 
 const getUserName = (req, res, next) => {
     pool.query(`SELECT password FROM users WHERE name = '${req.body.username}'`, (error, result) => {
         if (error) {
+            res.status(400).json({message: 'Database problem'});
             throw error;
         }
         else if (result.rows.length === 0) {
@@ -35,6 +31,11 @@ const validateUserName = (req, res, next) => {
     const password = req.body.password;
     if (password === res.password) {
         pool.query(`SELECT * FROM users WHERE name = '${req.body.username}'`, (_, result) => {
+            req.session.authenticated = true;
+            req.session.user = {
+                ...result.rows[0]
+            };
+
             res.status(200).json({ ...result.rows[0], message: 'Found'});
         });
     }
@@ -45,12 +46,17 @@ const validateUserName = (req, res, next) => {
 
 const getDatabase = (req, res, next) => {
     const userName = req.params.user;
-    pool.query(`SELECT * FROM user_project_task WHERE user_account = '${userName}';`, (err, result) => {
-        if (err) {
-            throw err;
-        }
-        res.status(200).json(result.rows);
-    });
+    if (!req.session.authenticated || req.session.user.name !== userName) {
+        res.status(400).json({error: 'BAD CREDENTIALS'});
+    }
+    else {
+        pool.query(`SELECT * FROM user_project_task WHERE user_account = '${userName}';`, (err, result) => {
+            if (err) {
+                throw err;
+            }
+            res.status(200).json(result.rows);
+        });
+    }
 }
 module.exports = {
     getUsers,
