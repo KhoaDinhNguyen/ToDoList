@@ -26,7 +26,6 @@ function Login() {
         event.preventDefault();
         setLoading(true);
         const data = JSON.stringify({username: username, password: password});
-        console.log(data);
         try {
             const response = await fetch(endpoint, {
                 method: 'POST',

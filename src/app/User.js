@@ -31,11 +31,11 @@ function User(){
     useEffect(() => {
         console.log(endpoint);
         fetchData(endpoint).then(data => {
-            console.log(data);
             if (data.error === 'BAD CREDENTIALS') {
                 navigate('/ToDoList/login');
             }
             else {
+                console.log(data);
                 dispatch(tasksSlice.actions.initialize(data));
                 dispatch(projectsSlice.actions.initialize(data));
             }

@@ -24,6 +24,7 @@ export const projectsSlice = createSlice({
     initialState: [],
     reducers: {
         initialize(state, action) {
+            state = [];
             const set = new Set();
             for (const data of action.payload) {
                 const currentProject = returnProjectFromData(data.project_name, data.project_description, data.project_time_created);
@@ -32,6 +33,10 @@ export const projectsSlice = createSlice({
                     set.add(currentProject);
                 }
             }
+            return state;
+        },
+        remove(state, action) {
+            state = [];
             return state;
         }
     }
@@ -42,6 +47,7 @@ export const tasksSlice = createSlice({
     initialState: [],
     reducers: {
         initialize(state, action) {
+            state = [];
             for (const data of action.payload) {
                 if (data.task_name !== null) {
                     state.push(
@@ -49,6 +55,10 @@ export const tasksSlice = createSlice({
                     );
                 }
             }
+            return state;
+        },
+        remove(state, action) {
+            state = [];
             return state;
         }
     }

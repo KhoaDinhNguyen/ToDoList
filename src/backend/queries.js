@@ -45,12 +45,12 @@ const validateUserName = (req, res, next) => {
 }
 
 const getDatabase = (req, res, next) => {
-    const userName = req.params.user;
-    if (!req.session.authenticated || req.session.user.name !== userName) {
+    const username = req.params.user;
+    if (!req.session.authenticated || req.session.user.name !== username) {
         res.status(400).json({error: 'BAD CREDENTIALS'});
     }
     else {
-        pool.query(`SELECT * FROM user_project_task WHERE user_account = '${userName}';`, (err, result) => {
+        pool.query(`SELECT * FROM user_project_task WHERE user_account = '${username}';`, (err, result) => {
             if (err) {
                 throw err;
             }
@@ -58,9 +58,24 @@ const getDatabase = (req, res, next) => {
         });
     }
 }
+
+const createUser = (req, res, next) => {
+    const password = req.body.password;
+    const fullname = req.body.fullname;
+    const username = req.body.username;
+    pool.query(`CALL create_user('${username}', '${fullname}', '${password}')`, (err, result) => {
+        if (err) {
+            res.status(400).json({message: err.message, error: 'Have error'});
+        }
+        else {
+            res.status(200).json({message: 'User signs up sucessfully'});
+        }
+    })
+}
 module.exports = {
     getUsers,
     getUserName,
     validateUserName,
-    getDatabase
+    getDatabase,
+    createUser
 }

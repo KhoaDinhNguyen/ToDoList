@@ -5,6 +5,7 @@ function Root() {
             <p>This is Root page 1</p>
             <ul>
                 <li><NavLink to="login">Login</NavLink></li>
+                <li><NavLink to="signup">Sign up</NavLink></li>
             </ul>
             <Outlet />
 

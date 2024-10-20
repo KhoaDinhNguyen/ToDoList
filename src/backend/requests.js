@@ -28,6 +28,7 @@ app.use(
 
 app.get('/', query.getUsers);
 app.post('/login', query.getUserName, query.validateUserName);
+app.post('/signup', query.createUser);
 app.get('/user/:user', query.getDatabase);
 
 app.listen(PORT, () => {
