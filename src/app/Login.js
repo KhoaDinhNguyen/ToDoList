@@ -4,7 +4,7 @@ import { fullNameSlice, passwordSlice } from "../features/fetchingData/userDataS
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const endpoint = "http://localhost:8080/login";
+const endpoint = "https://localhost:8080/login";
 
 function Login() {
     const username = useSelector((state) => state[userNameLoginSlice.name]);

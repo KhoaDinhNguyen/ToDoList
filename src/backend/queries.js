@@ -1,4 +1,8 @@
+const dotenv = require('dotenv');
 const Pool = require('pg').Pool;
+
+dotenv.config();
+
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
@@ -35,17 +39,21 @@ const validateUserName = (req, res, next) => {
             req.session.user = {
                 ...result.rows[0]
             };
-
+            console.log(req.sessionID);
+            console.log(req.session);
             res.status(200).json({ ...result.rows[0], message: 'Found'});
         });
     }
     else {
+        console.log("HAHA");
         res.status(400).json({message: 'Not found', error: 'The passord or username is incorrect'});
     }
 }
 
 const getDatabase = (req, res, next) => {
     const username = req.params.user;
+    console.log(req.sessionID);
+    console.log(req.session);
     if (!req.session.authenticated || req.session.user.name !== username) {
         res.status(400).json({error: 'BAD CREDENTIALS'});
     }
@@ -54,6 +62,7 @@ const getDatabase = (req, res, next) => {
             if (err) {
                 throw err;
             }
+            console.log(result.rows);
             res.status(200).json(result.rows);
         });
     }

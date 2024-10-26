@@ -5,16 +5,18 @@ import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
 import ListProject from "../components/Project.js";
 
-const url = "http://localhost:8080/user/";
+const url = "https://localhost:8080/user/";
 
 
 const fetchData = (url) => {
+    console.log(url);
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'GET',
-            credentials: 'include'
+            credentials: 'include',
+            mode: 'cors'
         })
-        .then(response => response.json())
+        .then(response => {console.log(response); return response.json();} )
         .then(data => resolve(data))
         .catch(error => reject(error));
     })
@@ -28,11 +30,15 @@ function User(){
     const userName = params.username;
     const endpoint = url + userName;
     
+    
     useEffect(() => {
         console.log(endpoint);
         fetchData(endpoint).then(data => {
-            if (data.error === 'BAD CREDENTIALS') {
-                navigate('/ToDoList/login');
+            console.log(data);
+            if (data.error) {
+                if (data.error === 'BAD CREDENTIALS') {
+                    navigate('/ToDoList/login');
+                }
             }
             else {
                 console.log(data);

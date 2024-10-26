@@ -3,7 +3,7 @@ import { userNameSignUpSlice, fullNameSignUpSlice, passwordSignUpSlice, correctP
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const endpoint = "http://localhost:8080/signup";
+const endpoint = "https://localhost:8080/signup";
 
 function SignUp() {
     const dispatch = useDispatch();
