@@ -41,11 +41,11 @@ const validateUserName = (req, res, next) => {
             };
             console.log(req.sessionID);
             console.log(req.session);
+            res.cookie('hello', 'world', {maxAge: 600000, secure: true});
             res.status(200).json({ ...result.rows[0], message: 'Found'});
         });
     }
     else {
-        console.log("HAHA");
         res.status(400).json({message: 'Not found', error: 'The passord or username is incorrect'});
     }
 }
@@ -54,6 +54,7 @@ const getDatabase = (req, res, next) => {
     const username = req.params.user;
     console.log(req.sessionID);
     console.log(req.session);
+    console.log(req.cookies);
     if (!req.session.authenticated || req.session.user.name !== username) {
         res.status(400).json({error: 'BAD CREDENTIALS'});
     }
@@ -62,7 +63,6 @@ const getDatabase = (req, res, next) => {
             if (err) {
                 throw err;
             }
-            console.log(result.rows);
             res.status(200).json(result.rows);
         });
     }

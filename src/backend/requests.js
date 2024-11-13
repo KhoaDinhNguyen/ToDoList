@@ -6,7 +6,7 @@ const query = require('./queries');
 const path = require('path');
 const https = require('https');
 const fs = require('fs');
-
+const cookieParser = require('cookie-parser')
 const app = express();
 const PORT = 8080;
 const store = new session.MemoryStore();
@@ -21,27 +21,29 @@ const httpsOptions = {
 const sslServer = https.createServer(httpsOptions, app);
 
 app.use(cors({
-    origin: ["http://localhost:3000", "https://khoadinhnguyen.github.io", "https://localhost:3000"],
+    origin: ["http://localhost:3000", "https://khoadinhnguyen.github.io", "https://localhost:3000", "https://192.168.12.238:3000"],
     methods: ["POST", "GET"],
     credentials: true
 }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static('public'));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '..', '..', '/public')));
 
 app.set('trust proxy', 1);
 
 app.use(
     session({
-        secret: "bocttt",
+        secret: "bocttt play video games",
         resave: false,
         saveUninitialized: false,
         cookie: { 
             maxAge: 1000 * 60 * 5, 
             secure: true,
+            sameSite: 'none'
         },
-
+        store
     })
 );
 
