@@ -5,7 +5,7 @@ import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
 import ListProject from "../components/Project.js";
 
-const url = "https://localhost:8080/user/";
+const url = "http://localhost:8080/user/";
 
 
 const fetchData = (url) => {

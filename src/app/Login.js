@@ -4,7 +4,7 @@ import { fullNameSlice, passwordSlice } from "../features/fetchingData/userDataS
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const endpoint = "https://localhost:8080/login";
+const endpoint = "http://localhost:8080/login";
 
 function Login() {
     const username = useSelector((state) => state[userNameLoginSlice.name]);
@@ -29,6 +29,7 @@ function Login() {
         try {
             const response = await fetch(endpoint, {
                 method: 'POST',
+                mode: 'cors',
                 body: data,
                 headers: {
                     'Content-type' : 'application/json'
@@ -36,7 +37,9 @@ function Login() {
                 credentials: 'include'
             })
             const jsonResponse = await response.json();
+            console.log(jsonResponse);  
             setLoading(false);
+            console.log("HAHA");
             if (response.ok) {
                 dispatch(fullNameSlice.actions.initialize(jsonResponse.full_name));
                 dispatch(passwordSlice.actions.initialize(jsonResponse.password));

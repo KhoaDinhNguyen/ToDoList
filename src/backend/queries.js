@@ -36,12 +36,13 @@ const validateUserName = (req, res, next) => {
     if (password === res.password) {
         pool.query(`SELECT * FROM users WHERE name = '${req.body.username}'`, (_, result) => {
             req.session.authenticated = true;
+
             req.session.user = {
                 ...result.rows[0]
             };
             console.log(req.sessionID);
             console.log(req.session);
-            res.cookie('hello', 'world', {maxAge: 600000, secure: true});
+            res.cookie("session", req.sessionID, {maxAge: 30000});
             res.status(200).json({ ...result.rows[0], message: 'Found'});
         });
     }
@@ -54,7 +55,7 @@ const getDatabase = (req, res, next) => {
     const username = req.params.user;
     console.log(req.sessionID);
     console.log(req.session);
-    console.log(req.cookies);
+    console.log(res.cookies);
     if (!req.session.authenticated || req.session.user.name !== username) {
         res.status(400).json({error: 'BAD CREDENTIALS'});
     }
