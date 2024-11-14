@@ -5,7 +5,7 @@ import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
 import ListProject from "../components/Project.js";
 
-const url = "https://localhost:8080/user/";
+const url = "http://localhost:8080/user/";
 
 
 const fetchData = (url) => {
@@ -13,8 +13,6 @@ const fetchData = (url) => {
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'GET',
-            credentials: 'include',
-            mode: 'cors'
         })
         .then(response => {console.log(response); return response.json();} )
         .then(data => resolve(data))

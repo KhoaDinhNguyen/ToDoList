@@ -35,13 +35,6 @@ const validateUserName = (req, res, next) => {
     const password = req.body.password;
     if (password === res.password) {
         pool.query(`SELECT * FROM users WHERE name = '${req.body.username}'`, (_, result) => {
-            req.session.authenticated = true;
-            req.session.user = {
-                ...result.rows[0]
-            };
-            console.log(req.sessionID);
-            console.log(req.session);
-            res.cookie('hello', 'world', {maxAge: 600000, secure: true});
             res.status(200).json({ ...result.rows[0], message: 'Found'});
         });
     }
@@ -52,20 +45,12 @@ const validateUserName = (req, res, next) => {
 
 const getDatabase = (req, res, next) => {
     const username = req.params.user;
-    console.log(req.sessionID);
-    console.log(req.session);
-    console.log(req.cookies);
-    if (!req.session.authenticated || req.session.user.name !== username) {
-        res.status(400).json({error: 'BAD CREDENTIALS'});
-    }
-    else {
-        pool.query(`SELECT * FROM user_project_task WHERE user_account = '${username}';`, (err, result) => {
-            if (err) {
-                throw err;
-            }
-            res.status(200).json(result.rows);
-        });
-    }
+    pool.query(`SELECT * FROM user_project_task WHERE user_account = '${username}';`, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        res.status(200).json(result.rows);
+    });
 }
 
 const createUser = (req, res, next) => {

@@ -4,7 +4,7 @@ import { fullNameSlice, passwordSlice } from "../features/fetchingData/userDataS
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const endpoint = "https://localhost:8080/login";
+const endpoint = "http://localhost:8080/login";
 
 function Login() {
     const username = useSelector((state) => state[userNameLoginSlice.name]);
@@ -33,7 +33,6 @@ function Login() {
                 headers: {
                     'Content-type' : 'application/json'
                 },
-                credentials: 'include'
             })
             const jsonResponse = await response.json();
             setLoading(false);
@@ -55,10 +54,10 @@ function Login() {
         <>  
             <form onSubmit={onSubmitLogin}>
                 <label htmlFor="username">User name </label>
-                <input name="username" type="text" required value={username} onChange={onChangeUserName}/>
+                <input name="username" type="text" required value={username} onChange={onChangeUserName} autoComplete=""/>
                 <br></br>
                 <label htmlFor="password">Password </label>
-                <input name="password" type="password" required value={password} onChange={onChangePassword}/>
+                <input name="password" type="password" required value={password} onChange={onChangePassword} autoComplete=""/>
                 <br></br>
                 <input type="submit" value=" Sign in" />
             </form>
