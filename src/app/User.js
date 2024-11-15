@@ -5,8 +5,7 @@ import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
 import ListProject from "../components/Project.js";
 
-const url = "http://localhost:8080/user/";
-
+const url = process.env.REACT_APP_USER_API_URL;
 
 const fetchData = (url) => {
     console.log(url);
@@ -14,40 +13,39 @@ const fetchData = (url) => {
         fetch(url, {
             method: 'GET',
         })
-        .then(response => {console.log(response); return response.json();} )
+        .then(response => response.json())
         .then(data => resolve(data))
         .catch(error => reject(error));
     })
 }
 
 function User(){
-    const dispatch = useDispatch();
     const params = useParams();
     const navigate = useNavigate();
     const fullName = useSelector((state) => state[fullNameSlice.name]);
     const userName = params.username;
+    const dispatch = useDispatch();
     const endpoint = url + userName;
-    
-    
+
+    const userNameAuthen = sessionStorage.getItem('username');
+
     useEffect(() => {
-        console.log(endpoint);
+        if (userNameAuthen !== userName) {
+            alert('BAD');
+            navigate('/ToDoList/login')
+        }
         fetchData(endpoint).then(data => {
-            console.log(data);
-            if (data.error) {
-                if (data.error === 'BAD CREDENTIALS') {
-                    navigate('/ToDoList/login');
-                }
-            }
-            else {
-                console.log(data);
-                dispatch(tasksSlice.actions.initialize(data));
-                dispatch(projectsSlice.actions.initialize(data));
-            }
+            dispatch(tasksSlice.actions.initialize(data));
+            dispatch(projectsSlice.actions.initialize(data));
         }).catch(error => {
             console.log(error);
         });
-    }, [endpoint, dispatch, navigate]);
+    }, [endpoint, dispatch, navigate, userName, userNameAuthen]);
     
+
+    if (userNameAuthen !== userName) {
+        return <></>;
+    }
 
     return (
         <>
@@ -56,7 +54,6 @@ function User(){
         </>
     )
 }
-
 
 function UserHeader() {
     return (

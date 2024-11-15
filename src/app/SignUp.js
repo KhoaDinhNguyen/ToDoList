@@ -3,7 +3,7 @@ import { userNameSignUpSlice, fullNameSignUpSlice, passwordSignUpSlice, correctP
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const endpoint = "http://localhost:8080/signup";
+const endpoint = process.env.REACT_APP_SIGN_UP_API_URL;
 
 function SignUp() {
     const dispatch = useDispatch();
@@ -52,7 +52,6 @@ function SignUp() {
                     headers: {
                         'Content-type' : 'application/json'
                     },
-                    credentials: 'include'
                 });
                 const jsonResponse = await response.json();
                 setResponse(jsonResponse);

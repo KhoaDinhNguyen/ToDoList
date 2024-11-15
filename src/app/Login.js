@@ -4,7 +4,7 @@ import { fullNameSlice, passwordSlice } from "../features/fetchingData/userDataS
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const endpoint = "http://localhost:8080/login";
+const endpoint = process.env.REACT_APP_LOGIN_API_URL;
 
 function Login() {
     const username = useSelector((state) => state[userNameLoginSlice.name]);
@@ -37,6 +37,7 @@ function Login() {
             const jsonResponse = await response.json();
             setLoading(false);
             if (response.ok) {
+                sessionStorage.setItem("username", username);
                 dispatch(fullNameSlice.actions.initialize(jsonResponse.full_name));
                 dispatch(passwordSlice.actions.initialize(jsonResponse.password));
                 navigate(`/ToDoList/user/${jsonResponse.name}`);
