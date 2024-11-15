@@ -35,6 +35,11 @@ export const projectsSlice = createSlice({
             }
             return state;
         },
+        add(state, action) {
+            const data = action.payload;
+            state.push(returnProjectFromData(data.project_name, data.project_description, data.project_time_created));
+            return state;
+        },
         remove(state, action) {
             state = [];
             return state;

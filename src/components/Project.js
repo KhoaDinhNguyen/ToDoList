@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 
 // Create object of object to easily access the data without join in
 // Cons: many tasks will effect the memory
-function handleProjectsAndTasks (projects, tasks, filter) {
+function handleProjectsAndTasks(projects, tasks, filter) {
+    console.log(projects);
     const data = {};
     for (const project of projects) {
         data[project.project_name] = {

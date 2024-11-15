@@ -15,6 +15,7 @@ app.get('/', query.getUsers);
 app.post('/login', query.getUserName, query.validateUserName);
 app.post('/signup', query.createUser);
 app.get('/user/:user', query.getDatabase);
+app.post('/project/:user', query.createProject);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

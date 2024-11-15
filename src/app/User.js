@@ -4,11 +4,11 @@ import { projectsSlice, tasksSlice } from "../features/fetchingData/databaseData
 import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
 import ListProject from "../components/Project.js";
+import CreateProjectForm from "../components/project/CreateProjectForm.js";
 
 const url = process.env.REACT_APP_USER_API_URL;
 
 const fetchData = (url) => {
-    console.log(url);
     return new Promise((resolve, reject) => {
         fetch(url, {
             method: 'GET',
@@ -26,13 +26,13 @@ function User(){
     const userName = params.username;
     const dispatch = useDispatch();
     const endpoint = url + userName;
-
+    
     const userNameAuthen = sessionStorage.getItem('username');
 
     useEffect(() => {
         if (userNameAuthen !== userName) {
             alert('BAD');
-            navigate('/ToDoList/login')
+            navigate('/ToDoList/login');
         }
         fetchData(endpoint).then(data => {
             dispatch(tasksSlice.actions.initialize(data));
@@ -49,6 +49,7 @@ function User(){
 
     return (
         <>
+            <CreateProjectForm userName={userName}/>
             <p>{userName} - Full name: {fullName}</p>
             <ListProject />
         </>
@@ -62,5 +63,6 @@ function UserHeader() {
         </>
     )
 }
+
 
 export {UserHeader, User};
