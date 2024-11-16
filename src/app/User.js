@@ -5,6 +5,7 @@ import { fullNameSlice } from "../features/fetchingData/userDataSlice.js";
 import { useEffect } from "react";
 import ListProject from "../components/Project.js";
 import CreateProjectForm from "../components/project/CreateProjectForm.js";
+import LogOut from "../components/logOut/LogOut.js";
 
 const url = process.env.REACT_APP_USER_API_URL;
 
@@ -51,7 +52,8 @@ function User(){
         <>
             <CreateProjectForm userName={userName}/>
             <p>{userName} - Full name: {fullName}</p>
-            <ListProject />
+            <ListProject/>
+            <LogOut/>
         </>
     )
 }
