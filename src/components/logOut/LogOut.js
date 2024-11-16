@@ -4,8 +4,8 @@ function LogOut() {
     const navigate = useNavigate();
 
     const onClickLogOut = () => {
-        sessionStorage.setItem("username", "");
-        navigate("/ToDoList/login");
+        localStorage.setItem("username", "");
+        navigate("/ToDoList/homepage/login");
     };
     
     return (

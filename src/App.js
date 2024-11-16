@@ -4,15 +4,18 @@ import Login from './app/Login';
 import Root from './app/Root';
 //import Authen from './app/Authen';
 import SignUp from './app/SignUp';
-import {User, UserHeader} from './app/User';
+import {User, UserHomePage} from './app/User';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import HomePage from './app/Homepage';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="ToDoList" element={<Root/>}>
-    <Route path="login" element={<Login/>}/>
-    <Route path="signup" element={<SignUp/>}/>
-    <Route path="user" element={<UserHeader/>}>
-      <Route path=":username" element={<User/>}/>
+    <Route path="homepage" element={<HomePage/>}>
+      <Route path="login" element={<Login/>}/>
+      <Route path="signup" element={<SignUp/>}/>
+    </Route>
+    <Route path="user" element={<User/>}>
+      <Route path=":username" element={<UserHomePage/>}/>
     </Route>
   </Route>
 ));

@@ -35,7 +35,7 @@ function ListProject(prop) {
     for (const project in data) {
         listProject.push(<Project key={project} project={data[project]} name={project}/>);
     }
-
+    console.log(listProject);
     return (
         <>
             <ul>

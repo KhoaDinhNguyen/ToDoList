@@ -7,6 +7,7 @@ import ListProject from "../components/Project.js";
 import CreateProjectForm from "../components/project/CreateProjectForm.js";
 import LogOut from "../components/logOut/LogOut.js";
 
+
 const url = process.env.REACT_APP_USER_API_URL;
 
 const fetchData = (url) => {
@@ -20,7 +21,15 @@ const fetchData = (url) => {
     })
 }
 
-function User(){
+function User() {
+    return (
+        <>
+            <Outlet/>
+        </>
+    )
+}
+
+function UserHomePage(){
     const params = useParams();
     const navigate = useNavigate();
     const fullName = useSelector((state) => state[fullNameSlice.name]);
@@ -28,12 +37,13 @@ function User(){
     const dispatch = useDispatch();
     const endpoint = url + userName;
     
-    const userNameAuthen = sessionStorage.getItem('username');
+    const userNameAuthen = localStorage.getItem('username');
 
     useEffect(() => {
         if (userNameAuthen !== userName) {
             alert('BAD');
-            navigate('/ToDoList/login');
+            localStorage.setItem('username', '');
+            navigate('/ToDoList/homepage/login');
         }
         fetchData(endpoint).then(data => {
             dispatch(tasksSlice.actions.initialize(data));
@@ -58,13 +68,6 @@ function User(){
     )
 }
 
-function UserHeader() {
-    return (
-        <>
-            <Outlet/>
-        </>
-    )
-}
 
 
-export {UserHeader, User};
+export {UserHomePage, User};

@@ -37,7 +37,7 @@ function Login() {
             const jsonResponse = await response.json();
             setLoading(false);
             if (response.ok) {
-                sessionStorage.setItem("username", username);
+                localStorage.setItem("username", username);
                 dispatch(fullNameSlice.actions.initialize(jsonResponse.full_name));
                 dispatch(passwordSlice.actions.initialize(jsonResponse.password));
                 navigate(`/ToDoList/user/${jsonResponse.name}`);
