@@ -1,11 +1,10 @@
 const pool = require('../database');
 
 const updateTask = (req, res, next) => {
-    const username = req.params.user;
-    const {project_name, task_name} = req.body;
+    const accountName = req.params.user;
+    const {projectName, taskName} = req.body;
     const type = req.params.type;
-
-    pool.query(`CALL ${type}_task('${username}', '${project_name}', '${task_name}');`, (err, result) => {
+    pool.query(`CALL ${type}_task('${accountName}', '${projectName}', '${taskName}');`, (err, result) => {
         if (err) {
             res.status(400).json({message: err.message, error: true});
         }
@@ -16,10 +15,10 @@ const updateTask = (req, res, next) => {
 }
 
 const createTask = (req, res, next) => {
-    const username = req.params.user;
-    const {task_name, project_name, task_description, date_created, date_deadline} = req.body;
+    const accountName = req.params.user;
+    const {taskName, projectName, taskDescription, taskTimeDeadline} = req.body;
 
-    pool.query(`CALL create_task('${task_name}', '${project_name}', '${username}', '${task_description}', '${date_created}', '${date_deadline}');`, (err, result) => {
+    pool.query(`CALL create_task('${taskName}', '${projectName}', '${accountName}', '${taskDescription}', '${taskTimeDeadline}');`, (err, result) => {
         if (err) {
             res.status(400).json({message: err.message, error: true});
         }
@@ -30,10 +29,10 @@ const createTask = (req, res, next) => {
 }
 
 const deleteTask = (req, res, next) => {
-    const username = req.params.user;
-    const {task_name, project_name} = req.query;
+    const accountName = req.params.user;
+    const {taskName, projectName} = req.query;
     
-    pool.query(`CALL delete_task('${task_name}', '${project_name}', '${username}');`, (err, result) => {
+    pool.query(`CALL delete_task('${taskName}', '${projectName}', '${accountName}');`, (err, result) => {
         if (err) {
             res.status(400).json({message: err.message, error: true});
         }
