@@ -1,25 +1,33 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { userNameLoginSlice, passwordLoginSlice } from "../features/signIn/signInSlice";
-import { projectsSlice, tasksSlice } from "../features/fetchingData/databaseDataSlice";
-import { fullNameSlice } from "../features/fetchingData/userDataSlice";
-import { userNameSignUpSlice, fullNameSignUpSlice, passwordSignUpSlice, correctPasswordSignUpSlice } from "../features/signIn/signUpSlice";
-import { newProjectName, newProjectDescription } from "../features/createProject/projectInfoSlice";
+import { accountNameLoginSlice, passwordLoginSlice } from "../features/page/signInSlice";
+import { projectsSlice, tasksSlice } from "../features/user/databaseSlice";
+import { accountNameSignUpSlice, profileNameSignUpSlice, passwordSignUpSlice, correctPasswordSignUpSlice } from "../features/page/signUpSlice";
+import { createProjectName, createProjectDescription } from "../features/project/createProjectSlice";
+import { newTaskName, newTaskDescription, newTaskDeadline } from "../features/task/createTaskSlice";
 
 const reducers = {
-    [userNameLoginSlice.name] : userNameLoginSlice.reducer,
+    // Sign In Slices
+    [accountNameLoginSlice.name] : accountNameLoginSlice.reducer,
     [passwordLoginSlice.name] : passwordLoginSlice.reducer,
+
     [projectsSlice.name] : projectsSlice.reducer,
     [tasksSlice.name] : tasksSlice.reducer,
-    [fullNameSlice.name]: fullNameSlice.reducer,
-    // Sign Up Slice
-    [userNameSignUpSlice.name] : userNameSignUpSlice.reducer,
-    [fullNameSignUpSlice.name] : fullNameSignUpSlice.reducer,
+
+    // Sign Up Slices
+    [accountNameSignUpSlice.name] : accountNameSignUpSlice.reducer,
+    [profileNameSignUpSlice.name] : profileNameSignUpSlice.reducer,
     [passwordSignUpSlice.name] : passwordSignUpSlice.reducer,
     [correctPasswordSignUpSlice.name] : correctPasswordSignUpSlice.reducer,
 
-    //Create new project
-    [newProjectName.name] : newProjectName.reducer,
-    [newProjectDescription.name] : newProjectDescription.reducer
+    //Create new projects
+    [createProjectName.name] : createProjectName.reducer,
+    [createProjectDescription.name] : createProjectDescription.reducer,
+
+    //Create new task
+    [newTaskName.name] : newTaskName.reducer,
+    [newTaskDescription.name] : newTaskDescription.reducer,
+    [newTaskDeadline.name] : newTaskDeadline.reducer
+
 }
 
 const rootReducer = combineReducers(reducers);

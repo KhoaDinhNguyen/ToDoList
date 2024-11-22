@@ -1,16 +1,16 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 function HomePage() {
     return(
         <>
-            <p>Homepage</p>
             <ul>
+                <li><NavLink to="aboutUs">About us</NavLink></li>
                 <li><NavLink to="login">Login</NavLink></li>
-                <li><NavLink to="signup">Sign up</NavLink></li>
+                <li><NavLink to="signUp">SignUp</NavLink></li>
             </ul>
             <Outlet />
         </>
-    )
+    );
 }
 
 export default HomePage;

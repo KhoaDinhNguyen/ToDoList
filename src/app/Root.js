@@ -1,13 +1,22 @@
-import HomePage from "./Homepage";
-import { User } from "./User";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Root() {
-    const username = localStorage.getItem("username");
+    const accountName = localStorage.getItem("accountName");
+    const navigate = useNavigate();
 
-    if (username === "") {return <HomePage/>};
+    useEffect(() => {
+        if (!accountName) {
+            navigate('homepage/aboutUs');
+        }
+        else {
+            navigate(`user/${accountName}`);
+        }
+    },[accountName, navigate]);
 
-    return <User/>;
-
-}
+    return (
+        <Outlet/>
+    );
+}   
 
 export default Root;
