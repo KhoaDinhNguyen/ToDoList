@@ -1,27 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const newProjectName = createSlice({
-    name: "newProjectName",
+const accountNameLoginSlice = createSlice({
+    name: "accountNameLogin",
     initialState: "",
     reducers: {
         add(state, action) {
             return action.payload;
         },
-        clear() {
+        clean(state) {
             return "";
         }
     }
 });
 
-export const newProjectDescription = createSlice({
-    name: "newProjectDescription",
+const passwordLoginSlice = createSlice({
+    name: "passwordLogin",
     initialState: "",
     reducers: {
         add(state, action) {
             return action.payload;
         },
-        clear() {
+        clean(state) {
             return "";
         }
     }
-})
+});
+
+export {
+    accountNameLoginSlice,
+    passwordLoginSlice, 
+};
