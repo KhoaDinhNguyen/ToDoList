@@ -7,10 +7,10 @@ function User() {
 
     useEffect(() => {
         if (accountName === '' || accountName === null) {
-            navigate('/ToDoList/homepage');
+            navigate('/homepage');
         }
         else {
-            navigate(`${accountName}`);
+            navigate(`/user/${accountName}`);
         }
     }, [accountName, navigate])
     return (

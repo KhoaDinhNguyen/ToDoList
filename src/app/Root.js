@@ -7,10 +7,10 @@ function Root() {
 
     useEffect(() => {
         if (!accountName) {
-            navigate('homepage/aboutUs');
+            navigate('/homepage/aboutUs');
         }
         else {
-            navigate(`user/${accountName}`);
+            navigate(`/user/${accountName}`);
         }
     },[accountName, navigate]);
 

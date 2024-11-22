@@ -5,7 +5,7 @@ function LogOut(props) {
 
     const onClickLogOut = () => {
         localStorage.setItem("accountName", "");
-        navigate("/ToDoList/homepage/login");
+        navigate("/homepage/login");
 
     };
     

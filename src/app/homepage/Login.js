@@ -32,7 +32,7 @@ function Login() {
                 localStorage.setItem("profileName", response.full_name);
                 dispatch(accountNameLoginSlice.actions.clean());
                 dispatch(passwordLoginSlice.actions.clean());
-                navigate(`/ToDoList/user/${response.name}`);
+                navigate(`/user/${response.name}`);
             }
             else {
                 setError(response.error);

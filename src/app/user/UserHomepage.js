@@ -25,7 +25,7 @@ function UserHomepage(props){
             alert('BAD');
             localStorage.setItem('accountName', '');
             localStorage.setItem('profileName', '');
-            navigate('/ToDoList/homepage/login');
+            navigate('/homepage/login');
         }
 
         fetchUserDatabase(accountName)
