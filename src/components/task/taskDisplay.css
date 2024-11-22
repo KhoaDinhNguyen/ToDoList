@@ -1,0 +1,15 @@
+.checkbox {
+    width: 10px;
+    height: 10px;
+    border: 1px solid blue;
+    border-radius: 20%;
+    margin-bottom: 10px;
+}
+
+.pending {
+    background-color: white;
+}
+
+.fulfilled {
+    background-color: greenyellow;
+}

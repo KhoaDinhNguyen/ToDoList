@@ -1,52 +1,56 @@
 import { useState } from "react";
-import { newProjectDescription, newProjectName } from "../../features/createProject/projectInfoSlice";
+import { createProjectName, createProjectDescription } from "../../features/project/createProjectSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { projectsSlice } from "../../features/fetchingData/databaseDataSlice";
-
-const url = process.env.REACT_APP_CREATE_PROJECT_API_URL;
+import { projectsSlice } from "../../features/user/databaseSlice";
+import { fetchCreateProject } from "../../features/project/projectAPI";
 
 function CreateProjectForm(props) {
-    const [visibility, setVisibility] = useState("hidden");
     const dispatch = useDispatch();
-    const projectName = useSelector(state => state[newProjectName.name]);
-    const projectDescription = useSelector(state => state[newProjectDescription.name]);
-    const params = useParams();
-    const userName = params.username;
-    const endpoint = url + userName;
+    const projectName = useSelector(state => state[createProjectName.name]);
+    const projectDescription = useSelector(state => state[createProjectDescription.name]);
 
     const [message, setMessage] = useState("");
+    const [display, setDisplay] = useState("none");
+
+    const accountName = localStorage.getItem("accountName");
+    const currentDate = new Date().toJSON().slice(0, 10);
 
     const closeForm = () => {
-        setVisibility("hidden");
+        setDisplay("none");
     }
 
     const openForm = () => {
-        setVisibility("visible");
+        setDisplay("block");
     }
 
     const onChangeProjectName = (event) => {
-        dispatch(newProjectName.actions.add(event.target.value));
+        dispatch(createProjectName.actions.add(event.target.value));
     }
 
     const onChangeProjectDescription = (event) => {
-        dispatch(newProjectDescription.actions.add(event.target.value));
+        dispatch(createProjectDescription.actions.add(event.target.value));
     }
 
     const onSubmitCreateProject = (event) => {
         event.preventDefault();
-        const body = JSON.stringify({projectName: projectName, projectDescription: projectDescription});
-        createProjectAPI(endpoint, body)
+       
+        fetchCreateProject(accountName, projectName, projectDescription)
         .then(response => {
             setMessage(response.message);
             if (response.message === "Create project sucessfully") {
-                // TODO: adject time created;
                 const newProject = {
-                    project_name: projectName,
-                    project_time_created: "",
-                    project_description: projectDescription
+                    projectName,
+                    projectTimeCreated: currentDate,
+                    projectDescription
                 }
                 dispatch(projectsSlice.actions.add(newProject));
+                dispatch(createProjectName.actions.clean());
+                dispatch(createProjectDescription.actions.clean());
+
+                setTimeout(() => {
+                    setMessage("");
+                }, 2000);
+                setDisplay("none");
             } 
         })
         .catch(err => {
@@ -59,36 +63,18 @@ function CreateProjectForm(props) {
         <>  
             <button onClick={openForm}>Create new project</button>
             <button onClick={closeForm}>Close the form</button>
-            <form style={{visibility: visibility}} onSubmit={onSubmitCreateProject}>
+            <form style={{display: display}} onSubmit={onSubmitCreateProject}>
                 <label htmlFor="projectName">Project name: </label>
-                <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName}/>
+                <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName} autoComplete="off"/>
                 <br></br>
                 <label htmlFor="projectDescription">Project description: </label>
-                <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription}/>
+                <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription} autoComplete="off"/>
                 <br></br>
                 <input type="submit" name="createNewProject" id="createNewProject" value="Create"/>
             </form>
             <Response message={message}/>
         </>
     )
-}
-
-const createProjectAPI = async (endpoint, body) => {
-    try {
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            body: body,
-            headers: {
-                'Content-type' : 'application/json'
-            },
-        });
-
-        const jsonResponse = await response.json();
-        return jsonResponse;
-    }
-    catch(err) {
-        console.log(err);
-    }
 }
 
 function Response(props) {

@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
-function LogOut() {
+function LogOut(props) {
     const navigate = useNavigate();
 
     const onClickLogOut = () => {
-        localStorage.setItem("username", "");
+        localStorage.setItem("accountName", "");
         navigate("/ToDoList/homepage/login");
+
     };
     
     return (
