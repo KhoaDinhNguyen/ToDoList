@@ -1,5 +1,5 @@
-const signInAPI = process.env.REACT_APP_LOGIN_API_URL;
-const signUpAPI = process.env.REACT_APP_SIGN_UP_API_URL;
+const signInAPI = process.env.REACT_APP_PROD_LOGIN_API_URL;
+const signUpAPI = process.env.REACT_APP_PROD_SIGN_UP_API_URL;
 
 async function fetchSignIn(accountName, password) {
     const data = JSON.stringify({

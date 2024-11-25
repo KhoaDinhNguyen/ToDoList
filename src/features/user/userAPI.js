@@ -1,4 +1,4 @@
-const getUserDatabaseAPI = process.env.REACT_APP_GET_USER_DATABASE_API_URL;
+const getUserDatabaseAPI = process.env.REACT_APP_PROD_GET_USER_DATABASE_API_URL;
 
 const fetchUserDatabase = async (accountName) => {
     const endpoint = `${getUserDatabaseAPI}/${accountName}`;
