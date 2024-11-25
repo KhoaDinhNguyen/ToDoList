@@ -10,6 +10,7 @@ import { fetchUserDatabase } from "../../features/user/userAPI.js";
 import ListProject from "../../components/project/Project.js";
 import CreateProjectForm from "../../components/project/CreateProjectForm.js";
 import LogOut from "../../components/user/LogOut.js";
+import FilterForm from "../../components/user/FilterForm.js";
 
 function UserHomepage(props){
     const params = useParams();
@@ -42,6 +43,7 @@ function UserHomepage(props){
     return (
         <>
             <CreateProjectForm/>
+            <FilterForm/>
             <p>{accountName} - Full name: {profileName}</p>
             <ListProject/>
             <LogOut/>

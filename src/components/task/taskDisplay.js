@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./taskDisplay.css";
 import DeleteTask from "./DeleteTask";
 import { fetchTaskUpdate } from "../../features/task/taskAPI";
+import { useDispatch } from "react-redux";
+import { tasksSlice } from "../../features/user/databaseSlice";
 
 function DefaultTaskDisplay(props) {
     const {taskStatus, taskTimeDeadline, projectName, taskName} = props.task;
@@ -9,14 +11,14 @@ function DefaultTaskDisplay(props) {
     const [taskInfoDisplay, setTaskInfoDisplay] = useState('none');
 
     const accountName = localStorage.getItem("accountName");
+    const dispatch = useDispatch();
 
-    const onChangeTaskStatus = (event) => {
+    const onChangeTaskStatus = (event) => {       
         const newStatus = nextStatus(currentStatus);
         setCurrentStatus(newStatus);
-        props.task.taskStatus = newStatus;
         fetchTaskUpdate(accountName, taskName, projectName, newStatus)
         .then((response) => {
-            
+            //dispatch(tasksSlice.actions.changeStatus({taskName, projectName, newStatus}));
         })
         .catch((err) => {
             console.log(err);
@@ -24,7 +26,7 @@ function DefaultTaskDisplay(props) {
     };
 
     const onChangeTaskInfoDisplay = () => {
-        if (taskInfoDisplay === 'none' ) setTaskInfoDisplay('block');
+        if (taskInfoDisplay === 'none') setTaskInfoDisplay('block');
         else setTaskInfoDisplay('none');
     };
 

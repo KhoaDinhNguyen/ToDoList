@@ -9,7 +9,6 @@ function CreateTaskForm(props) {
     const projectName = props.projectName;
     const accountName = localStorage.getItem('accountName');
 
-    
     const taskName = useSelector(state => state[newTaskName.name]);
     const taskDescription = useSelector(state => state[newTaskDescription.name]);
     const taskTimeDeadline = useSelector(state => state[newTaskDeadline.name]);

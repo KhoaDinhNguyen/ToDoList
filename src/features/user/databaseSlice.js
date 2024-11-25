@@ -1,44 +1,54 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-function returnProjectFromData(projectName, projectDescription, projectTimeCreated) {
-    return {
-        projectName,
-        projectDescription,
-        projectTimeCreated
+function handleProjectsAndTasks(projects, tasks, filter) {
+    const data = [];
+    for (const project of projects) {
+        const {projectName, projectDescription, projectTimeCreated} = project;
+
+        data.push({
+            projectName,
+            projectDescription,
+            projectTimeCreated,
+            tasks: []
+        });
     }
+
+    for (const task of tasks) {
+        const {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName} = task;
+        
+ 
+        data[projectName].tasks[taskName] = {
+            taskName,
+            taskStatus,
+            taskDescription,
+            taskTimeCreated,
+            taskTimeDeadline,
+            projectName
+        }
+    }
+
+    return data;
 }
 
-function returnTaskFromData(taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName) {
-    return {
-        taskName,
-        taskDescription,
-        taskStatus,
-        taskTimeCreated,
-        taskTimeDeadline,
-        projectName
-    }
-}
-
-export const projectsSlice = createSlice({
+const projectsSlice = createSlice({
     name: "projects",
     initialState: [],
     reducers: {
         initialize(state, action) {
             state = [];
-            const set = new Set();
             for (const data of action.payload) {
                 const { projectName, projectDescription, projectTimeCreated } = data;
-                const currentProject = returnProjectFromData(projectName, projectDescription, projectTimeCreated);
-                if (!set.has(currentProject)) {
-                    state.push(currentProject);
-                    set.add(currentProject);
-                }
+                const currentProject = { projectName, projectDescription, projectTimeCreated };
+
+                const existProject = state.find(project => project.projectName === currentProject.projectName);
+                if (existProject === undefined) state.push(currentProject);
+                else continue;
             }
             return state;
         },
         add(state, action) {
             const {projectName, projectDescription, projectTimeCreated} = action.payload;
-            state.push(returnProjectFromData(projectName, projectDescription, projectTimeCreated));
+            state.push({ projectName, projectDescription, projectTimeCreated });
             return state;
         },
         remove(state, action) {
@@ -50,7 +60,7 @@ export const projectsSlice = createSlice({
     }
 });
 
-export const tasksSlice = createSlice({
+const tasksSlice = createSlice({
     name: "tasks",
     initialState: [],
     reducers: {
@@ -58,19 +68,13 @@ export const tasksSlice = createSlice({
             state = [];
             for (const data of action.payload) {
                 const { taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName } = data;
-                if (taskName !== null) {
-                    state.push(
-                        returnTaskFromData(taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName)
-                    );
-                }
+                if (taskName !== null) state.push({ taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName });
             }
             return state;
         },
         add(state, action) {
             const {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName} = action.payload;
-            if (taskName !== null) {
-                state.push(returnTaskFromData(taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName));
-            }
+            state.push( {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName});
             return state;
         },
         remove(state, action) {
@@ -85,6 +89,49 @@ export const tasksSlice = createSlice({
             return state.filter((data) => {
                 return data.projectName !== projectName;
             });
+        },
+        changeStatus(state, action) {
+            const { taskName, projectName, newStatus } = action.payload;
+            state.forEach((task) => {
+                if (task.taskName === taskName && task.projectName === projectName) {
+                    task.taskStatus = newStatus;
+                }
+            });
+
+            return state;
         }
     }
-})
+});
+
+const dataSlice = createSlice({
+    name: "data",
+    initialState: {},
+    reducers: {
+        applyFilter(state, action) {
+            const { projects, tasks, filter } = action.payload;
+            return handleProjectsAndTasks(projects, tasks, filter);
+        }
+    }
+});
+
+const filterSlice = createSlice({
+    name: "filter",
+    initialState: {
+        statusFilter: ['pending', 'fulfilled', 'falling']
+    },
+    reducers: {
+        clean() {
+            return {};
+        },
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+export {
+    projectsSlice,
+    tasksSlice,
+    dataSlice,
+    filterSlice
+}

@@ -24,4 +24,4 @@ yarn-error.log*
 
 .env
 /certs
-src/backend/certs
+/src/backend/node_modules
