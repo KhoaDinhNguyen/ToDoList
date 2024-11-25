@@ -1,8 +1,8 @@
 import { createSearchParams } from "react-router-dom";
 
-const updateTaskAPI = process.env.REACT_APP_PROD_CREATE_TASK_API_URL;
-const deleteTaskAPI = process.env.REACT_APP_PROD_UPDATE_TASK_API_URL;
-const createTaskAPI = process.env.REACT_APP_PROD_DELETE_TASK_API_URL;
+const updateTaskAPI = process.env.REACT_APP_PROD_UPDATE_TASK_API_URL; 
+const deleteTaskAPI = process.env.REACT_APP_PROD_DELETE_TASK_API_URL;
+const createTaskAPI = process.env.REACT_APP_PROD_CREATE_TASK_API_URL;
 
 const fetchTaskCreate = async (accountName, projectName, taskName, taskDescription, taskTimeDeadline) => {
     const createTaskEndpointAPI = `${createTaskAPI}/${accountName}`;
