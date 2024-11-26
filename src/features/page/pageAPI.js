@@ -1,6 +1,6 @@
 async function fetchSignIn(accountName, password) {
     const environment = process.env.NODE_ENV;
-    console.log(environment);
+    //console.log(environment);
     const signInAPI = process.env[`REACT_APP_LOGIN_API_URL_${environment.toUpperCase()}`];
     const signInEndpoint = `${signInAPI}`;
     console.log(signInEndpoint);
