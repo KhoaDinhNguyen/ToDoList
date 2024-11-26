@@ -2,9 +2,9 @@
 
 # dependencies
 /node_modules
+/src/backend/node_modules
 /.pnp
 .pnp.js
-
 # testing
 /coverage
 
@@ -23,5 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
+
 /certs
-/src/backend/node_modules
+
