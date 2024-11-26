@@ -1,19 +1,16 @@
 const express = require('express');
-const process = require('process');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
 const pageRouter = require('./pageRouter/pageRequest');
 const taskRouter = require('./taskRouter/taskRequest');
 const projectRouter = require('./projectRouter/projectRequest');
 const userRouter = require('./userRouter/userRequest');
 
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
-const port = process.env.BACKEND_PORT || 4041;
 
-console.log(`Backend port: ${process.env.BACKEND_PORT}`);
+const port = process.env.BACKEND_PORT || 4041;
 
 app.use(cors());
 app.use(bodyParser.json());
