@@ -1,10 +1,10 @@
-const getUserDatabaseAPI = process.env.REACT_APP_PROD_GET_USER_DATABASE_API_URL;
-
 const fetchUserDatabase = async (accountName) => {
-    const endpoint = `${getUserDatabaseAPI}/${accountName}`;
+    const environment = process.env.NODE_ENV;
+    const getUserDatabaseAPI = process.env[`REACT_APP_GET_USER_DATABASE_API_URL_${environment.toUpperCase()}`];
+    const getUserEndpoint = `${getUserDatabaseAPI}/${accountName}`;
 
     try {
-        const jsonResponse = await fetch(endpoint, {
+        const jsonResponse = await fetch(getUserEndpoint, {
             method: 'GET',
         });
 

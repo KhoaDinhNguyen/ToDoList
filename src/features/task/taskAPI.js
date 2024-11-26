@@ -1,10 +1,8 @@
 import { createSearchParams } from "react-router-dom";
 
-const updateTaskAPI = process.env.REACT_APP_PROD_UPDATE_TASK_API_URL; 
-const deleteTaskAPI = process.env.REACT_APP_PROD_DELETE_TASK_API_URL;
-const createTaskAPI = process.env.REACT_APP_PROD_CREATE_TASK_API_URL;
-
 const fetchTaskCreate = async (accountName, projectName, taskName, taskDescription, taskTimeDeadline) => {
+    const environment = process.env.NODE_ENV;
+    const createTaskAPI = process.env[`REACT_APP_CREATE_TASK_API_URL_${environment.toUpperCase()}`];
     const createTaskEndpointAPI = `${createTaskAPI}/${accountName}`;
 
     try {
@@ -29,6 +27,9 @@ const fetchTaskCreate = async (accountName, projectName, taskName, taskDescripti
 }
 
 const fetchTaskDelete = async (accountName, projectName, taskName) => {
+    const environment = process.env.NODE_ENV;
+    const deleteTaskAPI = process.env[`REACT_APP_DELETE_TASK_API_URL_${environment.toUpperCase()}`];
+
     const searchQueryParams = {
         taskName,
         projectName
@@ -53,6 +54,8 @@ const fetchTaskDelete = async (accountName, projectName, taskName) => {
 }
 
 const fetchTaskUpdate = async (accountName, taskName, projectName, type) => {
+    const environment = process.env.NODE_ENV;
+    const updateTaskAPI = process.env[`REACT_APP_UPDATE_TASK_API_URL_${environment.toUpperCase()}`];
     const endpoint = `${updateTaskAPI}/${accountName}/${type}`;
     const body = JSON.stringify({
         taskName,

@@ -1,9 +1,8 @@
 import { createSearchParams } from "react-router-dom";
 
-const deleteProjectAPI = process.env.REACT_APP_PROD_DELETE_PROJECT_API_URL;
-const createProjectAPI = process.env.REACT_APP_PROD_CREATE_PROJECT_API_URL;
-
 const fetchDeleteProject = async (accountName, projectName) => {
+    const environment = process.env.NODE_ENV;
+    const deleteProjectAPI = process.env[`REACT_APP_DELETE_PROJECT_API_URL_${environment.toUpperCase()}`];
     const searchQueryParams = {
         projectName
     };
@@ -28,6 +27,9 @@ const fetchDeleteProject = async (accountName, projectName) => {
 }
 
 const fetchCreateProject = async (accountName, projectName, projectDescription) => {
+    const environment = process.env.NODE_ENV;
+    const createProjectAPI = process.env[`REACT_APP_CREATE_PROJECT_API_URL_${environment.toUpperCase()}`];
+
     const endpoint = `${createProjectAPI}/${accountName}`;
     const body = JSON.stringify({projectName, projectDescription});
 
