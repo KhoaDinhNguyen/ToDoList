@@ -6,17 +6,18 @@ import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 
 function DefaultTaskDisplay(props) {
-    const {taskStatus, taskTimeDeadline, projectName, taskName} = props.task;
+    const {taskStatus, taskTimeDeadline, projectName, taskName, taskImportant} = props.task;
     const [currentStatus, setCurrentStatus] = useState(taskStatus);
     const [taskInfoDisplay, setTaskInfoDisplay] = useState('none');
-
+    const [currentImportant, setCurrentImportant] = useState(taskImportant);
     const accountName = localStorage.getItem("accountName");
     const dispatch = useDispatch();
 
     const onChangeTaskStatus = (event) => {       
-        const newStatus = nextStatus(currentStatus);
+        const newStatus = nextStatus(taskStatus);
         setCurrentStatus(newStatus);
-        fetchTaskUpdate(accountName, taskName, projectName, newStatus)
+        const task = {taskName, projectName, accountName, currentImportant};
+        fetchTaskUpdate(task, newStatus)
         .then((response) => {
             dispatch(tasksSlice.actions.changeStatus({taskName, projectName, newStatus}));
         })
@@ -30,12 +31,28 @@ function DefaultTaskDisplay(props) {
         else setTaskInfoDisplay('none');
     };
 
+    const onClickImportant = () => {
+        const newImportantStatus = !currentImportant;
+        const task = {taskName, projectName, accountName, newImportantStatus};
+
+        setCurrentImportant(newImportantStatus);
+        fetchTaskUpdate(task, "important")
+        .then((response) => {
+            dispatch(tasksSlice.actions.changeImportant({taskName, projectName, newImportantStatus}));
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        
+    }
     return (
         <li>
             <h4>{taskName}</h4>
             <p>{currentStatus}</p>
             <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
             <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
+            <p>Important</p>
+            <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
             <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
             <TaskInfo task={props.task} display={taskInfoDisplay}/>
         </li>

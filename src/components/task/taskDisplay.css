@@ -13,3 +13,19 @@
 .fulfilled {
     background-color: greenyellow;
 }
+
+.important {
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    border-radius: 20%;
+    margin-bottom: 10px;
+}
+
+.false_star {
+    background-color: white;
+}
+
+.true_star {
+    background-color: rgb(237, 237, 42);
+}

@@ -9,7 +9,6 @@ const fetchUserDatabase = async (accountName) => {
         });
 
         const response = await jsonResponse.json();
-
         return response;
         
     }

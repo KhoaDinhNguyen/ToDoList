@@ -40,14 +40,14 @@ const tasksSlice = createSlice({
         initialize(state, action) {
             state = [];
             for (const data of action.payload) {
-                const { taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName } = data;
-                if (taskName !== null) state.push({ taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName });
+                const { taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant } = data;
+                if (taskName !== null) state.push({ taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant });
             }
             return state;
         },
         add(state, action) {
-            const {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName} = action.payload;
-            state.push( {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName});
+            const {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant} = action.payload;
+            state.push( {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant});
             return state;
         },
         remove(state, action) {
@@ -72,44 +72,21 @@ const tasksSlice = createSlice({
             });
 
             return state;
+        },
+        changeImportant(state, action) {
+            const { taskName, projectName, newTaskImportant} = action.payload;
+            state.forEach(task => {
+                if (task.taskName === taskName && task.projectName === projectName) {
+                    task.taskImportant = newTaskImportant;
+                }
+            });
+
+            return state;
         }
     }
 });
 
-const filterSlice = createSlice({
-    name: "filter",
-    initialState: {
-        statusFilter: ['pending', 'fulfilled', 'falling'],
-        dateFilter: {
-            timeCreatedFrom : "",
-            timeCreatedTo: "",
-            timeDeadlineFrom: "",
-            timeDeadlineTo: ""
-        }
-    },
-    reducers: {
-        apply(state, action) {
-            return action.payload;
-        }
-    }
-});
-
-const sortSlice = createSlice({
-    name: "sort",
-    initialState: {
-        sortTaskName: true,
-        sortTimeCreated: undefined,
-        sortTimeDeadline: undefined
-    },
-    reducers: {
-        apply(state, action) {
-            return action.payload;
-        }
-    }
-})
 export {
     projectsSlice,
     tasksSlice,
-    filterSlice,
-    sortSlice
 }

@@ -16,7 +16,7 @@ function ListProject() {
     const sort = useSelector((state) => state[sortSlice.name]);
     const search = useSelector(state => state[searchSlice.name]);
     const listProject = [];
-    console.log(tasks);
+
     for (const project of projects) {
         const filterTasks = filterTask(tasks, project.projectName, filter);
         const searchTasks = searchTask(filterTasks, search);

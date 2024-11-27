@@ -18,7 +18,8 @@ const getUserDatabase = (req, res, next) => {
                 taskDescription: data.task_description,
                 taskStatus: data.status,
                 taskTimeCreated: data.task_time_created,
-                taskTimeDeadline: data.task_deadline
+                taskTimeDeadline: data.task_deadline,
+                taskImportant: data.important
             });
         };
 

@@ -54,19 +54,22 @@ const fetchTaskDelete = async (accountName, projectName, taskName) => {
     }
 }
 
-const fetchTaskUpdate = async (accountName, taskName, projectName, type) => {
+const fetchTaskUpdate = async (taskInfo, type) => {
     const environment = process.env.NODE_ENV;
     const updateTaskAPI = process.env[`REACT_APP_UPDATE_TASK_API_URL_${environment.toUpperCase()}`];
+    const {taskName, projectName, newImportantStatus, accountName} = taskInfo;
     const endpoint = `${updateTaskAPI}/${accountName}/${type}`;
+
     const body = JSON.stringify({
         taskName,
-        projectName
+        projectName,
+        newImportantStatus
     });
 
     try {
         const jsonRespone = await fetch(endpoint, {
             method: 'PUT',
-            headers: {
+            headers: {  
                 'Content-type' : 'application/json'
             },
             body: body
