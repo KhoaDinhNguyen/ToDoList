@@ -1,31 +1,20 @@
-import { projectsSlice, tasksSlice, dataSlice, filterSlice } from "../../features/user/databaseSlice";
+import { projectsSlice, tasksSlice, filterSlice } from "../../features/user/databaseSlice";
 import { useSelector } from "react-redux";
 import { DefaultTaskDisplay } from "../task/taskDisplay";
 import CreateTaskForm from "../task/CreateTaskForm";
 import { useState } from "react";
 import DeleteProject from "./DeleteProject";
-import { useDispatch } from "react-redux";
 import { filterTask } from "../../features/task/filterTask";
 
 function ListProject() {
     const projects = useSelector((state) => state[projectsSlice.name]);
     const tasks = useSelector((state) => state[tasksSlice.name]);
-    //const data = useSelector(state => state[dataSlice.name]);
     const filter = useSelector(state => state[filterSlice.name]);
-    /*
-    useEffect(() => {
-        dispatch(dataSlice.actions.applyFilter({projects, tasks, filter}));
 
-    }, [projects, tasks, filter, dispatch])
-    */
-    console.log("HHA");
     const listProject = [];
-
-    const copyTasks = tasks.map(task => task);
-
     for (const project of projects) {
-        const arrayOfTask = filterTask(copyTasks, project.projectName, filter);
-        listProject.push(<Project key={project.projectName} tasks={arrayOfTask} project={project}/>);
+        const filterTasks = filterTask(tasks, project.projectName, filter);
+        listProject.push(<Project key={project.projectName} tasks={filterTasks} project={project}/>);
     }
 
     return (
@@ -47,6 +36,7 @@ function Project(props) {
 
     const listTask = [];
     for (const task of tasks) {
+        //console.log(task);
         listTask.push(<DefaultTaskDisplay key={`${projectName}${task.taskName}`} task={task}/>)
     }
 

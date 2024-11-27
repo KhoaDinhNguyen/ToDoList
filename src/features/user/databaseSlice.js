@@ -1,35 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-function handleProjectsAndTasks(projects, tasks, filter) {
-    const data = [];
-    for (const project of projects) {
-        const {projectName, projectDescription, projectTimeCreated} = project;
-
-        data.push({
-            projectName,
-            projectDescription,
-            projectTimeCreated,
-            tasks: []
-        });
-    }
-
-    for (const task of tasks) {
-        const {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName} = task;
-        
- 
-        data[projectName].tasks[taskName] = {
-            taskName,
-            taskStatus,
-            taskDescription,
-            taskTimeCreated,
-            taskTimeDeadline,
-            projectName
-        }
-    }
-
-    return data;
-}
-
 const projectsSlice = createSlice({
     name: "projects",
     initialState: [],
@@ -103,26 +73,18 @@ const tasksSlice = createSlice({
     }
 });
 
-const dataSlice = createSlice({
-    name: "data",
-    initialState: {},
-    reducers: {
-        applyFilter(state, action) {
-            const { projects, tasks, filter } = action.payload;
-            return handleProjectsAndTasks(projects, tasks, filter);
-        }
-    }
-});
-
 const filterSlice = createSlice({
     name: "filter",
     initialState: {
-        statusFilter: ['pending', 'fulfilled', 'falling']
+        statusFilter: ['pending', 'fulfilled', 'falling'],
+        dateFilter: {
+            timeCreatedFrom : "",
+            timeCreatedTo: "",
+            timeDeadlineFrom: "",
+            timeDeadlineTo: ""
+        }
     },
     reducers: {
-        clean() {
-            return {};
-        },
         apply(state, action) {
             return action.payload;
         }
@@ -132,6 +94,5 @@ const filterSlice = createSlice({
 export {
     projectsSlice,
     tasksSlice,
-    dataSlice,
     filterSlice
 }
