@@ -18,7 +18,7 @@ function DefaultTaskDisplay(props) {
         setCurrentStatus(newStatus);
         fetchTaskUpdate(accountName, taskName, projectName, newStatus)
         .then((response) => {
-            //dispatch(tasksSlice.actions.changeStatus({taskName, projectName, newStatus}));
+            dispatch(tasksSlice.actions.changeStatus({taskName, projectName, newStatus}));
         })
         .catch((err) => {
             console.log(err);

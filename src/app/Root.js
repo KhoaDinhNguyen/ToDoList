@@ -4,7 +4,7 @@ import { useEffect } from "react";
 function Root() {
     const accountName = localStorage.getItem("accountName");
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         if (!accountName) {
             navigate('/homepage/aboutUs');
