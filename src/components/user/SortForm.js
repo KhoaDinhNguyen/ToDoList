@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { sortSlice } from "../../features/user/databaseSlice";
+import { sortSlice } from "../../features/user/utility";
 
 function SortForm() {
     const [timeCreatedASC, setTimeCreatedASC] = useState(false);

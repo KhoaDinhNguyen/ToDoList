@@ -1,6 +1,6 @@
 import { FilterStatusFrom } from "./FilterStatusForm";
 import { FilterDateForm } from "./FilterDateForm";
-import { filterSlice } from "../../features/user/databaseSlice";
+import { filterSlice } from "../../features/user/utility";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
