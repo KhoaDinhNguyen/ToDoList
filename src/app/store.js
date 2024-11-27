@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { accountNameLoginSlice, passwordLoginSlice } from "../features/page/signInSlice";
-import { projectsSlice, tasksSlice, filterSlice } from "../features/user/databaseSlice";
+import { projectsSlice, tasksSlice, filterSlice, sortSlice } from "../features/user/databaseSlice";
 import { accountNameSignUpSlice, profileNameSignUpSlice, passwordSignUpSlice, correctPasswordSignUpSlice } from "../features/page/signUpSlice";
 import { createProjectName, createProjectDescription } from "../features/project/createProjectSlice";
 import { newTaskName, newTaskDescription, newTaskDeadline } from "../features/task/createTaskSlice";
@@ -13,6 +13,7 @@ const reducers = {
     [projectsSlice.name] : projectsSlice.reducer,
     [tasksSlice.name] : tasksSlice.reducer,
     [filterSlice.name] : filterSlice.reducer,
+    [sortSlice.name] : sortSlice.reducer,
 
     // Sign Up Slices
     [accountNameSignUpSlice.name] : accountNameSignUpSlice.reducer,

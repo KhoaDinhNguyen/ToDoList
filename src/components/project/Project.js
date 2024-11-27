@@ -1,20 +1,24 @@
-import { projectsSlice, tasksSlice, filterSlice } from "../../features/user/databaseSlice";
+import { projectsSlice, tasksSlice, filterSlice, sortSlice } from "../../features/user/databaseSlice";
 import { useSelector } from "react-redux";
 import { DefaultTaskDisplay } from "../task/taskDisplay";
 import CreateTaskForm from "../task/CreateTaskForm";
 import { useState } from "react";
 import DeleteProject from "./DeleteProject";
 import { filterTask } from "../../features/task/filterTask";
+import { sortTask } from "../../features/task/sortTask";
 
 function ListProject() {
     const projects = useSelector((state) => state[projectsSlice.name]);
     const tasks = useSelector((state) => state[tasksSlice.name]);
-    const filter = useSelector(state => state[filterSlice.name]);
+    const filter = useSelector((state) => state[filterSlice.name]);
+    const sort = useSelector((state) => state[sortSlice.name]);
 
     const listProject = [];
+
     for (const project of projects) {
         const filterTasks = filterTask(tasks, project.projectName, filter);
-        listProject.push(<Project key={project.projectName} tasks={filterTasks} project={project}/>);
+        const sortTasks = sortTask(filterTasks, sort);
+        listProject.push(<Project key={project.projectName} tasks={sortTasks} project={project}/>);
     }
 
     return (

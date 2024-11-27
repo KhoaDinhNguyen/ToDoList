@@ -11,7 +11,10 @@ const projectsSlice = createSlice({
                 const currentProject = { projectName, projectDescription, projectTimeCreated };
 
                 const existProject = state.find(project => project.projectName === currentProject.projectName);
-                if (existProject === undefined) state.push(currentProject);
+                if (existProject === undefined) {
+                    //TODO: sort project
+                    state.push(currentProject);
+                }
                 else continue;
             }
             return state;
@@ -91,8 +94,22 @@ const filterSlice = createSlice({
     }
 });
 
+const sortSlice = createSlice({
+    name: "sort",
+    initialState: {
+        sortTaskName: true,
+        sortTimeCreated: undefined,
+        sortTimeDeadline: undefined
+    },
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+})
 export {
     projectsSlice,
     tasksSlice,
-    filterSlice
+    filterSlice,
+    sortSlice
 }
