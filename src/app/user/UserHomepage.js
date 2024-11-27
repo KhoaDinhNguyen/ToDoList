@@ -11,6 +11,7 @@ import ListProject from "../../components/project/Project.js";
 import CreateProjectForm from "../../components/project/CreateProjectForm.js";
 import LogOut from "../../components/user/LogOut.js";
 import FilterForm from "../../components/user/FilterForm.js";
+import SortForm from "../../components/user/SortForm.js";
 
 function UserHomepage(props){
     const params = useParams();
@@ -44,6 +45,7 @@ function UserHomepage(props){
         <>
             <CreateProjectForm/>
             <FilterForm/>
+            <SortForm/>
             <p>{accountName} - Full name: {profileName}</p>
             <ListProject/>
             <LogOut/>

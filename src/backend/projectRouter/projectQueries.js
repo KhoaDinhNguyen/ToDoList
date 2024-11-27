@@ -19,7 +19,7 @@ const deleteProject = (req, res, next) => {
     const accountName = req.params.user;
     const { projectName } = req.query;
     
-    pool.query(`CALL deleteProject('${projectName}', '${accountName}');`, (err, result) => {
+    pool.query(`CALL delete_project('${projectName}', '${accountName}');`, (err, result) => {
         if (err) {
             res.status(400).json({message: err.message, error: true});
         }

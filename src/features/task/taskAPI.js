@@ -37,6 +37,7 @@ const fetchTaskDelete = async (accountName, projectName, taskName) => {
 
     const searchQueryString = createSearchParams(searchQueryParams);
     const deleteTaskEndpoint = `${deleteTaskAPI}/${accountName}?${searchQueryString}`;
+    console.log(deleteTaskEndpoint);
     try {
         const jsonRespnse = await fetch(deleteTaskEndpoint, {
             method: 'DELETE',
