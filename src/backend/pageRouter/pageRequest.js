@@ -8,8 +8,6 @@ require('dotenv').config();
 
 pageRouter.get('/', (req, res) => {
     pool.query(`SELECT * FROM users;`, (err, result) => {
-        console.log(process.env.DB_CONNECTION);
-        console.log(process.env.DB_CONNECTION);
         if (err) {
             res.status(400).send(err.message);
         }
