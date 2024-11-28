@@ -3,59 +3,65 @@ import "./calender.css"
 import { TaskDisplay } from "./taskDisplay";
 
 function Calender(props) {
+    const { tasks } = props;
     const today = new Date();
+    today.setDate(today.getDate());
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
     const [calenderMonth, setCalenderMonth] = useState(month);
     const [calenderYear, setCalenderYear] = useState(year);
     const [calenderDate, setCalenderDate] = useState("");
 
-    const { tasks } = props;
     const firstDayOfMonth = new Date(`${calenderYear} ${calenderMonth}`);
-
-    const currenDate = new Date(firstDayOfMonth);
+    firstDayOfMonth.setDate(firstDayOfMonth.getDate());
+    
+    const dateIterator = new Date(firstDayOfMonth);
     const tableBody = [];
-    let i = 0, left = 0, numsOfRow = 0, row = [];
 
-    while (currenDate.getMonth() === firstDayOfMonth.getMonth()) {
-        while (i !== currenDate.getDay()) {
-            row.push(<td key={`${left++}_left`}></td>);
-            i++;
+    let dayOfWeek = 0, nonDate = 0, numsOfRow = 0, row = [];
+
+    while (dateIterator.getMonth() === firstDayOfMonth.getMonth()) {
+        while (dayOfWeek !== dateIterator.getDay()) {
+            row.push(<td key={`${nonDate++}_nonDate`}></td>);
+            dayOfWeek++;
         }
-        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === currenDate.toJSON().slice(0, 10));
+        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === dateIterator.toJSON().slice(0, 10));
         const dateTask = [];
+
         for (const task of arrayOfTask) {
-            //dateTask.push(<DefaultTaskDisplay key={`${task.projectName}_${task.taskName}`} type="calender" task={task}/>);
             dateTask.push(<li key={`${task.projectName}_${task.taskName}`}>{task.taskName}/{task.projectName}</li>);
         }
-        const dateIterator = currenDate.getDate();
+
+        const currenDate = dateIterator.getDate();
         row.push(
-            <td key={currenDate.getDate()} onClick={event => {setCalenderDate(dateIterator)}}>
-                <p>{currenDate.getDate()}</p>
+            <td key={currenDate} onClick={event => {setCalenderDate(currenDate)}}>
+                <p>{currenDate}</p>
                 <ul>
                     {dateTask}
                 </ul>
-            </td>);
+            </td>
+        );
 
-        i++;
-        currenDate.setDate(currenDate.getDate() + 1);
-        if (i === 7) {
-            i = 0;
+        dayOfWeek++;
+        dateIterator.setDate(dateIterator.getDate() + 1);
+
+        if (dayOfWeek === 7) {
+            dayOfWeek = 0;
             tableBody.push(<tr key={`row_${numsOfRow++}`}>{row}</tr>);
             row = [];
         }
     }
 
-    if (i !== 0) {
-        i = 7 - i;
-        while (i > 0) {
-            row.push(<td key={`${left++}_left`}></td>);
-            i--;
+    if (dayOfWeek !== 0) {
+        while (dayOfWeek < 7) {
+            row.push(<td key={`${nonDate++}_nonDate`}></td>);
+            dayOfWeek++;
         }
         tableBody.push(<tr key={`row_${numsOfRow++}`}>{row}</tr>);
         row = [];
     };
 
+   
     const onClickNextMonth = () => {
         setCalenderDate("");
         if (calenderMonth === 12) {
@@ -81,7 +87,7 @@ function Calender(props) {
     return (
         <>
             <h3>Calender</h3>
-            <p>{calenderMonth}, {calenderYear}</p>
+            <p>{getMonthName(calenderMonth)}, {calenderYear}</p>
             <table id="calender">
                 <thead>
                     <tr>
@@ -121,13 +127,20 @@ function DateDisplayTask(props) {
         }
     }
 
-
     return (
         <>
             <ul>
                 {dateListTask}
             </ul>
         </>
-    )
+    );
 }
+
+function getMonthName(month) {
+    const date = new Date();
+    date.setDate(1);
+    date.setMonth(month - 1);
+    return date.toDateString().slice(4, 7);
+}
+
 export default Calender;
