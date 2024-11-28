@@ -4,11 +4,11 @@ const getAccountName = async (req, res, next) => {
     const { accountName } = req.body;
     pool.query(`SELECT password FROM users WHERE name = '${accountName}'`, (error, result) => {
         if (error) {
-            res.status(400).json({message: 'Database problem'});
+            res.status(400).json({message: 'Database problem', error: true});
             throw error;
         }
         else if (result.rows.length === 0) {
-            res.status(400).json({message: 'Not found', error: 'The passord or account name is incorrect'});
+            res.status(400).json({message: 'The passord or account name is incorrect', error: true});
         }
         else {
             res.password = result.rows[0].password;
@@ -22,11 +22,11 @@ const validateAccountName = (req, res, next) => {
 
     if (password === res.password) {
         pool.query(`SELECT * FROM users WHERE name = '${accountName}'`, (_, result) => {
-            res.status(200).json({ ...result.rows[0], message: 'Found'});
+            res.status(200).json({ ...result.rows[0], message: 'Found', error: false});
         });
     }
     else {
-        res.status(400).json({message: 'Not found', error: 'The passord or account name is incorrect'});
+        res.status(400).json({message: 'The passord or account name is incorrect', error: true});
     }
 };
 
@@ -35,10 +35,10 @@ const createAccount = (req, res, next) => {
 
     pool.query(`CALL create_user('${accountName}', '${profileName}', '${password}')`, (err, result) => {
         if (err) {
-            res.status(400).json({message: err.message, error: 'Have error'});
+            res.status(400).json({message: err.message, error: true});
         }
         else {
-            res.status(200).json({message: 'Sign up successfully. Return to login to sign in'});
+            res.status(200).json({message: 'Sign up successfully. Return to login to sign in', error: false});
         }
     })
 };

@@ -1,41 +1,34 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { accountNameLoginSlice, passwordLoginSlice } from "../../features/page/signInSlice";
 import { fetchSignIn } from "../../features/page/pageAPI";
+import { Helmet } from "react-helmet";
 
 function Login() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const accountName = useSelector((state) => state[accountNameLoginSlice.name]);
-    const password = useSelector((state) => state[passwordLoginSlice.name]);
+    const [message, setMessage] = useState("");
+    const [accountName, setAccountName] = useState("");
+    const [password, setPassword] = useState("");
 
-    const onChangeAccountName = (event) => {
-        dispatch(accountNameLoginSlice.actions.add(event.target.value));
-    }
+    const onChangeAccountName = event => { setAccountName(event.target.value); }
+    const onChangePassword = event => { setPassword(event.target.value); }
 
-    const onChangePassword = (event) => {
-        dispatch(passwordLoginSlice.actions.add(event.target.value));
-    }
-
-    const onSubmitLogin = async (event) => {
+    const onSubmitLogin = async event => {
         event.preventDefault();
         setLoading(true);
 
         fetchSignIn(accountName, password)
         .then(response => {
             setLoading(false);
-            if (response.message === 'Found') {
+            if (!response.error) {
                 localStorage.setItem("accountName", response.name);
                 localStorage.setItem("profileName", response.full_name);
-                dispatch(accountNameLoginSlice.actions.clean());
-                dispatch(passwordLoginSlice.actions.clean());
+                setAccountName("");
+                setPassword("");
                 navigate(`/user/${response.name}`);
             }
             else {
-                setError(response.error);
+                setMessage(response.message);
             }
         })
         .catch(err => {
@@ -45,41 +38,29 @@ function Login() {
     
     return (
         <>  
+            <Helmet>
+                <title>Login | ToDo List</title>
+            </Helmet>
             <form onSubmit={onSubmitLogin}>
                 <label htmlFor="accountName">Account name </label>
-                <input name="accountName" id="accountName" type="text" required value={accountName} onChange={onChangeAccountName} autoComplete="off"/>
+                <input name="accountName" id="accountName" type="text" required value={accountName} onChange={onChangeAccountName} autoComplete="on"/>
                 <br></br>
                 <label htmlFor="password">Password </label>
                 <input name="password" id="password" type="password" required value={password} onChange={onChangePassword} autoComplete="off"/>
                 <br></br>
                 <input type="submit" value=" Sign in" />
             </form>
-
-            <LoginStatus loading={loading} error={error}/>
+            <LoginStatus loading={loading} message={message}/>
         </>
     )
 }
 
-function LoginStatus(prop) {
-    const loading = prop.loading;
-    const error = prop.error;
+function LoginStatus(props) {
+    const { loading, message } = props;
 
-    if (loading === false && error === "") {
-        // Initial
-        return <p></p>
-    }
-    else if (loading === false && error !== "") {
-        return (
-            <>
-                <p>{error}</p>
-            </>
-        )
-    }
-    return (
-        <>
-            <p>...Authenticating</p>
-        </>
-    )
+    if (loading === false) return <p>{message}</p>;
+    
+    return <p>...Authenticating</p>;
 }
 
 

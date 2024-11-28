@@ -1,50 +1,37 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { accountNameSignUpSlice, profileNameSignUpSlice, passwordSignUpSlice, correctPasswordSignUpSlice } from "../../features/page/signUpSlice";
 import { fetchSignUp } from "../../features/page/pageAPI";
+import { Helmet } from "react-helmet";
 
 function SignUp() {
-    const dispatch = useDispatch();
-    const accountName = useSelector(state => state[accountNameSignUpSlice.name]);
-    const profileName = useSelector(state => state[profileNameSignUpSlice.name]);
-    const password = useSelector(state => state[passwordSignUpSlice.name]);
-    const correctPassword = useSelector(state => state[correctPasswordSignUpSlice.name]);
     const [loading, setLoading] = useState(false);
-    const [response, setResponse] = useState(undefined);
+    const [message, setMessage] = useState("");
+    const [accountName, setAccountName] = useState("");
+    const [profileName, setProfileName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmedPassword, setConfirmedPassword] = useState("");
 
-    const onChangeAccountName = (event) => {
-        dispatch(accountNameSignUpSlice.actions.add(event.target.value));
-    }
-
-    const onChangeProfileName = (event) => {
-        dispatch(profileNameSignUpSlice.actions.add(event.target.value));
-    }
-
-    const onChangePassword = (event) => {
-        dispatch(passwordSignUpSlice.actions.add(event.target.value));
-    }
-
-    const onChangeCorrectPassword = (event) => {
-        dispatch(correctPasswordSignUpSlice.actions.add(event.target.value));
-    }
+    const onChangeAccountName = (event) => { setAccountName(event.target.value); }
+    const onChangeProfileName = (event) => { setProfileName(event.target.value); }
+    const onChangePassword = (event) => { setPassword(event.target.value); }
+    const onChangeConfirmedPassword = (event) => { setConfirmedPassword(event.target.value); }
 
     const onSubmitSignIn = async (event) => {
         event.preventDefault();
         setLoading(true);
-        if (password !== correctPassword) {
-            setResponse({message: "The confirm password is different.", error: "Have error"});
+        if (password !== confirmedPassword) {
+            setMessage("The confirm password is different.");
             setLoading(false);
         }
         else {
             fetchSignUp(accountName, profileName, password)
             .then(response =>{
                 setLoading(false);
-                setResponse(response);
-                if (response.message === 'Sign up successfully. Return to login to sign in') {
-                    dispatch(accountNameSignUpSlice.actions.clean());
-                    dispatch(profileNameSignUpSlice.actions.clean());
-                    dispatch(passwordSignUpSlice.actions.clean());
-                    dispatch(correctPasswordSignUpSlice.actions.clean());
+                setMessage(response.message);
+                if (!response.error) {
+                    setAccountName("");
+                    setProfileName("");
+                    setPassword("");
+                    setConfirmedPassword("");
                 }
             })
             .catch(err => {
@@ -54,7 +41,10 @@ function SignUp() {
 
     }
     return (
-        <>
+        <>  
+            <Helmet>
+                <title>Sign Up | ToDo List</title>
+            </Helmet>
             <p>Sign Up</p>
             <form onSubmit={onSubmitSignIn}>
                 <label htmlFor="accountName">Account name: </label>
@@ -66,39 +56,21 @@ function SignUp() {
                 <label htmlFor="password">Password: </label>
                 <input type="password" id="password" name="password" value={password} onChange={onChangePassword} required autoComplete="off"/>
                 <br></br>
-                <label htmlFor="correctPassword">Confirm password: </label>
-                <input type="password" id="correctPassword" name="correctPassword" value={correctPassword} onChange={onChangeCorrectPassword} required autoComplete="off"/>
+                <label htmlFor="confirmedPassword">Confirm password: </label>
+                <input type="password" id="confirmedPassword" name="confirmedPassword" value={confirmedPassword} onChange={onChangeConfirmedPassword} required autoComplete="off"/>
                 <br></br>
                 <input type="submit" value=" Sign Up "/>
             </form>
-            <SignUpState loading={loading} response={response}/>
+            <SignUpState loading={loading} message={message}/>
         </>
-    )
+    );
 }
 
-function SignUpState(prop) {
-    const response = prop.response;
-    const loading = prop.loading;
+function SignUpState(props) {
+    const { loading, message } = props; 
 
-    if (loading === true) {
-        return (
-            <>
-                <p>...Creating account</p>
-            </>
-        )
-    }
-    if (response === undefined) {
-        return (
-            <>
-                <p></p>
-            </>
-        )
-    }
-    else {
-        return (
-            <p>{response.message}</p>
-        );
-    }
+    if (loading === false) return <p>{message}</p>;    
+    return <p>...Authenticating</p>;
 }
 
 export default SignUp;
