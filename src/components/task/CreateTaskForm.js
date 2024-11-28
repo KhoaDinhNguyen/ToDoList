@@ -1,23 +1,24 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { newTaskName, newTaskDescription, newTaskDeadline } from "../../features/task/createTaskSlice";
+import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 import { fetchTaskCreate } from "../../features/task/taskAPI";
 
 function CreateTaskForm(props) {
     const dispatch = useDispatch();
-    const projectName = props.projectName;
+    const { projectName } = props;
     const accountName = localStorage.getItem('accountName');
+    const currentDate = new Date().toJSON().slice(0, 10);
 
-    const taskName = useSelector(state => state[newTaskName.name]);
-    const taskDescription = useSelector(state => state[newTaskDescription.name]);
-    const taskTimeDeadline = useSelector(state => state[newTaskDeadline.name]);
-    
     const [displayCreateTaskForm, setDisplayCreateTaskForm] = useState('none');
     const [contentCreateTaskForm, setContentCreateTaskForm] = useState('+');
     const [message, setMessage] = useState("");
-    
-    const currentDate = new Date().toJSON().slice(0, 10);
+    const [taskName, setTaskName] = useState("");
+    const [taskDescription, setTaskDescription] = useState("");
+    const [taskTimeDeadline, setTimeDeadline] = useState("");
+
+    const onChangeTaskName = event => { setTaskName(event.target.value); }    
+    const onChangeTaskDescription = event => { setTaskDescription(event.target.value); }
+    const onChangeTaskDeadline = event => { setTimeDeadline(event.target.value); }
 
     const onClickCreateTaskButton = () => {
         if (displayCreateTaskForm === 'none') {
@@ -30,25 +31,13 @@ function CreateTaskForm(props) {
         }
     }
 
-    const onChangeTaskName = (event) => {
-        dispatch(newTaskName.actions.add(event.target.value));
-    }
-    
-    const onChangeTaskDescription = (event) => {
-        dispatch(newTaskDescription.actions.add(event.target.value));
-    }
-
-    const onChangeTaskDeadline = (event) => {
-        dispatch(newTaskDeadline.actions.add(event.target.value));
-    }
-
-    const onSubmit = (event) => {
+    const onSubmit = event => {
         event.preventDefault();
         try {
             fetchTaskCreate(accountName, projectName, taskName, taskDescription, taskTimeDeadline)
             .then(response => {
                 setMessage(response.message);
-                if (response.message === 'Create task sucessfully') {
+                if (!response.error) {
                     dispatch(tasksSlice.actions.add({
                         taskName,
                         taskStatus: 'pending',
@@ -57,9 +46,9 @@ function CreateTaskForm(props) {
                         taskTimeDeadline,
                         projectName
                     }));
-                    dispatch(newTaskName.actions.clear());
-                    dispatch(newTaskDescription.actions.clear());
-                    dispatch(newTaskDeadline.actions.clear());
+                    setTaskName("");
+                    setTaskDescription("");
+                    setTimeDeadline("");
                     setDisplayCreateTaskForm('none');
                     setContentCreateTaskForm('+');
                 }
@@ -89,29 +78,9 @@ function CreateTaskForm(props) {
                 <br></br>
                 <input type="submit" value=" Create task "/>
             </form>
-            <Response message={message}/>
+            <p>{message}</p>
         </>
     )   
 }
 
-function Response(props) {
-    const message = props.message;
-
-    if (message === 'duplicate key value violates unique constraint "tasks_pkey"') {
-        return (
-            <p>Task duplicated</p>
-        );
-    }
-    else if (message === 'Create task sucessfully') {
-        return (
-            <p>Create task sucessfully</p>
-        );
-    }
-    return (
-        <>
-            <p></p>
-        </>
-    )
-
-}
 export default CreateTaskForm;

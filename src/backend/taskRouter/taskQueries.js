@@ -35,10 +35,15 @@ const createTask = (req, res, next) => {
 
     pool.query(`CALL create_task('${taskName}', '${projectName}', '${accountName}', '${taskDescription}', '${taskTimeDeadline}');`, (err, result) => {
         if (err) {
-            res.status(400).json({message: err.message, error: true});
+            if (err.message === 'duplicate key value violates unique constraint "tasks_pkey"') {
+                res.status(400).json({message: "Task duplicated", error: true});
+            }
+            else {
+                res.status(400).json({message: err.message, error: true});
+            }
         }
         else {
-            res.status(200).json({message: 'Create task sucessfully'});
+            res.status(200).json({message: 'Create task sucessfully', error: false});
         }
     })
 }
