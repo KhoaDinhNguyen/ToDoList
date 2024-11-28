@@ -1,7 +1,7 @@
 import { projectsSlice, tasksSlice } from "../../features/user/databaseSlice";
 import { filterSlice, sortSlice, searchSlice } from "../../features/user/utility";
 import { useSelector } from "react-redux";
-import { DefaultTaskDisplay } from "../task/taskDisplay";
+import { TaskDisplay } from "../task/taskDisplay";
 import CreateTaskForm from "../task/CreateTaskForm";
 import { useState } from "react";
 import DeleteProject from "./DeleteProject";
@@ -10,11 +10,12 @@ import { sortTask } from "../../features/task/sortTask";
 import { searchTask } from "../../features/task/searchTask";
 
 function ListProject() {
-    const projects = useSelector((state) => state[projectsSlice.name]);
-    const tasks = useSelector((state) => state[tasksSlice.name]);
-    const filter = useSelector((state) => state[filterSlice.name]);
-    const sort = useSelector((state) => state[sortSlice.name]);
+    const projects = useSelector(state => state[projectsSlice.name]);
+    const tasks = useSelector(state => state[tasksSlice.name]);
+    const filter = useSelector(state => state[filterSlice.name]);
+    const sort = useSelector(state => state[sortSlice.name]);
     const search = useSelector(state => state[searchSlice.name]);
+
     const listProject = [];
 
     for (const project of projects) {
@@ -30,30 +31,21 @@ function ListProject() {
                 {listProject}
             </ul>
         </>
-    )
+    );
 }
 
 function Project(props) {
     const [display, setDisplay] = useState('none');
-    const {projectName, projectDescription, projectTimeCreated } = props.project;
-
-    const tasks = props.tasks;
-
+    const { tasks, project } = props;
+    const {projectName, projectDescription, projectTimeCreated } = project;
     const accountName = localStorage.getItem("accountName");
 
     const listTask = [];
-    for (const task of tasks) {
-        //console.log(task);
-        listTask.push(<DefaultTaskDisplay key={`${projectName}${task.taskName}`} task={task}/>)
-    }
+    for (const task of tasks) { listTask.push(<TaskDisplay key={`${projectName}${task.taskName}`} task={task}/>); }
 
-    const onClickDisplayProjectInfo = () => {
-        if (display === 'none') {
-            setDisplay('block');
-        }
-        else {
-            setDisplay('none');
-        }
+    const onClickDisplayProjectInfo = () => { 
+        if (display === 'none') { setDisplay('block'); }
+        else { setDisplay('none'); } 
     }
     return (
         <>

@@ -1,8 +1,8 @@
-function filterTask(arrayOfTask, projectName, filter) {
+function filterTask(tasks, projectName, filter) {
     const { statusFilter, dateFilter, importantFilter } = filter;
     const { timeCreatedFrom, timeCreatedTo, timeDeadlineFrom, timeDeadlineTo} = dateFilter;
 
-    const taskResult = arrayOfTask.filter(task => {
+    const taskResult = tasks.filter(task => {
         if (task.projectName !== projectName) return false;
         if (timeCreatedFrom !== "" && task.taskTimeCreated.slice(0,10) < timeCreatedFrom) return false;
         if (timeCreatedTo !== "" && task.taskTimeCreated.slice(0,10) > timeCreatedTo) return false;

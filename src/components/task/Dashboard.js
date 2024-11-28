@@ -1,5 +1,4 @@
-import TaskDateDisplay from "../../components/task/taskDateDisplay";
-
+import { TaskDisplay } from "./taskDisplay";
 function Dashboard(props) {
     const { tasks } = props;
 
@@ -35,6 +34,24 @@ function Dashboard(props) {
 
         </>
     );
+}
+
+
+function TaskDateDisplay(props) {
+    const {tasks, date} = props;
+    const listTask = [];
+    for (const task of tasks) {
+        listTask.push(<TaskDisplay key={`${task.projectName}${task.taskName}`} task={task} type={"dashboard"}/>)
+    }
+
+    return (
+        <>
+            <p>{new Date(date).toDateString()}</p>
+            <ul>
+                {listTask}
+            </ul>
+        </>
+    )
 }
 
 export default Dashboard;

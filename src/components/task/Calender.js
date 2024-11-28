@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./calender.css"
-import { DefaultTaskDisplay } from "./taskDisplay";
+import { TaskDisplay } from "./taskDisplay";
 
 function Calender(props) {
     const today = new Date();
@@ -25,7 +25,8 @@ function Calender(props) {
         const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === currenDate.toJSON().slice(0, 10));
         const dateTask = [];
         for (const task of arrayOfTask) {
-            dateTask.push(<DefaultTaskDisplay key={`${task.projectName}_${task.taskName}`} type="calender" task={task}/>);
+            //dateTask.push(<DefaultTaskDisplay key={`${task.projectName}_${task.taskName}`} type="calender" task={task}/>);
+            dateTask.push(<li key={`${task.projectName}_${task.taskName}`}>{task.taskName}/{task.projectName}</li>);
         }
         const dateIterator = currenDate.getDate();
         row.push(
@@ -116,7 +117,7 @@ function DateDisplayTask(props) {
 
     if (arrayOfTask.length !== 0) {
         for (const task of arrayOfTask) {
-            dateListTask.push(<DefaultTaskDisplay key={`${task.taskName}_${task.projectName}_display`} date={currentDate.toJSON()} task={task}/>)
+            dateListTask.push(<TaskDisplay key={`${task.taskName}_${task.projectName}_display`} date={currentDate.toJSON()} task={task} type="calender"/>)
         }
     }
 

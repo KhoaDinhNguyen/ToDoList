@@ -5,8 +5,9 @@ import { fetchTaskUpdate } from "../../features/task/taskAPI";
 import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 
-function DefaultTaskDisplay(props) {
-    const {taskStatus, taskTimeDeadline, projectName, taskName, taskImportant} = props.task;
+function TaskDisplay(props) {
+    const { type, task} = props;
+    const {taskStatus, projectName, taskName, taskImportant} = task;
     const [currentStatus, setCurrentStatus] = useState(taskStatus);
     const [taskInfoDisplay, setTaskInfoDisplay] = useState('none');
     const [currentImportant, setCurrentImportant] = useState(taskImportant);
@@ -27,8 +28,8 @@ function DefaultTaskDisplay(props) {
     };
 
     const onChangeTaskInfoDisplay = () => {
-        if (taskInfoDisplay === 'none') setTaskInfoDisplay('block');
-        else setTaskInfoDisplay('none');
+        if (taskInfoDisplay === 'none') { setTaskInfoDisplay('block'); }
+        else { setTaskInfoDisplay('none'); }
     };
 
     const onClickImportant = () => {
@@ -46,27 +47,58 @@ function DefaultTaskDisplay(props) {
         
     }
 
-    if (props.type === 'calender') {
+    if (type === 'calender') {
         return (
-            <li>
-                <h4>{taskName}/{projectName}</h4>
-            </li>
-        )
+            <TaskDisplayCalender
+                task={props.task} 
+                onChangeTaskInfoDisplay={onChangeTaskInfoDisplay} 
+                currentStatus={currentStatus}
+                taskInfoDisplay={taskInfoDisplay}
+            />
+        );
     }
-    else if (props.type === 'dashboard') {
+    else if (type === 'dashboard') {
         return (
-            <li>
-                <h4>{taskName}/{projectName}</h4>
-                <p>{currentStatus}</p>
-                <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
-                <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
-                <p>Important</p>
-                <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
-                <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-                <TaskInfo task={props.task} display={taskInfoDisplay} type="dashboard"/>
-            </li>
-        )
+            <TaskDisplayDashBoard 
+            task={props.task} 
+            onChangeTaskStatus={onChangeTaskStatus}
+            onClickImportant={onClickImportant} 
+            onChangeTaskInfoDisplay={onChangeTaskInfoDisplay} 
+            currentImportant={currentImportant} 
+            currentStatus={currentStatus}
+            taskInfoDisplay={taskInfoDisplay}
+            />
+        );
     }
+
+    return (
+        <TaskDisplayHomepage 
+            task={props.task} 
+            onChangeTaskStatus={onChangeTaskStatus}
+            onClickImportant={onClickImportant} 
+            onChangeTaskInfoDisplay={onChangeTaskInfoDisplay} 
+            currentImportant={currentImportant} 
+            currentStatus={currentStatus}
+            taskInfoDisplay={taskInfoDisplay}
+        />
+    );
+}
+
+function timeDisplay(time) {
+    return time.slice(0, 10);
+}
+
+
+function nextStatus(currentStatus) {
+    if (currentStatus === 'pending') return 'fulfilled';
+    else return 'pending';
+}
+
+/* -------------------- TASK HOMEPAGE IN DASHBOARD--------------------*/
+function TaskDisplayHomepage(props) {
+    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay} = props;
+    const { taskName, taskTimeDeadline} = task;
+
     return (
         <li>
             <h4>{taskName}</h4>
@@ -76,42 +108,85 @@ function DefaultTaskDisplay(props) {
             <p>Important</p>
             <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
             <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-            <TaskInfo task={props.task} display={taskInfoDisplay}/>
+            <TaskInfoHomepage task={task} display={taskInfoDisplay}/>
         </li>
-    )
+    );
 }
 
-function timeDisplay(time) {
-    return time.slice(0, 10);
-}
+function TaskInfoHomepage(props) {
+    const { display, task } = props; 
+    const {taskTimeDeadline, taskTimeCreated, taskDescription} = task;
 
-function TaskInfo(props) {
-    const {taskTimeDeadline, taskTimeCreated, taskDescription, taskName, projectName} = props.task;
-
-    if (props.type === "dashboard") {
-        return (
-            <div className="taskInfo" style={{display: props.display}}>
-                <p>Task description: {taskDescription}</p>
-                <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
-                <p>Time create: {timeDisplay(taskTimeCreated)}</p>
-                <p>Project name: {projectName}</p>
-                <DeleteTask task={props.task} taskName={taskName}/>
-            </div>
-        );
-    }
     return (
-        <div className="taskInfo" style={{display: props.display}}>
+        <div className="taskInfo" style={{display: display}}>
             <p>Task description: {taskDescription}</p>
             <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
-            <p>Time create: {timeDisplay(taskTimeCreated)}</p>
-            <DeleteTask task={props.task} taskName={taskName}/>
+            <p>Time created: {timeDisplay(taskTimeCreated)}</p>
+            <DeleteTask task={task}/>
         </div>
     )
 }
 
-function nextStatus(currentStatus) {
-    if (currentStatus === 'pending') return 'fulfilled';
-    else return 'pending';
+/* -------------------- TASK DISPLAY IN DASHBOARD--------------------*/
+function TaskDisplayDashBoard(props) {
+    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay} = props;
+    const { taskName, projectName} = task;
+
+    return (
+        <li>
+            <h4>{taskName}/{projectName}</h4>
+            <p>{currentStatus}</p>
+            <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
+            <p>Important</p>
+            <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
+            <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
+            <TaskInfoDashboard task={task} display={taskInfoDisplay}/>
+        </li>
+    );
 }
 
-export { DefaultTaskDisplay }
+function TaskInfoDashboard(props) {
+    const { display, task } = props;
+    const {taskTimeDeadline, taskTimeCreated, taskDescription, projectName} = task;
+
+    return (
+        <div className="taskInfo" style={{display: display}}>
+            <p>Task description: {taskDescription}</p>
+            <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
+            <p>Time created: {timeDisplay(taskTimeCreated)}</p>
+            <p>Project name: {projectName}</p>
+        </div>
+    );
+}
+
+/* -------------------- TASK DISPLAY IN CALENDER--------------------*/
+function TaskDisplayCalender(props) {
+    const { task, onChangeTaskInfoDisplay, currentStatus, taskInfoDisplay} = props;
+    const { taskName, taskTimeDeadline, projectName } = task;
+
+    return (
+        <li>
+            <h4>{taskName} - Project name : {projectName}</h4>
+            <p>{currentStatus}</p>
+            <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
+            <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
+            <TaskInfoCalender task={task} display={taskInfoDisplay}/>
+        </li>
+    );
+}
+
+function TaskInfoCalender(props) {
+    const { display, task } = props; 
+    const { taskTimeCreated, taskDescription } = task;
+
+    return (
+        <div className="taskInfo" style={{display: display}}>
+            <p>Task description: {taskDescription}</p>
+            <p>Time created: {timeDisplay(taskTimeCreated)}</p>
+        </div>
+    );
+}
+
+export { 
+    TaskDisplay
+ }
