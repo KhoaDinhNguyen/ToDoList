@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Root() {
@@ -13,9 +13,9 @@ function Root() {
             navigate(`/user/${accountName}`);
         }
     },[accountName, navigate]);
-
+    
     return (
-        <Outlet/>
+        <></>
     );
 }   
 

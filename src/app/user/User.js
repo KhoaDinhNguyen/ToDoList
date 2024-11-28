@@ -5,6 +5,7 @@ function User() {
     const accountName = localStorage.getItem('accountName');
     const navigate = useNavigate();
 
+    
     useEffect(() => {
         if (accountName === '' || accountName === null) {
             navigate('/homepage');
@@ -12,13 +13,15 @@ function User() {
         else {
             navigate(`/user/${accountName}`);
         }
-    }, [accountName, navigate])
+    }, [accountName, navigate]);
+    
     return (
         <>  
             <nav>
                 <ul>
                     <li><NavLink to={`${accountName}`}>Homepage</NavLink></li>
                     <li><NavLink to={`${accountName}/dashboard`}>Dashboard</NavLink></li>
+                    <li><NavLink to={`${accountName}/calender`}>Calender</NavLink></li>
                 </ul>
             </nav>
             <Outlet/>

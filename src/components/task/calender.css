@@ -1,0 +1,18 @@
+#calender {
+    width: 90vw;
+    margin: 0 auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+}
+
+tbody td {
+    margin: 0;
+    padding: 0;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    text-overflow: ellipsis;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}

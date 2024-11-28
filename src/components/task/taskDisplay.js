@@ -46,7 +46,14 @@ function DefaultTaskDisplay(props) {
         
     }
 
-    if (props.type === 'dashboard') {
+    if (props.type === 'calender') {
+        return (
+            <li>
+                <h4>{taskName}/{projectName}</h4>
+            </li>
+        )
+    }
+    else if (props.type === 'dashboard') {
         return (
             <li>
                 <h4>{taskName}/{projectName}</h4>
