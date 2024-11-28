@@ -7,10 +7,15 @@ const createProject = (req, res, next) => {
     
     pool.query(`CALL insert_project('${projectName}','${accountName}', CURRENT_DATE, '${projectDescription}');`, (err, result) => {
         if (err) {
-            res.status(400).json({message: err.message, error: true});
+            if (err.message === `duplicate key value violates unique constraint "projects_pkey"`) {
+                res.status(400).json({message: "Project name duplicate", error: true});
+            }
+            else {
+                res.status(400).json({message: err.message, error: true});
+            }
         }
         else {
-            res.status(200).json({message: 'Create project sucessfully'});
+            res.status(200).json({message: 'Create project sucessfully', error: false});
         }
     });
 };

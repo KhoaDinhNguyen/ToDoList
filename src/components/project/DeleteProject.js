@@ -4,9 +4,7 @@ import { useDispatch } from "react-redux";
 
 function DeleteProject(props) {
     const dispatch = useDispatch();
-
-    const accountName = props.accountName;
-    const projectName = props.projectName;
+    const { accountName, projectName } = props;
 
     const onClickDeleteProject = () => {
         fetchDeleteProject(accountName, projectName)
