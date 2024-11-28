@@ -57,7 +57,7 @@ const deleteTask = (req, res, next) => {
             res.status(400).json({message: err.message, error: true});
         }
         else {
-            res.status(200).json({message: 'Delete task sucessfully'});
+            res.status(200).json({message: 'Delete task sucessfully', error: false});
         }
     })
 }

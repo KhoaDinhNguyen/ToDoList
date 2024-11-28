@@ -4,13 +4,14 @@ import { fetchTaskDelete } from "../../features/task/taskAPI";
 
 function DeleteTask(props) {
     const dispatch = useDispatch();
-    const {taskName, projectName} = props.task;
+    const { task } = props;
+    const { taskName, projectName } = task;
     const accountName = localStorage.getItem("accountName");
 
     const onClickDeleteTaskButton = () => {
         fetchTaskDelete(accountName, projectName, taskName)
         .then(response => {
-            if (response.message === 'Delete task sucessfully') {
+            if (!response.error) {
                 dispatch(tasksSlice.actions.remove({
                     taskName,
                     projectName
@@ -23,7 +24,7 @@ function DeleteTask(props) {
     }
     return (
         <button onClick={onClickDeleteTaskButton}>Delete task</button>
-    )
+    );
 }
 
 export default DeleteTask;
