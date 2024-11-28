@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 function User() {
     const accountName = localStorage.getItem('accountName');
@@ -14,7 +14,13 @@ function User() {
         }
     }, [accountName, navigate])
     return (
-        <>
+        <>  
+            <nav>
+                <ul>
+                    <li><NavLink to={`${accountName}`}>Homepage</NavLink></li>
+                    <li><NavLink to={`${accountName}/dashboard`}>Dashboard</NavLink></li>
+                </ul>
+            </nav>
             <Outlet/>
         </>
     )

@@ -32,8 +32,8 @@ function FilterForm() {
         <>
             <p>This is filter</p>
             <p>Star</p>
-            <label htmlFor="pendingFilter">Star</label>
-            <input type="checkbox" id="starFilter" name="statFilter" checked={importantFilter} onChange={onChangeStar}/>
+            <label htmlFor="starFilter">Star</label>
+            <input type="checkbox" id="starFilter" name="starFilter" checked={importantFilter} onChange={onChangeStar}/>
             <FilterStatusFrom setStatusFilter={setStatusFilter} />
             <FilterDateForm setDateFilter={setDateFilter}/>
         </>

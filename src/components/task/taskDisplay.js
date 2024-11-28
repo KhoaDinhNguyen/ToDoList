@@ -45,6 +45,21 @@ function DefaultTaskDisplay(props) {
         });
         
     }
+
+    if (props.type === 'dashboard') {
+        return (
+            <li>
+                <h4>{taskName}/{projectName}</h4>
+                <p>{currentStatus}</p>
+                <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
+                <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
+                <p>Important</p>
+                <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
+                <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
+                <TaskInfo task={props.task} display={taskInfoDisplay} type="dashboard"/>
+            </li>
+        )
+    }
     return (
         <li>
             <h4>{taskName}</h4>
@@ -64,8 +79,19 @@ function timeDisplay(time) {
 }
 
 function TaskInfo(props) {
-    const {taskTimeDeadline, taskTimeCreated, taskDescription, taskName} = props.task;
+    const {taskTimeDeadline, taskTimeCreated, taskDescription, taskName, projectName} = props.task;
 
+    if (props.type === "dashboard") {
+        return (
+            <div className="taskInfo" style={{display: props.display}}>
+                <p>Task description: {taskDescription}</p>
+                <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
+                <p>Time create: {timeDisplay(taskTimeCreated)}</p>
+                <p>Project name: {projectName}</p>
+                <DeleteTask task={props.task} taskName={taskName}/>
+            </div>
+        );
+    }
     return (
         <div className="taskInfo" style={{display: props.display}}>
             <p>Task description: {taskDescription}</p>

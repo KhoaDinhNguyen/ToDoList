@@ -40,12 +40,12 @@ function FilterStatusFrom(props) {
         <>
             <div id="statusFilter">
                 <p>Status</p>
-                <input type="checkbox" id="pendingFiler" name="pendingFilter" checked={pending} onChange={onChangePending}/>
-                <label htmlFor="pendingFilter">Pending</label>
+                <input type="checkbox" id="pendingFitler" name="pendingFitler" checked={pending} onChange={onChangePending}/>
+                <label htmlFor="pendingFitler">Pending</label>
                 <input type="checkbox" id="fulfilledFilter" name="fulfilledFilter" checked={fulfilled} onChange={onChangeFulfilled}/>
                 <label htmlFor="fulfilledFilter">Fulfilled</label>
-                <input type="checkbox" id="failingFiler" name="failingFilter" checked={falling} onChange={onChangeFalling}/>
-                <label htmlFor="failingFilter">Falling</label>
+                <input type="checkbox" id="failingFilter" name="failingFilter" checked={falling} onChange={onChangeFalling}/>
+                <label htmlFor="failingFilter">Failing</label>
                 <input type="checkbox" id="allStatus" name="allStatus" value="allStatus" checked={allStatus} onChange={onChangeAllStatus}/>
                 <label htmlFor="allStatus">All apply</label>
             </div>
