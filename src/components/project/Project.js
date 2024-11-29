@@ -55,7 +55,7 @@ function Project(props) {
                 <div className="projectInfo" style={{display: display}}>
                     <p>Project name: {projectName}</p>
                     <p>Project description: {projectDescription}</p>
-                    <p>Project time created: {projectTimeCreated.slice(0, 10)}</p>
+                    <p>Project time created: {projectTimeCreated}</p>
                     <DeleteProject accountName={accountName} projectName={projectName} />
                 </div>
                 <ul>

@@ -15,7 +15,7 @@ function Calender(props) {
     const firstDayOfMonth = new Date(`${calenderYear} ${calenderMonth}`);
     firstDayOfMonth.setDate(firstDayOfMonth.getDate());
     
-    const dateIterator = new Date(firstDayOfMonth);
+    const dateIterator = new Date(`${calenderYear} ${calenderMonth}`);
     const tableBody = [];
 
     let dayOfWeek = 0, nonDate = 0, numsOfRow = 0, row = [];
@@ -25,7 +25,8 @@ function Calender(props) {
             row.push(<td key={`${nonDate++}_nonDate`}></td>);
             dayOfWeek++;
         }
-        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === dateIterator.toJSON().slice(0, 10));
+
+        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline === dateIterator.toISOString().slice(0, 10));
         const dateTask = [];
 
         for (const task of arrayOfTask) {
@@ -118,7 +119,7 @@ function DateDisplayTask(props) {
         return <></>
     }
 
-    const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === currentDate.toJSON().slice(0, 10));
+    const arrayOfTask = tasks.filter(task => task.taskTimeDeadline === currentDate.toISOString().slice(0, 10));
     const dateListTask = [];
 
     if (arrayOfTask.length !== 0) {

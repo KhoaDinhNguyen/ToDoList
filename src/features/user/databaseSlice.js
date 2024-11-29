@@ -48,6 +48,7 @@ const tasksSlice = createSlice({
         add(state, action) {
             const {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant} = action.payload;
             state.push( {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant});
+            console.log(taskTimeDeadline);
             return state;
         },
         remove(state, action) {

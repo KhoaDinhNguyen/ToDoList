@@ -1,8 +1,7 @@
-import { TaskDisplay } from "./taskDisplay";
+import { TaskDisplay, dateDisplay } from "./taskDisplay";
 
 function Dashboard(props) {
     const { tasks } = props;
-
     if (tasks.length === 0) {return <p>Nothing has planned yet</p>;}
 
     let minTimeDeadline = tasks[0].taskTimeDeadline, maxTimeDeadline = tasks[0].taskTimeDeadline;
@@ -18,8 +17,8 @@ function Dashboard(props) {
     const maxDateDeadline = new Date(maxTimeDeadline);
     maxDateDeadline.setDate(maxDateDeadline.getDate());
 
-    const beforeMinDateDeadline = new Date(minDateDeadline.toDateString());
-    const afterMaxDateDeadLine = new Date(maxDateDeadline.toDateString());
+    const beforeMinDateDeadline = new Date(minDateDeadline.toISOString().slice(0, 10));
+    const afterMaxDateDeadLine = new Date(maxDateDeadline.toISOString().slice(0, 10));
     let nonDeadlineStartDate = undefined;
     let nonDeadlineEndDate = undefined;
 
@@ -28,39 +27,47 @@ function Dashboard(props) {
 
     const dateListTask = [];
 
-    for (let currentDate = new Date(minDateDeadline); currentDate <=  maxDateDeadline; currentDate.setDate(currentDate.getDate() + 1)) {
+    for (let currentDate = new Date(minDateDeadline.toISOString().slice(0, 10)); currentDate <=  maxDateDeadline; currentDate.setDate(currentDate.getDate() + 1)) {
         currentDate.setDate(currentDate.getDate());
-        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline === currentDate.toJSON());
+        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline === currentDate.toISOString().slice(0, 10));
+
         if (arrayOfTask.length !== 0) {
+            //console.log(arrayOfTask);
             if (nonDeadlineStartDate !== undefined) {
                 dateListTask.push(
-                    <li key={nonDeadlineStartDate.toDateString()}>
-                        <NotDeadlineDisplay startDate={nonDeadlineStartDate.toDateString()} endDate={nonDeadlineEndDate.toDateString()}/>
+                    <li key={dateDisplay(nonDeadlineStartDate)}>
+                        <NotDeadlineDisplay startDate={dateDisplay(nonDeadlineStartDate)} endDate={dateDisplay(nonDeadlineEndDate)}/>
                     </li>
                 );
                 nonDeadlineStartDate = undefined;
                 nonDeadlineEndDate = undefined;
             }
-
-            dateListTask.push(<li key={currentDate}><DeadlineDisplay tasks={arrayOfTask} date={currentDate.toJSON()}/></li>);
+            //console.log(currentDate.toISOString().slice(0, 10));
+            dateListTask.push(<li key={currentDate}><DeadlineDisplay tasks={arrayOfTask} date={dateDisplay(currentDate)}/></li>);
         }
         else {
-            if (nonDeadlineStartDate === undefined) { nonDeadlineStartDate = new Date(currentDate); }
-            else { nonDeadlineEndDate = new Date(currentDate); }
+            if (nonDeadlineStartDate === undefined) { 
+                nonDeadlineStartDate = new Date(currentDate);
+                nonDeadlineEndDate = new Date(currentDate); 
+            }
+            else { 
+                nonDeadlineEndDate = new Date(currentDate); 
+            }
         }
     }
 
+    //console.log(typeof(minDateDeadline));
     return (
         <>
             <p>This is dashboard</p>
             <ul>
                 <li>
-                    <p>Before - {beforeMinDateDeadline.toDateString()}</p>
+                    <p>Before - {dateDisplay(beforeMinDateDeadline)}</p>
                     <p>Nothing planned yet</p>
                 </li>
                 {dateListTask}
                 <li>
-                    <p>{afterMaxDateDeadLine.toDateString()} - After</p>
+                    <p>{dateDisplay(afterMaxDateDeadLine)} - After</p>
                     <p>Nothing planned yet</p>
                 </li>
             </ul>
@@ -71,6 +78,14 @@ function Dashboard(props) {
 function NotDeadlineDisplay(props) {
     const { startDate, endDate } = props;
 
+    if (startDate === endDate) {
+        return (
+            <>
+                <p>{startDate}</p>
+                <p>Nothing planned yet</p>
+            </>
+        )
+    }
     return (
         <>
             <p>{startDate} - {endDate}</p>
@@ -89,7 +104,7 @@ function DeadlineDisplay(props) {
 
     return (
         <>
-            <p>{new Date(date).toDateString()}</p>
+            <p>{date}</p>
             <ul>
                 {listTask}
             </ul>

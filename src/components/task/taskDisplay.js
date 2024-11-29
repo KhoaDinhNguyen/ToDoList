@@ -84,10 +84,10 @@ function TaskDisplay(props) {
     );
 }
 
-function timeDisplay(time) {
-    return time.slice(0, 10);
+function dateDisplay(date) {
+    const dateString = date.toISOString().slice(0, 10);
+    return dateString;
 }
-
 
 function nextStatus(currentStatus) {
     if (currentStatus === 'pending') return 'fulfilled';
@@ -103,7 +103,7 @@ function TaskDisplayHomepage(props) {
         <li>
             <h4>{taskName}</h4>
             <p>{currentStatus}</p>
-            <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
+            <p>Deadline: {taskTimeDeadline}</p>
             <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
             <p>Important</p>
             <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
@@ -120,8 +120,8 @@ function TaskInfoHomepage(props) {
     return (
         <div className="taskInfo" style={{display: display}}>
             <p>Task description: {taskDescription}</p>
-            <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
-            <p>Time created: {timeDisplay(taskTimeCreated)}</p>
+            <p>Deadline: {taskTimeDeadline}</p>
+            <p>Time created: {taskTimeCreated}</p>
             <DeleteTask task={task}/>
         </div>
     )
@@ -152,8 +152,8 @@ function TaskInfoDashboard(props) {
     return (
         <div className="taskInfo" style={{display: display}}>
             <p>Task description: {taskDescription}</p>
-            <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
-            <p>Time created: {timeDisplay(taskTimeCreated)}</p>
+            <p>Deadline: {taskTimeDeadline}</p>
+            <p>Time created: {taskTimeCreated}</p>
             <p>Project name: {projectName}</p>
         </div>
     );
@@ -168,7 +168,7 @@ function TaskDisplayCalender(props) {
         <li>
             <h4>{taskName} - Project name : {projectName}</h4>
             <p>{currentStatus}</p>
-            <p>Deadline: {timeDisplay(taskTimeDeadline)}</p>
+            <p>Deadline: {taskTimeDeadline}</p>
             <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
             <TaskInfoCalender task={task} display={taskInfoDisplay}/>
         </li>
@@ -182,11 +182,12 @@ function TaskInfoCalender(props) {
     return (
         <div className="taskInfo" style={{display: display}}>
             <p>Task description: {taskDescription}</p>
-            <p>Time created: {timeDisplay(taskTimeCreated)}</p>
+            <p>Time created: {taskTimeCreated}</p>
         </div>
     );
 }
 
 export { 
-    TaskDisplay
+    TaskDisplay,
+    dateDisplay
  }

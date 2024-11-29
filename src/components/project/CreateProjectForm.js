@@ -11,7 +11,7 @@ function CreateProjectForm() {
     const [display, setDisplay] = useState("none");
 
     const accountName = localStorage.getItem("accountName");
-    const currentDate = new Date().toJSON().slice(0, 10);
+    const currentDate = new Date().toISOString().slice(0, 10);
 
     const closeForm = () => { setDisplay("none"); }
     const openForm = () => { setDisplay("block"); }
