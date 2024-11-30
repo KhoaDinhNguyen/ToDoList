@@ -30,7 +30,12 @@ const updateTask = (req, res, next) => {
         const { projectName, taskName, newTaskName, newTaskDescription, newTaskTimeDeadline } = req.body;
         pool.query(`CALL update_task_info('${taskName}', '${projectName}', '${accountName}', '${newTaskName}', '${newTaskDescription}', '${newTaskTimeDeadline}');`, (err, result) => {
             if (err) {
-                res.status(400).json({message: err.message, error: true});
+                if (err.message === 'duplicate key value violates unique constraint "tasks_pkey"') {
+                    res.status(400).json({message: 'Duplicate task name in the same project', error: true});
+                }
+                else {
+                    res.status(400).json({message: err.message, error: true});
+                }
             }
             else {
                 res.status(200).json({message: 'Update task sucessfully'});

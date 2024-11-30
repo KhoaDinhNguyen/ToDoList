@@ -4,11 +4,13 @@ import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 
 function UpdateTask(props) {
-    const { task, setDisplayEdit, display } = props;
+    const { task, setDisplayEdit, display, setTaskInfoDisplay } = props;
     const { taskName, taskDescription, taskTimeDeadline, taskTimeCreated, projectName} = task;
     const [newTaskName, setNewTaskName] = useState(taskName);
     const [newTaskDescription, setNewTaskDescription] = useState(taskDescription);
     const [newTaskTimeDeadline, setNewTaskTimeDeadline] = useState(taskTimeDeadline);
+    const [error, setError] = useState("");
+
     const accountName = localStorage.getItem('accountName');
     const dispatch = useDispatch();
 
@@ -17,11 +19,24 @@ function UpdateTask(props) {
     const onChangeTaskDescription = event => { setNewTaskDescription(event.target.value); }
     const onChangeTaskDeadline = event => { setNewTaskTimeDeadline(event.target.value); }
 
+    const today = new Date();
+    today.setDate(today.getDate());
+    const todayString = today.toISOString().slice(0, 10);
+
     const onSubmitUpdateTaskInfo = (event) => {
         event.preventDefault();
         featchTaskUpdateInfo(taskName, projectName, accountName, newTaskName, newTaskDescription, newTaskTimeDeadline)
         .then(response => {
-            dispatch(tasksSlice.actions.updateInfo({taskName, projectName, accountName, newTaskName, newTaskDescription, newTaskTimeDeadline}));
+            if (!response.error) {
+                dispatch(tasksSlice.actions.updateInfo({taskName, projectName, accountName, newTaskName, newTaskDescription, newTaskTimeDeadline}));
+                setTaskInfoDisplay('none');
+            }
+            else {
+                setError(response.message);
+                setTimeout(() => {
+                    setError("");
+                }, 2000);
+            }
         })
         .catch(err => {
             console.log(err);
@@ -38,7 +53,7 @@ function UpdateTask(props) {
                     <input type="text" name="newTaskDescription" id="newTaskDescription" value={newTaskDescription} onChange={onChangeTaskDescription}/>
                     <br/>
                     <label htmlFor="newTaskTimeDeadline">Task deadline: </label>
-                    <input type="date" name="newTaskTimeDeadline" id="newTaskTimeDeadline" value={newTaskTimeDeadline} onChange={onChangeTaskDeadline}/>
+                    <input type="date" name="newTaskTimeDeadline" id="newTaskTimeDeadline" value={newTaskTimeDeadline} onChange={onChangeTaskDeadline} min={todayString}/>
                     <br/>
                     <span>Task time created: {taskTimeCreated}</span>
                     <br/>
@@ -48,6 +63,7 @@ function UpdateTask(props) {
                     <button onClick={onClickCancle}>Cancle</button>
                 </form>
                 <p>Cannot change task time created and task's project</p>
+                <p>{error}</p>
             </div>
         </>
     )

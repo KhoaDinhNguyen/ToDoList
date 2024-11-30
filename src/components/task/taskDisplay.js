@@ -81,6 +81,7 @@ function TaskDisplay(props) {
             onClickImportant={onClickImportant} 
             onChangeTaskInfoDisplay={onChangeTaskInfoDisplay}
             setDisplayEdit={setDisplayEdit} 
+            setTaskInfoDisplay={setTaskInfoDisplay}
             currentImportant={currentImportant} 
             currentStatus={currentStatus}
             taskInfoDisplay={taskInfoDisplay}
@@ -107,7 +108,7 @@ function negateDisplay(display) {
 
 /* -------------------- TASK HOMEPAGE IN DASHBOARD--------------------*/
 function TaskDisplayHomepage(props) {
-    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, setDisplayEdit, displayEdit} = props;
+    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, setDisplayEdit, displayEdit, setTaskInfoDisplay} = props;
     const { taskName, taskTimeDeadline} = task;
 
     return (
@@ -119,13 +120,13 @@ function TaskDisplayHomepage(props) {
             <p>Important</p>
             <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
             <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-            <TaskInfoHomepage task={task} display={taskInfoDisplay} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit}/>
+            <TaskInfoHomepage task={task} display={taskInfoDisplay} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit} setTaskInfoDisplay={setTaskInfoDisplay}/>
         </li>
     );
 }
 
 function TaskInfoHomepage(props) {
-    const { display, task, displayEdit, setDisplayEdit } = props; 
+    const { display, task, displayEdit, setDisplayEdit, setTaskInfoDisplay } = props; 
     const {taskTimeDeadline, taskTimeCreated, taskDescription} = task;
 
     const onClickEdit = () => {
@@ -139,8 +140,8 @@ function TaskInfoHomepage(props) {
                 <p>Deadline: {taskTimeDeadline}</p>
                 <p>Time created: {taskTimeCreated}</p>
             </div>
-            <UpdateTask task={task} display={displayEdit} setDisplayEdit={setDisplayEdit}/>
-            <button onClick={onClickEdit}>Edit</button>
+            <UpdateTask task={task} display={displayEdit} setDisplayEdit={setDisplayEdit} setTaskInfoDisplay={setTaskInfoDisplay}/>
+            <button onClick={onClickEdit} style={{display: negateDisplay(displayEdit)}}>Edit</button>
             <DeleteTask task={task}/>
         </div>
     )
