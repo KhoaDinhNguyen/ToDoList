@@ -23,7 +23,11 @@ function ListProject() {
         const filterTasks = filterTask(tasks, project.projectName, filter);
         const searchTasks = searchTask(filterTasks, search);
         const sortTasks = sortTask(searchTasks, sort);
-        listProject.push(<Project key={project.projectName} tasks={sortTasks} project={project}/>);
+        const listTask = [];
+        for (const task of sortTasks) {
+            listTask.push(<TaskDisplay key={`${project.projectName}${task.taskName}`} task={task}/>);
+        }
+        listProject.push(<Project key={project.projectName} listTask={listTask} project={project}/>);
     }
 
     return (
@@ -36,12 +40,11 @@ function ListProject() {
 }
 
 function Project(props) {
-    const { tasks, project } = props;
+    const { listTask, project } = props;
     const { projectName, projectDescription, projectTimeCreated } = project;
     const [infoDisplay, setInfoDisplay] = useState('none');
     const [editDisplay, setEditDisplay] = useState('none');
 
-    const listTask = [];
     const accountName = localStorage.getItem("accountName");   
 
     const onClickEdit = () => { setEditDisplay('block'); };
@@ -50,8 +53,6 @@ function Project(props) {
         if (infoDisplay === 'none') { setInfoDisplay('block'); }
         else { setInfoDisplay('none'); } 
     };
-
-    for (const task of tasks) { listTask.push(<TaskDisplay key={`${projectName}${task.taskName}`} task={task}/>); }
 
     return (
         <>
