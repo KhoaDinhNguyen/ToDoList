@@ -30,6 +30,7 @@ function UpdateTask(props) {
             if (!response.error) {
                 dispatch(tasksSlice.actions.updateInfo({taskName, projectName, accountName, newTaskName, newTaskDescription, newTaskTimeDeadline}));
                 setTaskInfoDisplay('none');
+                setDisplayEdit('none');
             }
             else {
                 setError(response.message);
@@ -44,7 +45,7 @@ function UpdateTask(props) {
     }
     return (
         <>  
-            <div className="editForm" style={{display: display}} onSubmit={onSubmitUpdateTaskInfo}>
+            <div className="editTaskForm" style={{display: display}} onSubmit={onSubmitUpdateTaskInfo}>
                 <form>
                     <label htmlFor="newTaskName">Task name: </label>
                     <input type="text" name="newTaskName" id="newTaskName" value={newTaskName} onChange={onChangeTaskName}/>
@@ -60,8 +61,8 @@ function UpdateTask(props) {
                     <span>Task's project name: {projectName}</span>
                     <br/>
                     <input type="submit" value="Confirm"/>
-                    <button onClick={onClickCancle}>Cancle</button>
                 </form>
+                <button onClick={onClickCancle}>Cancle</button>
                 <p>Cannot change task time created and task's project</p>
                 <p>{error}</p>
             </div>

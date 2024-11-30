@@ -50,7 +50,41 @@ const fetchCreateProject = async (accountName, projectName, projectDescription) 
     }
 }
 
+const fetchUpdateProject = async (projectName, accountName, newProjectName, newProjectDescription) => {
+    const environment = process.env.NODE_ENV;
+    const updateProjectAPI = process.env[`REACT_APP_UPDATE_PROJECT_API_URL_${environment.toUpperCase()}`];
+
+    const bodyInfo = {
+        newProjectName,
+        newProjectDescription
+    };
+
+    const searchQueryParams = {
+        projectName
+    };
+
+    const searchQueryString = createSearchParams(searchQueryParams);
+    const endpoint = `${updateProjectAPI}/${accountName}?${searchQueryString}`;
+
+    try {
+        const jsonResponse = await fetch(endpoint, {
+            method: 'PUT',
+            body: JSON.stringify(bodyInfo),
+            headers: {
+                'Content-type' : 'application/json'
+            }
+        });
+
+        const response = await jsonResponse.json();
+        return response;
+    }
+    catch(err) {
+        return err;
+    }
+
+}
 export {
     fetchCreateProject,
-    fetchDeleteProject
+    fetchDeleteProject,
+    fetchUpdateProject
 };

@@ -29,6 +29,17 @@ const projectsSlice = createSlice({
             return state.filter((data) => {
                 return data.projectName !== projectName;
             });
+        },
+        updateInfo(state, action) {
+            const { projectName, newProjectName, newProjectDescription } = action.payload;
+            state.forEach(project => {
+                if (project.projectName === projectName) {
+                    project.projectName = newProjectName;
+                    project.projectDescription = newProjectDescription;
+                }
+            });
+
+            return state;
         }
     }
 });
@@ -92,6 +103,17 @@ const tasksSlice = createSlice({
                     task.taskName = newTaskName;
                     task.taskDescription = newTaskDescription;
                     task.taskTimeDeadline = newTaskTimeDeadline;
+                }
+            });
+
+            return state;
+        },
+        updateInfoFromProject(state, action) {
+            const { projectName, newProjectName } = action.payload;
+
+            state.forEach(task => {
+                if (task.projectName === projectName) {
+                    task.projectName = newProjectName
                 }
             });
 

@@ -129,9 +129,7 @@ function TaskInfoHomepage(props) {
     const { display, task, displayEdit, setDisplayEdit, setTaskInfoDisplay } = props; 
     const {taskTimeDeadline, taskTimeCreated, taskDescription} = task;
 
-    const onClickEdit = () => {
-        setDisplayEdit('block');
-    }
+    const onClickEdit = () => { setDisplayEdit('block'); }
 
     return (
         <div className="taskInfo" style={{display: display}}>

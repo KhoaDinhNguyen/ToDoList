@@ -8,6 +8,7 @@ import DeleteProject from "./DeleteProject";
 import { filterTask } from "../../features/task/filterTask";
 import { sortTask } from "../../features/task/sortTask";
 import { searchTask } from "../../features/task/searchTask";
+import UpdateProject from "./UpdateProject";
 
 function ListProject() {
     const projects = useSelector(state => state[projectsSlice.name]);
@@ -35,27 +36,36 @@ function ListProject() {
 }
 
 function Project(props) {
-    const [display, setDisplay] = useState('none');
     const { tasks, project } = props;
-    const {projectName, projectDescription, projectTimeCreated } = project;
-    const accountName = localStorage.getItem("accountName");
+    const { projectName, projectDescription, projectTimeCreated } = project;
+    const [infoDisplay, setInfoDisplay] = useState('none');
+    const [editDisplay, setEditDisplay] = useState('none');
 
     const listTask = [];
+    const accountName = localStorage.getItem("accountName");   
+
+    const onClickEdit = () => { setEditDisplay('block'); };
+    const onClickDisplayProjectInfo = () => { 
+        setEditDisplay('none');
+        if (infoDisplay === 'none') { setInfoDisplay('block'); }
+        else { setInfoDisplay('none'); } 
+    };
+
     for (const task of tasks) { listTask.push(<TaskDisplay key={`${projectName}${task.taskName}`} task={task}/>); }
 
-    const onClickDisplayProjectInfo = () => { 
-        if (display === 'none') { setDisplay('block'); }
-        else { setDisplay('none'); } 
-    }
     return (
         <>
             <li>
                 <h3>{projectName}</h3>
                 <button onClick={onClickDisplayProjectInfo}>Project information</button>
-                <div className="projectInfo" style={{display: display}}>
-                    <p>Project name: {projectName}</p>
-                    <p>Project description: {projectDescription}</p>
-                    <p>Project time created: {projectTimeCreated}</p>
+                <div className="projectInfo" style={{display: infoDisplay}}>
+                    <div className="projectDescription" style={{display: negateDisplay(editDisplay)}}>
+                        <p>Project name: {projectName}</p>
+                        <p>Project description: {projectDescription}</p>
+                        <p>Project time created: {projectTimeCreated}</p>
+                    </div>
+                    <button onClick={onClickEdit} style={{display: negateDisplay(editDisplay)}}>Edit</button>
+                    <UpdateProject editDisplay={editDisplay} setEditDisplay={setEditDisplay} setInfoDisplay={setInfoDisplay} project={project} infoDisplay={infoDisplay}/>
                     <DeleteProject accountName={accountName} projectName={projectName} />
                 </div>
                 <ul>
@@ -65,6 +75,11 @@ function Project(props) {
             </li>
         </>
     )
+}
+
+export function negateDisplay(display) {
+    if (display === 'none') return 'block';
+    else return 'none';
 }
 
 export default ListProject;
