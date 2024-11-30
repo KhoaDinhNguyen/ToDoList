@@ -4,6 +4,7 @@ import DeleteTask from "./DeleteTask";
 import { fetchTaskUpdate } from "../../features/task/taskAPI";
 import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
+import UpdateTask from "./UpdateTask";
 
 function TaskDisplay(props) {
     const { type, task} = props;
@@ -12,6 +13,7 @@ function TaskDisplay(props) {
     const [taskInfoDisplay, setTaskInfoDisplay] = useState('none');
     const [currentImportant, setCurrentImportant] = useState(taskImportant);
     const accountName = localStorage.getItem("accountName");
+    const [displayEdit, setDisplayEdit] = useState('none');
     const dispatch = useDispatch();
 
     const onChangeTaskStatus = (event) => {       
@@ -28,6 +30,7 @@ function TaskDisplay(props) {
     };
 
     const onChangeTaskInfoDisplay = () => {
+        setDisplayEdit('none');
         if (taskInfoDisplay === 'none') { setTaskInfoDisplay('block'); }
         else { setTaskInfoDisplay('none'); }
     };
@@ -76,10 +79,12 @@ function TaskDisplay(props) {
             task={props.task} 
             onChangeTaskStatus={onChangeTaskStatus}
             onClickImportant={onClickImportant} 
-            onChangeTaskInfoDisplay={onChangeTaskInfoDisplay} 
+            onChangeTaskInfoDisplay={onChangeTaskInfoDisplay}
+            setDisplayEdit={setDisplayEdit} 
             currentImportant={currentImportant} 
             currentStatus={currentStatus}
             taskInfoDisplay={taskInfoDisplay}
+            displayEdit={displayEdit}
         />
     );
 }
@@ -94,9 +99,15 @@ function nextStatus(currentStatus) {
     else return 'pending';
 }
 
+function negateDisplay(display) {
+    if (display === 'block') return 'none';
+    else return 'block';
+}
+
+
 /* -------------------- TASK HOMEPAGE IN DASHBOARD--------------------*/
 function TaskDisplayHomepage(props) {
-    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay} = props;
+    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, setDisplayEdit, displayEdit} = props;
     const { taskName, taskTimeDeadline} = task;
 
     return (
@@ -108,20 +119,28 @@ function TaskDisplayHomepage(props) {
             <p>Important</p>
             <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
             <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-            <TaskInfoHomepage task={task} display={taskInfoDisplay}/>
+            <TaskInfoHomepage task={task} display={taskInfoDisplay} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit}/>
         </li>
     );
 }
 
 function TaskInfoHomepage(props) {
-    const { display, task } = props; 
+    const { display, task, displayEdit, setDisplayEdit } = props; 
     const {taskTimeDeadline, taskTimeCreated, taskDescription} = task;
+
+    const onClickEdit = () => {
+        setDisplayEdit('block');
+    }
 
     return (
         <div className="taskInfo" style={{display: display}}>
-            <p>Task description: {taskDescription}</p>
-            <p>Deadline: {taskTimeDeadline}</p>
-            <p>Time created: {taskTimeCreated}</p>
+            <div style={{display: negateDisplay(displayEdit)}}>
+                <p>Task description: {taskDescription}</p>
+                <p>Deadline: {taskTimeDeadline}</p>
+                <p>Time created: {taskTimeCreated}</p>
+            </div>
+            <UpdateTask task={task} display={displayEdit} setDisplayEdit={setDisplayEdit}/>
+            <button onClick={onClickEdit}>Edit</button>
             <DeleteTask task={task}/>
         </div>
     )

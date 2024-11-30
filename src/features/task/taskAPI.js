@@ -83,8 +83,43 @@ const fetchTaskUpdate = async (taskInfo, type) => {
     };
 };
 
+const featchTaskUpdateInfo = async (taskName, projectName, accountName, newTaskName, newTaskDescription, newTaskTimeDeadline) => {
+    const body = {
+        projectName,
+        taskName,
+        newTaskName,
+        newTaskDescription,
+        newTaskTimeDeadline
+    };
+    return fetchTaskUpdateAPI(body, "info", accountName);
+}
+
+const fetchTaskUpdateAPI = async (bodyObject, type, accountName) => {
+    const environment = process.env.NODE_ENV;
+    const updateTaskAPI = process.env[`REACT_APP_UPDATE_TASK_API_URL_${environment.toUpperCase()}`];
+    const endpoint = `${updateTaskAPI}/${accountName}/${type}`;
+
+    const body = JSON.stringify(bodyObject);
+
+    try {
+        const jsonRespone = await fetch(endpoint, {
+            method: 'PUT',
+            headers: {  
+                'Content-type' : 'application/json'
+            },
+            body: body
+        });
+
+        const response = await jsonRespone.json();
+        return response;
+    }
+    catch(err) {
+        throw new Error(err.message);
+    };
+};
 export {
     fetchTaskCreate,
     fetchTaskUpdate,
-    fetchTaskDelete
+    fetchTaskDelete,
+    featchTaskUpdateInfo
 };

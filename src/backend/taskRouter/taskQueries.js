@@ -3,6 +3,7 @@ const pool = require('../database');
 const updateTask = (req, res, next) => {
     const accountName = req.params.user;
     const type = req.params.type;
+
     if (type === 'pending' || type === 'fulfilled') {
         const {projectName, taskName} = req.body;
         pool.query(`CALL ${type}_task('${accountName}', '${projectName}', '${taskName}');`, (err, result) => {
@@ -14,10 +15,20 @@ const updateTask = (req, res, next) => {
             }
         });
     }
-
     else if (type === 'important') {
         const { projectName, taskName, newImportantStatus } = req.body;
         pool.query(`CALL update_task_important('${taskName}', '${projectName}', '${accountName}', '${newImportantStatus}');`, (err, result) => {
+            if (err) {
+                res.status(400).json({message: err.message, error: true});
+            }
+            else {
+                res.status(200).json({message: 'Update task sucessfully'});
+            }
+        });
+    }
+    else if (type === "info") {
+        const { projectName, taskName, newTaskName, newTaskDescription, newTaskTimeDeadline } = req.body;
+        pool.query(`CALL update_task_info('${taskName}', '${projectName}', '${accountName}', '${newTaskName}', '${newTaskDescription}', '${newTaskTimeDeadline}');`, (err, result) => {
             if (err) {
                 res.status(400).json({message: err.message, error: true});
             }

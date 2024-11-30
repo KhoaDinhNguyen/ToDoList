@@ -83,6 +83,19 @@ const tasksSlice = createSlice({
             });
 
             return state;
+        },
+        updateInfo(state, action) {
+            const { taskName, projectName, newTaskName, newTaskDescription, newTaskTimeDeadline} = action.payload;
+
+            state.forEach(task => {
+                if (task.taskName === taskName && task.projectName === projectName) {
+                    task.taskName = newTaskName;
+                    task.taskDescription = newTaskDescription;
+                    task.taskTimeDeadline = newTaskTimeDeadline;
+                }
+            });
+
+            return state;
         }
     }
 });
