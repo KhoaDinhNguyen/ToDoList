@@ -2,7 +2,6 @@ import { useState } from "react";
 import { fetchUpdateProject } from "../../features/project/projectAPI";
 import { useDispatch } from "react-redux";
 import { projectsSlice, tasksSlice } from "../../features/user/databaseSlice";
-//import { negateDisplay } from "./Project";
 
 function UpdateProject (props) {
     const { editDisplay, setEditDisplay, setInfoDisplay, project } = props;

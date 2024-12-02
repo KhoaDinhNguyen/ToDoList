@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import UpdateProfile from "../../components/task/UpdateProfile";
 
 function UserProfile() {
     const accountName = localStorage.getItem('accountName');
@@ -11,6 +12,7 @@ function UserProfile() {
             </Helmet>
             <p>Account name: {accountName}</p>
             <p>Profile name: {profileName}</p>
+            <UpdateProfile/>
         </>
     );
 }

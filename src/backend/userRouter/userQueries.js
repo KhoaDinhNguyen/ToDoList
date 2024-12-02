@@ -45,6 +45,23 @@ const getUserDatabase = (req, res, next) => {
     });
 }
 
+const updateUser = (req, res, next) => {
+    const accountName = req.params.user;
+    const type = req.query.type;
+    if (type === 'password') {
+        const { newPassword } = req.body;
+        pool.query(`CALL change_password('${accountName}', '${newPassword}');`, (err, result) => {
+            if (err) {
+                res.status(404).json({message: err.message, error: true});
+            }
+            else {
+                res.status(200).json({message: "Change password successfully", error: false});
+            }
+        });
+    }
+
+}
 module.exports = {
-    getUserDatabase
+    getUserDatabase,
+    updateUser
 }
