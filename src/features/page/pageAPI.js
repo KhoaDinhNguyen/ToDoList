@@ -53,7 +53,35 @@ async function fetchSignUp(accountName, profileName, password) {
     }
 };
 
+const fetchFindAccount = async(accountName) => {
+    const environment = process.env.NODE_ENV;
+    const findAccountAPI = process.env[`REACT_APP_FIND_ACCOUNT_API_URL_${environment.toUpperCase()}`];
+    const findAccountEndpoint = `${findAccountAPI}`;
+
+    const body = JSON.stringify({
+        accountName
+    });
+
+    try {
+        const jsonResponse = await fetch(findAccountEndpoint, {
+            method: 'POST',
+            body,
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+
+        const response = await jsonResponse.json();
+
+        return response;
+    }
+    catch(err) {
+        console.log(err);
+        return err;
+    }
+}
 export {
     fetchSignIn,
-    fetchSignUp
+    fetchSignUp,
+    fetchFindAccount
 };

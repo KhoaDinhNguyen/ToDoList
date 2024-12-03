@@ -18,5 +18,6 @@ pageRouter.get('/', (req, res) => {
 })
 pageRouter.post('/login', query.getAccountName, query.validateAccountName);
 pageRouter.post('/signUp', query.createAccount);
+pageRouter.post('/findAccount', query.findAccountNameExist);
 
 module.exports = pageRouter;

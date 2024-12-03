@@ -12,6 +12,7 @@ import UserDashboard from './app/user/UserDashboard';
 import UserCalender from './app/user/UserCalender';
 import PageNotFound from './app/homepage/PageNotFound';
 import UserProfile from './app/user/UserProfile';
+import ForgetPassword from './app/homepage/ForgetPassword';
 
 const router = createHashRouter(createRoutesFromElements(
   <>
@@ -20,6 +21,7 @@ const router = createHashRouter(createRoutesFromElements(
         <Route path="aboutUs" element={<AboutUs/>}/>
         <Route path="login" element={<Login/>}/>
         <Route path="signUp" element={<SignUp/>}/>
+        <Route path="forgetPassword" element={<ForgetPassword/>}/>
       </Route>
       <Route path="user/:username" element={<User/>}>
         <Route index element={<UserHomepage/>}/>

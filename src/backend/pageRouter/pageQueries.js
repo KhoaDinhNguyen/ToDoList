@@ -1,11 +1,10 @@
 const pool = require('../database');
 
-const getAccountName = async (req, res, next) => {
+const getAccountName = (req, res, next) => {
     const { accountName } = req.body;
     pool.query(`SELECT password FROM users WHERE name = '${accountName}'`, (error, result) => {
         if (error) {
             res.status(400).json({message: 'Database problem', error: true});
-            throw error;
         }
         else if (result.rows.length === 0) {
             res.status(400).json({message: 'The passord or account name is incorrect', error: true});
@@ -16,6 +15,21 @@ const getAccountName = async (req, res, next) => {
         }
     });
 };
+
+const findAccountNameExist = (req, res, next) => {
+    const { accountName } = req.body;
+    pool.query(`SELECT * FROM users WHERE name = '${accountName}';`, (error, result) => {
+        if (error) {
+            res.status(400).json({message: 'Database problem', error: true});
+        }
+        else if (result.rows.length === 0) {
+            res.status(400).json({message: 'Cannot find account name', error: true});
+        }
+        else {
+            res.status(200).json({message: 'Account name exists', error: false});
+        }
+    });
+}
 
 const validateAccountName = (req, res, next) => {
     const {password, accountName} = req.body;
@@ -46,5 +60,6 @@ const createAccount = (req, res, next) => {
 module.exports = {
     getAccountName,
     validateAccountName,
-    createAccount
+    createAccount,
+    findAccountNameExist
 }

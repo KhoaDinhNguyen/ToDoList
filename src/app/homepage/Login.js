@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { fetchSignIn } from "../../features/page/pageAPI";
 import { Helmet } from "react-helmet";
 
@@ -50,6 +50,7 @@ function Login() {
                 <br></br>
                 <input type="submit" value=" Sign in" />
             </form>
+            <NavLink to="/homepage/forgetPassword">Forget the password</NavLink>
             <LoginStatus loading={loading} message={message}/>
         </>
     )
