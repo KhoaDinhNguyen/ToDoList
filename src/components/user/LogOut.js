@@ -4,7 +4,7 @@ function LogOut(props) {
     const navigate = useNavigate();
 
     const onClickLogOut = () => {
-        localStorage.setItem("accountName", "");
+        localStorage.clear();
         navigate("/homepage/login");
 
     };
