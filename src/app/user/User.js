@@ -20,7 +20,7 @@ function User() {
         if (accountName !== accountNameAuthen) {
             alert('BAD');
             localStorage.setItem('accountName', '');
-            localStorage.setItem('profileName', '');
+            dispatch(profileNameSlice.actions.assignName(''));
             navigate('/homepage/login');
         }
 

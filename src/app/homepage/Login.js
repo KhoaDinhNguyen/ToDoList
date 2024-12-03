@@ -2,6 +2,8 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { fetchSignIn } from "../../features/page/pageAPI";
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { profileNameSlice } from "../../features/user/databaseSlice";
 
 function Login() {
     const navigate = useNavigate();
@@ -9,6 +11,7 @@ function Login() {
     const [message, setMessage] = useState("");
     const [accountName, setAccountName] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     const onChangeAccountName = event => { setAccountName(event.target.value); }
     const onChangePassword = event => { setPassword(event.target.value); }
@@ -22,7 +25,7 @@ function Login() {
             setLoading(false);
             if (!response.error) {
                 localStorage.setItem("accountName", response.name);
-                localStorage.setItem("profileName", response.full_name);
+                dispatch(profileNameSlice.actions.assignName(response.full_name));
                 setAccountName("");
                 setPassword("");
                 navigate(`/user/${response.name}`);
