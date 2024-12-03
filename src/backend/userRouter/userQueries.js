@@ -59,6 +59,17 @@ const updateUser = (req, res, next) => {
             }
         });
     }
+    else if(type === 'profileName') {
+        const { newProfileName } = req.body;
+        pool.query(`CALL change_profile_name('${accountName}', '${newProfileName}');`, (err, reuslt) => {
+            if (err) {
+                res.status(404).json({message: err.message, error: true});
+            }
+            else {
+                res.status(200).json({message: "Change profile name successfully", error: false});
+            }
+        })
+    }
 
 }
 module.exports = {

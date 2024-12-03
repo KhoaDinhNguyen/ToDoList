@@ -1,5 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const profileNameSlice = createSlice({
+    name: "profileName",
+    initialState: "",
+    reducers: {
+        assignName(state, action) {
+            return action.payload;
+        }
+    }
+});
+
 const projectsSlice = createSlice({
     name: "projects",
     initialState: [],
@@ -125,4 +135,5 @@ const tasksSlice = createSlice({
 export {
     projectsSlice,
     tasksSlice,
+    profileNameSlice
 }

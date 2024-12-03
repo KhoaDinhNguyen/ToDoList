@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 /*------------------------------------- FEATURES -------------------------------------*/
-import { projectsSlice, tasksSlice } from "../../features/user/databaseSlice.js";
+import { profileNameSlice, projectsSlice, tasksSlice } from "../../features/user/databaseSlice.js";
 import { fetchUserDatabase } from "../../features/user/userAPI.js";
 
 import LogOut from "../../components/user/LogOut.js";
@@ -28,6 +28,7 @@ function User() {
         .then(response => {
             dispatch(tasksSlice.actions.initialize(response));
             dispatch(projectsSlice.actions.initialize(response));
+            dispatch(profileNameSlice.actions.assignName(response[0].profileName));
         })
         .catch(err => {
             console.log(err);

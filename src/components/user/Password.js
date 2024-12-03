@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { featchUserUpdate } from "../../features/user/userAPI";
 
-function UpdateProfile() {
-    return (
-        <>
-            <ChangePassword/>
-        </>
-    )
-}
-
-function ChangePassword() {
+function Password() {
     const [display, setDisplay] = useState('block');
     const [newPassword, setNewPassword] = useState("");
     const [newConfirmedPassword, setNewConfirmedPassword] = useState("");
@@ -75,4 +67,5 @@ function negateDisplay(display) {
     if (display === 'block') return 'none';
     else return 'block';
 }
-export default UpdateProfile;
+
+export default Password;
