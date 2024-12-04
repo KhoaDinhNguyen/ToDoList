@@ -2,23 +2,23 @@ const pool = require('../database');
 
 const getUserDatabase = (req, res, next) => {
     const accountName = req.params.user;
-    pool.query(`SELECT * FROM user_project_task WHERE user_account = '${accountName}';`, (err, result) => {
+    pool.query(`SELECT * FROM get_user_database('${accountName}');`, (err, result) => {
         if (err) {
             throw err;
         }
         const database = []; 
         for (const data of result.rows) {
-            const { user_account, full_name, project_name, project_description, project_time_created, task_name, task_description, status, task_time_created, task_deadline, important} = data;
-            if (task_name === null) {
+            const { accountname, profilename, projectname, projectdescription, projecttimecreated, taskname, taskdescription, taskstatus, tasktimecreated, tasktimedeadline, important} = data;
+            if (taskname === null) {
                 database.push({
-                    accountName: user_account,
-                    profileName: full_name,
-                    projectName: project_name,
-                    projectDescription: project_description,
-                    projectTimeCreated: project_time_created.toISOString().slice(0, 10),
-                    taskName: task_name,
-                    taskDescription: task_description,
-                    taskStatus: status,
+                    accountName: accountname,
+                    profileName: profilename,
+                    projectName: projectname,
+                    projectDescription: projectdescription,
+                    projectTimeCreated: projecttimecreated.toISOString().slice(0, 10),
+                    taskName: taskname,
+                    taskDescription: taskdescription,
+                    taskStatus: taskstatus,
                     taskTimeCreated: "",
                     taskTimeDeadline: "",
                     taskImportant: important
@@ -26,16 +26,16 @@ const getUserDatabase = (req, res, next) => {
             }
             else {
                 database.push({
-                    accountName: user_account,
-                    profileName: full_name,
-                    projectName: project_name,
-                    projectDescription: project_description,
-                    projectTimeCreated: project_time_created.toISOString().slice(0, 10),
-                    taskName: task_name,
-                    taskDescription: task_description,
-                    taskStatus: status,
-                    taskTimeCreated: task_time_created.toISOString().slice(0, 10),
-                    taskTimeDeadline: task_deadline.toISOString().slice(0, 10),
+                    accountName: accountname,
+                    profileName: profilename,
+                    projectName: projectname,
+                    projectDescription: projectdescription,
+                    projectTimeCreated: projecttimecreated.toISOString().slice(0, 10),
+                    taskName: taskname,
+                    taskDescription: taskdescription,
+                    taskStatus: taskstatus,
+                    taskTimeCreated: tasktimecreated.toISOString().slice(0, 10),
+                    taskTimeDeadline: tasktimedeadline.toISOString().slice(0, 10),
                     taskImportant: important
                 });
             }

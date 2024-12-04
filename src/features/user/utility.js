@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const filterSlice = createSlice({
     name: "filter",
     initialState: {
-        statusFilter: ['pending', 'fulfilled', 'falling'],
+        statusFilter: ['pending', 'fulfilled', 'failing'],
         dateFilter: {
             timeCreatedFrom : "",
             timeCreatedTo: "",

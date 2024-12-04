@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 function FilterForm() {
     const dispatch = useDispatch();
-    const [statusFilter, setStatusFilter] = useState(['pending', 'fulfilled', 'falling']);
+    const [statusFilter, setStatusFilter] = useState(['pending', 'fulfilled', 'failing']);
     const [importantFilter, setImporantFilter] = useState(false);
     const [dateFilter, setDateFilter] = useState(
     {

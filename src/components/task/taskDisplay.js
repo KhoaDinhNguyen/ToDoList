@@ -7,14 +7,17 @@ import { tasksSlice } from "../../features/user/databaseSlice";
 import UpdateTask from "./UpdateTask";
 
 function TaskDisplay(props) {
-    const { type, task} = props;
-    const {taskStatus, projectName, taskName, taskImportant} = task;
+    const { type, task } = props;
+    const {taskStatus, projectName, taskName, taskImportant, taskTimeDeadline} = task;
     const [currentStatus, setCurrentStatus] = useState(taskStatus);
     const [taskInfoDisplay, setTaskInfoDisplay] = useState('none');
     const [currentImportant, setCurrentImportant] = useState(taskImportant);
     const accountName = localStorage.getItem("accountName");
     const [displayEdit, setDisplayEdit] = useState('none');
     const dispatch = useDispatch();
+
+    const today = new Date();
+    const todayString = today.toISOString().slice(0, 10);
 
     const onChangeTaskStatus = (event) => {       
         const newStatus = nextStatus(taskStatus);
@@ -70,6 +73,7 @@ function TaskDisplay(props) {
             currentImportant={currentImportant} 
             currentStatus={currentStatus}
             taskInfoDisplay={taskInfoDisplay}
+            finish={taskTimeDeadline < todayString}
             />
         );
     }
@@ -86,6 +90,7 @@ function TaskDisplay(props) {
             currentStatus={currentStatus}
             taskInfoDisplay={taskInfoDisplay}
             displayEdit={displayEdit}
+            finish={taskTimeDeadline < todayString}
         />
     );
 }
@@ -106,11 +111,26 @@ function negateDisplay(display) {
 }
 
 
-/* -------------------- TASK HOMEPAGE IN DASHBOARD--------------------*/
+/* -------------------- TASK HOMEPAGE IN HOMEPAGE--------------------*/
 function TaskDisplayHomepage(props) {
-    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, setDisplayEdit, displayEdit, setTaskInfoDisplay} = props;
+    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, setDisplayEdit, displayEdit, setTaskInfoDisplay, finish} = props;
     const { taskName, taskTimeDeadline} = task;
 
+    if (finish) {
+        return (
+            <>
+                <h4>{taskName}</h4>
+                <p>Failing</p>
+                <p>Deadline: {taskTimeDeadline}</p>
+                <div className={`${currentStatus} checkbox`}></div>
+                <p>Important</p>
+                <div className={`${currentImportant}_star important`}></div>
+                <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
+                <TaskInfoHomepage task={task} finish={true} display={taskInfoDisplay}/>
+                <p>Cannot edit task finished</p>
+            </>
+        )
+    }
     return (
         <li>
             <h4>{taskName}</h4>
@@ -120,17 +140,28 @@ function TaskDisplayHomepage(props) {
             <p>Important</p>
             <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
             <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-            <TaskInfoHomepage task={task} display={taskInfoDisplay} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit} setTaskInfoDisplay={setTaskInfoDisplay}/>
+            <TaskInfoHomepage task={task} display={taskInfoDisplay} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit} setTaskInfoDisplay={setTaskInfoDisplay} finish={false}/>
         </li>
     );
 }
 
 function TaskInfoHomepage(props) {
-    const { display, task, displayEdit, setDisplayEdit, setTaskInfoDisplay } = props; 
+    const { display, task, displayEdit, setDisplayEdit, setTaskInfoDisplay, finish} = props; 
     const {taskTimeDeadline, taskTimeCreated, taskDescription} = task;
 
     const onClickEdit = () => { setDisplayEdit('block'); }
 
+    if (finish) {
+        return (
+            <div className="taskInfo" style={{display: display}}>
+                <div>
+                    <p>Task description: {taskDescription}</p>
+                    <p>Deadline: {taskTimeDeadline}</p>
+                    <p>Time created: {taskTimeCreated}</p>
+                </div>
+            </div>
+        )
+    }
     return (
         <div className="taskInfo" style={{display: display}}>
             <div style={{display: negateDisplay(displayEdit)}}>
@@ -147,9 +178,23 @@ function TaskInfoHomepage(props) {
 
 /* -------------------- TASK DISPLAY IN DASHBOARD--------------------*/
 function TaskDisplayDashBoard(props) {
-    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay} = props;
+    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, finish} = props;
     const { taskName, projectName} = task;
 
+    if (finish) {
+        return (
+            <li>
+                <h4>{taskName}/{projectName}</h4>
+                <p>{currentStatus}</p>
+                <div className={`${currentStatus} checkbox`}></div>
+                <p>Important</p>
+                <div className={`${currentImportant}_star important`}></div>
+                <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
+                <TaskInfoDashboard task={task} display={taskInfoDisplay}/>
+                <p>Cannot edit task was finished</p>
+            </li>
+        );
+    }
     return (
         <li>
             <h4>{taskName}/{projectName}</h4>
