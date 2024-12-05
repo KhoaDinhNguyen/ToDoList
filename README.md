@@ -1,1 +1,1 @@
-https://khoadinhnguyen.github.io/ToDoList/#/user/tester
+https://khoadinhnguyen.github.io/ToDoList
