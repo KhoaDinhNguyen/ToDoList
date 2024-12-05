@@ -126,5 +126,9 @@
     border-radius: 10px;
     border: 2px solid rgba(244, 91, 105);
     padding: 10px 20px;
-    margin-top: 15px;
+
+}
+
+#loginIntro p:nth-child(2) {
+    padding-bottom: 10px;
 }

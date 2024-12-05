@@ -1,0 +1,86 @@
+#aboutUs {
+    height: 92vh;
+    width: 100vw;
+    background-color: rgba(244, 91, 105, 1);
+    box-sizing: border-box;
+}
+
+#aboutUsIntro {
+    padding-top: 10px;
+    text-align: center;
+    color: white;
+}
+
+#aboutUsIntro h2 {
+    font-size: 50px;
+}
+
+#aboutUsIntro p {
+    font-style: italic;
+}
+
+#aboutUsIntro span {
+    font-style: normal;
+}
+
+#aboutUsMain {
+    width: 750px;
+    margin: 0 auto;
+    margin-top: 30px;
+    background-color: white;
+    height: 50vh;
+    border-radius: 20px;
+}
+
+#aboutUsMain ul {
+    display: flex;
+    flex-flow: column wrap;
+    list-style: circle;
+}
+
+#aboutUsMain li {
+    list-style-type:circle;
+    list-style: inside;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#aboutUsMain li span {
+    font-weight: 700;
+}
+#aboutUsMain div {
+    width: 700px;
+    margin: 0 auto;
+}
+
+#aboutUsMain h3 {
+    margin-top: 20px;
+}
+
+#aboutUsMain div h3:nth-child(1) {
+    padding-top: 20px;
+}
+
+#aboutUsMain a {
+    text-decoration: none;
+    color: rgba(244, 91, 105, 1);
+    font-weight: 500;
+}
+
+#aboutUsMain a:visited {
+    color: rgba(244, 91, 105, 1);
+}
+
+
+#aboutUsMain h4 {
+    width: max-content;
+    margin: 0 auto;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+#aboutUsMain h4:nth-child(1) {
+    margin-top: 35px;
+}

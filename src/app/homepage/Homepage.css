@@ -18,7 +18,7 @@
 }
 
 #homepage li {
-    list-style: none;
+    list-style-type: none;
     padding: 10px 15px;
     box-sizing: border-box;
     margin-top: 10px;
