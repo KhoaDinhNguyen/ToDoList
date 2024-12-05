@@ -72,11 +72,8 @@
     border: 1px solid black;
 }
 
-h2 {
-    margin: 0 auto;
-}
-
 #loginSignUp h2 {
+    margin: 0 auto;
     margin-bottom: 20px;
     font-weight: 400;
     font-size: 30px;
@@ -114,7 +111,7 @@ h2 {
     color: rgba(244, 91, 105, 1);
 }
 
-#message {
+#loginFormFooter #message {
     width: 360px;
     margin: 0 auto;
     font-weight: 400;
