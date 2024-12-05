@@ -1,0 +1,134 @@
+#login {
+    background-color: rgba(244, 91, 105);
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+#loginMain {
+    background-color: rgba(244, 91, 105);
+    margin: 0 auto;
+    width: 900px;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+#loginSignUp {
+    width: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#loginIntro {
+    width: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left: 2px solid grey;
+}
+
+
+.input {
+    width: 360px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+.input label{
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.input input{
+    border-radius: 5px;
+    font-size: 16px;
+    background: #e8e7e7;
+    width: 360px;
+    border: 1px solid #F1F0E8;
+    box-sizing: border-box;
+    padding: 12px;
+    margin: 8px 0;
+}
+
+.input input:focus {
+    border: 1px solid black;
+}
+
+#loginSignUp h2 {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 30px;
+}
+
+#loginForm input[type=submit] {
+    display: block;
+    background-color: rgba(244, 91, 105, 1);
+    width: 360px;
+    padding: 10px;
+    margin: 0 auto;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid rgba(244, 91, 105, 1);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#loginFormFooter {
+    display: flex;
+    justify-content: flex-end;
+    width: 360px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+#loginFormFooter a {
+    color: rgba(244, 91, 105, 1);
+    font-size: 16px;
+    text-decoration: none;
+}
+
+#loginFormFooter a:visited {
+    color: rgba(244, 91, 105, 1);
+}
+
+#loginFormFooter #message {
+    width: 360px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+#loginIntro a {
+    color: rgba(244, 91, 105);
+    font-size: 16px;
+    box-sizing: border-box;
+    font-weight: bold;
+    text-decoration: solid;
+    border-radius: 10px;
+    border: 2px solid rgba(244, 91, 105);
+    padding: 10px 20px;
+
+}
+
+#loginIntro p:nth-child(2) {
+    padding-bottom: 10px;
+}

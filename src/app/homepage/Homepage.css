@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#homepage nav {
+    height: 8vh;
+    box-sizing: border-box;
+    background-color: rgba(244, 91, 105);
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+#homepage ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+#homepage li {
+    list-style-type: none;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+#homepage nav a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#homepage a.match {
+    color: black;
+    color: #ffff;
+    background-color: white;
+    background-color: rgba(244, 91, 105);
+    background-color: black;
+}
+
+#homepage a.noMatch {
+    color: white;
+    color: black;
+    background-color: rgba(244, 91, 105);
+    background-color: white;
+}
+
+#companyName {
+    display: flex;
+    align-items: center;
+}
+
+#companyName p {
+    color: white;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
