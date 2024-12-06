@@ -11,9 +11,9 @@
     box-sizing: border-box;
 }
 
-@media screen and (max-width : 499px) {
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
     #homepage nav {
-        height: 5vh;
+        height: 40px;
     }
 }
 
@@ -28,7 +28,7 @@
     box-sizing: border-box;
 }
 
-@media screen and (max-width : 499px) {
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
     #homepage li {
         padding: 3px;
         margin: 0;
@@ -50,7 +50,7 @@
     }
 }
 
-@media screen and (max-width : 499px) {
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
     #homepage nav a {
         font-size: 1rem;
         padding: 3px;
@@ -79,7 +79,7 @@
     margin-left: 10px;
 }
 
-@media screen and (max-width : 499px) {
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
     #companyName p {
         font-size: 1rem;
         margin: 0;
@@ -91,4 +91,6 @@
 #navList {
     display: flex;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }

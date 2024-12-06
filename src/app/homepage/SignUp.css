@@ -6,6 +6,7 @@
     align-items: center;
     box-sizing: border-box;
     margin: 0 auto;
+
 }
 
 @media screen and (max-width : 499px) {
@@ -13,6 +14,14 @@
         height: 95vh;
     }
 }
+
+@media screen and (max-height: 600px) {
+    #signUp {
+        height: 100vh;
+        overflow-y: scroll;
+    }
+}
+
 
 #signUpMain {
     background-color: #fff;
@@ -28,6 +37,14 @@
     }
 }
 
+@media screen and (max-height: 600px) {
+    #signUpMain {
+        height: 350px;
+        overflow-y: scroll;
+        margin-top: 50px;
+    }
+}
+
 #signUpMain h2 {
     width: max-content;
     margin: 0 auto;
@@ -37,7 +54,7 @@
     font-size: 30px;
 }
 
-@media screen and (max-width : 499px) {
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
     #signUpMain h2 {
         font-size: 20px;
         margin: 0 auto;
@@ -72,6 +89,13 @@
     }
 }
 
+@media screen and (max-height: 600px) {
+    .signUpInput input {
+        font-size: 13px;
+        padding: 5px;
+    }
+}
+
 .signUpInput label {
     width: 360px;
     margin: 0 auto;
@@ -85,6 +109,13 @@
         width: 90%;
         max-width: 400px;
         min-width: 300px;
+        margin-top: 10px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .signUpInput label {
         margin-top: 10px;
         font-size: 13px;
     }
@@ -122,6 +153,18 @@
         width: 90%;
         max-width: 400px;
         min-width: 300px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    #signUpForm input[type=submit] {
+        margin-top: 20px;
+        font-size: 13px;
+        padding: 10px 20px;
+    }
+
+    #signUp #message {
         font-size: 13px;
     }
 }
