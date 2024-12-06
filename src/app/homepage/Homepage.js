@@ -12,7 +12,7 @@ function HomePage() {
                 <div id="companyName">
                     <p>MasterTask</p>
                 </div>
-                <div>
+                <div id="navList">
                     <ul>
                         <li><NavLink to="aboutUs"className={linkIsActive}>About us</NavLink></li>
                         <li ><NavLink to="login" className={linkIsActive}>Login</NavLink></li>

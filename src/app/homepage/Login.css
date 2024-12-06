@@ -8,6 +8,12 @@
     margin: 0 auto;
 }
 
+@media screen and (max-width : 499px) {
+    #login {
+        height: 95vh;
+    }
+}
+
 #loginMain {
     background-color: rgba(244, 91, 105);
     margin: 0 auto;
@@ -16,6 +22,13 @@
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
+}
+
+@media screen and (max-width : 499px) {
+    #loginMain {
+        width: 100%;
+        height: 45vh;
+    }
 }
 
 #loginSignUp {
@@ -29,6 +42,14 @@
     border-bottom-left-radius: 20px;
 }
 
+@media screen and (max-width : 850px) {
+    #loginSignUp {
+        width: 95%;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin: 0 auto;
+    }
+}
 #loginIntro {
     width: 50%;
     background-color: white;
@@ -42,6 +63,12 @@
     border-left: 2px solid grey;
 }
 
+@media screen and (max-width : 850px) {
+    #loginIntro {
+        display: none;
+    }
+    
+}
 
 .input {
     width: 360px;
@@ -68,6 +95,30 @@
     margin: 8px 0;
 }
 
+@media screen and (max-width : 499px) {
+    .input {
+        width: 90%;
+        max-width: 400px;
+        min-width: 250px;
+    }
+ 
+    .input label{
+        max-width: 400px;
+        min-width: 250px;
+        margin-top: 10px;
+        font-size: 13px;
+        width: 100%;
+    }
+    
+    .input input{
+        font-size: 13px;
+        padding: 10px;
+        max-width: 400px;
+        min-width: 250px;
+        width: 100%;
+    }
+}
+
 .input input:focus {
     border: 1px solid black;
 }
@@ -82,8 +133,8 @@
 #loginForm input[type=submit] {
     display: block;
     background-color: rgba(244, 91, 105, 1);
-    width: 360px;
-    padding: 10px;
+    width: max-content;
+    padding: 10px 155px;
     margin: 0 auto;
     color: white;
     font-size: 16px;
@@ -93,12 +144,29 @@
     margin-top: 10px;
 }
 
+@media screen and (max-width : 499px) {
+    #loginForm input[type=submit] {
+        margin-top: 20px;
+        font-size: 13px;
+        padding: 10px 20px;
+        
+    }
+}
+
 #loginFormFooter {
     display: flex;
     justify-content: flex-end;
     width: 360px;
     box-sizing: border-box;
     margin: 0 auto;
+}
+
+@media screen and (max-width : 499px) {
+    #loginFormFooter {
+        max-width: 400px;
+        min-width: 300px;
+        width: 100%;
+    }
 }
 
 #loginFormFooter a {
@@ -111,10 +179,25 @@
     color: rgba(244, 91, 105, 1);
 }
 
-#loginFormFooter #message {
+#message {
     width: 360px;
     margin: 0 auto;
     font-weight: 400;
+}
+
+@media screen and (max-width : 499px) {
+    #loginFormFooter a {
+        font-size: 13px;
+    }
+
+    #message {
+        max-width: 400px;
+        min-width: 250px;
+        width: 90%;
+        font-size: 13px;
+        margin: 0 auto;
+
+    }
 }
 
 #loginIntro a {

@@ -5,11 +5,16 @@
 
 #homepage nav {
     height: 8vh;
-    box-sizing: border-box;
-    background-color: rgba(244, 91, 105);
-    background-color: #fff;
     display: flex;
     justify-content: space-between;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width : 499px) {
+    #homepage nav {
+        height: 5vh;
+    }
 }
 
 #homepage ul {
@@ -21,29 +26,44 @@
     list-style-type: none;
     padding: 10px 15px;
     box-sizing: border-box;
-    margin-top: 10px;
+}
+
+@media screen and (max-width : 499px) {
+    #homepage li {
+        padding: 3px;
+        margin: 0;
+    }
 }
 
 #homepage nav a {
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
-    box-sizing: border-box;
     padding: 10px;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 500px) and (max-width : 850) {
+    #homepage nav a {
+        font-size: 1.5rem;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width : 499px) {
+    #homepage nav a {
+        font-size: 1rem;
+        padding: 3px;
+    }
 }
 
 #homepage a.match {
-    color: black;
     color: #ffff;
-    background-color: white;
-    background-color: rgba(244, 91, 105);
     background-color: black;
 }
 
 #homepage a.noMatch {
-    color: white;
     color: black;
-    background-color: rgba(244, 91, 105);
     background-color: white;
 }
 
@@ -53,9 +73,22 @@
 }
 
 #companyName p {
-    color: white;
     color: black;
     font-size: 1.5rem;
     font-weight: bold;
     margin-left: 10px;
+}
+
+@media screen and (max-width : 499px) {
+    #companyName p {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+    
+}
+
+#navList {
+    display: flex;
+    align-items: center;
 }

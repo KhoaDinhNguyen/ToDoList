@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+@media screen and (max-width : 499px) {
+    #aboutUs {
+        height: 95vh;
+    }
+}
+
 #aboutUsIntro {
     padding-top: 10px;
     text-align: center;
@@ -15,8 +21,20 @@
     font-size: 50px;
 }
 
+@media screen and (max-width : 499px) {
+    #aboutUsIntro h2 {
+        font-size: 30px;
+    }
+}
+
 #aboutUsIntro p {
     font-style: italic;
+}
+
+@media screen and (max-width : 499px) {
+    #aboutUsIntro p {
+        font-size: 13px;
+    }
 }
 
 #aboutUsIntro span {
@@ -30,6 +48,21 @@
     background-color: white;
     height: 50vh;
     border-radius: 20px;
+}
+
+@media screen and (max-width : 499px) {
+    #aboutUsMain {
+        max-width: 400px;
+        min-width: 300px;
+        width: 100%;
+        height: 55vh;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width : 850px) {
+    #aboutUsMain {
+        height: 55vh;
+    }
 }
 
 #aboutUsMain ul {
@@ -53,6 +86,7 @@
     width: 700px;
     margin: 0 auto;
 }
+
 
 #aboutUsMain h3 {
     margin-top: 20px;
@@ -83,4 +117,24 @@
 
 #aboutUsMain h4:nth-child(1) {
     margin-top: 35px;
+}
+
+@media screen and (max-width : 499px) {
+    #aboutUsMain div {
+        max-width: 400px;
+        min-width: 300px;
+        width: 90%;
+    }
+
+    #aboutUsMain p, #aboutUsMain a,  #aboutUsMain li{
+        font-size: 13px;
+    }
+
+    #aboutUsMain h3 {
+        font-size: 15px;
+    }
+
+    #aboutUsMain h4 {
+        font-size: 18px;
+    }
 }
