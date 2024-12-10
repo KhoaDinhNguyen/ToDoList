@@ -5,21 +5,23 @@ import { fetchTaskUpdate } from "../../features/task/taskAPI";
 import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 import UpdateTask from "./UpdateTask";
+import { convertFromBooleanToDisplay } from "../../app/user/User";
 
 function TaskDisplay(props) {
     const { type, task } = props;
     const {taskStatus, projectName, taskName, taskImportant, taskTimeDeadline} = task;
     const [currentStatus, setCurrentStatus] = useState(taskStatus);
-    const [taskInfoDisplay, setTaskInfoDisplay] = useState('none');
+    const [taskDetailDisplay, setTaskDetailDisplay] = useState(false);
     const [currentImportant, setCurrentImportant] = useState(taskImportant);
     const accountName = localStorage.getItem("accountName");
-    const [displayEdit, setDisplayEdit] = useState('none');
+    const [deleteDisplay, setDeleteDisplay] = useState(false);
+    const [editDisplay, setEditDisplay] = useState(false);
     const dispatch = useDispatch();
 
     const today = new Date();
     const todayString = today.toISOString().slice(0, 10);
 
-    const onChangeTaskStatus = (event) => {       
+    const onChangeTaskStatus = (event) => {     
         const newStatus = nextStatus(taskStatus);
         setCurrentStatus(newStatus);
         const task = {taskName, projectName, accountName, currentImportant};
@@ -32,16 +34,14 @@ function TaskDisplay(props) {
         });
     };
 
-    const onChangeTaskInfoDisplay = () => {
-        setDisplayEdit('none');
-        if (taskInfoDisplay === 'none') { setTaskInfoDisplay('block'); }
-        else { setTaskInfoDisplay('none'); }
+    const onChangeTaskDetailDisplay = () => {
+        setEditDisplay(false);
+        setTaskDetailDisplay(!taskDetailDisplay);
     };
 
-    const onClickImportant = () => {
+    const onClickImportant = (event) => { 
         const newImportantStatus = !currentImportant;
         const task = {taskName, projectName, accountName, newImportantStatus};
-
         setCurrentImportant(newImportantStatus);
         fetchTaskUpdate(task, "important")
         .then((response) => {
@@ -49,17 +49,16 @@ function TaskDisplay(props) {
         })
         .catch((err) => {
             console.log(err);
-        });
-        
+        });            
     }
 
     if (type === 'calender') {
         return (
             <TaskDisplayCalender
                 task={props.task} 
-                onChangeTaskInfoDisplay={onChangeTaskInfoDisplay} 
+                onChangeTaskDetailDisplay={onChangeTaskDetailDisplay} 
                 currentStatus={currentStatus}
-                taskInfoDisplay={taskInfoDisplay}
+                taskDetailDisplay={taskDetailDisplay}
             />
         );
     }
@@ -69,10 +68,10 @@ function TaskDisplay(props) {
             task={props.task} 
             onChangeTaskStatus={onChangeTaskStatus}
             onClickImportant={onClickImportant} 
-            onChangeTaskInfoDisplay={onChangeTaskInfoDisplay} 
+            onChangeTaskDetailDisplay={onChangeTaskDetailDisplay} 
             currentImportant={currentImportant} 
             currentStatus={currentStatus}
-            taskInfoDisplay={taskInfoDisplay}
+            taskDetailDisplay={taskDetailDisplay}
             finish={taskTimeDeadline < todayString}
             />
         );
@@ -83,14 +82,16 @@ function TaskDisplay(props) {
             task={props.task} 
             onChangeTaskStatus={onChangeTaskStatus}
             onClickImportant={onClickImportant} 
-            onChangeTaskInfoDisplay={onChangeTaskInfoDisplay}
-            setDisplayEdit={setDisplayEdit} 
-            setTaskInfoDisplay={setTaskInfoDisplay}
+            onChangeTaskDetailDisplay={onChangeTaskDetailDisplay}
+            setDeleteDisplay={setDeleteDisplay}
+            setEditDisplay={setEditDisplay}
             currentImportant={currentImportant} 
             currentStatus={currentStatus}
-            taskInfoDisplay={taskInfoDisplay}
-            displayEdit={displayEdit}
             finish={taskTimeDeadline < todayString}
+            taskDetailDisplay={taskDetailDisplay}
+            deleteDisplay={deleteDisplay}
+            editDisplay={editDisplay}
+
         />
     );
 }
@@ -105,80 +106,149 @@ function nextStatus(currentStatus) {
     else return 'pending';
 }
 
-function negateDisplay(display) {
-    if (display === 'block') return 'none';
-    else return 'block';
-}
-
 
 /* -------------------- TASK HOMEPAGE IN HOMEPAGE--------------------*/
 function TaskDisplayHomepage(props) {
-    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, setDisplayEdit, displayEdit, setTaskInfoDisplay, finish} = props;
+    const { 
+        task, 
+        onChangeTaskStatus, 
+        onClickImportant, 
+        onChangeTaskDetailDisplay,
+        setDeleteDisplay,
+        setEditDisplay,
+        currentImportant,
+        currentStatus, 
+        finish,
+        taskDetailDisplay,
+        deleteDisplay,
+        editDisplay
+    } = props;
     const { taskName, taskTimeDeadline} = task;
 
     if (finish) {
         return (
-            <>
-                <h4>{taskName}</h4>
-                <p>Failing</p>
-                <p>Deadline: {taskTimeDeadline}</p>
-                <div className={`${currentStatus} checkbox`}></div>
-                <p>Important</p>
-                <div className={`${currentImportant}_star important`}></div>
-                <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-                <TaskInfoHomepage task={task} finish={true} display={taskInfoDisplay}/>
-                <p>Cannot edit task finished</p>
-            </>
+            <li className="homepageTask taskFinish">
+                <div className={`${currentStatus}Task taskBody`}>
+                    <div className="taskNameAndTaskStatus">
+                        <div className="taskName">
+                            <div className="important">
+                                <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                                <label htmlFor={`${taskName}_important`}>
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                </label>
+                            </div>
+                            <h4>{taskName}</h4>
+                        </div>
+                    </div>
+                    <div className="taskFunction">
+                        <p className="deadline">Deadline: {taskTimeDeadline}</p>
+                        <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
+                    </div>
+                </div>
+                <TaskInfoHomepage task={task} finish={true} taskDetailDisplay={taskDetailDisplay} deleteDisplay={deleteDisplay} setDeleteDisplay={setDeleteDisplay} editDisplay={editDisplay} setEditDisplay={setEditDisplay}/>
+            </li>
         )
     }
     return (
-        <li>
-            <h4>{taskName}</h4>
-            <p>{currentStatus}</p>
-            <p>Deadline: {taskTimeDeadline}</p>
-            <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
-            <p>Important</p>
-            <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
-            <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-            <TaskInfoHomepage task={task} display={taskInfoDisplay} displayEdit={displayEdit} setDisplayEdit={setDisplayEdit} setTaskInfoDisplay={setTaskInfoDisplay} finish={false}/>
+        <li className="homepageTask">
+            <div className="taskBody">
+                <div className="taskNameAndTaskStatus">
+                    <div className="taskName">
+                        <div className="important">
+                            <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                            <label htmlFor={`${taskName}_important`}>
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                </svg>
+                            </label>
+                        </div>
+                        <h4>{taskName}</h4>
+                    </div>
+                    <div className="taskStatus">
+                        <div className={`${currentStatus} checkbox`}></div>
+                        <p>{currentStatus}</p>
+                    </div>
+                </div>
+                <div className="taskFunction">
+                    <p className="deadline">Deadline: {taskTimeDeadline}</p>
+                    <input type="checkbox" name={`${taskName}Fulfilled`} id={`${taskName}Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
+                    <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
+                </div>
+            </div>
+            <TaskInfoHomepage 
+                task={task} 
+                finish={false} 
+                taskDetailDisplay={taskDetailDisplay} 
+                deleteDisplay={deleteDisplay} 
+                setDeleteDisplay={setDeleteDisplay} 
+                editDisplay={editDisplay} 
+                setEditDisplay={setEditDisplay}
+            />
         </li>
     );
 }
 
 function TaskInfoHomepage(props) {
-    const { display, task, displayEdit, setDisplayEdit, setTaskInfoDisplay, finish} = props; 
-    const {taskTimeDeadline, taskTimeCreated, taskDescription} = task;
+    const { 
+        task, 
+        finish, 
+        taskDetailDisplay, 
+        deleteDisplay, 
+        setDeleteDisplay, 
+        editDisplay, 
+        setEditDisplay
+    } = props; 
 
-    const onClickEdit = () => { setDisplayEdit('block'); }
+    const { taskTimeDeadline, taskTimeCreated, taskDescription, taskName, taskStatus} = task;
+    const onClickEdit = () => { setEditDisplay(true) };
+    const onClickDelete = () => { setDeleteDisplay(true); };
 
     if (finish) {
         return (
-            <div className="taskInfo" style={{display: display}}>
-                <div>
-                    <p>Task description: {taskDescription}</p>
-                    <p>Deadline: {taskTimeDeadline}</p>
-                    <p>Time created: {taskTimeCreated}</p>
-                </div>
+            <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"}`}>
+            <div className="taskInfoDescription">
+                <p><span>Task name:</span> {taskName}</p>
+                <p><span>Task description:</span> {taskDescription}</p>
+                <p><span>Task time created:</span> {taskTimeCreated}</p>
+                <p><span>Task time deadline:</span> {taskTimeDeadline}</p>
+                <p><span>Task status:</span> finished + {taskStatus}</p>
+                <p className="note">&#9432; Cannot edit or delete finised task</p>
             </div>
+        </div>
         )
     }
     return (
-        <div className="taskInfo" style={{display: display}}>
-            <div style={{display: negateDisplay(displayEdit)}}>
-                <p>Task description: {taskDescription}</p>
-                <p>Deadline: {taskTimeDeadline}</p>
-                <p>Time created: {taskTimeCreated}</p>
+        <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"} ${!deleteDisplay ? "backgroundDelete" : "backgroundNonDelete"}`}>
+            <div className="taskInfoDescription" style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>
+                <p><span>Task name:</span> {taskName}</p>
+                <p><span>Task description:</span> {taskDescription}</p>
+                <p><span>Task time created:</span> {taskTimeCreated}</p>
+                <p><span>Task time deadline:</span> {taskTimeDeadline}</p>
             </div>
-            <UpdateTask task={task} display={displayEdit} setDisplayEdit={setDisplayEdit} setTaskInfoDisplay={setTaskInfoDisplay}/>
-            <button onClick={onClickEdit} style={{display: negateDisplay(displayEdit)}}>Edit</button>
-            <DeleteTask task={task}/>
+            <UpdateTask task={task} display={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay}/>
+            <DeleteTask task={task} display={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay}/>
+            <div className="taskInfoButton">
+                <button onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Edit</button>
+                <button onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Delete</button>
+            </div>
         </div>
     )
 }
 
 /* -------------------- TASK DISPLAY IN DASHBOARD--------------------*/
 function TaskDisplayDashBoard(props) {
-    const { task, onChangeTaskStatus, onClickImportant, onChangeTaskInfoDisplay, currentStatus, currentImportant, taskInfoDisplay, finish} = props;
+    const { 
+        task, 
+        onChangeTaskStatus, 
+        onClickImportant, 
+        onChangeTaskDetailDisplay,
+        currentImportant, 
+        currentStatus,
+        taskDetailDisplay,
+        finish
+    } = props;
     const { taskName, projectName} = task;
 
     if (finish) {
@@ -189,8 +259,8 @@ function TaskDisplayDashBoard(props) {
                 <div className={`${currentStatus} checkbox`}></div>
                 <p>Important</p>
                 <div className={`${currentImportant}_star important`}></div>
-                <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-                <TaskInfoDashboard task={task} display={taskInfoDisplay}/>
+                <button onClick={onChangeTaskDetailDisplay}>Task Information</button>
+                <TaskInfoDashboard task={task} display={convertFromBooleanToDisplay(taskDetailDisplay)}/>
                 <p>Cannot edit task was finished</p>
             </li>
         );
@@ -202,15 +272,15 @@ function TaskDisplayDashBoard(props) {
             <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
             <p>Important</p>
             <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
-            <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-            <TaskInfoDashboard task={task} display={taskInfoDisplay}/>
+            <button onClick={onChangeTaskDetailDisplay}>Task Information</button>
+            <TaskInfoDashboard task={task} display={convertFromBooleanToDisplay(taskDetailDisplay)}/>
         </li>
     );
 }
 
 function TaskInfoDashboard(props) {
     const { display, task } = props;
-    const {taskTimeDeadline, taskTimeCreated, taskDescription, projectName} = task;
+    const { taskTimeDeadline, taskTimeCreated, taskDescription, projectName} = task;
 
     return (
         <div className="taskInfo" style={{display: display}}>
@@ -224,7 +294,7 @@ function TaskInfoDashboard(props) {
 
 /* -------------------- TASK DISPLAY IN CALENDER--------------------*/
 function TaskDisplayCalender(props) {
-    const { task, onChangeTaskInfoDisplay, currentStatus, taskInfoDisplay} = props;
+    const { task, onChangeTaskDetailDisplay, currentStatus, taskDetailDisplay} = props;
     const { taskName, taskTimeDeadline, projectName } = task;
 
     return (
@@ -232,8 +302,8 @@ function TaskDisplayCalender(props) {
             <h4>{taskName} - Project name : {projectName}</h4>
             <p>{currentStatus}</p>
             <p>Deadline: {taskTimeDeadline}</p>
-            <button onClick={onChangeTaskInfoDisplay}>Task Information</button>
-            <TaskInfoCalender task={task} display={taskInfoDisplay}/>
+            <button onClick={onChangeTaskDetailDisplay}>Task Information</button>
+            <TaskInfoCalender task={task} display={convertFromBooleanToDisplay(taskDetailDisplay)}/>
         </li>
     );
 }

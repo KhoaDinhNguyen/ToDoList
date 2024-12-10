@@ -1,0 +1,42 @@
+.updateProjectForm form .updateProjectInput{
+    margin-left: 10px;
+
+}
+
+.updateProjectInput input {
+    font-size: 18px;
+    background-color: #e8e7e7;
+    border: 1px #e8e7e7 solid;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.updateProjectInput label, .updateProjectInput input, .updateProjectInput p{
+    font-size: 18px;
+}
+
+.updateProjectInput span, .updateProjectInput label {
+    font-weight: 500;
+
+}
+.updateProjectInput .updateProjectMessage {
+    font-size: 13px;
+    color: black;
+    font-weight: 300;
+}
+
+.updateProjectButton {
+    margin-top: 10px;
+}
+
+.updateProjectButton input {
+    margin-left: 20px;
+    background-color: #000;
+    border: 0;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top: 10px;
+}

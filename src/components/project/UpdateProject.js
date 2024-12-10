@@ -2,21 +2,19 @@ import { useState } from "react";
 import { fetchUpdateProject } from "../../features/project/projectAPI";
 import { useDispatch } from "react-redux";
 import { projectsSlice, tasksSlice } from "../../features/user/databaseSlice";
+import './UpdateProject.css';
 
 function UpdateProject (props) {
-    const { editDisplay, setEditDisplay, setInfoDisplay, project } = props;
+    const { editDisplay, setEditDisplay, project } = props;
     const { projectName, projectDescription, projectTimeCreated} = project;
     const [ newProjectName, setNewProjectName] = useState(projectName);
     const [ newProjectDescription, setNewProjectDescription] = useState(projectDescription);
-    const [ error, setError ] = useState("");
 
     const dispatch = useDispatch();
     
     const accountName = localStorage.getItem('accountName');
 
-    const onClickCancel = () => {
-        setEditDisplay('none');
-    };
+    const onClickCancel = () => { setEditDisplay(false); };
     const onChangeProjectName =  event => { setNewProjectName(event.target.value); };
     const onChangeProjectDescription = event => { setNewProjectDescription(event.target.value); };
 
@@ -25,8 +23,7 @@ function UpdateProject (props) {
         fetchUpdateProject(projectName, accountName, newProjectName, newProjectDescription)
         .then(response => {
             if (!response.error) {
-                setInfoDisplay('none');
-                setEditDisplay('none');
+                setEditDisplay(false);
                 dispatch(projectsSlice.actions.updateInfo({
                     projectName,
                     newProjectName,
@@ -38,11 +35,7 @@ function UpdateProject (props) {
                 }));
             }
             else {
-                setError(response.message);
-
-                setTimeout(() => {
-                    setError("");
-                }, 2000);
+                alert(response.message);
             }
         })
         .catch(err => {
@@ -51,21 +44,28 @@ function UpdateProject (props) {
     } 
     return (
         <>
-            <div className="editProjectForm" style={{display: editDisplay}}>
+            <div className="updateProjectForm" style={{display: editDisplay}}>
                 <form onSubmit={onSubmitUpdateProjectInfo}>
-                    <label htmlFor="newProjectName">Project name </label>
-                    <input type="text" name="newProjectName" id="newProjectName" value={newProjectName} onChange={onChangeProjectName}/>
-                    <br/>
-                    <label htmlFor="newProjectDescription">Project description </label>
-                    <input type="text" name="newProjectDescription" id="newProjectDescription" value={newProjectDescription} onChange={onChangeProjectDescription}/>
-                    <br/>
-                    <span>Project time created: {projectTimeCreated}</span>
-                    <br/>
-                    <input type="submit" value="Confirm"/>
-                    <p>Cannot change project time created</p>
+                    <div className="updateProjectInput">
+                        <label htmlFor={`${projectName}_newProjectName`}>Project name: </label>
+                        <input type="text" name={`${projectName}_newProjectName`} id={`${projectName}_newProjectName`} value={newProjectName} onChange={onChangeProjectName}/>
+                    </div>
+                    <div className="updateProjectInput">
+                        <label htmlFor={`${projectName}_newProjectDescription`}>Project description: </label>
+                        <input type="text" name={`${projectName}_newProjectDescription`} id={`${projectName}_newProjectDescription`} value={newProjectDescription} onChange={onChangeProjectDescription}/>
+                    </div>
+                    <div className="updateProjectInput">
+                        <p><span>Project time created</span>: {projectTimeCreated}</p>
+                    </div>
+                    <div className="updateProjectInput">
+                        <p className="updateProjectMessage">&#9432; Cannot change project time created</p>
+                    </div>
+                    <div className="updateProjectButton">
+                        <input type="submit" value="Confirm"/>
+                        <input type="button" value="Cancel" onClick={onClickCancel}/>
+                    </div>
+
                 </form>
-                <button onClick={onClickCancel}>Cancel</button>
-                <p>{error}</p>
             </div>
         </>
     )

@@ -1,0 +1,76 @@
+#filterForm {
+    margin-left: 10px;
+}
+
+#filterForm label{
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+#statusFilter input[type=checkbox] {
+    height: 18px;
+    width: 18px;
+    margin-right: 2px;
+    box-sizing: border-box;
+}
+
+#statusFilter input[type=checkbox]:checked {
+    accent-color: rgba(244, 91, 105);
+}
+#statusFilter {
+    margin-top: 5px;
+}
+
+#statusList {
+    display: flex;
+    margin: 5px 0;
+}
+
+#filterForm .statusBox {
+    display: flex;
+    align-items: center;
+}
+
+#clearDate {
+    color: white;
+    background-color: rgba(244, 91, 105);
+    border: 0;
+    padding: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition-duration: 0.2s;
+    border: 1px solid rgba(244, 91, 105);
+    cursor: pointer;
+}
+
+#clearDate:active {
+    color: white;
+    background-color: #AF1740;
+    border: 1px solid #AF1740;
+}
+
+#starFilter {
+    z-index: -1;
+}
+#starFilter input[type="checkbox"]{
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+#starFilter label svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #000;
+    stroke-width: 1px;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+    fill: #fff;
+}
+
+#starFilter input[type=checkbox]:checked + label svg {
+    fill: rgb(237, 237, 42);
+}

@@ -7,22 +7,31 @@ import SearchForm from "../../components/user/SearchForm.js";
 import { Helmet } from "react-helmet";
 import { profileNameSlice } from "../../features/user/databaseSlice.js";
 import { useSelector } from "react-redux";
+import './UserHomepage.css';
 
 function UserHomepage(props){
     const profileName = useSelector(state => state[profileNameSlice.name]);
 
     return (
-        <>
+        <div id="userHomepage">
             <Helmet>
                 <title>Homepage | ToDo List</title>
             </Helmet>
-            <p>Hello {profileName}</p>
-            <CreateProjectForm/>
-            <FilterForm/>
-            <SortForm/>
+            <div id="profileName">
+                <h2>Hello {profileName} !&#128526;</h2>
+            </div>
             <SearchForm/>
-            <ListProject/>
-        </>
+            <div id="userHomepageBody">
+                <div id="filterAndSort">
+                    <FilterForm/>
+                    <SortForm/>
+                </div>
+                <div id="userHomepageMain">
+                    <CreateProjectForm/>
+                    <ListProject/>
+                </div>
+            </div>
+        </div>
     );
 }
 

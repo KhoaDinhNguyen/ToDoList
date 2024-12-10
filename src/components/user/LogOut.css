@@ -1,0 +1,37 @@
+#userNavigationBar #pageNavigation #logOut {
+    display: flex;
+    margin-left: 6px;
+    cursor: pointer;
+    align-items: center;
+    background-color: rgba(244, 91, 105);
+    border: 0;
+    margin-top: 100px;
+    overflow-x: hidden;
+    width: var(--width850Hover);
+}
+
+#userNavigationBar #pageNavigation #logOut img {
+    padding: 5px;
+    border-radius: 50%;
+}
+
+#userNavigationBar #pageNavigation #logOut p {
+    font-weight: 500;
+    color: black;
+    padding: 5px;
+    font-size: 1.5rem;
+    border: 2px solid rgba(244, 91, 105);
+}
+
+#userNavigationBar #pageNavigation #logOut:hover img {
+    background-color: beige;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#userNavigationBar #pageNavigation #logOut:hover p {
+    background-color: beige;
+    border: 2px solid beige;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

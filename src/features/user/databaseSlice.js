@@ -96,10 +96,10 @@ const tasksSlice = createSlice({
             return state;
         },
         changeImportant(state, action) {
-            const { taskName, projectName, newTaskImportant} = action.payload;
+            const { taskName, projectName, newImportantStatus} = action.payload;
             state.forEach(task => {
                 if (task.taskName === taskName && task.projectName === projectName) {
-                    task.taskImportant = newTaskImportant;
+                    task.taskImportant = newImportantStatus;
                 }
             });
 

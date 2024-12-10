@@ -31,7 +31,7 @@ function Login() {
                 dispatch(profileNameSlice.actions.assignName(response.full_name));
                 setAccountName("");
                 setPassword("");
-                navigate(`/user/${response.name}`);
+                navigate(`/user/${response.name}/homepage`);
             }
             else {
                 setMessage(response.message);

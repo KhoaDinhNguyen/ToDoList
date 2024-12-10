@@ -43,24 +43,24 @@ function FilterDateForm(props) {
     return (
         <>
             <div id="timeFilter">
-                <p>Task time created: </p>
-                <label htmlFor="timeFilterCreatedTimeBegin">From: </label>
+                <h4>Task time created</h4>
+                <label htmlFor="timeFilterCreatedTimeBegin">From</label>
                 <br/>
                 <input type="date" id="timeFilterCreatedTimeBegin" name="timeFilterCreatedTimeBegin" value={timeCreatedFrom} onChange={onChangeSetTimeCreatedFrom}/>
                 <br/>
-                <label htmlFor="timeFilterCreatedTimeEnd">To: </label>
+                <label htmlFor="timeFilterCreatedTimeEnd">To</label>
                 <br/>
                 <input type="date" id="timeFilterCreatedTimeEnd" name="timeFilterCreatedTimeEnd" value={timeCreatedTo} onChange={onChangeSetTimeCreatedTo} min={timeCreatedFrom}/>
-                <p>Task time deadline: </p>
-                <label htmlFor="timeFilterDeadlineTimeBegin">From: </label>
+                <h4>Task time deadline</h4>
+                <label htmlFor="timeFilterDeadlineTimeBegin">From</label>
                 <br/>
                 <input type="date" id="timeFilterDeadlineTimeBegin" name="timeFilterDeadlineTimeBegin" value={timeDeadlineFrom} onChange={onChangeSetTimeDeadlineFrom} min={timeCreatedFrom}/>
                 <br/>
-                <label htmlFor="timeFilterDeadlineTimeEnd">To: </label>
+                <label htmlFor="timeFilterDeadlineTimeEnd">To</label>
                 <br/>
                 <input type="date" id="timeFilterDeadlineTimeEnd" name="timeFilterDeadlineTimeEnd" value={timeDeadlineTo} onChange={onChangeSetTimeDeadlineTo} min={timeDeadlineFrom}/>
                 <br/>
-                <button onClick={onClickClearDate}>Clear date</button>
+                <button id="clearDate" onClick={onClickClearDate}>Clear date</button>
             </div>
         </>
     )

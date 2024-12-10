@@ -1,13 +1,78 @@
+.homepageTask {
+    list-style-type: none;
+    background-color: var(--taskColor);
+}
+
+.taskBody {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+
+.taskBody h4{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.taskBody .taskNameAndTaskStatus {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    width: 70%;
+    max-width: 400px;
+}
+
+/* =========================== TASK IMPORTANT =========================== */
+.important input[type="checkbox"]{
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.important label svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #000;
+    stroke-width: 1px;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+    fill: #fff;
+}
+
+.important input[type=checkbox]:checked + label svg {
+    fill: rgb(237, 237, 42);
+}
+
+
+/* =========================== TASK NAME =========================== */
+.taskBody .taskNameAndTaskStatus .taskName {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    grid-column: 1 / 2;
+}
+
+/* =========================== TASK STATUS =========================== */
+.taskStatus {
+    display: flex;
+    align-items: center;
+}
+
 .checkbox {
     width: 10px;
     height: 10px;
-    border: 1px solid blue;
-    border-radius: 20%;
-    margin-bottom: 10px;
+    border: 1.5px solid black;
+    border-radius: 50%;
+    position: relative;
+    top: 2px;
+    margin-right: 3px;
 }
 
 .pending {
-    background-color: white;
+    background-color: orange;
 }
 
 .fulfilled {
@@ -17,18 +82,122 @@
 .failing {
     background-color: red;
 }
-.important {
-    width: 10px;
-    height: 10px;
-    border: 1px solid black;
-    border-radius: 20%;
-    margin-bottom: 10px;
+
+
+.backgroundDelete {
+    background-color: antiquewhite;
 }
 
-.false_star {
+.backgroundNonDelete {
     background-color: white;
 }
 
-.true_star {
-    background-color: rgb(237, 237, 42);
+/* =========================== TASK FUNCTION =========================== */
+.taskFunction {
+    display: flex;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.taskFunction .deadline {
+    font-weight: 500;
+    margin-right: 10px;
+    font-style: italic;
+    display: flex;
+    width: 170px;
+}
+
+.changeStatus {
+    accent-color: green;
+    width: 25px;
+    height: 25px;
+    outline: 1px dashed black;
+    margin-right: 5px;
+}
+
+/* =========================== TASK INFO BODY =========================== */
+.taskInfoBody {
+    transition-duration: 0.5s;
+    transition-property: height;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.taskInfoHidden {
+    height: 0px;
+    opacity: 0;
+    visibility: hidden;
+    border: 0;
+}
+
+.taskInfoVisible {
+    border: 2px dashed black;
+    height: 200px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.taskInfoDescription {
+    margin-left: 10px;
+}
+
+.taskInfoDescription p{
+    font-size: 17px;
+}
+
+.taskInfoDescription span {
+    font-weight: 500;
+}
+
+
+.taskInfoButton {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.taskInfoButton button{
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.taskInfoDisplayButton {
+    padding: 2px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid grey;
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+
+/* =========================== TASK NOT FINISH =========================== */
+
+.taskFinish .taskInfoVisible {
+    height: 150px;
+}
+
+.taskFinish .note {
+    font-size: 13px;
+    font-style: italic;
+}
+
+.fulfilledTask {
+    background-color: #A8CD89;
+}
+
+.failingTask {
+    background-color: #F9C0AB;
+}
+
+.taskFinish .deadline {
+    text-decoration: line-through;
 }

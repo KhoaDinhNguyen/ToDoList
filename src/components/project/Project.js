@@ -9,6 +9,7 @@ import { filterTask } from "../../features/task/filterTask";
 import { sortTask } from "../../features/task/sortTask";
 import { searchTask } from "../../features/task/searchTask";
 import UpdateProject from "./UpdateProject";
+import './Project.css';
 
 function ListProject() {
     const projects = useSelector(state => state[projectsSlice.name]);
@@ -32,7 +33,7 @@ function ListProject() {
 
     return (
         <>
-            <ul>
+            <ul id="projectList">
                 {listProject}
             </ul>
         </>
@@ -42,45 +43,55 @@ function ListProject() {
 function Project(props) {
     const { listTask, project } = props;
     const { projectName, projectDescription, projectTimeCreated } = project;
-    const [infoDisplay, setInfoDisplay] = useState('none');
-    const [editDisplay, setEditDisplay] = useState('none');
-
+    const [infoDisplay, setInfoDisplay] = useState(false);
+    const [editDisplay, setEditDisplay] = useState(false);
+    const [deleteDisplay, setDeleteDisplay] = useState(false);
     const accountName = localStorage.getItem("accountName");   
 
-    const onClickEdit = () => { setEditDisplay('block'); };
+    const onClickEdit = () => { setEditDisplay(true); };
+    const onClickDelete = () => { setDeleteDisplay(true); };
+
     const onClickDisplayProjectInfo = () => { 
-        setEditDisplay('none');
-        if (infoDisplay === 'none') { setInfoDisplay('block'); }
-        else { setInfoDisplay('none'); } 
+        setEditDisplay(false);
+        setDeleteDisplay(false)
+        setInfoDisplay(!infoDisplay);
     };
 
     return (
         <>
-            <li>
-                <h3>{projectName}</h3>
-                <button onClick={onClickDisplayProjectInfo}>Project information</button>
-                <div className="projectInfo" style={{display: infoDisplay}}>
-                    <div className="projectDescription" style={{display: negateDisplay(editDisplay)}}>
-                        <p>Project name: {projectName}</p>
-                        <p>Project description: {projectDescription}</p>
-                        <p>Project time created: {projectTimeCreated}</p>
+            <li className="project">
+                <div className="projectBody">
+                    <div className="projectHeader">
+                        <h3>{projectName}</h3>
+                        <div className="projectInfoButton">
+                            <button onClick={onClickDisplayProjectInfo}>{!infoDisplay ? "\u2BC7": "\u2BC6"}</button>
+                        </div>
                     </div>
-                    <button onClick={onClickEdit} style={{display: negateDisplay(editDisplay)}}>Edit</button>
-                    <UpdateProject editDisplay={editDisplay} setEditDisplay={setEditDisplay} setInfoDisplay={setInfoDisplay} project={project} infoDisplay={infoDisplay}/>
-                    <DeleteProject accountName={accountName} projectName={projectName} />
+                    <div className={`projectMain ${!infoDisplay ? "hiddenProject" : "visibleProject"} ${!deleteDisplay ? "backgroundDelete": "backgroundNonDelete"}`}>
+                        <div className="projectDescription" style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>
+                            <p><span style={{fontWeight: 500}}>Project name:</span> {projectName}</p>
+                            <p><span style={{fontWeight: 500}}>Project description:</span> {projectDescription}</p>
+                            <p><span style={{fontWeight: 500}}>Project time created:</span> {projectTimeCreated}</p>
+                        </div>
+                        <UpdateProject editDisplay={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay} project={project}/>
+                        <DeleteProject accountName={accountName} projectName={projectName} deleteDisplay={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay}/>
+                        <div className="projectFunction">
+                            <button onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Edit</button>
+                            <button onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Delete</button>
+                        </div>
+                    </div>
                 </div>
-                <ul>
-                    {listTask}
-                </ul>
+                <div className="taskList">
+                    <ul>
+                        {listTask}
+                    </ul>
+                </div>
                 <CreateTaskForm projectName={projectName}/>
             </li>
         </>
     )
 }
 
-export function negateDisplay(display) {
-    if (display === 'none') return 'block';
-    else return 'none';
-}
+export const convertFromBooleanToDisplay = display => display ? "block" : "none";
 
 export default ListProject;

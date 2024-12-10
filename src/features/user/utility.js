@@ -21,9 +21,9 @@ const filterSlice = createSlice({
 const sortSlice = createSlice({
     name: "sort",
     initialState: {
-        sortTaskName: true,
+        sortTaskName: undefined,
         sortTimeCreated: undefined,
-        sortTimeDeadline: undefined
+        sortTimeDeadline: true
     },
     reducers: {
         apply(state, action) {

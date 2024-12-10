@@ -1,0 +1,91 @@
+#projectList {
+    width: 100%;
+    background-color: var(--taskColor);
+}
+
+.project {
+    list-style: none;
+    width: 100%;
+}
+
+.projectHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(244, 91, 105);
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.projectHeader h3 {
+    color: white;
+    margin-left: 10px;
+}
+
+.projectHeader button {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid gray;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.projectMain {
+    transition-duration: 0.75s;
+    transition-property: height;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 0;
+}
+
+.projectDescription p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.hiddenProject {
+    height: 0px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.visibleProject {
+    border: 2px dashed gray;
+    opacity: 1;
+    height: 200px;
+    visibility: visible;
+}
+
+.backgroundDelete {
+    background-color: white;
+}
+
+.backgroundNonDelete {
+    background-color: antiquewhite;
+}
+
+.projectFunction {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.projectFunction button {
+    background-color: #000;
+    border: 0;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}

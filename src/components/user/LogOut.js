@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
+import logOutLogo from '../../img/user/logOutLogo.png';
+import './LogOut.css';
 function LogOut(props) {
     const navigate = useNavigate();
 
@@ -11,7 +12,10 @@ function LogOut(props) {
     
     return (
         <>
-            <button onClick={onClickLogOut}>Log out</button>
+            <button onClick={onClickLogOut} id="logOut">
+                <img src={logOutLogo} alt="logout"/>
+                <p>Log out</p>
+            </button>
         </>
     )
 }

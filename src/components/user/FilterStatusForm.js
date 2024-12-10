@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import './FilterForm.css';
 
 function FilterStatusFrom(props) {
     const dispatch = useDispatch();
@@ -39,15 +40,25 @@ function FilterStatusFrom(props) {
     return (
         <>
             <div id="statusFilter">
-                <p>Status</p>
-                <input type="checkbox" id="pendingFitler" name="pendingFitler" checked={pending} onChange={onChangePending}/>
-                <label htmlFor="pendingFitler">Pending</label>
-                <input type="checkbox" id="fulfilledFilter" name="fulfilledFilter" checked={fulfilled} onChange={onChangeFulfilled}/>
-                <label htmlFor="fulfilledFilter">Fulfilled</label>
-                <input type="checkbox" id="failingFilter" name="failingFilter" checked={failing} onChange={onChangeFailing}/>
-                <label htmlFor="failingFilter">Failing</label>
-                <input type="checkbox" id="allStatus" name="allStatus" value="allStatus" checked={allStatus} onChange={onChangeAllStatus}/>
-                <label htmlFor="allStatus">All apply</label>
+                <h4>Status</h4>
+                <div id="statusList">
+                    <div className="statusBox">
+                        <input type="checkbox" id="pendingFitler" name="pendingFitler" checked={pending} onChange={onChangePending}/>
+                        <label htmlFor="pendingFitler">Pending</label>
+                    </div>
+                    <div className="statusBox">
+                        <input type="checkbox" id="fulfilledFilter" name="fulfilledFilter" checked={fulfilled} onChange={onChangeFulfilled}/>
+                        <label htmlFor="fulfilledFilter">Fulfilled</label>
+                    </div>
+                    <div className="statusBox">
+                        <input type="checkbox" id="failingFilter" name="failingFilter" checked={failing} onChange={onChangeFailing}/>
+                        <label htmlFor="failingFilter">Failing</label>
+                    </div>
+                </div>
+                <div className="statusBox">
+                    <input type="checkbox" id="allStatus" name="allStatus" value="allStatus" checked={allStatus} onChange={onChangeAllStatus}/>
+                    <label htmlFor="allStatus">All apply</label>
+                </div>
             </div>
         </>
     )

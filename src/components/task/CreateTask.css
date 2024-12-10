@@ -1,0 +1,61 @@
+.createTaskForm {
+    margin: 10px 0;
+    background-color: var(--taskColor);
+}
+
+.createTaskForm .openCreateTask {
+    width: 100%;
+}
+.createTaskForm .openCreateTask button{
+    background-color: white;
+    border: 0;
+    color: grey;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.createTaskForm .createTaskInput {
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.createTaskForm .createTaskInput label, .createTaskForm .createTaskInput span {
+    font-weight: 500;
+}
+
+.createTaskForm .createTaskInput input {
+    background-color: #e8e7e7;
+    border: 1px #e8e7e7 solid;
+    font-size: 16px;
+}
+
+.createTaskForm .createTaskButton {
+    margin-left: 10px;
+}
+
+.createTaskForm .createTaskButton input {
+    font-size: 14px;
+    margin-top: 10px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 0;
+}
+
+.createTaskForm .createTaskButton input:first-child:hover {
+    background-color: yellowgreen;
+}
+
+.createTaskForm .createTaskButton input:last-child {
+    margin-left: 10px;
+}
+
+.createTaskForm .createTaskButton input:last-child:hover {
+    background-color:antiquewhite;
+    color: black;
+}

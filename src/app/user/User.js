@@ -2,11 +2,20 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import './User.css';
+import homepageLogo from '../../img/user/homeActive.png';
+import logoPage from '../../img/user/logoPage.png';
+import calendarLogo from '../../img/user/calendarLogo.png';
+import dashboardLogo from '../../img/user/dashboardLogo.png';
+import profileLogo from '../../img/user/profileLogo.png';
+
 /*------------------------------------- FEATURES -------------------------------------*/
 import { profileNameSlice, projectsSlice, tasksSlice } from "../../features/user/databaseSlice.js";
 import { fetchUserDatabase } from "../../features/user/userAPI.js";
 
 import LogOut from "../../components/user/LogOut.js";
+
+export const convertFromBooleanToDisplay = display => display ? "block" : "none";
 
 function User() {
     const params = useParams();
@@ -36,20 +45,51 @@ function User() {
 
     }, [dispatch, navigate, accountName, accountNameAuthen]);
     
+    const linkIsActive = ({isActive}) => {
+        return isActive ? "match" : "noMatch";
+    };
+
     return (
-        <>  
-            <nav>
-                <ul>
-                    <li><NavLink to="aboutUs">About Us</NavLink></li>
-                    <li><NavLink to="">Homepage</NavLink></li>
-                    <li><NavLink to="dashboard">Dashboard</NavLink></li>
-                    <li><NavLink to="calender">Calender</NavLink></li>
-                    <li><NavLink to="profile">Profile</NavLink></li>
-                </ul>
-            </nav>
-            <Outlet/>
-            <LogOut/>
-        </>
+        <div id="userPage">
+            <div id="userNavigationBar">
+                <div id="companyName">
+                    <img src={logoPage} alt="logoPage"/>
+                    <h3>MasterTask</h3>
+                </div>
+                <nav id="pageNavigation">
+                    <ul>
+                        <li>
+                            <NavLink to="homepage" className={linkIsActive}>
+                                <img src={homepageLogo} alt="homepage"/>
+                                <p>Homepage</p>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="dashboard" className={linkIsActive}>
+                                <img src={dashboardLogo} alt="dashboard"/>
+                                <p>Dashboard</p>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="calender" className={linkIsActive}>
+                                <img src={calendarLogo} alt="calendar"/>
+                                <p>Calender</p>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="profile" className={linkIsActive}>
+                                <img src={profileLogo} alt="profile"/>
+                                <p>Profile</p>
+                            </NavLink>
+                        </li>
+                    </ul>
+                    <LogOut/>
+                </nav>
+            </div>
+            <div id="userContent">
+                <Outlet/>
+            </div>
+        </div>
     );
 }
 

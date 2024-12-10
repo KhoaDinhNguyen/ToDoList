@@ -10,11 +10,9 @@ function SearchForm() {
 
     }
     return (
-        <>
-            <p>Search</p>
-            <label htmlFor="searchString">Search: </label>
-            <input type="text" id="searchString" name="searchString" value={seachString} onChange={onChangeSearchString}/>
-        </>
+        <div id="searchForm">
+            <input type="text" id="searchString" name="searchString" value={seachString} onChange={onChangeSearchString} placeholder="&#x1F50E; Search"/>
+        </div>
     )
 }
 

@@ -1,0 +1,46 @@
+.editTaskFormMain {
+    margin-left: 10px;
+}
+
+.editTaskFormMain label, .editTaskFormMain span{
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.editTaskFormMain input {
+    font-size: 17px;
+    background-color: #e8e7e7;
+    border: 1px #e8e7e7 solid;
+    border-radius: 5px;
+}
+
+.editTaskFormMain .notice {
+    margin-top: 5px;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.editTaskButton {
+    margin-top: 10px;
+}
+
+.editTaskButton input {
+    margin-right: 20px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.editTaskButton input:nth-child(1):hover {
+    background-color: #FBD288;
+    color: black;
+}
+
+.editTaskButton input:nth-child(2):hover {
+    background-color: white;
+    color: black;
+}

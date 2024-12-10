@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { sortSlice } from "../../features/user/utility";
+import './SortForm.css';
 
 function SortForm() {
     const [timeCreatedASC, setTimeCreatedASC] = useState(false);
     const [timeCreatedDESC, setTimeCreatedDESC] = useState(false);
-    const [taskNameASC, setTaskNameASC] = useState(true);
+    const [taskNameASC, setTaskNameASC] = useState(false);
     const [taskNameDESC, setTaskNameDESC] = useState(false);
-    const [timeDeadlineASC, setTimeDeadlineASC] = useState(false);
+    const [timeDeadlineASC, setTimeDeadlineASC] = useState(true);
     const [timeDeadlineDESC, setTimeDeadlineDESC] = useState(false);
     const dispatch = useDispatch();
 
@@ -97,28 +98,39 @@ function SortForm() {
         setTimeDeadlineDESC(false);
     }
     return (
-        <>
-            <p>This is sort</p>
+        <div id="sortForm">
+            <h3>Sort</h3>
             <div id="sortFilter">
-                <p>Task name</p>
-                <label htmlFor="sortTaskNameASC">ASC</label>
-                <input type="checkbox" name="sortTaskNameASC" id="sortTaskNameASC" checked={taskNameASC} onChange={onChangeTaskNameASC}/>
-                <label htmlFor="sortTaskNameDESC">DESC</label>
-                <input type="checkbox" name="sortTaskNameDESC" id="sortTaskNameDESC" checked={taskNameDESC} onChange={onChangeTaskNameDESC}/>
-                <p>Time created</p>
-                <label htmlFor="sortTimeCreatedASC">ASC</label>
-                <input type="checkbox" name="sortTimeCreatedASC" id="sortTimeCreatedASC" checked={timeCreatedASC} onChange={onChangeTimeCreatedASC}/>
-                <label htmlFor="sortImeCreatedDESC">DESC</label>
-                <input type="checkbox" name="sortImeCreatedDESC" id="sortImeCreatedDESC" checked={timeCreatedDESC} onChange={onChangeTimeCreatedDESC}/>
-                <p>Time deadline </p>
-                <label htmlFor="sortTimeDeadlineASC">ASC</label>
-                <input type="checkbox" name="sortTimeDeadlineASC" id="sortTimeDeadlineASC" checked={timeDeadlineASC} onChange={onChangeTimeDeadlineASC}/>
-                <label htmlFor="sortTimeDeadlineDESC">DESC</label>
-                <input type="checkbox" name="sortTimeDeadlineDESC" id="sortTimeDeadlineDESC" checked={timeDeadlineDESC} onChange={onChangeTimeDeadlineDESC}/>
-                <br/>
-                <button onClick={onClickResetSort}>Clear sort</button>
+                <h4>Task name</h4>
+                <div className="statusBox">
+                    <input type="checkbox" name="sortTaskNameASC" id="sortTaskNameASC" checked={taskNameASC} onChange={onChangeTaskNameASC}/>
+                    <label htmlFor="sortTaskNameASC">ASC</label>
+                </div>
+                <div className="statusBox">
+                    <input type="checkbox" name="sortTaskNameDESC" id="sortTaskNameDESC" checked={taskNameDESC} onChange={onChangeTaskNameDESC}/>
+                    <label htmlFor="sortTaskNameDESC">DESC</label>
+                </div>
+                <h4>Time created</h4>
+                <div className="statusBox">
+                    <input type="checkbox" name="sortTimeCreatedASC" id="sortTimeCreatedASC" checked={timeCreatedASC} onChange={onChangeTimeCreatedASC}/>
+                    <label htmlFor="sortTimeCreatedASC">ASC</label>
+                </div>
+                <div className="statusBox">
+                    <input type="checkbox" name="sortImeCreatedDESC" id="sortImeCreatedDESC" checked={timeCreatedDESC} onChange={onChangeTimeCreatedDESC}/>
+                    <label htmlFor="sortImeCreatedDESC">DESC</label>
+                </div>
+                <h4>Time deadline </h4>
+                <div className="statusBox">
+                    <input type="checkbox" name="sortTimeDeadlineASC" id="sortTimeDeadlineASC" checked={timeDeadlineASC} onChange={onChangeTimeDeadlineASC}/>
+                    <label htmlFor="sortTimeDeadlineASC">ASC</label>
+                </div>
+                <div className="statusBox">
+                    <input type="checkbox" name="sortTimeDeadlineDESC" id="sortTimeDeadlineDESC" checked={timeDeadlineDESC} onChange={onChangeTimeDeadlineDESC}/>
+                    <label htmlFor="sortTimeDeadlineDESC">DESC</label>
+                </div>
+                <button id="clearSort" onClick={onClickResetSort}>Clear sort</button>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -1,0 +1,61 @@
+#createProjectForm {
+    margin: 10px 0;
+    background-color: var(--backgroundColorMain);
+    width: 100%;
+}
+
+#createProjectForm #openCreateProjectButton {
+    padding: 10px;
+    background-color: rgba(244, 91, 105);
+    font-size: 18px;
+    border: 0;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    justify-self: end;
+    margin-right: 10px;
+}
+#createProjectForm form {
+    border: 3px solid black;
+    padding: 5px;
+    border-radius: 10px;
+}
+#createProjectForm .createProjectInput label{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#createProjectForm .createProjectInput input{
+    font-size: 18px;
+    background-color: #e8e7e7;
+    border: 1px #e8e7e7 solid;
+}
+
+#createProjectForm #createProjectButton {
+    margin-top: 10px;
+}
+
+#createProjectForm #createProjectButton input{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 0;
+}
+
+#createProjectForm #createProjectButton input:first-child:hover{
+    background-color: yellowgreen;
+}
+
+#createProjectForm #createProjectButton input:last-child{
+    margin-left: 10px;
+}
+
+#createProjectForm #createProjectButton input:last-child:hover{
+    background-color:antiquewhite;
+    color: black;
+}
