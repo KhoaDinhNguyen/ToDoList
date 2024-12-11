@@ -2,9 +2,21 @@
     margin-left: 10px;
 }
 
+@media screen and (max-width : 499px) {
+    .editTaskFormMain {
+        margin-left: 5x;
+    }
+}
+
 .editTaskFormMain label, .editTaskFormMain span{
     font-weight: 500;
     font-size: 17px;
+}
+
+@media screen and (max-width : 499px) {
+    .editTaskFormMain label, .editTaskFormMain span, .editTaskFormMain p{
+        font-size: 12px;
+    }
 }
 
 .editTaskFormMain input {
@@ -14,11 +26,26 @@
     border-radius: 5px;
 }
 
+@media screen and (max-width : 499px) {
+    .editTaskFormMain input {
+        font-size: 12px;
+        width: 100px;
+    }
+}
+
 .editTaskFormMain .notice {
     margin-top: 5px;
     font-weight: 300;
     font-size: 13px;
 }
+
+@media screen and (max-width : 499px) {
+    .editTaskFormMain .notice {
+        font-size: 10px;
+        margin-top: 0;
+    }
+}
+
 
 .editTaskButton {
     margin-top: 10px;
@@ -33,6 +60,20 @@
     color: white;
     border-radius: 10px;
     cursor: pointer;
+}
+
+@media screen and (max-width : 499px) {
+    .editTaskButton {
+        margin-top: 0;
+    }
+
+    .editTaskButton input {
+        margin-right: 10px;
+        padding: 6px;
+        font-size: 14px;
+        width: 70px;
+    }
+    
 }
 
 .editTaskButton input:nth-child(1):hover {

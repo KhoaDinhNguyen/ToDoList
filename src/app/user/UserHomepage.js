@@ -18,12 +18,12 @@ function UserHomepage(props){
                 <SearchForm/>
             </div>
             <div id="userHomepageBody">
+                <CreateProjectForm/>
                 <div id="filterAndSort">
                     <FilterForm/>
                     <SortForm/>
                 </div>
                 <div id="userHomepageMain">
-                    <CreateProjectForm/>
                     <ListProject/>
                 </div>
             </div>

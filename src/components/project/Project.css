@@ -1,12 +1,7 @@
-#projectList {
-    width: 100%;
-    background-color: var(--taskColor);
-}
 
-@media screen and (max-width : 499px) {
-    #projectList {
-        width: max-content;
-    }
+#projectList {
+    width: 95%;
+    background-color: var(--taskColor);
 }
 
 .project {
@@ -16,7 +11,6 @@
 
 @media screen and (max-width : 499px) {
     .project {
-        width: max-content;
     }
 }
 
@@ -48,18 +42,26 @@
     margin-right: 10px;
 }
 
+
 .projectMain {
     transition-duration: 0.75s;
     transition-property: height;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     border-top: 0;
+    height: 0px;
 }
 
 .projectDescription p {
     font-size: 18px;
     margin-bottom: 10px;
     margin-left: 10px;
+}
+
+@media screen and (max-width : 499px) {
+    .projectDescription p {
+        font-size: 14px;
+    }
 }
 
 .hiddenProject {
@@ -73,6 +75,12 @@
     opacity: 1;
     height: 200px;
     visibility: visible;
+}
+
+@media screen and (max-width : 499px) {
+    .visibleProject {
+        height: 150px;
+    }
 }
 
 .backgroundDelete {
@@ -91,6 +99,12 @@
     margin-top: 50px;
 }
 
+@media screen and (max-width : 499px) {
+    .projectFunction {
+        margin-top: 20px;
+    }
+}
+
 .projectFunction button {
     background-color: #000;
     border: 0;
@@ -100,4 +114,10 @@
     font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
+}
+
+@media screen and (max-width : 499px) {
+    .projectFunction button {
+        font-size: 12px;
+    }
 }

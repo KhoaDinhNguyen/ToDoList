@@ -1,8 +1,17 @@
-@media screen and (max-width : 499px) {
+#sortTaskName, #sortTimeCreated, #sortTimeDeadline {
+    display: flex;
+}   
+
+#sortTaskName div, #sortTimeCreated div, #sortTimeDeadline div{
+    display: flex;
+}   
+
+@media screen and (min-width : 850px) {
     #sortTaskName, #sortTimeCreated, #sortTimeDeadline {
-        display: flex;
-    }   
+        flex-direction: column;
+    }
 }
+
 
 #sortForm {
     margin-left: 10px;
@@ -10,14 +19,19 @@
 }
 
 #sortForm .statusBox {
-    display: inline-flex;
+    display: flex;
     align-items: center;
 }
 
 
 #sortForm label{
     font-size: 14px;
-    margin-right: 10px;
+}
+
+@media screen and (max-width : 499px) {
+    #sortForm label{
+        font-size: 12px;
+    }
 }
 
 #sortForm input[type=checkbox] {
@@ -25,14 +39,14 @@
     width: 18px;
     margin-right: 2px;
     box-sizing: border-box;
+    margin-left: 10px;
 }
 
+
 @media screen and (max-width : 499px) {
-    #sortForm .statusBox input[type=checkbox]{
-        margin-left: 10px;
-    }
-    #sortForm label{
-        margin-right: 0;
+    #sortForm .statusBox input[type=checkbox]{   
+        height: 15px;
+        width: 15px;
     }
 }
 
@@ -52,6 +66,12 @@
     border: 0;
     cursor: pointer;
     display: block;
+}
+
+@media screen and (max-width : 499px) {
+    #clearSort {
+        font-size: 12px;
+    }
 }
 
 #clearSort:active {

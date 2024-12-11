@@ -7,7 +7,13 @@
     border: 0;
     margin-top: 100px;
     overflow-x: hidden;
-    width: var(--width850Hover);
+    width: var(--width1024Hover);
+}
+
+@media screen and (max-width : 499px) {
+    #userNavigationBar #pageNavigation #logOut {
+        margin-top: 50px;
+    }
 }
 
 #userNavigationBar #pageNavigation #logOut img {
@@ -15,12 +21,26 @@
     border-radius: 50%;
 }
 
+@media screen and (max-width : 499px) {
+    #userNavigationBar #pageNavigation #logOut img {
+        height: 36px;
+        width: 36px;
+    }
+}
+
+
 #userNavigationBar #pageNavigation #logOut p {
     font-weight: 500;
     color: black;
     padding: 5px;
     font-size: 1.5rem;
     border: 2px solid rgba(244, 91, 105);
+}
+
+@media screen and (max-width : 499px) {
+    #userNavigationBar #pageNavigation #logOut p {
+        font-size: 1rem;
+    }
 }
 
 #userNavigationBar #pageNavigation #logOut:hover img {

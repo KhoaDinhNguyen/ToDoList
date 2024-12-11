@@ -5,6 +5,12 @@
     height: 200px;
 }
 
+@media screen and (max-width : 499px) {
+    .detetePrompt .deletePromptBody{
+        height: 150px;
+    }
+}
+
 .deletePromptMain {
     text-align: center;
     font-weight: 500;
@@ -14,6 +20,13 @@
     font-style: italic;
     font-weight: 300;
 }
+
+@media screen and (max-width : 499px) {
+    .deletePromptMain p {
+        font-size: 12px;
+    }
+}
+
 
 .deletePromptButton {
     margin: 0 auto;
@@ -32,6 +45,16 @@
     margin-top: 10px;
     transition-duration: 0.1s;
     cursor: pointer;
+}
+
+@media screen and (max-width : 499px) {
+    .deletePromptButton button{
+        display: block;
+        width: max-content;
+        padding: 10px;
+        font-size: 12px;
+        margin-left: 0;
+    }
 }
 
 .deletePromptButton button:nth-child(1):hover {

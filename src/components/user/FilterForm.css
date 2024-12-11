@@ -7,6 +7,13 @@
     margin-right: 10px;
 }
 
+@media screen and (max-width : 499px) {
+    #filterForm label{
+        font-size: 12px;
+        margin-right: 0px;
+    }  
+}
+
 /* ================================== STATUS FILTER ================================== */
 
 #statusFilter input[type=checkbox] {
@@ -16,12 +23,19 @@
     box-sizing: border-box;
 }
 
+@media screen and (max-width : 499px) {
+    #statusFilter input[type=checkbox] {
+        height: 15px;
+        width: 15px;
+    }
+}
+
+
 #statusFilter input[type=checkbox]:checked {
     accent-color: rgba(244, 91, 105);
 }
 #statusFilter {
     margin-top: 5px;
-
 }
 
 #statusFilter h4 {
@@ -34,6 +48,12 @@
     align-content: center;
 }
 
+@media screen and (max-width : 499px) {
+    #statusList {
+        width: 250px;
+    }
+}
+
 #filterForm .statusBox {
     display: flex;
     align-items: center;
@@ -42,15 +62,8 @@
 
 /* ================================== DATE FILTER ================================== */
 @media screen and (max-width : 499px) {
-    #timeFilter h4 {
-        display: inline-block;
-    }
-    .dateFilter {
-        display: inline-block;
-    }
-
     .dateFilter label{
-        margin-left: 10px;
+        margin-left: 0;
     }
 }
 
@@ -66,6 +79,13 @@
     transition-duration: 0.2s;
     cursor: pointer;
 }
+
+@media screen and (max-width : 499px) {
+    #clearDate {
+        font-size: 12px;
+    }
+}
+
 
 #clearDate:active {
     color: #000;

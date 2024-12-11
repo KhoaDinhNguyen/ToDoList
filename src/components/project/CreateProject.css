@@ -1,12 +1,16 @@
 #createProjectForm {
     margin: 10px 0;
     background-color: var(--backgroundColorMain);
-    width: 100%;
+    width: 95%;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    justify-self: flex-end;
 }
 
 @media screen and (max-width : 499px) {
     #createProjectForm {
-        max-width: max-content;
+        width: 100%;
+        justify-self: center;
     }
 }
 
@@ -14,7 +18,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
+
+@media screen and (max-width : 499px) {
+    #projectHeader {
+        justify-content: center;
+    }
+
+    #createProjectForm h2 {
+        font-size: 16px;
+    }
+}
+
 #createProjectForm #openCreateProjectButton {
     padding: 10px;
     background-color: rgba(244, 91, 105);
@@ -24,14 +40,26 @@
     color: white;
     cursor: pointer;
     border-radius: 5px;
-    justify-self: end;
-    margin-right: 10px;
+}
+
+@media screen and (max-width : 499px) {
+    #createProjectForm #openCreateProjectButton {
+        font-size: 12px;
+        padding: 5px;
+    }
 }
 #createProjectForm form {
     border: 2px solid black;
     padding: 5px;
     border-radius: 10px;
 }
+
+@media screen and (max-width : 499px) {
+    #createProjectForm form {
+        width: 250px;
+    }
+}
+
 #createProjectForm .createProjectInput label{
     font-size: 18px;
     font-weight: 500;
@@ -41,6 +69,18 @@
     font-size: 18px;
     background-color: #e8e7e7;
     border: 1px #e8e7e7 solid;
+}
+
+
+@media screen and (max-width : 499px) {
+    #createProjectForm .createProjectInput label{
+        font-size: 12px;
+    }
+    
+    #createProjectForm .createProjectInput input{
+        font-size: 12px;
+        width: 100px;
+    }
 }
 
 #createProjectForm #createProjectButton {
@@ -56,6 +96,13 @@
     border-radius: 10px;
     cursor: pointer;
     border: 0;
+}
+
+@media screen and (max-width : 499px) {
+    #createProjectForm #createProjectButton input{
+        padding: 10px;
+        font-size: 12px;
+    }
 }
 
 #createProjectForm #createProjectButton input:first-child:hover{

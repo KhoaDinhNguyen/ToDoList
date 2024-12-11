@@ -8,11 +8,21 @@
     justify-content: space-between;
     border-bottom: 1px solid black;
     padding: 10px;
+    align-items: center;
 }
 
 .taskBody h4{
     font-size: 20px;
     font-weight: 600;
+}
+
+@media screen and (max-width : 499px) {
+    .taskBody {
+        padding: 5px;
+    }
+    .taskBody h4{
+        font-size: 14px;
+    }
 }
 
 .taskBody .taskNameAndTaskStatus {
@@ -56,6 +66,19 @@
     grid-column: 1 / 2;
 }
 
+@media screen and (max-width : 499px) {
+    .taskBody h4{
+        font-size: 14px;
+    }
+
+    .taskBody .taskNameAndTaskStatus {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        width: 80%;
+        max-width: 400px;
+    }
+}
 /* =========================== TASK STATUS =========================== */
 .taskStatus {
     display: flex;
@@ -70,6 +93,16 @@
     position: relative;
     top: 2px;
     margin-right: 3px;
+}
+@media screen and (max-width : 499px) {
+    .checkbox {
+        width: 7px;
+        height: 7px;
+    }
+
+    .taskStatus p{
+        font-size: 12px;
+    }
 }
 
 .pending {
@@ -98,6 +131,7 @@
     display: flex;
     width: 250px;
     justify-content: space-between;
+    align-items: center;
 }
 
 @media screen and (max-width : 499px) {
@@ -105,12 +139,19 @@
         width: max-content;
     }
 }
+
 .taskFunction .deadline {
     font-weight: 500;
     margin-right: 10px;
     font-style: italic;
     display: flex;
     width: 170px;
+}
+
+@media screen and (max-width : 499px) {
+    .taskFunction .deadline {
+        display: none;
+    }
 }
 
 .changeStatus {
@@ -121,6 +162,13 @@
     margin-right: 5px;
 }
 
+@media screen and (max-width : 499px) {
+    .changeStatus {
+        width: 15px;
+        height: 15px;
+    }
+}
+
 /* =========================== TASK INFO BODY =========================== */
 .taskInfoBody {
     transition-duration: 0.5s;
@@ -129,6 +177,13 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+@media screen and (max-width : 499px) {
+    .taskInfoBody {
+
+    }
+}
+
 
 .taskInfoHidden {
     height: 0px;
@@ -144,12 +199,24 @@
     visibility: visible;
 }
 
+@media screen and (max-width : 499px) {
+    .taskInfoVisible {
+        height: 150px;
+    }
+}
+
 .taskInfoDescription {
     margin-left: 10px;
 }
 
 .taskInfoDescription p{
     font-size: 17px;
+}
+
+@media screen and (max-width : 499px) {
+    .taskInfoDescription p{
+        font-size: 12px;
+    }
 }
 
 .taskInfoDescription span {
@@ -173,6 +240,13 @@
     cursor: pointer;
 }
 
+@media screen and (max-width : 499px) {
+    .taskInfoButton button{
+        padding: 5px;
+        font-size: 14px;
+    }
+}
+
 .taskInfoDisplayButton {
     padding: 2px;
     border-radius: 50%;
@@ -182,6 +256,16 @@
     margin-left: 10px;
     cursor: pointer;
     font-weight: 900;
+}
+
+@media screen and (max-width : 499px) {
+    .taskInfoDisplayButton {
+        width: 15px;
+        height: 15px;
+        font-size: 8px;
+        margin-left: 0;
+    }
+    
 }
 
 
@@ -195,6 +279,16 @@
     font-size: 13px;
     font-style: italic;
 }
+
+@media screen and (max-width : 499px) {
+    .taskFinish .note {
+        font-size: 10px;
+    }
+    .taskFinish .taskInfoVisible {
+        height: 100px;
+    }
+}
+
 
 .fulfilledTask {
     background-color: #A8CD89;

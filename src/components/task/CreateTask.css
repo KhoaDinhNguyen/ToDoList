@@ -6,6 +6,7 @@
 @media screen and (max-width : 499px) {
     .createTaskForm {
         max-width: max-content;
+        margin: 5px 0;
     }
 }
 
@@ -23,10 +24,24 @@
     font-size: 20px;
 }
 
+@media screen and (max-width : 499px) {
+    .createTaskForm .openCreateTask button{
+        font-size: 12px;
+        margin-left: 5px;
+    }
+}
+
 .createTaskForm .createTaskInput {
     font-size: 16px;
     margin-left: 10px;
     margin-top: 5px;
+}
+
+@media screen and (max-width : 499px) {
+    .createTaskForm .createTaskInput {
+        font-size: 12px;
+        margin-left: 5px;
+    }
 }
 
 .createTaskForm .createTaskInput label, .createTaskForm .createTaskInput span {
@@ -38,6 +53,15 @@
     border: 1px #e8e7e7 solid;
     font-size: 16px;
 }
+
+@media screen and (max-width : 499px) {
+    .createTaskForm .createTaskInput input {
+        background-color: #e8e7e7;
+        border: 1px #e8e7e7 solid;
+        font-size: 12px;
+    }    
+}
+
 
 .createTaskForm .createTaskButton {
     margin-left: 10px;
@@ -54,6 +78,14 @@
     cursor: pointer;
     border: 0;
 }
+
+@media screen and (max-width : 499px) {
+    .createTaskForm .createTaskButton input {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+}
+
 
 .createTaskForm .createTaskButton input:first-child:hover {
     background-color: yellowgreen;
