@@ -54,10 +54,10 @@ function FilterStatusFrom(props) {
                         <input type="checkbox" id="failingFilter" name="failingFilter" checked={failing} onChange={onChangeFailing}/>
                         <label htmlFor="failingFilter">Failing</label>
                     </div>
-                </div>
-                <div className="statusBox">
-                    <input type="checkbox" id="allStatus" name="allStatus" value="allStatus" checked={allStatus} onChange={onChangeAllStatus}/>
-                    <label htmlFor="allStatus">All apply</label>
+                    <div className="statusBox">
+                        <input type="checkbox" id="allStatus" name="allStatus" value="allStatus" checked={allStatus} onChange={onChangeAllStatus}/>
+                        <label htmlFor="allStatus">All apply</label>
+                    </div>
                 </div>
             </div>
         </>

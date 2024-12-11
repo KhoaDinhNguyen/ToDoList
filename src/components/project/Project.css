@@ -3,9 +3,21 @@
     background-color: var(--taskColor);
 }
 
+@media screen and (max-width : 499px) {
+    #projectList {
+        width: max-content;
+    }
+}
+
 .project {
     list-style: none;
     width: 100%;
+}
+
+@media screen and (max-width : 499px) {
+    .project {
+        width: max-content;
+    }
 }
 
 .projectHeader {

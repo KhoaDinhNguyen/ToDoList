@@ -101,32 +101,38 @@ function SortForm() {
         <div id="sortForm">
             <h3>Sort</h3>
             <div id="sortFilter">
-                <h4>Task name</h4>
-                <div className="statusBox">
-                    <input type="checkbox" name="sortTaskNameASC" id="sortTaskNameASC" checked={taskNameASC} onChange={onChangeTaskNameASC}/>
-                    <label htmlFor="sortTaskNameASC">ASC</label>
+                <div id="sortTaskName">
+                    <h4>Task name</h4>
+                    <div className="statusBox">
+                        <input type="checkbox" name="sortTaskNameASC" id="sortTaskNameASC" checked={taskNameASC} onChange={onChangeTaskNameASC}/>
+                        <label htmlFor="sortTaskNameASC">ASC</label>
+                    </div>
+                    <div className="statusBox">
+                        <input type="checkbox" name="sortTaskNameDESC" id="sortTaskNameDESC" checked={taskNameDESC} onChange={onChangeTaskNameDESC}/>
+                        <label htmlFor="sortTaskNameDESC">DESC</label>
+                    </div>
                 </div>
-                <div className="statusBox">
-                    <input type="checkbox" name="sortTaskNameDESC" id="sortTaskNameDESC" checked={taskNameDESC} onChange={onChangeTaskNameDESC}/>
-                    <label htmlFor="sortTaskNameDESC">DESC</label>
+                <div id="sortTimeCreated">
+                    <h4>Time created</h4>
+                    <div className="statusBox">
+                        <input type="checkbox" name="sortTimeCreatedASC" id="sortTimeCreatedASC" checked={timeCreatedASC} onChange={onChangeTimeCreatedASC}/>
+                        <label htmlFor="sortTimeCreatedASC">ASC</label>
+                    </div>
+                    <div className="statusBox">
+                        <input type="checkbox" name="sortImeCreatedDESC" id="sortImeCreatedDESC" checked={timeCreatedDESC} onChange={onChangeTimeCreatedDESC}/>
+                        <label htmlFor="sortImeCreatedDESC">DESC</label>
+                    </div>
                 </div>
-                <h4>Time created</h4>
-                <div className="statusBox">
-                    <input type="checkbox" name="sortTimeCreatedASC" id="sortTimeCreatedASC" checked={timeCreatedASC} onChange={onChangeTimeCreatedASC}/>
-                    <label htmlFor="sortTimeCreatedASC">ASC</label>
-                </div>
-                <div className="statusBox">
-                    <input type="checkbox" name="sortImeCreatedDESC" id="sortImeCreatedDESC" checked={timeCreatedDESC} onChange={onChangeTimeCreatedDESC}/>
-                    <label htmlFor="sortImeCreatedDESC">DESC</label>
-                </div>
-                <h4>Time deadline </h4>
-                <div className="statusBox">
-                    <input type="checkbox" name="sortTimeDeadlineASC" id="sortTimeDeadlineASC" checked={timeDeadlineASC} onChange={onChangeTimeDeadlineASC}/>
-                    <label htmlFor="sortTimeDeadlineASC">ASC</label>
-                </div>
-                <div className="statusBox">
-                    <input type="checkbox" name="sortTimeDeadlineDESC" id="sortTimeDeadlineDESC" checked={timeDeadlineDESC} onChange={onChangeTimeDeadlineDESC}/>
-                    <label htmlFor="sortTimeDeadlineDESC">DESC</label>
+                <div id="sortTimeDeadline">
+                    <h4>Time deadline </h4>
+                    <div className="statusBox">
+                        <input type="checkbox" name="sortTimeDeadlineASC" id="sortTimeDeadlineASC" checked={timeDeadlineASC} onChange={onChangeTimeDeadlineASC}/>
+                        <label htmlFor="sortTimeDeadlineASC">ASC</label>
+                    </div>
+                    <div className="statusBox">
+                        <input type="checkbox" name="sortTimeDeadlineDESC" id="sortTimeDeadlineDESC" checked={timeDeadlineDESC} onChange={onChangeTimeDeadlineDESC}/>
+                        <label htmlFor="sortTimeDeadlineDESC">DESC</label>
+                    </div>
                 </div>
                 <button id="clearSort" onClick={onClickResetSort}>Clear sort</button>
             </div>

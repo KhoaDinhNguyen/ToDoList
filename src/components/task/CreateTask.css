@@ -3,9 +3,17 @@
     background-color: var(--taskColor);
 }
 
+@media screen and (max-width : 499px) {
+    .createTaskForm {
+        max-width: max-content;
+    }
+}
+
+
 .createTaskForm .openCreateTask {
     width: 100%;
 }
+
 .createTaskForm .openCreateTask button{
     background-color: white;
     border: 0;

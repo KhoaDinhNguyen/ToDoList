@@ -7,6 +7,8 @@
 :root {
     --width850Default: 54px;
     --width850Hover: 200px;
+    --width499Default: 54px;
+    --width499Hover: 200px;
     --backgroundColorMain: #fff;
     --taskColor: #fff;
     --commomRedColor: rgba(244, 91, 105, 1);
@@ -16,6 +18,20 @@
     height: 100vh;
     display: grid;
     grid-template-columns: var(--width850Default) 1fr;
+}
+
+@media screen and (max-width : 499px) {
+    #userPage {
+        grid-template-columns: var(--width499Default) 1fr;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width : 850px) {
+
+}
+
+@media screen and (max-height: 600px) {
+
 }
 
 #userNavigationBar {
@@ -132,6 +148,12 @@
     grid-column: 2 / 3;
     background-color: var(--backgroundColorMain);
     height: 100vh;
+}
+
+@media screen and (max-width : 499px) {
+    #userContent{
+        width: 100%;
+    }
 }
 
 ::-webkit-scrollbar {

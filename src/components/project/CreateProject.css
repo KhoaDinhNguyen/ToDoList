@@ -4,6 +4,17 @@
     width: 100%;
 }
 
+@media screen and (max-width : 499px) {
+    #createProjectForm {
+        max-width: max-content;
+    }
+}
+
+#projectHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 #createProjectForm #openCreateProjectButton {
     padding: 10px;
     background-color: rgba(244, 91, 105);
@@ -17,7 +28,7 @@
     margin-right: 10px;
 }
 #createProjectForm form {
-    border: 3px solid black;
+    border: 2px solid black;
     padding: 5px;
     border-radius: 10px;
 }

@@ -11,7 +11,7 @@ function SearchForm() {
     }
     return (
         <div id="searchForm">
-            <input type="text" id="searchString" name="searchString" value={seachString} onChange={onChangeSearchString} placeholder="&#x1F50E; Search"/>
+            <input type="text" id="searchString" name="searchString" value={seachString} onChange={onChangeSearchString} placeholder="&#x1F50E; Search tasks"/>
         </div>
     )
 }

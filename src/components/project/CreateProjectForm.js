@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { projectsSlice } from "../../features/user/databaseSlice";
 import { fetchCreateProject } from "../../features/project/projectAPI";
 import { convertFromBooleanToDisplay } from "../../app/user/User";
+import { profileNameSlice } from "../../features/user/databaseSlice.js";
 import './CreateProject.css';
 
 function CreateProjectForm() {
@@ -10,6 +11,7 @@ function CreateProjectForm() {
     const [projectName, setProjectName] = useState("");
     const [projectDescription, setProjectDescription] = useState("");
     const [createProjectDisplay, setCreateProjectDisplay] = useState(false);
+    const profileName = useSelector(state => state[profileNameSlice.name]);
 
     const accountName = localStorage.getItem("accountName");
     const currentDate = new Date().toISOString().slice(0, 10);
@@ -44,7 +46,10 @@ function CreateProjectForm() {
 
     return(
         <div id="createProjectForm">
-            <button onClick={onClickToggleForm} id="openCreateProjectButton" style={{display: convertFromBooleanToDisplay(!createProjectDisplay)}}>&#x271A; Create project</button>
+            <div id="projectHeader">
+                <h2>Hello {profileName} !&#128526;</h2>
+                <button onClick={onClickToggleForm} id="openCreateProjectButton" style={{display: convertFromBooleanToDisplay(!createProjectDisplay)}}>&#x271A; Create project</button>
+            </div>
             <form style={{display: convertFromBooleanToDisplay(createProjectDisplay)}} onSubmit={onSubmitCreateProject}>
                 <div className="createProjectInput">
                     <label htmlFor="projectName">Project name: </label>
