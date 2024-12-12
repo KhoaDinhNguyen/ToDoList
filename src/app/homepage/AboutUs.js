@@ -29,7 +29,7 @@ function AboutUs() {
                         <p><NavLink to="/homepage/signUp">Create an account</NavLink> or <NavLink to="/homepage/login">Login</NavLink> to enjoy the application.</p>
                         <div id="aboutUsMessage">
                             <h4>Organize tasks can take a lot of time.</h4>
-                            <h4>Let's MasterTask help you.</h4>
+                            <h4>Let MasterTask help you.</h4>
                         </div>
                     </div>
                 </div>

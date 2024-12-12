@@ -21,7 +21,7 @@
     grid-template-columns: var(--width1024Default) 1fr;
     overflow-y: visible;
     grid-template-rows: 100%;
-    height: 100%;
+    height: max(100%, 100vh);
 }
 
 @media screen and (max-width : 499px) {
@@ -41,7 +41,7 @@
 #userNavigationBar {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    height: 100%;
+    height: max(100%, 100vh);
     background-color: rgba(244, 91, 105);
     width: var(--width1024Default);
     overflow-x: clip;
@@ -192,6 +192,7 @@
 #userContent{
     grid-column: 2 / 3;
     background-color: var(--backgroundColorMain);
+    height: max(100vh - 50px, 100%);
 }
 
 @media screen and (max-width : 499px) {

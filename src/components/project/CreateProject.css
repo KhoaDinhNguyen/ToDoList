@@ -56,7 +56,8 @@
 
 @media screen and (max-width : 499px) {
     #createProjectForm form {
-        width: 250px;
+        width: 95%;
+        justify-self: flex-end;
     }
 }
 
@@ -79,7 +80,7 @@
     
     #createProjectForm .createProjectInput input{
         font-size: 12px;
-        width: 100px;
+        width: 200px;
     }
 }
 

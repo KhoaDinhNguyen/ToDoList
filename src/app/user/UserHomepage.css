@@ -28,6 +28,7 @@
     display: grid;
     grid-template-columns: 20% 1fr;
     grid-template-rows: 160px 1fr;
+    height: max(100vh - 50px, 100%);
 }
 
 @media screen and ((max-width : 499px) or ((min-width: 500px) and (max-width : 850px))){
@@ -47,6 +48,7 @@
     background-color: rgb(245, 245, 245);
     grid-column: 1 / 2;
     grid-row: 1 / 3;
+    height: max(100vh - 50px, 100%);
 }
 
 @media screen and ((max-width : 499px) or (((min-width: 500px) and (max-width : 850px)))) {
