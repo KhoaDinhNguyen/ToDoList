@@ -212,7 +212,7 @@ function TaskInfoHomepage(props) {
                 <p><span>Task name:</span> {taskName}</p>
                 <p><span>Task description:</span> {taskDescription}</p>
                 <p><span>Task time created:</span> {taskTimeCreated}</p>
-                <p><span>Task time deadline:</span> {taskTimeDeadline}</p>
+                <p><span>Task time deadline:</span> {taskTimeDeadline.slice(0, 10)}</p>
                 <p><span>Task status:</span> finished + {taskStatus}</p>
                 <p className="note">&#9432; Cannot edit or delete finised task</p>
             </div>
@@ -225,7 +225,7 @@ function TaskInfoHomepage(props) {
                 <p><span>Task name:</span> {taskName}</p>
                 <p><span>Task description:</span> {taskDescription}</p>
                 <p><span>Task time created:</span> {taskTimeCreated}</p>
-                <p><span>Task time deadline:</span> {taskTimeDeadline}</p>
+                <p><span>Task time deadline:</span> {taskTimeDeadline.slice(0, 10)}</p>
             </div>
             <UpdateTask task={task} display={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay}/>
             <DeleteTask task={task} display={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay}/>
@@ -329,7 +329,7 @@ function TaskDisplayCalender(props) {
         <li>
             <h4>{taskName} - Project name : {projectName}</h4>
             <p>{currentStatus}</p>
-            <p>Deadline: {taskTimeDeadline}</p>
+            <p>Deadline: {taskTimeDeadline.slice(0, 10)}</p>
             <button onClick={onChangeTaskDetailDisplay}>Task Information</button>
             <TaskInfoCalender task={task} display={convertFromBooleanToDisplay(taskDetailDisplay)}/>
         </li>

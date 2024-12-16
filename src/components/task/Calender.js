@@ -1,20 +1,18 @@
 import { useState } from "react";
 import "./calender.css"
 import { TaskDisplay } from "./taskDisplay";
+import { convertDateToISOString } from "../../app/user/User";
 
 function Calender(props) {
     const { tasks } = props;
     const today = new Date();
-    today.setDate(today.getDate());
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
     const [calenderMonth, setCalenderMonth] = useState(month);
     const [calenderYear, setCalenderYear] = useState(year);
     const [calenderDate, setCalenderDate] = useState("");
 
-    const firstDayOfMonth = new Date(`${calenderYear} ${calenderMonth}`);
-    firstDayOfMonth.setDate(firstDayOfMonth.getDate());
-    
+    const firstDayOfMonth = new Date(`${calenderYear} ${calenderMonth}`);    
     const dateIterator = new Date(`${calenderYear} ${calenderMonth}`);
     const tableBody = [];
 
@@ -26,7 +24,7 @@ function Calender(props) {
             dayOfWeek++;
         }
 
-        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline === dateIterator.toISOString().slice(0, 10));
+        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === convertDateToISOString(dateIterator));
         const dateTask = [];
 
         for (const task of arrayOfTask) {
@@ -105,8 +103,8 @@ function Calender(props) {
                     {tableBody}
                 </tbody>
             </table>
-            <button onClick={onClickNextMonth}>Next</button>
             <button onClick={onClickPreviousMonth}>Previous</button>
+            <button onClick={onClickNextMonth}>Next</button>
             <DateDisplayTask date={calenderDate} month={calenderMonth} year={calenderYear} tasks={tasks}/>
         </>
     )
@@ -119,7 +117,7 @@ function DateDisplayTask(props) {
         return <></>
     }
 
-    const arrayOfTask = tasks.filter(task => task.taskTimeDeadline === currentDate.toISOString().slice(0, 10));
+    const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === convertDateToISOString(currentDate));
     const dateListTask = [];
 
     if (arrayOfTask.length !== 0) {
