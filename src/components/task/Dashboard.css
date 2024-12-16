@@ -1,0 +1,82 @@
+#dashboard {
+    width: 100%;
+}
+
+#dashboard #dashboardHeader {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#dashboard li {
+    list-style: none;
+}
+
+#dashboardBody {
+    display: flex;
+    justify-content: center;
+}
+
+#dashboardBody > ul {
+    width: 60%;
+}
+
+.dashboardDate {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 50px;
+    border-bottom: 3px #40A2D8 solid;
+}
+
+@media screen and (max-width : 499px) {
+    .dashboardDate {
+        font-size: 15px;
+    }
+}
+
+.nothingPlan {
+    background-image: url('../../img/user/nothingplanDashboard.png');
+    height: 100px;
+    background-size: contain;
+    background-repeat: space;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nothingPlan p {
+    font-size: 25px;
+    font-weight: 500;
+    padding: 5px;
+    background-color: white;
+}
+
+@media screen and (max-width : 499px) {
+    .nothingPlan {
+        height: 50px;
+    }
+    
+    .nothingPlan p {
+        font-size: 10px;
+    }
+}
+
+
+.deadlineTask ul {
+    width: 100%;
+}
+
+.listDeadlineTask {
+    display: none;
+}
+
+.openFinishedTasks {
+    color: rgb(62, 62, 245);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+@media screen and (max-width : 499px) {
+    .openFinishedTasks {
+        font-size: 12px;
+    }
+}

@@ -143,7 +143,7 @@ function TaskDisplayHomepage(props) {
                         </div>
                     </div>
                     <div className="taskFunction">
-                        <p className="deadline">Deadline: {taskTimeDeadline}</p>
+                        <p className="deadline">Deadline: {taskTimeDeadline.slice(0, 10)}</p>
                         <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
                     </div>
                 </div>
@@ -172,7 +172,7 @@ function TaskDisplayHomepage(props) {
                     </div>
                 </div>
                 <div className="taskFunction">
-                    <p className="deadline">Deadline: {taskTimeDeadline}</p>
+                    <p className="deadline">Deadline: {taskTimeDeadline.slice(0, 10)}</p>
                     <input type="checkbox" name={`${taskName}Fulfilled`} id={`${taskName}Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
                     <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
                 </div>
@@ -254,40 +254,68 @@ function TaskDisplayDashBoard(props) {
     if (finish) {
         return (
             <li>
-                <h4>{taskName}/{projectName}</h4>
-                <p>{currentStatus}</p>
-                <div className={`${currentStatus} checkbox`}></div>
-                <p>Important</p>
-                <div className={`${currentImportant}_star important`}></div>
-                <button onClick={onChangeTaskDetailDisplay}>Task Information</button>
-                <TaskInfoDashboard task={task} display={convertFromBooleanToDisplay(taskDetailDisplay)}/>
-                <p>Cannot edit task was finished</p>
+                <div className={`taskDashboard ${currentStatus}Task`}>
+                    <div className="taskName">
+                        <div className="important">
+                            <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                            <label htmlFor={`${taskName}_important`}>
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                </svg>
+                            </label>
+                        </div>
+                        <h4>{taskName} -- Project name: {projectName}</h4>
+                    </div>
+                    <div className="taskFunction">
+                        <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>  
+                    </div>
+                </div>
+                <TaskInfoDashboard task={task} taskDetailDisplay={taskDetailDisplay}/>
             </li>
         );
     }
     return (
         <li>
-            <h4>{taskName}/{projectName}</h4>
-            <p>{currentStatus}</p>
-            <div className={`${currentStatus} checkbox`} onClick={onChangeTaskStatus}></div>
-            <p>Important</p>
-            <div className={`${currentImportant}_star important`} onClick={onClickImportant}></div>
-            <button onClick={onChangeTaskDetailDisplay}>Task Information</button>
-            <TaskInfoDashboard task={task} display={convertFromBooleanToDisplay(taskDetailDisplay)}/>
+            <div className="taskDashboard">
+                <div className="taskName">
+                    <div className="important">
+                        <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                        <label htmlFor={`${taskName}_important`}>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                            </svg>
+                        </label>
+                    </div>
+                    <h4>{taskName} -- Project name: {projectName}</h4>
+                </div>
+                <div className="taskFunction">
+                    <input type="checkbox" name={`${taskName}Fulfilled`} id={`${taskName}Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
+                    <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>  
+                </div>
+            </div>
+            <TaskInfoDashboard task={task} taskDetailDisplay={taskDetailDisplay}/>
         </li>
     );
 }
 
 function TaskInfoDashboard(props) {
-    const { display, task } = props;
-    const { taskTimeDeadline, taskTimeCreated, taskDescription, projectName} = task;
-
+    const { task, taskDetailDisplay } = props;
+    const { taskTimeDeadline, taskTimeCreated, taskDescription, projectName, taskName, taskStatus} = task;
+    console.log(taskDetailDisplay);
     return (
-        <div className="taskInfo" style={{display: display}}>
-            <p>Task description: {taskDescription}</p>
-            <p>Deadline: {taskTimeDeadline}</p>
-            <p>Time created: {taskTimeCreated}</p>
-            <p>Project name: {projectName}</p>
+        <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"}`}>
+            <div>
+                <p><span>Task name: </span>{taskName}</p>
+                <p><span>Task description: </span>{taskDescription}</p>
+                <div className="taskStatus">
+                    <p><span>Task status: </span></p>
+                    <div className={`${taskStatus} checkbox`}></div>
+                    <p>{taskStatus}</p>
+                </div>
+                <p><span>Deadline: </span>{taskTimeDeadline.slice(0, 10)}</p>
+                <p><span>Time created: </span>{taskTimeCreated}</p>
+                <p><span>Project name: </span>{projectName}</p>
+            </div>
         </div>
     );
 }

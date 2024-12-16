@@ -7,6 +7,7 @@ const getUserDatabase = (req, res, next) => {
             throw err;
         }
         const database = []; 
+        //console.log(result.rows);
         for (const data of result.rows) {
             const { accountname, profilename, projectname, projectdescription, projecttimecreated, taskname, taskdescription, taskstatus, tasktimecreated, tasktimedeadline, important} = data;
             if (taskname === null) {
@@ -35,7 +36,7 @@ const getUserDatabase = (req, res, next) => {
                     taskDescription: taskdescription,
                     taskStatus: taskstatus,
                     taskTimeCreated: tasktimecreated.toISOString().slice(0, 10),
-                    taskTimeDeadline: tasktimedeadline.toISOString().slice(0, 10),
+                    taskTimeDeadline: tasktimedeadline,
                     taskImportant: important
                 });
             }

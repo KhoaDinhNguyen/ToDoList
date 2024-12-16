@@ -16,7 +16,19 @@ import { fetchUserDatabase } from "../../features/user/userAPI.js";
 import LogOut from "../../components/user/LogOut.js";
 
 export const convertFromBooleanToDisplay = display => display ? "block" : "none";
+export const convertDateToISOString = (day) => {
+    const date = day.getDate();
+    const month = day.getMonth();
+    const year = day.getFullYear();
+    
+    let monthString = `${month + 1}`;
+    if (monthString.length === 1) monthString = `0${monthString}`;
+    let dateString = `${date}`;
+    if (dateString.length === 1) dateString = `0${dateString}`;
 
+    //console.log(`${year}-${monthString}-${dateString}`);
+    return `${year}-${monthString}-${dateString}`;
+}
 function User() {
     const params = useParams();
     const navigate = useNavigate();
@@ -35,6 +47,7 @@ function User() {
 
         fetchUserDatabase(accountName)
         .then(response => {
+            console.log(response);
             dispatch(tasksSlice.actions.initialize(response));
             dispatch(projectsSlice.actions.initialize(response));
             dispatch(profileNameSlice.actions.assignName(response[0].profileName));

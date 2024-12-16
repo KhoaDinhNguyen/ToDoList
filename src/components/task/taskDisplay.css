@@ -178,13 +178,6 @@
     justify-content: space-between;
 }
 
-@media screen and (max-width : 499px) {
-    .taskInfoBody {
-
-    }
-}
-
-
 .taskInfoHidden {
     height: 0px;
     opacity: 0;
@@ -300,4 +293,67 @@
 
 .taskFinish .deadline {
     text-decoration: line-through;
+}
+
+
+/* =========================== TASK DASHBOARD =========================== */
+.taskDashboard {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+}
+
+.taskDashboard .taskName {
+    display: flex;
+    margin-left: 10px;
+    width: 70%;
+}
+
+@media screen and (max-width : 499px) {
+    .taskDashboard .taskName {
+        font-size: 12px;
+    }
+
+    .taskDashboard .important label svg {
+        height: 15px;
+        width: 15px;
+    }
+}
+
+.taskDashboard .taskFunction {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10px;
+    width: 30%;
+}
+
+.taskDashboard .taskStatus {
+    display: flex;
+}
+
+#dashboard .taskInfoBody > div {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+
+#dashboard .taskInfoVisible { 
+    height: 150px;
+}
+
+#dashboard span {
+    font-weight: 500;
+}
+
+@media screen and (max-width : 499px) {
+    #dashboard .taskInfoBody p{
+        font-size: 12px;
+    }
+
+    #dashboard .taskInfoVisible { 
+        height: 120px;
+    }
 }

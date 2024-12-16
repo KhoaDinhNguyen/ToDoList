@@ -1,79 +1,106 @@
-import { TaskDisplay, dateDisplay } from "./taskDisplay";
+import { TaskDisplay } from "./taskDisplay";
+import './Dashboard.css';
+import { useState } from "react";
+import { convertFromBooleanToDisplay, convertDateToISOString } from "../../app/user/User";
 
 function Dashboard(props) {
     const { tasks } = props;
     if (tasks.length === 0) {return <p>Nothing has planned yet</p>;}
 
     let minTimeDeadline = tasks[0].taskTimeDeadline, maxTimeDeadline = tasks[0].taskTimeDeadline;
+    const today = new Date();
+
+    const todayString = convertDateToISOString(today);
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowString = convertDateToISOString(tomorrow);
 
     for (const task of tasks) {
         const timeDeadline = task.taskTimeDeadline;
         if (timeDeadline < minTimeDeadline) minTimeDeadline = timeDeadline;
         if (timeDeadline > maxTimeDeadline) maxTimeDeadline = timeDeadline;
     }
-
     const minDateDeadline = new Date(minTimeDeadline);
-    minDateDeadline.setDate(minDateDeadline.getDate());
+    const minDateDeadlineString = convertDateToISOString(minDateDeadline);
+
     const maxDateDeadline = new Date(maxTimeDeadline);
-    maxDateDeadline.setDate(maxDateDeadline.getDate());
+    const maxDateDeadlineString = convertDateToISOString(maxDateDeadline);
 
-    const beforeMinDateDeadline = new Date(minDateDeadline.toISOString().slice(0, 10));
-    const afterMaxDateDeadLine = new Date(maxDateDeadline.toISOString().slice(0, 10));
-    let nonDeadlineStartDate = undefined;
-    let nonDeadlineEndDate = undefined;
+    let dateListTask = [];
 
-    beforeMinDateDeadline.setDate(minDateDeadline.getDate() - 1);
-    afterMaxDateDeadLine.setDate(maxDateDeadline.getDate() + 1);
+    const startDate = todayString < minDateDeadlineString ? todayString : minDateDeadlineString;
+    const endDate = tomorrowString > maxDateDeadlineString ? tomorrow : maxDateDeadline;
 
-    const dateListTask = [];
-
-    for (let currentDate = new Date(minDateDeadline.toISOString().slice(0, 10)); currentDate <=  maxDateDeadline; currentDate.setDate(currentDate.getDate() + 1)) {
-        currentDate.setDate(currentDate.getDate());
-        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline === currentDate.toISOString().slice(0, 10));
+    for (let currentDate = new Date(startDate); currentDate <=  endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+        const currentDateString = convertDateToISOString(currentDate);
+        const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === currentDateString);
 
         if (arrayOfTask.length !== 0) {
-            //console.log(arrayOfTask);
-            if (nonDeadlineStartDate !== undefined) {
-                dateListTask.push(
-                    <li key={dateDisplay(nonDeadlineStartDate)}>
-                        <NotDeadlineDisplay startDate={dateDisplay(nonDeadlineStartDate)} endDate={dateDisplay(nonDeadlineEndDate)}/>
-                    </li>
-                );
-                nonDeadlineStartDate = undefined;
-                nonDeadlineEndDate = undefined;
-            }
-            //console.log(currentDate.toISOString().slice(0, 10));
-            dateListTask.push(<li key={currentDate}><DeadlineDisplay tasks={arrayOfTask} date={dateDisplay(currentDate)}/></li>);
+            dateListTask.push(<li key={currentDate}><DeadlineDisplay tasks={arrayOfTask} date={currentDateString} finish={currentDate < today} today={todayString === currentDateString} tomorrow={tomorrowString === currentDateString}/></li>);
         }
-        else {
-            if (nonDeadlineStartDate === undefined) { 
-                nonDeadlineStartDate = new Date(currentDate);
-                nonDeadlineEndDate = new Date(currentDate); 
-            }
-            else { 
-                nonDeadlineEndDate = new Date(currentDate); 
-            }
+        else if (todayString === currentDateString) {
+            dateListTask.push(<li key={todayString}><NotDeadlineDisplay today={true}/></li>);
+        }
+        else if (tomorrowString === currentDateString) {
+            dateListTask.push(<li key={tomorrowString}><NotDeadlineDisplay tomorrow={true}/></li>);
         }
     }
 
-    //console.log(typeof(minDateDeadline));
     return (
-        <>
-            <p>This is dashboard</p>
-            <ul>
-                <li>
-                    <p>Before - {dateDisplay(beforeMinDateDeadline)}</p>
-                    <p>Nothing planned yet</p>
-                </li>
-                {dateListTask}
-                <li>
-                    <p>{dateDisplay(afterMaxDateDeadLine)} - After</p>
-                    <p>Nothing planned yet</p>
-                </li>
-            </ul>
-        </>
+        <div id="dashboard">
+            <div id="dashboardHeader">
+                <h3>Dashboard - Today: {today.toDateString()}</h3>
+            </div>
+            <div id="dashboardBody">
+                <ul>
+                    {dateListTask}
+                </ul>
+            </div>
+        </div>
     );
 }
+
+function DeadlineDisplay(props) {
+    const {tasks, date, finish, today, tomorrow} = props;
+    const listTask = [];
+    const [taskDisplay, setTaskDisplay] = useState(!finish);
+
+    for (const task of tasks) {
+        listTask.push(<TaskDisplay key={`${task.projectName}${task.taskName}`} task={task} type="dashboard"/>)
+    }
+
+    const numsOfTask = tasks.length;
+    const toggleTaskDisplay = () =>  { setTaskDisplay(!taskDisplay); };
+
+    return (
+        <div className="deadlineTask">
+            <p className="dashboardDate">{date} {today ? "(Today)" : (tomorrow ? "(Tomorrow)": "")}</p>
+            <p className="openFinishedTasks" style={{display : convertFromBooleanToDisplay(!taskDisplay && finish)}} onClick={toggleTaskDisplay}>Show {numsOfTask} finised task(s)</p>
+            <ul className="listDeadlineTask" style={{display : convertFromBooleanToDisplay(taskDisplay)}}>
+                {listTask}
+            </ul>
+            <p className="openFinishedTasks" style={{display : convertFromBooleanToDisplay(taskDisplay && finish)}} onClick={toggleTaskDisplay}>Close task(s)</p>
+        </div>
+    )
+}
+
+export default Dashboard;
+
+function NotDeadlineDisplay(props) {
+    const { today, tomorrow } = props;
+
+    return (
+        <div>
+            <p className="dashboardDate">{today ? "Today" : (tomorrow ? "Tomorrow": "")}</p>
+            <div className="nothingPlan">
+                <p>Nothing planned yet</p>
+            </div>
+        </div>
+    )
+}
+
+/*
 
 function NotDeadlineDisplay(props) {
     const { startDate, endDate } = props;
@@ -92,24 +119,8 @@ function NotDeadlineDisplay(props) {
             <p>Nothing planned yet</p>
         </>
     );
-}
 
-function DeadlineDisplay(props) {
-    const {tasks, date} = props;
-    const listTask = [];
-    
-    for (const task of tasks) {
-        listTask.push(<TaskDisplay key={`${task.projectName}${task.taskName}`} task={task} type="dashboard"/>)
-    }
-
-    return (
-        <>
-            <p>{date}</p>
-            <ul>
-                {listTask}
-            </ul>
-        </>
-    )
-}
-
-export default Dashboard;
+    <li key={dateDisplay(nonDeadlineStartDate)}>
+        <NotDeadlineDisplay startDate={dateDisplay(nonDeadlineStartDate)} endDate={dateDisplay(nonDeadlineEndDate)}/>
+    </li>
+}*/
