@@ -44,7 +44,6 @@
     width: 100%;
     min-width: 200px;
     max-width: 300px;
-    background-color: #FFF9D0;
     background-color: rgb(245, 245, 245);
     grid-column: 1 / 2;
     grid-row: 1 / 3;

@@ -1,0 +1,57 @@
+#userProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+#userProfileBody{
+    border: 3px solid gray;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#userProfileHeader {
+    margin-left: 20px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+@media screen and (max-width : 499px) {
+    #userProfileHeader {
+        font-size: 20px;
+    }
+}
+
+#accountName {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid gray;
+}
+
+#accountName legend{
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+@media screen and (max-width : 499px) {
+    #accountName legend{
+        font-size: 16px;
+    }
+}
+
+#accountName p {
+    width: 90%;
+    margin: 20px auto;
+}
+
+@media screen and (max-width : 499px) {
+    #accountName p {
+        font-size: 12px;
+        margin: 10px auto;
+    }
+}

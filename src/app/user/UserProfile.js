@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet";
 import ProfileName from "../../components/user/ProfileName";
 import Password from "../../components/user/Password";
+import './UserProfile.css';
+
 function UserProfile() {
     const accountName = localStorage.getItem('accountName');
 
@@ -9,9 +11,17 @@ function UserProfile() {
             <Helmet>
                 <title>Profile | ToDo List</title>
             </Helmet>
-            <p>Account name: {accountName}</p>
-            <ProfileName/>
-            <Password/>
+            <div id="userProfile">
+                <fieldset id="userProfileBody">
+                    <legend id="userProfileHeader">Profile</legend>
+                    <fieldset id="accountName">
+                        <legend>Account name</legend>
+                        <p>Account name: {accountName}</p>
+                    </fieldset>
+                    <ProfileName/>
+                    <Password/>
+                </fieldset>
+            </div>
         </>
     );
 }

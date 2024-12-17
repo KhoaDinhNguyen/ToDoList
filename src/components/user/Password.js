@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { featchUserUpdate } from "../../features/user/userAPI";
+import './Password.css';
+import hideEyeIcon from '../../img/user/hide.png';
+import showEyeIcon from '../../img/user/show.png';
 
 function Password() {
-    const [display, setDisplay] = useState('block');
     const [newPassword, setNewPassword] = useState("");
     const [newConfirmedPassword, setNewConfirmedPassword] = useState("");
-    const [message, setMessage] = useState("");
     const [revealPassword, setRevealPassword] = useState("password");
     const accountName = localStorage.getItem('accountName');
 
@@ -16,26 +17,16 @@ function Password() {
         if (revealPassword === 'password') setRevealPassword('text');
         else setRevealPassword('password');
     }
-    const onClickDisplay = () => {
-        setNewPassword("");
-        setNewConfirmedPassword("");
-        if (display === 'block') setDisplay('none');
-        else setDisplay('block');
-    };
 
     const onSubmitChangePasswordForm = event => {
         event.preventDefault();
         if (newPassword !== newConfirmedPassword) {
-            setMessage("Confirmed password is not the same");
+            alert("Confirmed password is not the same");
         }
         else {
             featchUserUpdate(accountName, "password", null, newPassword)
             .then(response => {
-                setMessage(response.message);
-
-                setTimeout(() => {
-                    setMessage("");
-                }, 2000);
+                alert(response.message);
             })
             .catch(err => {
                 console.log(err);
@@ -44,28 +35,26 @@ function Password() {
     };
 
     return (
-        <>
-            <button style={{display: display}} onClick={onClickDisplay}>Change password</button>
-            <form style={{display: negateDisplay(display)}} onSubmit={onSubmitChangePasswordForm}>
-                <label htmlFor="changePassword">New password: </label>
-                <input type={revealPassword} name="changePassword" id="changePassword" value={newPassword} onChange={onChangeNewPassword} autoComplete="off"/>
-                <br/>
-                <label htmlFor="changeConfirmedPassword">Confirm new password: </label>
-                <input type={revealPassword} name="changeConfirmedPassword" id="changeConfirmedPassword" value={newConfirmedPassword} onChange={onChangeNewConfirmedPassword} autoComplete="off"/>
-                <br/>
-                <input type="button" name="revealNewPassword" id="revealNewPassword" value="See password" onClick={onClickRevealPassword}/>
-                <br/>
-                <input type="submit" value="Change password"/>
+        <div id="userProfilePassword">
+            <form onSubmit={onSubmitChangePasswordForm} id="userProfilePasswordForm">
+                <fieldset>
+                    <legend>Password</legend>
+                    <div className="userProfileInput">
+                        <label htmlFor="changePassword">New password<span style={{color: "red"}}>&#42;</span></label>
+                        <input type={revealPassword} name="changePassword" id="changePassword" value={newPassword} onChange={onChangeNewPassword} autoComplete="off" required/>
+                    </div>
+                    <div className="userProfileInput">
+                        <label htmlFor="changeConfirmedPassword">Confirmed password<span style={{color: "red"}}>&#42;</span></label>
+                        <input type={revealPassword} name="changeConfirmedPassword" id="changeConfirmedPassword" value={newConfirmedPassword} onChange={onChangeNewConfirmedPassword} autoComplete="off" required/>
+                    </div>
+                    <div id="userProfileButton">
+                        <img id="eyeImg" src={revealPassword === 'password' ? hideEyeIcon : showEyeIcon} alt={revealPassword === 'password' ? 'hidePassword' : 'showPassword'} onClick={onClickRevealPassword}/>
+                        <input type="submit" value="Apply"/>
+                    </div>
+                </fieldset>
             </form>
-            <button style={{display: negateDisplay(display)}} onClick={onClickDisplay}>Cancel</button>
-            <p>{message}</p>
-        </>
+        </div>
     )
-}
-
-function negateDisplay(display) {
-    if (display === 'block') return 'none';
-    else return 'block';
 }
 
 export default Password;

@@ -1,0 +1,66 @@
+#profileNameForm p {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+@media screen and (max-width : 499px) {
+    #profileNameForm p {
+        font-size: 12px;
+        margin-bottom: 0px;
+    }
+}
+#profileNameForm fieldset {
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid gray;
+}
+
+#profileNameForm legend {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+@media screen and (max-width : 499px) {
+    #profileNameForm legend {
+        font-size: 16px;
+    } 
+}
+
+
+#profileNameButton {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+@media screen and (max-width : 499px) {
+    #profileNameButton {
+        margin-top: 10px;
+    }
+}
+
+#profileNameButton input {
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+}
+
+@media screen and (max-width : 499px) {
+    #profileNameButton input {
+        font-size: 14px;
+    }
+}
+
+#profileNameButton input:hover {
+    background-color: yellowgreen;
+    color: black;
+}
