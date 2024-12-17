@@ -84,9 +84,9 @@ function User() {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="calender" className={linkIsActive}>
+                            <NavLink to="calendar" className={linkIsActive}>
                                 <img src={calendarLogo} alt="calendar"/>
-                                <p>Calender</p>
+                                <p>Calendar</p>
                             </NavLink>
                         </li>
                         <li>

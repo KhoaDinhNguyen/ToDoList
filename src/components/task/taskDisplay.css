@@ -357,3 +357,88 @@
         height: 120px;
     }
 }
+
+.dateDetail {
+    margin: 10px 0;
+    border: 2px #40A2D8 solid;
+    width: max-content;
+    padding: 5px;
+}
+
+.taskCalendarBody {
+    display: flex;
+    align-items: center;
+}
+
+.taskCalendarBody .taskCalendarMain {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    justify-content: space-between;
+}
+
+@media screen and (max-width : 499px) {
+    .dateDetail {
+        width: 100%;
+    }
+}
+
+.taskCalendarBody .taskName {
+    display: flex;
+    align-items: center;
+}
+
+.taskCalendarBody h4, .taskCalendarDescription span {
+    font-weight: 500;
+}
+
+@media screen and (max-width : 499px) {
+    .taskCalendarBody h4 {
+        font-size: 12px;
+    }
+
+    .taskCalendarBody .important label svg {
+        height: 15px;
+        width: 15px;
+    }
+}
+
+#calendarPage .taskInfoBody {
+    transition-duration: 0.5s;
+    transition-property: height;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px;
+    width: 100%;
+}
+
+#calendarPage .taskInfoHidden {
+    height: 0px;
+    opacity: 0;
+    visibility: hidden;
+    border: 0;
+}
+
+#calendarPage .taskInfoVisible {
+    border: 0;
+    border-top: 2px dashed black;
+    height: 128px;
+    opacity: 1;
+    visibility: visible;
+}
+
+@media screen and (max-width : 499px) {
+    #calendarPage .taskInfoVisible {
+        height: 100px;
+    }
+    .taskCalendarDescription p {
+        font-size: 12px;
+    }
+}
+
+
+#calendarPage ::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}

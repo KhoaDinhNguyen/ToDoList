@@ -9,7 +9,7 @@ import UserHomepage from './app/user/UserHomepage';
 import HomePage from './app/homepage/Homepage';
 import AboutUs from './app/homepage/AboutUs';
 import UserDashboard from './app/user/UserDashboard';
-import UserCalender from './app/user/UserCalender';
+import UserCalendar from './app/user/UserCalender';
 import PageNotFound from './app/homepage/PageNotFound';
 import UserProfile from './app/user/UserProfile';
 import ForgetPassword from './app/homepage/ForgetPassword';
@@ -26,7 +26,7 @@ const router = createHashRouter(createRoutesFromElements(
       <Route path="user/:username" element={<User/>}>
         <Route path="homepage" element={<UserHomepage/>}/>
         <Route path="dashboard" element={<UserDashboard/>}/>
-        <Route path="calender" element={<UserCalender/>}/>
+        <Route path="calendar" element={<UserCalendar/>}/>
         <Route path="aboutUs" element={<AboutUs/>}/>
         <Route path="profile" element={<UserProfile/>}/>
       </Route>

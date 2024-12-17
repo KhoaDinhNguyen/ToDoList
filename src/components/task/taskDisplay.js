@@ -52,13 +52,15 @@ function TaskDisplay(props) {
         });            
     }
 
-    if (type === 'calender') {
+    if (type === 'calendar') {
         return (
-            <TaskDisplayCalender
+            <TaskDisplayCalendar
                 task={props.task} 
                 onChangeTaskDetailDisplay={onChangeTaskDetailDisplay} 
                 currentStatus={currentStatus}
                 taskDetailDisplay={taskDetailDisplay}
+                currentImportant={currentImportant}
+                onClickImportant={onClickImportant}
             />
         );
     }
@@ -301,7 +303,7 @@ function TaskDisplayDashBoard(props) {
 function TaskInfoDashboard(props) {
     const { task, taskDetailDisplay } = props;
     const { taskTimeDeadline, taskTimeCreated, taskDescription, projectName, taskName, taskStatus} = task;
-    console.log(taskDetailDisplay);
+
     return (
         <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"}`}>
             <div>
@@ -321,29 +323,49 @@ function TaskInfoDashboard(props) {
 }
 
 /* -------------------- TASK DISPLAY IN CALENDER--------------------*/
-function TaskDisplayCalender(props) {
-    const { task, onChangeTaskDetailDisplay, currentStatus, taskDetailDisplay} = props;
-    const { taskName, taskTimeDeadline, projectName } = task;
+function TaskDisplayCalendar(props) {
+    const { task, onChangeTaskDetailDisplay, currentStatus, taskDetailDisplay, currentImportant, onClickImportant} = props;
+    const { taskName, projectName } = task;
 
     return (
-        <li>
-            <h4>{taskName} - Project name : {projectName}</h4>
-            <p>{currentStatus}</p>
-            <p>Deadline: {taskTimeDeadline.slice(0, 10)}</p>
-            <button onClick={onChangeTaskDetailDisplay}>Task Information</button>
-            <TaskInfoCalender task={task} display={convertFromBooleanToDisplay(taskDetailDisplay)}/>
+        <li className="dateDetail">
+            <div className="taskCalendarBody">
+                <div className="taskCalendarMain">
+                    <div className="taskName">
+                        <div className="important">
+                            <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                            <label htmlFor={`${taskName}_important`}>
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                </svg>
+                            </label>
+                        </div>
+                        <h4>{taskName} -- Project name: {projectName}</h4>
+                    </div>
+                    <div className="taskStatus">
+                            <div className={`${currentStatus} checkbox`}></div>
+                            <p>{currentStatus}</p>
+                    </div>
+                </div>
+                <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
+            </div>
+            <TaskInfoCalender task={task} taskDetailDisplay={taskDetailDisplay}/>
         </li>
     );
 }
 
 function TaskInfoCalender(props) {
-    const { display, task } = props; 
-    const { taskTimeCreated, taskDescription } = task;
+    const { taskDetailDisplay, task } = props; 
+    const { taskTimeCreated, taskDescription, projectName, taskName, taskTimeDeadline, taskStatus } = task;
 
     return (
-        <div className="taskInfo" style={{display: display}}>
-            <p>Task description: {taskDescription}</p>
-            <p>Time created: {taskTimeCreated}</p>
+        <div className={`taskCalendarDescription taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"}`}>
+            <p><span>Task name: </span>{taskName}</p>
+            <p><span>Task description: </span>{taskDescription}</p>
+            <p><span>Task status: </span>{taskStatus}</p>
+            <p><span>Task time created: </span>{taskTimeCreated}</p>
+            <p><span>Deadline: </span>{taskTimeDeadline.slice(0, 10)}</p>
+            <p><span>Project name: </span>{projectName}</p>
         </div>
     );
 }

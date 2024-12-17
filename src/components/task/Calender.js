@@ -3,41 +3,48 @@ import "./calender.css"
 import { TaskDisplay } from "./taskDisplay";
 import { convertDateToISOString } from "../../app/user/User";
 
-function Calender(props) {
+function Calendar(props) {
     const { tasks } = props;
     const today = new Date();
     const month = today.getMonth() + 1;
     const year = today.getFullYear();
-    const [calenderMonth, setCalenderMonth] = useState(month);
-    const [calenderYear, setCalenderYear] = useState(year);
-    const [calenderDate, setCalenderDate] = useState("");
+    const todayString = convertDateToISOString(today);
 
-    const firstDayOfMonth = new Date(`${calenderYear} ${calenderMonth}`);    
-    const dateIterator = new Date(`${calenderYear} ${calenderMonth}`);
+    const [calendarMonth, setCalendarMonth] = useState(month);
+    const [calendarYear, setCalendarYear] = useState(year);
+    const [calendarDate, setCalendarDate] = useState("");
+
+    const firstDayOfMonth = new Date(`${calendarYear} ${calendarMonth}`);    
+    const dateIterator = new Date(`${calendarYear} ${calendarMonth}`);
     const tableBody = [];
 
     let dayOfWeek = 0, nonDate = 0, numsOfRow = 0, row = [];
 
     while (dateIterator.getMonth() === firstDayOfMonth.getMonth()) {
         while (dayOfWeek !== dateIterator.getDay()) {
-            row.push(<td key={`${nonDate++}_nonDate`}></td>);
+            row.push(<td key={`${nonDate++}_nonDate`} className="dateOfMonth" onClick={() => {setCalendarDate("")}}></td>);
             dayOfWeek++;
         }
 
         const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === convertDateToISOString(dateIterator));
         const dateTask = [];
-
+        const currentDate = dateIterator.getDate();
+        const currentDateString = convertDateToISOString(dateIterator);
+        
         for (const task of arrayOfTask) {
-            dateTask.push(<li key={`${task.projectName}_${task.taskName}`}>{task.taskName}/{task.projectName}</li>);
+            const {projectName, taskName, taskStatus} = task;
+    
+            dateTask.push(<li key={`${projectName}_${taskName}`}><p className={`calendarTask ${todayString > currentDateString ? (taskStatus === 'fulfilled' ? 'calendarFulfilled' : 'calendarFailing'): '' }`}>{taskName}</p></li>);
         }
 
-        const currenDate = dateIterator.getDate();
         row.push(
-            <td key={currenDate} onClick={event => {setCalenderDate(currenDate)}}>
-                <p>{currenDate}</p>
-                <ul>
-                    {dateTask}
-                </ul>
+            <td key={currentDate} onClick={() => {setCalendarDate(currentDate);}} className="dateOfMonth">
+                <div className={`dateOfMonthListTask ${currentDateString === todayString ? "todayCalendar": ""}`}>
+                    <h4>{currentDate}</h4>
+                    <ul>
+                        {dateTask}
+                    </ul>
+                </div>
             </td>
         );
 
@@ -53,7 +60,7 @@ function Calender(props) {
 
     if (dayOfWeek !== 0) {
         while (dayOfWeek < 7) {
-            row.push(<td key={`${nonDate++}_nonDate`}></td>);
+            row.push(<td key={`${nonDate++}_nonDate`} className="dateOfMonth" onClick={() => setCalendarDate("")}></td>);
             dayOfWeek++;
         }
         tableBody.push(<tr key={`row_${numsOfRow++}`}>{row}</tr>);
@@ -62,34 +69,38 @@ function Calender(props) {
 
    
     const onClickNextMonth = () => {
-        setCalenderDate("");
-        if (calenderMonth === 12) {
-            setCalenderMonth(1);
-            setCalenderYear(calenderYear => calenderYear + 1);
+        setCalendarDate("");
+        if (calendarMonth === 12) {
+            setCalendarMonth(1);
+            setCalendarYear(calendarYear => calendarYear + 1);
         }
         else {
-            setCalenderMonth(calenderMonth => calenderMonth + 1);
+            setCalendarMonth(calendarMonth => calendarMonth + 1);
         }
     }
 
     const onClickPreviousMonth = () => {
-        setCalenderDate("");
-        if (calenderMonth === 1) {
-            setCalenderMonth(12);
-            setCalenderYear(calenderYear => calenderYear - 1);
+        setCalendarDate("");
+        if (calendarMonth === 1) {
+            setCalendarMonth(12);
+            setCalendarYear(calendarYear => calendarYear - 1);
         }
         else {
-            setCalenderMonth(calenderMonth => calenderMonth - 1);
+            setCalendarMonth(calendarMonth => calendarMonth - 1);
         }
     }
 
     return (
-        <>
-            <h3>Calender</h3>
-            <p>{getMonthName(calenderMonth)}, {calenderYear}</p>
-            <table id="calender">
+        <div id="calendarPage">
+            <h3>Calendar</h3>
+            <div id="calendarHeader">
+                <p onClick={onClickPreviousMonth} className="calendarButton">&#x3C;</p>
+                <p id="calendarMonth">{getMonthName(calendarMonth)}, {calendarYear}</p>
+                <p onClick={onClickNextMonth} className="calendarButton">&#x3E;</p>
+            </div>
+            <table id="calendar">
                 <thead>
-                    <tr>
+                    <tr id="dateOfWeek">
                         <td key="Sun">Sun</td>
                         <td key="Mon">Mon</td>
                         <td key="Tue">Tue</td>
@@ -103,10 +114,10 @@ function Calender(props) {
                     {tableBody}
                 </tbody>
             </table>
-            <button onClick={onClickPreviousMonth}>Previous</button>
-            <button onClick={onClickNextMonth}>Next</button>
-            <DateDisplayTask date={calenderDate} month={calenderMonth} year={calenderYear} tasks={tasks}/>
-        </>
+            <div id="dateDisplayTask">
+                <DateDisplayTask date={calendarDate} month={calendarMonth} year={calendarYear} tasks={tasks}/>
+            </div>
+        </div>
     )
 }
 
@@ -114,7 +125,7 @@ function DateDisplayTask(props) {
     const { date, month, year, tasks } =  props;
     const currentDate = new Date(`${year} ${month} ${date}`);
     if (date === "") {
-        return <></>
+        return <></>;
     }
 
     const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === convertDateToISOString(currentDate));
@@ -122,16 +133,17 @@ function DateDisplayTask(props) {
 
     if (arrayOfTask.length !== 0) {
         for (const task of arrayOfTask) {
-            dateListTask.push(<TaskDisplay key={`${task.taskName}_${task.projectName}_display`} date={currentDate.toJSON()} task={task} type="calender"/>)
+            dateListTask.push(<TaskDisplay key={`${task.taskName}_${task.projectName}_display`} date={currentDate.toJSON()} task={task} type="calendar"/>)
         }
     }
 
     return (
-        <>
+        <div>
+            <p>{currentDate.toDateString()}</p>
             <ul>
                 {dateListTask}
             </ul>
-        </>
+        </div>
     );
 }
 
@@ -142,4 +154,4 @@ function getMonthName(month) {
     return date.toDateString().slice(4, 7);
 }
 
-export default Calender;
+export default Calendar;

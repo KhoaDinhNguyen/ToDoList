@@ -1,19 +1,19 @@
-import Calender from "../../components/task/Calender";
+import Calendar from "../../components/task/Calender";
 import { useSelector } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 import { Helmet } from "react-helmet";
 
-function UserCalender() {
+function UserCalendar() {
     const tasks = useSelector(state => state[tasksSlice.name]);
     
     return (
         <>
             <Helmet>
-                <title>Calender | ToDo List</title>
+                <title>Calendar | ToDo List</title>
             </Helmet>
-            <Calender tasks={tasks}/>
+            <Calendar tasks={tasks}/>
         </>
     );
 }
 
-export default UserCalender;
+export default UserCalendar;
