@@ -358,6 +358,7 @@
     }
 }
 
+/* ===================== CALENDAR ===============================*/
 .dateDetail {
     margin: 10px 0;
     border: 2px #40A2D8 solid;
@@ -380,6 +381,15 @@
 @media screen and (max-width : 499px) {
     .dateDetail {
         width: 100%;
+    }
+    
+    .taskCalendarBody {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+    
+    .taskCalendarBody .taskCalendarMain {
+        width: 80%;
     }
 }
 
