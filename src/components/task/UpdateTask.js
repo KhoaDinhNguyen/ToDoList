@@ -50,16 +50,22 @@ function UpdateTask(props) {
                     <label htmlFor={`${taskName}_${projectName}_newTaskDescription`}>Task description: </label>
                     <input type="text" name={`${taskName}_${projectName}_newTaskDescription`} id={`${taskName}_${projectName}_newTaskDescription`} value={newTaskDescription} onChange={onChangeTaskDescription}/>
                 </div>
+                <p><span>Task time created:</span> {taskTimeCreated}</p>
                 <div>
                     <label htmlFor={`${taskName}_${projectName}_newTaskDeadline`}>Task deadline: </label>
                     <input type="date" name={`${taskName}_${projectName}_newTaskDeadline`} id={`${taskName}_${projectName}_newTaskDeadline`} value={newTaskTimeDeadline} onChange={onChangeTaskDeadline} min={todayString}/>
                 </div>
-                <p><span>Task time created:</span> {taskTimeCreated}</p>
                 <p><span>Task's project name:</span> {projectName}</p>
                 <p className="notice">&#9432; Cannot change task time created and task's project</p>
                 <div className="editTaskButton">
-                    <input type="submit" value="Confirm"/>
-                    <input type="button" value="Cancle" onClick={onClickCancle}/> 
+                    <div className="editTaskSubmitButton">
+                        <input type="submit" name={`editTaskSubmitButton_${taskName}_${projectName}`} id={`editTaskSubmitButton_${taskName}_${projectName}`} onClick={onClickCancle}/>
+                        <label htmlFor={`editTaskSubmitButton_${taskName}_${projectName}`}><span>Apply</span></label>
+                    </div>
+                    <div className="editTaskCancelButton">
+                        <input type="button" name={`editTaskCancelButton_${taskName}_${projectName}`} id={`editTaskCancelButton_${taskName}_${projectName}`} onClick={onClickCancle}/>
+                        <label htmlFor={`editTaskCancelButton_${taskName}_${projectName}`}><span>Cancel</span></label>
+                    </div>
                 </div>
             </form>
         </div>

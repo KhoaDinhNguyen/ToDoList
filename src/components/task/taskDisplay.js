@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 import UpdateTask from "./UpdateTask";
 import { convertFromBooleanToDisplay } from "../../app/user/User";
+import editImg from '../../img/user/edit.png';
+import deleteImg from '../../img/user/delete.png';
 
 function TaskDisplay(props) {
     const { type, task } = props;
@@ -130,23 +132,17 @@ function TaskDisplayHomepage(props) {
     if (finish) {
         return (
             <li className="homepageTask taskFinish">
-                <div className={`${currentStatus}Task taskBody`}>
-                    <div className="taskNameAndTaskStatus">
-                        <div className="taskName">
-                            <div className="important">
-                                <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
-                                <label htmlFor={`${taskName}_important`}>
-                                    <svg viewBox="0 0 24 24">
-                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                    </svg>
-                                </label>
-                            </div>
-                            <h4>{taskName}</h4>
-                        </div>
-                    </div>
-                    <div className="taskFunction">
-                        <p className="deadline">Deadline: {taskTimeDeadline.slice(0, 10)}</p>
-                        <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
+                <div className={`${currentStatus}Task taskBody`} onClick={onChangeTaskDetailDisplay}>
+                    <div className="important">
+                        <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                        <label htmlFor={`${taskName}_important`}>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                            </svg>
+                        </label>
+                    </div>            
+                    <div className="taskMain" onClick={onChangeTaskDetailDisplay}>
+                        <h4>{taskName}</h4>
                     </div>
                 </div>
                 <TaskInfoHomepage task={task} finish={true} taskDetailDisplay={taskDetailDisplay} deleteDisplay={deleteDisplay} setDeleteDisplay={setDeleteDisplay} editDisplay={editDisplay} setEditDisplay={setEditDisplay}/>
@@ -156,27 +152,24 @@ function TaskDisplayHomepage(props) {
     return (
         <li className="homepageTask">
             <div className="taskBody">
-                <div className="taskNameAndTaskStatus">
-                    <div className="taskName">
-                        <div className="important">
-                            <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
-                            <label htmlFor={`${taskName}_important`}>
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                            </label>
-                        </div>
-                        <h4>{taskName}</h4>
-                    </div>
+                <div className="important">
+                    <input type="checkbox" id={`${taskName}_important`} name={`${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                    <label htmlFor={`${taskName}_important`}>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                        </svg>
+                    </label>
+                </div>
+                <div className="taskMain" onClick={onChangeTaskDetailDisplay}>
+                    <h4>{taskName}</h4>
                     <div className="taskStatus">
                         <div className={`${currentStatus} checkbox`}></div>
                         <p>{currentStatus}</p>
                     </div>
+                    <p className="deadline">Deadline: {taskTimeDeadline.slice(0, 10)}</p>
                 </div>
                 <div className="taskFunction">
-                    <p className="deadline">Deadline: {taskTimeDeadline.slice(0, 10)}</p>
                     <input type="checkbox" name={`${taskName}Fulfilled`} id={`${taskName}Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
-                    <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
                 </div>
             </div>
             <TaskInfoHomepage 
@@ -222,7 +215,7 @@ function TaskInfoHomepage(props) {
         )
     }
     return (
-        <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"} ${!deleteDisplay ? "backgroundDelete" : "backgroundNonDelete"}`}>
+        <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"} ${deleteDisplay ? "backgroundTaskDelete" : "backgroundTaskNonDelete"}`}>
             <div className="taskInfoDescription" style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>
                 <p><span>Task name:</span> {taskName}</p>
                 <p><span>Task description:</span> {taskDescription}</p>
@@ -232,8 +225,18 @@ function TaskInfoHomepage(props) {
             <UpdateTask task={task} display={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay}/>
             <DeleteTask task={task} display={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay}/>
             <div className="taskInfoButton">
-                <button onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Edit</button>
-                <button onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Delete</button>
+                <div onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="taskInfoEdit">
+                    <figure>
+                        <img src={editImg} alt="edit"/>
+                        <figcaption>Edit</figcaption>
+                    </figure>
+                </div>
+                <div onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="taskInfoDelete">
+                    <figure>
+                        <img src={deleteImg} alt="delete"/>
+                        <figcaption>Delete</figcaption>
+                    </figure>
+                </div>
             </div>
         </div>
     )

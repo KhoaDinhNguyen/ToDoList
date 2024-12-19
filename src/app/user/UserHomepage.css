@@ -27,7 +27,7 @@
 #userHomepageBody {
     display: grid;
     grid-template-columns: 20% 1fr;
-    grid-template-rows: 160px 1fr;
+    grid-template-rows: 200px 1fr;
     height: max(100vh - 50px, 100%);
 }
 
@@ -42,7 +42,6 @@
     overflow-y: auto;
     justify-content: space-evenly;
     width: 100%;
-    min-width: 200px;
     max-width: 300px;
     background-color: rgb(245, 245, 245);
     grid-column: 1 / 2;
@@ -96,7 +95,7 @@
     background-color: var(--backgroundColorMain);
     min-width: 275px;
     grid-column: 2 / 3;
-
     display: flex;
     justify-content: flex-end;
+    margin-right: 5px;
 }

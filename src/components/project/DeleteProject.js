@@ -29,8 +29,8 @@ function DeleteProject(props) {
                     <p>&#9432; All tasks will be removed followedly</p>
                 </div>
                 <div className="deletePromptButton">
-                    <button onClick={onClickDeleteProject}>Yes, I want to delete it</button>
-                    <button onClick={onClickCancle}>No, I think I will keep it</button>
+                    <button onClick={onClickDeleteProject} className="yesDeleteProject"><span>Yes, I want to delete it</span></button>
+                    <button onClick={onClickCancle} className="noDeleteProject"><span>No, I think I will keep it</span></button>
                 </div>
             </div>
         </div>

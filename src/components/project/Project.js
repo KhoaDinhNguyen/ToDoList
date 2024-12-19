@@ -10,6 +10,8 @@ import { sortTask } from "../../features/task/sortTask";
 import { searchTask } from "../../features/task/searchTask";
 import UpdateProject from "./UpdateProject";
 import './Project.css';
+import editImg from '../../img/user/edit.png';
+import deleteImg from '../../img/user/delete.png';
 
 function ListProject() {
     const projects = useSelector(state => state[projectsSlice.name]);
@@ -61,13 +63,10 @@ function Project(props) {
         <>
             <li className="project">
                 <div className="projectBody">
-                    <div className="projectHeader">
+                    <div className="projectHeader" onClick={onClickDisplayProjectInfo}>
                         <h3>{projectName}</h3>
-                        <div className="projectInfoButton">
-                            <button onClick={onClickDisplayProjectInfo}>{!infoDisplay ? "\u2BC7": "\u2BC6"}</button>
-                        </div>
                     </div>
-                    <div className={`projectMain ${!infoDisplay ? "hiddenProject" : "visibleProject"} ${!deleteDisplay ? "backgroundDelete": "backgroundNonDelete"}`}>
+                    <div className={`projectMain ${!infoDisplay ? "hiddenProject" : "visibleProject"} ${deleteDisplay ? "backgroundDelete": "backgroundNonDelete"}`}>
                         <div className="projectDescription" style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>
                             <p><span style={{fontWeight: 500}}>Project name:</span> {projectName}</p>
                             <p><span style={{fontWeight: 500}}>Project description:</span> {projectDescription}</p>
@@ -76,8 +75,18 @@ function Project(props) {
                         <UpdateProject editDisplay={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay} project={project}/>
                         <DeleteProject accountName={accountName} projectName={projectName} deleteDisplay={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay}/>
                         <div className="projectFunction">
-                            <button onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Edit</button>
-                            <button onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>Delete</button>
+                            <div onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="editButton projectButton">
+                                <figure>
+                                    <img src={editImg} alt="Edit"/>
+                                    <figcaption>Edit</figcaption>
+                                </figure>
+                            </div>
+                            <div onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="deleteButton projectButton">
+                                <figure>
+                                    <img src={deleteImg} alt="Delete"/>
+                                    <figcaption>Delete</figcaption>
+                                </figure>
+                            </div>
                         </div>
                     </div>
                 </div>

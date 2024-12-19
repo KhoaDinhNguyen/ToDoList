@@ -51,30 +51,38 @@ function CreateTaskForm(props) {
 
     return (
         <div className="createTaskForm">
-            <div className="openCreateTask" style={{display: convertFromBooleanToDisplay(!createTaskFormDisplay)}}>
-                <button onClick={onClickToggleCreateTaskButton}>&#x1F7A3; Create new task</button>
+            <div className="openCreateTask" style={{display: convertFromBooleanToDisplay(!createTaskFormDisplay)}} onClick={onClickToggleCreateTaskButton}>
+                <p>&#x1F7A3; Create new task</p>
             </div>
-            <form style={{display: convertFromBooleanToDisplay(createTaskFormDisplay)}} onSubmit={onSubmit}>
-                <div className="createTaskInput">
-                    <label htmlFor={`${projectName}_taskName`}>Task name: </label>
-                    <input type="text" id={`${projectName}_taskName`} name={`${projectName}_taskName`} required value={taskName} onChange={onChangeTaskName} autoComplete="off"/>
-                </div>
-                <div className="createTaskInput">
-                    <label htmlFor={`${projectName}_taskDescription`}>Task description: </label>
-                    <input type="text" id={`${projectName}_taskDescription`} name={`${projectName}_taskDescription`} value={taskDescription} onChange={onChangeTaskDescription} autoComplete="off"/>
-                </div>             
-                <div className="createTaskInput">
-                    <label htmlFor={`${projectName}_taskTimeDeadline`}>Task deadline: </label>
-                    <input type="date" id={`${projectName}_taskTimeDeadline`} name={`${projectName}_taskTimeDeadline`} value={taskTimeDeadline} onChange={onChangeTaskDeadline} min={currentDate} required/>
-                </div>
-                <div className="createTaskInput">
-                    <p><span>Project name:</span> {projectName}</p>
-                </div>
-                <div className="createTaskButton">
-                    <input type="submit" value="Create task"/>
-                    <input type="button" value="Cancel" onClick={onClickToggleCreateTaskButton}/>
-                </div>
-
+            <form style={{display: convertFromBooleanToDisplay(createTaskFormDisplay)}} onSubmit={onSubmit} className="createTaskFormMain">
+                <fieldset>
+                    <legend>Create task form</legend>
+                    <div className="createTaskInput">
+                        <label htmlFor={`${projectName}_taskName`}>Task name: </label>
+                        <input type="text" id={`${projectName}_taskName`} name={`${projectName}_taskName`} required value={taskName} onChange={onChangeTaskName} autoComplete="off"/>
+                    </div>
+                    <div className="createTaskInput">
+                        <label htmlFor={`${projectName}_taskDescription`}>Task description: </label>
+                        <input type="text" id={`${projectName}_taskDescription`} name={`${projectName}_taskDescription`} value={taskDescription} onChange={onChangeTaskDescription} autoComplete="off"/>
+                    </div>             
+                    <div className="createTaskInput">
+                        <label htmlFor={`${projectName}_taskTimeDeadline`}>Task deadline: </label>
+                        <input type="date" id={`${projectName}_taskTimeDeadline`} name={`${projectName}_taskTimeDeadline`} value={taskTimeDeadline} onChange={onChangeTaskDeadline} min={currentDate} required/>
+                    </div>
+                    <div className="createTaskInput">
+                        <p><span>Project name:</span> {projectName}</p>
+                    </div>
+                    <div className="createTaskFunction">
+                        <div className="createTaskSubmitButton">
+                            <input type="submit" name={`${projectName}_${taskName}_submitButton`} id={`${projectName}_${taskName}_submitButton`} onClick={onClickToggleCreateTaskButton}/>
+                            <label htmlFor={`${projectName}_${taskName}_submitButton`} className="createTaskButton"><span>Create</span></label>
+                        </div>
+                        <div className="createTaskCancelButton">
+                            <input type="button" name={`${projectName}_${taskName}_cancelButton`} id={`${projectName}_${taskName}_cancelButton`} onClick={onClickToggleCreateTaskButton}/>
+                            <label htmlFor={`${projectName}_${taskName}_cancelButton`} className="createTaskButton"><span>Cancel</span></label>
+                        </div>
+                    </div>
+                </fieldset>
             </form>
         </div>
     )   

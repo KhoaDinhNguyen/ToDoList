@@ -28,9 +28,9 @@ function DeleteTask(props) {
         <div style={{display: display}}>
             <div className="deletePrompt">
                 <p>Do you really want to delete this task?</p>
-                <div>
-                    <button onClick={onClickDeleteTaskButton}>Yes</button>
-                    <button onClick={onClickCancle}>No</button>
+                <div className="deleteTaskButton">
+                    <button onClick={onClickDeleteTaskButton} className="yesDeleteTaskButton"><span>Yes</span></button>
+                    <button onClick={onClickCancle} className="noDeleteTaskButton"><span>No</span></button>
                 </div>
             </div>
         </div>

@@ -1,36 +1,69 @@
 .createTaskForm {
-    margin: 10px 0;
-    background-color: var(--taskColor);
+    padding: 10px 0;
+    background-color: var(--backgroundColorMain);
 }
 
 @media screen and (max-width : 499px) {
     .createTaskForm {
-        max-width: max-content;
         margin: 5px 0;
+        width: 100%;
     }
 }
 
-
 .createTaskForm .openCreateTask {
     width: 100%;
+    cursor: pointer;
+    margin-bottom: -10px;
+    margin-top: -10px;
 }
 
-.createTaskForm .openCreateTask button{
-    background-color: white;
+.createTaskForm .openCreateTask:hover {
+    background-color: black;
+}
+
+.createTaskForm .openCreateTask:active {
+    background-color: black;
+}
+
+.createTaskForm .openCreateTask p{
+    background-color: var(--backgroundColorMain);
     border: 0;
     color: grey;
     cursor: pointer;
-    margin-left: 10px;
     font-size: 20px;
+    padding: 10px;
+}
+
+.createTaskForm .openCreateTask:hover p{
+    background-color: black;
+    color: white;
+    font-weight: 700;
+}
+
+.createTaskForm .openCreateTask:active p{
+    background-color: black;
+    color: white;
+    font-weight: 700;
 }
 
 @media screen and (max-width : 499px) {
-    .createTaskForm .openCreateTask button{
+    .createTaskForm .openCreateTask p{
         font-size: 12px;
         margin-left: 5px;
     }
 }
 
+.createTaskFormMain fieldset {
+    border: 3px solid black;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+
+.createTaskFormMain legend {
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 18px;
+}
 .createTaskForm .createTaskInput {
     font-size: 16px;
     margin-left: 10px;
@@ -54,6 +87,11 @@
     font-size: 16px;
 }
 
+.createTaskForm .createTaskInput input:focus {
+    background-color: #fff;
+}
+
+
 @media screen and (max-width : 499px) {
     .createTaskForm .createTaskInput input {
         background-color: #e8e7e7;
@@ -63,39 +101,71 @@
 }
 
 
-.createTaskForm .createTaskButton {
+.createTaskForm .createTaskFunction {
     margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
 }
 
-.createTaskForm .createTaskButton input {
+.createTaskFunction input {
+    display: none;
+}
+
+.createTaskForm .createTaskButton {
     font-size: 14px;
     margin-top: 10px;
     background-color: black;
-    color: white;
     font-weight: bold;
+    color: white;
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
     border: 0;
+    position: relative;
 }
 
+.createTaskButton span {
+    position: relative;
+    z-index: 3;
+} 
+
 @media screen and (max-width : 499px) {
-    .createTaskForm .createTaskButton input {
+    .createTaskForm .createTaskButton {
         font-size: 12px;
         margin-top: 5px;
     }
 }
 
-
-.createTaskForm .createTaskButton input:first-child:hover {
-    background-color: yellowgreen;
+.createTaskForm .createTaskButton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    transition-duration: 0.5s;
+    border-radius: 5px;
 }
 
-.createTaskForm .createTaskButton input:last-child {
-    margin-left: 10px;
-}
+.createTaskCancelButton label:hover::before {
+    width: 100%;
+    background-color: white;
+} 
 
-.createTaskForm .createTaskButton input:last-child:hover {
-    background-color:antiquewhite;
+.createTaskCancelButton label:hover span {
     color: black;
+} 
+
+.createTaskSubmitButton {
+    margin-right: 20px;
 }
+
+.createTaskSubmitButton label:hover::before {
+    width: 100%;
+    background-color: #118B50;
+    color: white;
+} 
+
+.createTaskSubmitButton label:hover span {
+    color: white;
+} 

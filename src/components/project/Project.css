@@ -9,11 +9,6 @@
     width: 100%;
 }
 
-@media screen and (max-width : 499px) {
-    .project {
-    }
-}
-
 .projectHeader {
     display: flex;
     justify-content: space-between;
@@ -21,33 +16,28 @@
     background-color: rgba(244, 91, 105);
     font-size: 20px;
     padding: 5px;
-    border-radius: 20px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.projectHeader:hover {
+    background-color: #10162F;
 }
 
 .projectHeader h3 {
     color: white;
     margin-left: 10px;
+    transition-duration: 0.5s;
 }
 
-.projectHeader button {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    font-size: 20px;
-    background-color: white;
-    border: 1px solid gray;
-    cursor: pointer;
-    margin-right: 10px;
+.projectHeader:hover h3 {
+    margin: 5px 0px 5px 10px;
+    font-size: 25px;
 }
-
 
 .projectMain {
     transition-duration: 0.75s;
     transition-property: height;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
     border-top: 0;
     height: 0px;
 }
@@ -83,11 +73,12 @@
     }
 }
 
-.backgroundDelete {
+.backgroundNonDelete {
+    background-color: #FFF0E5;
     background-color: white;
 }
 
-.backgroundNonDelete {
+.backgroundDelete {
     background-color: antiquewhite;
 }
 
@@ -97,12 +88,69 @@
     width: 90%;
     margin: 0 auto;
     margin-top: 50px;
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+.projectButton {
+    box-shadow: 5px 5px black;
+    transition-duration: 500ms;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    height: max-content;
+}
+
+.projectButton:hover {
+    box-shadow: 0px 0px white;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.projectButton:active {
+    box-shadow: 0px 0px white;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.editButton {
+    background-color: #008FFF;
+}
+
+.deleteButton {
+    background-color: #F86363;
+}
+
+.projectButton figure {
+    display: flex;
+    align-items: center;
+}
+
+.projectButton img {
+    height: 24px;
+    width: 24px;
+}
+
+.projectButton figcaption {
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
 }
 
 @media screen and (max-width : 499px) {
     .projectFunction {
         margin-top: 20px;
     }
+
+    .projectFunction img {
+        height: 16px;
+        width: 16px;
+    }
+    
+    .projectFunction figcaption {
+        font-size: 12px;
+    }
+    
 }
 
 .projectFunction button {

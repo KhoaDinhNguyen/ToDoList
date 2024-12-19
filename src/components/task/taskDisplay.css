@@ -4,37 +4,68 @@
 }
 
 .taskBody {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid black;
+    display: grid;
+    grid-template-columns: 25px 1fr 30px;
+    border-top: 1px solid black;
     padding: 10px;
     align-items: center;
+    transition-duration: 0.3s;
 }
 
-.taskBody h4{
+.taskBody:hover {
+    box-shadow: -5px 5px black;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.taskMain {
+    display: grid;
+    grid-column: 2 / 3;
+    grid-template-columns: 1fr 200px 175px;
+    cursor: pointer;
+}
+
+.taskMain h4 {
+    grid-column: 1 / 2;
     font-size: 20px;
     font-weight: 600;
 }
 
+.taskMain .taskStatus {
+    grid-column: 2 / 3;
+}
+
+.taskMain .deadline {
+    grid-column: 3 / 4;
+}
+
+.taskFinish .taskMain {
+    display: block;
+}
 @media screen and (max-width : 499px) {
     .taskBody {
         padding: 5px;
     }
+
     .taskBody h4{
         font-size: 14px;
     }
-}
 
-.taskBody .taskNameAndTaskStatus {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    align-items: center;
-    width: 70%;
-    max-width: 400px;
-}
+    .taskMain {
+        display: grid;
+        grid-column: 2 / 3;
+        grid-template-columns: 1fr 75px;
+        cursor: pointer;
+    }
 
+}
 
 /* =========================== TASK IMPORTANT =========================== */
+.important {
+    width: max-content;
+    grid-column: 1 / 2;
+    margin: 0 auto;
+}
 .important input[type="checkbox"]{
     visibility: hidden;
     width: 0;
@@ -53,30 +84,27 @@
     fill: #fff;
 }
 
+.taskBody:hover .important label svg {
+    width: 25px;
+    height: 25px;
+    stroke-width: 2px;
+}
+
+.taskBody:active .important label svg {
+    width: 25px;
+    height: 25px;
+    stroke-width: 2px;
+}
+
 .important input[type=checkbox]:checked + label svg {
-    fill: rgb(237, 237, 42);
+    fill: yellow;
 }
 
 
 /* =========================== TASK NAME =========================== */
-.taskBody .taskNameAndTaskStatus .taskName {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    grid-column: 1 / 2;
-}
-
 @media screen and (max-width : 499px) {
     .taskBody h4{
         font-size: 14px;
-    }
-
-    .taskBody .taskNameAndTaskStatus {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        width: 80%;
-        max-width: 400px;
     }
 }
 /* =========================== TASK STATUS =========================== */
@@ -94,6 +122,7 @@
     top: 2px;
     margin-right: 3px;
 }
+
 @media screen and (max-width : 499px) {
     .checkbox {
         width: 7px;
@@ -117,39 +146,16 @@
     background-color: red;
 }
 
-
-.backgroundDelete {
-    background-color: antiquewhite;
-}
-
-.backgroundNonDelete {
-    background-color: white;
-}
-
 /* =========================== TASK FUNCTION =========================== */
 .taskFunction {
     display: flex;
-    width: 250px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    grid-column: 3 / 4;
 }
 
 @media screen and (max-width : 499px) {
-    .taskFunction {
-        width: max-content;
-    }
-}
-
-.taskFunction .deadline {
-    font-weight: 500;
-    margin-right: 10px;
-    font-style: italic;
-    display: flex;
-    width: 170px;
-}
-
-@media screen and (max-width : 499px) {
-    .taskFunction .deadline {
+    .deadline {
         display: none;
     }
 }
@@ -160,6 +166,7 @@
     height: 25px;
     outline: 1px dashed black;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 @media screen and (max-width : 499px) {
@@ -176,6 +183,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: white;
+}
+
+.backgroundTaskDelete {
+    background-color: antiquewhite;
+}
+
+.backgroundTaskNonDelete {
+    background-color: #FFF0E5;
+    background-color: white;
 }
 
 .taskInfoHidden {
@@ -221,44 +238,60 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
+    height: 40px;
 }
 
-.taskInfoButton button{
-    padding: 10px;
+.taskInfoButton div {
+    box-shadow: 5px 5px black;
+    border-radius: 5px;
+    padding: 5px;
+    position: relative;
+    cursor: pointer;
+    transition-duration: 500ms;
+    height: max-content;
+}
+
+.taskInfoButton figure {
+    display: flex;
+    align-items: center;
+}
+
+.taskInfoButton div:hover {
+    margin-top: 5px;
+    margin-left: 5px;
+    box-shadow: 0px 0px white;
+}
+
+.taskInfoButton div:active {
+    margin-top: 5px;
+    margin-left: 5px;
+    box-shadow: 0px 0px white;
+}
+
+.taskInfoButton figure img{
+    height: 24px;
+    width: 24px;
+}
+
+.taskInfoButton figure figcaption{
     font-size: 16px;
-    font-weight: bold;
-    background-color: black;
+    font-weight: 500;
     color: white;
-    border-radius: 10px;
-    cursor: pointer;
+}
+
+.taskInfoEdit {
+    background-color: #008FFF;
+}
+
+.taskInfoDelete {
+    background-color: #F86363;
 }
 
 @media screen and (max-width : 499px) {
-    .taskInfoButton button{
-        padding: 5px;
-        font-size: 14px;
+    .taskInfoButton figure img{
+        height: 16px;
+        width: 16px;
     }
-}
-
-.taskInfoDisplayButton {
-    padding: 2px;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    border: 1px solid grey;
-    margin-left: 10px;
-    cursor: pointer;
-    font-weight: 900;
-}
-
-@media screen and (max-width : 499px) {
-    .taskInfoDisplayButton {
-        width: 15px;
-        height: 15px;
-        font-size: 8px;
-        margin-left: 0;
-    }
-    
 }
 
 
@@ -287,8 +320,16 @@
     background-color: #A8CD89;
 }
 
+.fulfilledTask:hover {
+    box-shadow: -5px 5px green;
+}
+
 .failingTask {
     background-color: #F9C0AB;
+}
+
+.failingTask:hover {
+    box-shadow: -5px 5px #AF1740;
 }
 
 .taskFinish .deadline {

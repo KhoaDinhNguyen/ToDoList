@@ -14,7 +14,7 @@ function UpdateProject (props) {
     
     const accountName = localStorage.getItem('accountName');
 
-    const onClickCancel = () => { setEditDisplay(false); };
+    const onClickCancel = () => { setEditDisplay(false);};
     const onChangeProjectName =  event => { setNewProjectName(event.target.value); };
     const onChangeProjectDescription = event => { setNewProjectDescription(event.target.value); };
 
@@ -60,11 +60,16 @@ function UpdateProject (props) {
                     <div className="updateProjectInput">
                         <p className="updateProjectMessage">&#9432; Cannot change project time created</p>
                     </div>
-                    <div className="updateProjectButton">
-                        <input type="submit" value="Confirm"/>
-                        <input type="button" value="Cancel" onClick={onClickCancel}/>
+                    <div className="updateProjectFunction">
+                        <div className="updateProjectSubmitButton">
+                            <input type="submit" name={`submitButtonProject_${projectName}`} id={`submitButtonProject_${projectName}`}/>
+                            <label htmlFor={`submitButtonProject_${projectName}`}><span>Apply</span></label>
+                        </div>
+                        <div className="updateProjectCancelButton">
+                            <input type="button" name={`cancelButtonProject_${projectName}`} id={`cancelButtonProject_${projectName}`} onClick={onClickCancel}/>
+                            <label htmlFor={`cancelButtonProject_${projectName}`}><span>Cancle</span></label>
+                        </div>
                     </div>
-
                 </form>
             </div>
         </>

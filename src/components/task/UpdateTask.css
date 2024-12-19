@@ -1,10 +1,15 @@
+.editTaskForm {
+    height: auto;
+}
+
+
 .editTaskFormMain {
     margin-left: 10px;
 }
 
 @media screen and (max-width : 499px) {
     .editTaskFormMain {
-        margin-left: 5x;
+        margin-left: 5px;
     }
 }
 
@@ -13,17 +18,16 @@
     font-size: 17px;
 }
 
-@media screen and (max-width : 499px) {
-    .editTaskFormMain label, .editTaskFormMain span, .editTaskFormMain p{
-        font-size: 12px;
-    }
-}
 
 .editTaskFormMain input {
     font-size: 17px;
     background-color: #e8e7e7;
     border: 1px #e8e7e7 solid;
     border-radius: 5px;
+}
+
+.editTaskFormMain input:focus {
+    background-color: white;
 }
 
 @media screen and (max-width : 499px) {
@@ -49,6 +53,11 @@
 
 .editTaskButton {
     margin-top: 10px;
+    margin-left: 10px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    padding-bottom: 10px;
 }
 
 .editTaskButton input {
@@ -62,7 +71,108 @@
     cursor: pointer;
 }
 
+.editTaskButton input {
+    display: none;
+}
+
+.editTaskButton label {
+    padding: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid black;
+}
+
+.editTaskButton label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    border-radius: 10px;
+    transition-duration: 0.75s;
+}
+
+.editTaskButton label span {
+    color: white;
+    position: relative;
+    z-index: 3;
+}
+
+.editTaskCancelButton label:hover {
+    background-color: #000;
+    border: 2px solid #000;
+}
+
+.editTaskCancelButton label:hover::before {
+    width: 100%;
+    background-color: white;
+}
+
+.editTaskCancelButton label:hover span {
+    color: black;
+}
+
+.editTaskCancelButton label:active {
+    background-color: #000;
+    border: 2px solid #000;
+}
+
+.editTaskCancelButton label:active::before {
+    width: 100%;
+    background-color: white;
+}
+
+.editTaskCancelButton label:active span {
+    color: black;
+}
+
+.editTaskSubmitButton label:hover {
+    background-color: #008FFF;
+    border: 2px solid #008FFF;
+}
+
+.editTaskSubmitButton label:hover::before {
+    width: 100%;
+    background-color: white;
+}
+
+.editTaskSubmitButton label:hover span {
+    color: #008FFF;
+}
+
+.editTaskSubmitButton label:active {
+    background-color: #008FFF;
+    border: 2px solid #008FFF;
+}
+
+.editTaskSubmitButton label:active::before {
+    width: 100%;
+    background-color: white;
+}
+
+.editTaskSubmitButton label:active span {
+    color: #008FFF;
+}
+
+.editTaskCancelButton {
+    margin-left: 20px;
+}
+
 @media screen and (max-width : 499px) {
+    .editTaskButton label {
+        padding: 5px;
+    }
+    
+    .editTaskFormMain label, .editTaskFormMain span, .editTaskFormMain p{
+        font-size: 12px;
+    }
+
     .editTaskButton {
         margin-top: 0;
     }

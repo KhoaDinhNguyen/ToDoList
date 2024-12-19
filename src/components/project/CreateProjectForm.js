@@ -48,21 +48,24 @@ function CreateProjectForm() {
         <div id="createProjectForm">
             <div id="projectHeader">
                 <h2>Hello {profileName} !&#128526;</h2>
-                <button onClick={onClickToggleForm} id="openCreateProjectButton" style={{display: convertFromBooleanToDisplay(!createProjectDisplay)}}>&#x271A; Create project</button>
+                <button onClick={onClickToggleForm} id="openCreateProjectButton" style={{display: convertFromBooleanToDisplay(!createProjectDisplay)}}><span>&#x271A; Create project</span></button>
             </div>
-            <form style={{display: convertFromBooleanToDisplay(createProjectDisplay)}} onSubmit={onSubmitCreateProject}>
-                <div className="createProjectInput">
-                    <label htmlFor="projectName">Project name: </label>
-                    <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName} autoComplete="off"/>
-                </div>
-                <div className="createProjectInput">
-                    <label htmlFor="projectDescription">Project description: </label>
-                    <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription} autoComplete="off"/>
-                </div>
-                <div id="createProjectButton">
-                    <input type="submit" name="createNewProject" id="createNewProject" value="Create project"/>
-                    <input type="button" value="Cancel" onClick={onClickToggleForm}/>
-                </div>
+            <form style={{display: convertFromBooleanToDisplay(createProjectDisplay)}} onSubmit={onSubmitCreateProject} id="createProjectFormMain">
+                <fieldset>
+                    <legend>Create project form</legend>
+                    <div className="createProjectInput">
+                        <label htmlFor="projectName">Project name: </label>
+                        <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName} autoComplete="off"/>
+                    </div>
+                    <div className="createProjectInput">
+                        <label htmlFor="projectDescription">Project description: </label>
+                        <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription} autoComplete="off"/>
+                    </div>
+                    <div id="createProjectButton">
+                        <input type="submit" name="createNewProject" id="createNewProject" value="Create project"/>
+                        <input type="button" value="Cancel" onClick={onClickToggleForm}/>
+                    </div>
+                </fieldset>
             </form>
         </div>
     )
