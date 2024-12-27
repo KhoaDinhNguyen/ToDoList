@@ -15,7 +15,7 @@ const createProject = (req, res, next) => {
             }
         }
         else {
-            res.status(200).json({message: 'Create project sucessfully', error: false});
+            res.status(200).json({message: 'Create project successfully', error: false});
         }
     });
 };

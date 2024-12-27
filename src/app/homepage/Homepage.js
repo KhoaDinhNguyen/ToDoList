@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import './Homepage.css'
+import logoPage from '../../img/homepage/logoPage.png';
 
 function HomePage() {
 
@@ -10,6 +11,7 @@ function HomePage() {
         <div id="homepage">
             <nav>
                 <div id="companyName">
+                    <img src={logoPage} alt="Logo"/>
                     <p>MasterTask</p>
                 </div>
                 <div id="navList">
