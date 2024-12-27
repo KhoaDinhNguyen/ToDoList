@@ -1,6 +1,11 @@
 .createTaskForm {
-    padding: 10px 0;
     background-color: var(--backgroundColorMain);
+    background-color: #FCFFC1;
+    background-color: #FFFDF0;
+    padding-top: 5px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-top: 5px;
 }
 
 @media screen and (max-width : 499px) {
@@ -13,8 +18,9 @@
 .createTaskForm .openCreateTask {
     width: 100%;
     cursor: pointer;
-    margin-bottom: -10px;
     margin-top: -10px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .createTaskForm .openCreateTask:hover {
@@ -27,15 +33,20 @@
 
 .createTaskForm .openCreateTask p{
     background-color: var(--backgroundColorMain);
+    background-color: #FCFFC1;
+    background-color: #FFFDF0;
     border: 0;
-    color: grey;
+    color: black;
     cursor: pointer;
     font-size: 20px;
     padding: 10px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
 }
 
 .createTaskForm .openCreateTask:hover p{
-    background-color: black;
+    background-color: #3C3D37;
     color: white;
     font-weight: 700;
 }
@@ -54,9 +65,16 @@
 }
 
 .createTaskFormMain fieldset {
-    border: 3px solid black;
-    border-radius: 20px;
+    border: 3px solid grey;
+    border: 0;
+    border-top: 1px solid grey;
+    background-color: #fff;
+    border-radius: 10px;
+    border-radius: 0;
     padding-bottom: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #FFFDF0;
 }
 
 .createTaskFormMain legend {

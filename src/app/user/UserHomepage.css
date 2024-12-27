@@ -27,7 +27,7 @@
 #userHomepageBody {
     display: grid;
     grid-template-columns: 20% 1fr;
-    grid-template-rows: 200px 1fr;
+    grid-template-rows: 225px 1fr;
     height: max(100vh - 50px, 100%);
 }
 

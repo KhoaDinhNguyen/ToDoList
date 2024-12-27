@@ -1,13 +1,14 @@
 .updateProjectForm form .updateProjectInput{
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 /*#e8e7e7*/
 .updateProjectInput input {
-    font-size: 18px;
+    font-size: 16px;
     background-color: #e8e7e7;
     border-radius: 5px;
+    width: 125px;
 }
 
 .updateProjectInput input:focus {
@@ -24,7 +25,7 @@
 
 
 .updateProjectInput label, .updateProjectInput input, .updateProjectInput p{
-    font-size: 18px;
+    font-size: 14px;
 }
 
 @media screen and (max-width : 499px) {

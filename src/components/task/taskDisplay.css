@@ -1,70 +1,101 @@
 .homepageTask {
     list-style-type: none;
     background-color: var(--taskColor);
-}
-
-.taskBody {
-    display: grid;
-    grid-template-columns: 25px 1fr 30px;
-    border-top: 1px solid black;
-    padding: 10px;
-    align-items: center;
+    width: 250px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    margin-top: 10px;
     transition-duration: 0.3s;
+    border-radius: 5px;
+    border: 1px solid black;
+    position: relative;
+    z-index: 5;
+    box-shadow: -3px 3px black;
 }
 
-.taskBody:hover {
-    box-shadow: -5px 5px black;
-    margin-bottom: 5px;
-    margin-left: 5px;
+.homepageTask:hover {
+    box-shadow: -6px 6px black;
+    transform: translate(3px, -3px);
 }
 
-.taskMain {
-    display: grid;
-    grid-column: 2 / 3;
-    grid-template-columns: 1fr 200px 175px;
-    cursor: pointer;
-}
-
-.taskMain h4 {
-    grid-column: 1 / 2;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.taskMain .taskStatus {
-    grid-column: 2 / 3;
-}
-
-.taskMain .deadline {
-    grid-column: 3 / 4;
-}
-
-.taskFinish .taskMain {
-    display: block;
-}
 @media screen and (max-width : 499px) {
-    .taskBody {
-        padding: 5px;
+    .homepageTask {
+        width: 225px;
     }
+}
 
-    .taskBody h4{
-        font-size: 14px;
-    }
+.homepageTaskBody {
+    position: relative;
+    z-index: 6;
+}
+.homepageTaskMain {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition-duration: 0.5s;
+    position: relative;
+    z-index: 5;
+    height: 50px;
+}
 
-    .taskMain {
-        display: grid;
-        grid-column: 2 / 3;
-        grid-template-columns: 1fr 75px;
-        cursor: pointer;
-    }
+.homepageTaskName {
+    width: 200px;
+    cursor: pointer;
+    overflow-x: auto;
+}
 
+
+.homepageTaskName::-webkit-scrollbar {
+    height: 5px;
+}
+  
+.homepageTaskName::-webkit-scrollbar-track {
+    background-color: #000;
+}
+
+.homepageTaskName::-webkit-scrollbar-thumb {
+    background-color: grey;
+}
+
+.homepageTaskName h4 {
+    font-weight: 500;
+}
+
+.fulfilledTask {
+    background-color: #A8CD89;
+    box-shadow: 0 0 white;
+}
+
+.failingTask {
+    background-color: #FF748B;
+    box-shadow: 0 0 white;
+}
+
+.fulfilledTask .homepageTaskName, .failingTask .homepageTaskName {
+    width: 220px;
+}
+
+.fulfilledTask:hover, .failingTask:hover {
+    box-shadow: 0px 0px white;
+    transform: translate(0px, 0px);
+}
+
+.homepageTaskDescription, .homepageTaskDescription:hover {
+    box-shadow: 0px 0px white;
+    transform: translate(0px, 0px);
+}
+
+#userHomepage .homepageTaskMainNonDisplay, #userHomepage .homepageTaskMainNonDisplay * {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
 }
 
 /* =========================== TASK IMPORTANT =========================== */
 .important {
-    width: max-content;
-    grid-column: 1 / 2;
-    margin: 0 auto;
+    width: 25px;
+    margin: 0 5px;
 }
 .important input[type="checkbox"]{
     visibility: hidden;
@@ -82,9 +113,10 @@
     position: relative;
     top: 2px;
     fill: #fff;
+    transition-duration: 0.5s;
 }
 
-.taskBody:hover .important label svg {
+.homepageTask:hover .important label svg {
     width: 25px;
     height: 25px;
     stroke-width: 2px;
@@ -102,11 +134,7 @@
 
 
 /* =========================== TASK NAME =========================== */
-@media screen and (max-width : 499px) {
-    .taskBody h4{
-        font-size: 14px;
-    }
-}
+
 /* =========================== TASK STATUS =========================== */
 .taskStatus {
     display: flex;
@@ -151,13 +179,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-column: 3 / 4;
-}
-
-@media screen and (max-width : 499px) {
-    .deadline {
-        display: none;
-    }
 }
 
 .changeStatus {
@@ -195,52 +216,66 @@
     background-color: white;
 }
 
-.taskInfoHidden {
+#userHomepage .taskInfoHidden, #userHomepage .taskInfoHidden * {
     height: 0px;
     opacity: 0;
     visibility: hidden;
-    border: 0;
+    width: 0px;
+    overflow: hidden;
 }
+
 
 .taskInfoVisible {
-    border: 2px dashed black;
-    height: 200px;
+    border-radius: 10px;
+    height: 175px;
     opacity: 1;
     visibility: visible;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
-@media screen and (max-width : 499px) {
-    .taskInfoVisible {
-        height: 150px;
-    }
+.taskInfoVisible::-webkit-scrollbar {
+    height: 5px;
+}
+  
+.taskInfoVisible::-webkit-scrollbar-track {
+    background-color: #000;
+}
+
+.taskInfoVisible::-webkit-scrollbar-thumb {
+    background-color: grey;
 }
 
 .taskInfoDescription {
     margin-left: 10px;
 }
 
-.taskInfoDescription p{
-    font-size: 17px;
+.taskInfoDescription span {
+    display: inline-block;
+    font-size: 14px;
 }
 
 @media screen and (max-width : 499px) {
-    .taskInfoDescription p{
+    .taskInfoDescription span {
         font-size: 12px;
     }
 }
 
-.taskInfoDescription span {
+
+.taskInfoDescription .outlineDescription {
     font-weight: 500;
+    margin-right: 3px;
 }
-
-
 .taskInfoButton {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     height: 40px;
 }
 
+.taskFinishInfoButton {
+    justify-content: flex-end;
+}
 .taskInfoButton div {
     box-shadow: 5px 5px black;
     border-radius: 5px;
@@ -269,8 +304,8 @@
 }
 
 .taskInfoButton figure img{
-    height: 24px;
-    width: 24px;
+    height: 16px;
+    width: 16px;
 }
 
 .taskInfoButton figure figcaption{
@@ -287,14 +322,13 @@
     background-color: #F86363;
 }
 
-@media screen and (max-width : 499px) {
-    .taskInfoButton figure img{
-        height: 16px;
-        width: 16px;
-    }
+.taskInfoClose {
+    background-color: #000;
 }
 
-
+.taskFinishInfoButton .taskInfoClose {
+    margin-right: 10px;
+}
 /* =========================== TASK NOT FINISH =========================== */
 
 .taskFinish .taskInfoVisible {
@@ -315,26 +349,6 @@
     }
 }
 
-
-.fulfilledTask {
-    background-color: #A8CD89;
-}
-
-.fulfilledTask:hover {
-    box-shadow: -5px 5px green;
-}
-
-.failingTask {
-    background-color: #F9C0AB;
-}
-
-.failingTask:hover {
-    box-shadow: -5px 5px #AF1740;
-}
-
-.taskFinish .deadline {
-    text-decoration: line-through;
-}
 
 
 /* =========================== TASK DASHBOARD =========================== */
@@ -493,3 +507,41 @@
     height: 5px;
     width: 5px;
 }
+
+/*
+.test {
+    background-color: #008FFF;
+    display: block;
+    transition: display 5s;
+    cursor: pointer;
+}
+
+.test:hover {
+    display: none;
+    background-color: red;
+}
+
+/*
+.test {
+    transition: opacity 10s, display 10s;
+    display: block;
+    opacity: 1;
+}
+
+.test:hover {
+    display: none;
+    opacity: 0;
+}
+*/
+
+/*
+@keyframes slideaway {
+    from { display: block; }
+    to { transform: translateY(40px); opacity: 0;}
+  }
+
+.test {
+    animation: 1s slideaway;
+    display: block;
+    cursor: pointer;
+}*/

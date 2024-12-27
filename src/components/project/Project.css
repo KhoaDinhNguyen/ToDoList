@@ -2,11 +2,20 @@
 #projectList {
     width: 95%;
     background-color: var(--taskColor);
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .project {
     list-style: none;
-    width: 100%;
+    width: 275px;
+    border: 1px solid black;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    height: max-content;
+    background-color: #FFE893;
+    border-radius: 20px;
+    background-color: #FFFDF0;
 }
 
 .projectHeader {
@@ -14,10 +23,11 @@
     justify-content: space-between;
     align-items: center;
     background-color: rgba(244, 91, 105);
-    font-size: 20px;
-    padding: 5px;
     cursor: pointer;
     transition-duration: 0.5s;
+    height: 46.67px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .projectHeader:hover {
@@ -26,13 +36,13 @@
 
 .projectHeader h3 {
     color: white;
-    margin-left: 10px;
     transition-duration: 0.5s;
+    margin: 0 auto;
+    font-size: 25px;
 }
 
 .projectHeader:hover h3 {
-    margin: 5px 0px 5px 10px;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .projectMain {
@@ -43,8 +53,8 @@
 }
 
 .projectDescription p {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 5px;
     margin-left: 10px;
 }
 
@@ -63,7 +73,7 @@
 .visibleProject {
     border: 2px dashed gray;
     opacity: 1;
-    height: 200px;
+    height: 175px;
     visibility: visible;
 }
 
@@ -87,7 +97,7 @@
     justify-content: space-between;
     width: 90%;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 10px;
     height: 40px;
 }
@@ -168,4 +178,119 @@
     .projectFunction button {
         font-size: 12px;
     }
+}
+
+.taskList {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.taskList::-webkit-scrollbar {
+    width: 5px;
+}
+  
+.taskList::-webkit-scrollbar-track {
+    background-color: #000;
+}
+
+.taskList::-webkit-scrollbar-thumb {
+    background-color: grey;
+}
+
+.finishedListTaskButton {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.finishedListTaskButton button {
+    cursor: pointer;
+    width: 150px;
+    background-color: #213555;
+    background-color: #8D0B41;
+    border: 0;
+    color: #fff;
+    font-weight: 600;
+    margin: 0 auto;
+    padding: 5px 0px;
+    font-size: 12px;
+    border-radius: 10px;
+    border: 0px solid black;
+    box-shadow: 0px 5px #8D0B41;
+    transition-duration: 300ms;
+    margin-bottom: 10px;
+}
+
+.finishedListTaskButton button:hover {
+    transform: translate(0px, 5px);
+    box-shadow: 0px 0px white;
+}
+
+.finishedListTaskVisible {
+    transition-duration: 500ms;
+}
+
+.finishedListTaskNonVisible {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: 0;
+    transition-duration: 500ms;
+}
+
+.progress {
+    padding: 7px 0px;
+}
+
+.progress table {
+    width: 180px;
+    margin: 0 auto;
+    height: 20px;
+    border-collapse: collapse;
+    border-radius: 1em;
+}
+
+.progress table td {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.emptyProgress table td {
+    border-radius: 10px;
+    background-color: white;
+    background-color: #213555;
+    background-color: black;
+    color: white;
+}
+
+.nonEmptyProgress table td {
+    color: white;
+}
+
+.nonEmptyProgress table tbody td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.nonEmptyProgress table tbody td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.failingProcess {
+    background-color: #F72C5B;
+}
+
+.pendingProcess {
+    background-color: #FF8000;
+}
+
+.fulfilledProcess {
+    background-color: #5CB338;
+}
+
+.zeroPercent {
+    display: none;
 }

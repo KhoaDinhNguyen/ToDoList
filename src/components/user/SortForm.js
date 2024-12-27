@@ -90,11 +90,11 @@ function SortForm() {
     },[taskNameASC, taskNameDESC, timeCreatedASC, timeCreatedDESC, timeDeadlineASC, timeDeadlineDESC, dispatch]);
 
     const onClickResetSort = () => {
-        setTaskNameASC(true);
+        setTaskNameASC(false);
         setTaskNameDESC(false);
         setTimeCreatedASC(false);
         setTimeCreatedDESC(false);
-        setTimeDeadlineASC(false);
+        setTimeDeadlineASC(true);
         setTimeDeadlineDESC(false);
     }
     return (

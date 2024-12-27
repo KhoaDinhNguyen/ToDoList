@@ -15,15 +15,15 @@
 
 .editTaskFormMain label, .editTaskFormMain span{
     font-weight: 500;
-    font-size: 17px;
+    font-size: 14px;
 }
 
 
 .editTaskFormMain input {
-    font-size: 17px;
+    font-size: 14px;
     background-color: #e8e7e7;
     border: 1px #e8e7e7 solid;
-    border-radius: 5px;
+    width: 120px;
 }
 
 .editTaskFormMain input:focus {
@@ -40,7 +40,7 @@
 .editTaskFormMain .notice {
     margin-top: 5px;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 10px;
 }
 
 @media screen and (max-width : 499px) {

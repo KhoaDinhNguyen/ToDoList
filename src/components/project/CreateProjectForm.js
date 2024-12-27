@@ -53,17 +53,25 @@ function CreateProjectForm() {
             <form style={{display: convertFromBooleanToDisplay(createProjectDisplay)}} onSubmit={onSubmitCreateProject} id="createProjectFormMain">
                 <fieldset>
                     <legend>Create project form</legend>
-                    <div className="createProjectInput">
-                        <label htmlFor="projectName">Project name: </label>
-                        <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName} autoComplete="off"/>
-                    </div>
-                    <div className="createProjectInput">
-                        <label htmlFor="projectDescription">Project description: </label>
-                        <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription} autoComplete="off"/>
+                    <div id="createProjectInputDiv">
+                        <div className="createProjectInput">
+                            <label htmlFor="projectName">Project name: </label>
+                            <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName} autoComplete="off" placeholder="Project's name"/>
+                        </div>
+                        <div className="createProjectInput">
+                            <label htmlFor="projectDescription">Project description: </label>
+                            <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription} autoComplete="off" placeholder="Project's description"/>
+                        </div>         
                     </div>
                     <div id="createProjectButton">
-                        <input type="submit" name="createNewProject" id="createNewProject" value="Create project"/>
-                        <input type="button" value="Cancel" onClick={onClickToggleForm}/>
+                        <div id="createProjectButtonCreate">
+                            <input type="submit" name="createNewProject" id="createNewProject"/>
+                            <label htmlFor="createNewProject"><span>New project</span></label>
+                        </div>
+                        <div id="createProjectButtonCancel">
+                            <input type="button" name="cancelNewProject" id="cancelNewProject" onClick={onClickToggleForm}/>
+                            <label htmlFor="cancelNewProject"><span>Cancel</span></label>
+                        </div>
                     </div>
                 </fieldset>
             </form>

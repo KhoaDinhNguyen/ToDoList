@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { searchSlice } from "../../features/user/utility";
+import './SearchForm.css';
 
 function SearchForm() {
     const seachString = useSelector(state => state[searchSlice.name]);

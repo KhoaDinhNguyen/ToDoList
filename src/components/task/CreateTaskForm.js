@@ -4,12 +4,13 @@ import { tasksSlice } from "../../features/user/databaseSlice";
 import { fetchTaskCreate } from "../../features/task/taskAPI";
 import './CreateTask.css';
 import { convertFromBooleanToDisplay } from "../../app/user/User";
+import { convertDateToISOString } from "../../app/user/User";
 
 function CreateTaskForm(props) {
     const dispatch = useDispatch();
     const { projectName } = props;
     const accountName = localStorage.getItem('accountName');
-    const currentDate = new Date().toJSON().slice(0, 10);
+    const today = new Date();
 
     const [createTaskFormDisplay, setCreateTaskFormDisplay] = useState(false);
     const [taskName, setTaskName] = useState("");
@@ -23,6 +24,7 @@ function CreateTaskForm(props) {
 
     const onSubmit = event => {
         event.preventDefault();
+
         try {
             fetchTaskCreate(accountName, projectName, taskName, taskDescription, taskTimeDeadline)
             .then(response => {
@@ -32,7 +34,7 @@ function CreateTaskForm(props) {
                         taskName,
                         taskStatus: 'pending',
                         taskDescription,
-                        taskTimeCreated: currentDate,
+                        taskTimeCreated: convertDateToISOString(today),
                         taskTimeDeadline,
                         projectName
                     }));
@@ -67,7 +69,7 @@ function CreateTaskForm(props) {
                     </div>             
                     <div className="createTaskInput">
                         <label htmlFor={`${projectName}_taskTimeDeadline`}>Task deadline: </label>
-                        <input type="date" id={`${projectName}_taskTimeDeadline`} name={`${projectName}_taskTimeDeadline`} value={taskTimeDeadline} onChange={onChangeTaskDeadline} min={currentDate} required/>
+                        <input type="date" id={`${projectName}_taskTimeDeadline`} name={`${projectName}_taskTimeDeadline`} value={taskTimeDeadline} onChange={onChangeTaskDeadline} min={convertDateToISOString(today)} required/>
                     </div>
                     <div className="createTaskInput">
                         <p><span>Project name:</span> {projectName}</p>
