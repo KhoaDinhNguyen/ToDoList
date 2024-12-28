@@ -4,16 +4,25 @@
 
 #dashboard #dashboardHeader {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    height: 50px;
+    background-color: rgba(244, 91, 105);
+    align-items: center;
 }
 
+#dashboard #dashboardHeader h3 {
+    font-size: 25px;
+    color: white;
+}
 #dashboard li {
     list-style: none;
 }
 
 #dashboardBody {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 #dashboardBody > ul {
@@ -79,4 +88,42 @@
     .openFinishedTasks {
         font-size: 12px;
     }
+}
+
+#toggleFinishedTask input {
+    display: none;
+}
+
+#toggleFinishedTask label {
+    display: block;
+    width: 80px;
+    height: 42px;
+    border-radius: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: grey;
+    position: relative;
+    transition-duration: 0.5s;
+}
+
+#toggleFinishedTask input:checked + label {
+    background-color: aquamarine;
+}
+
+#toggleFinishedTask label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    background-color: azure;
+    border-radius: 50%;
+    transition-duration: 0.5s;
+    border: 1px solid black;
+}
+
+#toggleFinishedTask input:checked + label::before {
+    left: 50%;
 }

@@ -4,18 +4,19 @@ import { useState } from "react";
 import { convertFromBooleanToDisplay, convertDateToISOString } from "../../app/user/User";
 
 function Dashboard(props) {
-    const { tasks } = props;
-    if (tasks.length === 0) {return <p>Nothing has planned yet</p>;}
+    const { tasks, finishedTaskVisible, setFinishedTaskVisible } = props;
 
+    if (tasks.length === 0) {return <p>Nothing has planned yet</p>;}
+    
     let minTimeDeadline = tasks[0].taskTimeDeadline, maxTimeDeadline = tasks[0].taskTimeDeadline;
     const today = new Date();
-
+    
     const todayString = convertDateToISOString(today);
 
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowString = convertDateToISOString(tomorrow);
-
+    
     for (const task of tasks) {
         const timeDeadline = task.taskTimeDeadline;
         if (timeDeadline < minTimeDeadline) minTimeDeadline = timeDeadline;
@@ -28,31 +29,36 @@ function Dashboard(props) {
     const maxDateDeadlineString = convertDateToISOString(maxDateDeadline);
 
     let dateListTask = [];
-
-    const startDate = todayString < minDateDeadlineString ? todayString : minDateDeadlineString;
+    
+    const startDate = todayString < minDateDeadlineString ? today : minDateDeadline;
     const endDate = tomorrowString > maxDateDeadlineString ? tomorrow : maxDateDeadline;
 
-    for (let currentDate = new Date(startDate); currentDate <=  endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+    for (let currentDate = new Date(startDate); currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
         const currentDateString = convertDateToISOString(currentDate);
         const arrayOfTask = tasks.filter(task => task.taskTimeDeadline.slice(0, 10) === currentDateString);
-
+        console.log(currentDateString);
         if (arrayOfTask.length !== 0) {
-            dateListTask.push(<li key={currentDate}><DeadlineDisplay tasks={arrayOfTask} date={currentDateString} finish={currentDate < today} today={todayString === currentDateString} tomorrow={tomorrowString === currentDateString}/></li>);
+            dateListTask.push(<li key={currentDate} id={currentDateString}><DeadlineDisplay tasks={arrayOfTask} date={currentDateString} finish={currentDateString < todayString} today={todayString === currentDateString} tomorrow={tomorrowString === currentDateString}/></li>);
         }
         else if (todayString === currentDateString) {
-            dateListTask.push(<li key={todayString}><NotDeadlineDisplay today={true}/></li>);
+            dateListTask.push(<li key={todayString} id={currentDateString}><NotDeadlineDisplay today={true} date={currentDateString}/></li>);
         }
         else if (tomorrowString === currentDateString) {
-            dateListTask.push(<li key={tomorrowString}><NotDeadlineDisplay tomorrow={true}/></li>);
+            dateListTask.push(<li key={tomorrowString} id={currentDateString}><NotDeadlineDisplay tomorrow={true}/></li>);
         }
     }
 
     return (
         <div id="dashboard">
             <div id="dashboardHeader">
-                <h3>Dashboard - Today: {today.toDateString()}</h3>
+                <h3>Dashboard</h3>
             </div>
             <div id="dashboardBody">
+            <p>Today: {today.toDateString()}</p>
+            <div id="toggleFinishedTask">
+                <input type="checkbox" name="toggleFinishedTaskBox" id="toggleFinishedTaskBox" checked={finishedTaskVisible} onChange={() => setFinishedTaskVisible(!finishedTaskVisible)}/>
+                <label htmlFor="toggleFinishedTaskBox"></label>
+            </div>
                 <ul>
                     {dateListTask}
                 </ul>

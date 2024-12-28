@@ -352,18 +352,30 @@
 
 
 /* =========================== TASK DASHBOARD =========================== */
+#dashboard .taskInfoHidden, #dashboard .taskInfoHidden * {
+    height: 0px;
+    opacity: 0;
+    visibility: hidden;
+    width: 0px;
+    overflow: hidden;
+}
+
 .taskDashboard {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 50px 1fr 50px;
     width: 100%;
     padding: 10px 0;
     border-bottom: 1px solid black;
 }
 
-.taskDashboard .taskName {
+.taskDashboard .important {
     display: flex;
-    margin-left: 10px;
-    width: 70%;
+    justify-content: center;
+    grid-column: 1 / 2;
+}
+.taskDashboard .taskName {
+    grid-column: 2 / 3;
+    cursor: pointer;
 }
 
 @media screen and (max-width : 499px) {
@@ -378,11 +390,11 @@
 }
 
 .taskDashboard .taskFunction {
+    grid-column: 3 / 4;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     margin-right: 10px;
-    width: 30%;
 }
 
 .taskDashboard .taskStatus {
@@ -545,3 +557,4 @@
     display: block;
     cursor: pointer;
 }*/
+
