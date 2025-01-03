@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
 import { profileNameSlice } from "../../features/user/databaseSlice";
 import './Login.css';
+import loginLogo from '../../img/homepage/loginPage.png';
 
 function Login() {
     const navigate = useNavigate();
@@ -55,31 +56,31 @@ function Login() {
             </Helmet>
             <div id="login">
                 <div id="loginMain">
-                    <div id="loginSignUp">
-                        <h2>Sign In</h2>
+                    <div id="loginContext">
+                        <div id="loginContextHeader">
+                            <img src={loginLogo} alt="login logo" id="loginLogo"/>
+                            <h2>Welcome back</h2>
+                            <p>Please enter your details to sign in</p>
+                        </div>
                         <form onSubmit={onSubmitLogin} id="loginForm">
                             <div className="input">
-                                <label htmlFor="accountName">Username<span style={{color: "red"}}>&#42;</span></label>
-                                <input name="accountName" id="accountName" type="text" required value={accountName} onChange={onChangeAccountName} autoComplete="off"/>
+                                <input name="accountNameSignIn" id="accountNameSignIn" type="text" required value={accountName} onChange={onChangeAccountName} autoComplete="off" placeholder="Username"/>
                             </div>
                             <div className="input">
-                                <label htmlFor="password">Password<span style={{color: "red"}}>&#42;</span></label>
-                                <input name="password" id="password" type="password" required value={password} onChange={onChangePassword} autoComplete="off"/>
+                                <input name="passwordSignIn" id="passwordSignIn" type="password" required value={password} onChange={onChangePassword} autoComplete="off" placeholder="Password"/>
                             </div>
                             <div id="loginFormFooter">
                                 <NavLink to="/homepage/forgetPassword">Forgot password?</NavLink>
                             </div>
-                            <input type="submit" value="Sign In"/>
+                            <input type="submit" id="loginSubmit" name="loginSubmit"/>
+                            <label htmlFor="loginSubmit" id="labelLoginSubmit"><span>Sign In</span></label>
                         </form>
                         <div id="message" style={{visibility: displayMessage}}>
                             <LoginStatus loading={loading} message={message}/>
                         </div>
-                    </div>
-                    <div id="loginIntro">
-                        <h2>Welcome to To-Do List Application</h2>
-                        <p>Organize your tasks effectively</p>
-                        <p>Don't have an account?</p>
-                        <NavLink to="/homepage/signUp">Sign Up</NavLink>
+                        <div id="loginContextFooter">
+                            <p>Don't have an account? <NavLink to="/homepage/signUp">Sign Up</NavLink></p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,95 +4,27 @@
     box-sizing: border-box;
 }
 
+body {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 #homepage nav {
-    height: 8vh;
     display: flex;
     justify-content: space-between;
     background-color: #fff;
     box-sizing: border-box;
-}
-
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #homepage nav {
-        height: 40px;
-    }
-}
-
-#homepage ul {
-    display: flex;
-    justify-content: space-between;
-}
-
-#homepage li {
-    list-style-type: none;
-    padding: 10px 15px;
-    box-sizing: border-box;
-}
-
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #homepage li {
-        padding: 3px;
-        margin: 0;
-    }
-}
-
-#homepage nav a {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-@media screen and (min-width: 500px) and (max-width : 850) {
-    #homepage nav a {
-        font-size: 1.5rem;
-        padding: 0;
-    }
-}
-
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #homepage nav a {
-        font-size: 1rem;
-        padding: 3px;
-    }
-}
-
-#homepage a.match {
-    color: #ffff;
-    background-color: black;
-}
-
-#homepage a.noMatch {
-    color: black;
-    background-color: white;
-}
-
-#homepage #companyName {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-}
-
-#homepage #companyName img {
-    height: 32px;
-    width: 32px;
-}
-
-#homepage #companyName p {
-    color: black;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #companyName p {
-        font-size: 1rem;
-        margin: 0;
-        padding: 0;
-    }
-    
+    background: linear-gradient(-90deg, #a1c4fda4 0%, #c2e9fb9d 100%);
 }
 
 #navList {
@@ -100,4 +32,119 @@
     align-items: center;
     margin: 0;
     padding: 0;
+}
+
+#navList ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+#navList li {
+    list-style-type: none;
+    box-sizing: border-box;
+    margin-right: 30px;
+}
+
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
+    #navList li {
+        padding: 3px;
+        margin: 0;
+    }
+}
+
+#navList li a {
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+
+@media screen and (min-width: 500px) and (max-width : 850) {
+    #navList li a {
+        font-size: 1.5rem;
+        padding: 0;
+    }
+}
+
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
+    #navList li a {
+        font-size: 1rem;
+        padding: 3px;
+    }
+}
+
+#navList a.match {
+    color: rgb(106 101 255);
+}
+
+#navList a.noMatch {
+    color: rgb(89, 82, 119);
+}
+
+#navList a.noMatch:hover {
+    color: black;
+}
+
+#homepage .companyName {
+    display: flex;
+    align-items: center;
+}
+
+#homepage .companyName img {
+    height: 48px;
+    width: 48px;
+    cursor: pointer;
+}
+
+#homepage .companyName p {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
+    #homepage #companyName p {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+    
+}
+
+footer {
+    background-color: rgb(7 1 39);
+    padding: 50px;
+}
+
+#homepage footer .companyName p {
+    color: white;
+}
+
+#homepage footer .companyName img {
+    cursor: default;
+}
+
+footer #contact {
+    color: gray;
+    display: flex;
+    justify-content: space-between;
+}
+
+#contactLeft {
+    width: 500px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #A294F9;
+    border-radius: 10px;
 }

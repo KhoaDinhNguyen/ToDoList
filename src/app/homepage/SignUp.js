@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { fetchSignUp } from "../../features/page/pageAPI";
 import { Helmet } from "react-helmet";
+import { NavLink } from "react-router-dom";
 import './SignUp.css';
+import signUpLogo from '../../img/homepage/signupPage.png' ;
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("NOMESSAGE");
+    const [message, setMessage] = useState("");
     const [accountName, setAccountName] = useState("");
     const [profileName, setProfileName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmedPassword, setConfirmedPassword] = useState("");
-    const [displayMessage, setDisplayMessage] = useState('hidden');
 
     const onChangeAccountName = (event) => { setAccountName(event.target.value); }
     const onChangeProfileName = (event) => { setProfileName(event.target.value); }
@@ -22,11 +24,9 @@ function SignUp() {
         setLoading(true);
         if (password !== confirmedPassword) {
             setMessage("The confirm password is different.");
-            setDisplayMessage('visible');
             setLoading(false);
             setTimeout(() => {
-                setMessage("NOMESSAGE");
-                setDisplayMessage('hidden');
+                setMessage("");
             }, 5000);
         }
         else {
@@ -34,7 +34,6 @@ function SignUp() {
             .then(response =>{
                 setLoading(false);
                 setMessage(response.message);
-                setDisplayMessage('visible');
 
                 if (!response.error) {
                     setAccountName("");
@@ -44,8 +43,7 @@ function SignUp() {
                 }
                 else {
                     setTimeout(() => {
-                        setMessage("NOMESSAGE");
-                        setDisplayMessage('hidden');
+                        setMessage("");
                     }, 5000);
                 }
 
@@ -54,7 +52,6 @@ function SignUp() {
                 console.log(err);
             })
         }
-
     }
     return (
         <>  
@@ -63,32 +60,33 @@ function SignUp() {
             </Helmet>
             <div id="signUp">
                 <div id="signUpMain">
-                    <h2>Sign Up</h2>
+                    <div id="signUpContextHeader">
+                        <img src={signUpLogo} alt="sign up logo"/>
+                        <h2>Create an account</h2>
+                        <p>Already have an account? <NavLink to="/homepage/login">Sign in</NavLink></p>
+                    </div>
                     <form onSubmit={onSubmitSignIn} id="signUpForm">
                         <div className="signUpInput">
-                            <label htmlFor="accountName">Username<span style={{color: "red"}}>&#42;</span></label>
-                            <input type="text" id="accountName" name="accountName" value={accountName} onChange={onChangeAccountName} required autoComplete="off"/>
+                            <input type="text" id="accountNameSignUp" name="accountNameSignUp" value={accountName} onChange={onChangeAccountName} required autoComplete="off" placeholder="Username" title="Only used for login"/>
                         </div>
                         <div className="signUpInput">
-                            <label htmlFor="profileName">Profile name<span style={{color: "red"}}>&#42;</span></label>
-                            <input type="text" id="profileName" name="profileName" value={profileName} onChange={onChangeProfileName} required autoComplete="off"/>
+                            <input type="text" id="profileNameSignUp" name="profileNameSignUp" value={profileName} onChange={onChangeProfileName} required autoComplete="off" placeholder="Profile name" title="Displayed name in public"/>
                         </div>
                         <div className="signUpInput">
-                            <label htmlFor="password">Password<span style={{color: "red"}}>&#42;</span></label>
-                            <input type="password" id="password" name="password" value={password} onChange={onChangePassword} required autoComplete="off"/>
+                            <input type="password" id="passwordSignUp" name="passwordSignUp" value={password} onChange={onChangePassword} required autoComplete="off" placeholder="Password"/>
                         </div>
                         <div className="signUpInput">
-                            <label htmlFor="confirmedPassword">Confirm password<span style={{color: "red"}}>&#42;</span></label>
-                            <input type="password" id="confirmedPassword" name="confirmedPassword" value={confirmedPassword} onChange={onChangeConfirmedPassword} required autoComplete="off"/>
+                            <input type="password" id="confirmedPasswordSignUp" name="confirmedPasswordSignUp" value={confirmedPassword} onChange={onChangeConfirmedPassword} required autoComplete="off" placeholder="Confirmed password"/>
                         </div>
-                        <input type="submit" value="Sign Up"/>
+                        <input type="submit" value="Sign Up" id="signUpSubmit" name="signUpSubmit"/>
+                        <label htmlFor="signUpSubmit" id="signUpSubmitLabel">Sign Up</label>
                     </form>
-                    <div id="message" style={{visibility: displayMessage}}>
+                    <div id="message" style={{visibility: message === ''? 'hidden' : 'visible'}}>
                         <SignUpState loading={loading} message={message}/>
                     </div>
                 </div>
+                <SignUpDialog message={message} setMessage={setMessage}/>
             </div>
-
         </>
     );
 }
@@ -101,4 +99,29 @@ function SignUpState(props) {
     return <p>...Authenticating</p>;
 }
 
+function SignUpDialog(props) {
+    const { message, setMessage } = props;
+    const navigate = useNavigate();
+
+    const onClickGoToLogin = () => {
+        navigate('/homepage/login');
+    }
+
+    const onClickStayOnThePage = () => {
+        setMessage("");
+    }
+
+    return (
+        <div id="dialog" className={`${message === 'Sign up successfully. Return to login to sign in'? "visibleDialog" : "notVisibleDialog"}`}>
+            <div id="signUpDialogMain" className={`${message === 'Sign up successfully. Return to login to sign in'? "visibleSignUpDialog" : "notVisibleSignUpDialog"}`}>
+                <p id="symbol" className="successSymbol"><span>&#10003;</span></p>
+                <p>{message}</p>
+                <div id="button">
+                    <button onClick={onClickGoToLogin}>Go to login</button>
+                    <button onClick={onClickStayOnThePage}>Stay on the page</button>
+                </div>
+            </div>
+        </div>
+    );
+}
 export default SignUp;

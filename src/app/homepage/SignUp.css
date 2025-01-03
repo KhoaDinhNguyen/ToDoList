@@ -1,5 +1,5 @@
 #signUp {
-    background-color: rgba(244, 91, 105);
+    background: linear-gradient(-90deg, #a1c4fda4 0%, #c2e9fb9d 100%);
     height: 92vh;
     display: flex;
     justify-content: center;
@@ -9,25 +9,14 @@
 
 }
 
-@media screen and (max-width : 499px) {
-    #signUp {
-        height: 95vh;
-    }
-}
-
-@media screen and (max-height: 600px) {
-    #signUp {
-        height: 100vh;
-        overflow-y: scroll;
-    }
-}
-
-
 #signUpMain {
-    background-color: #fff;
+    background-color: #F8F8F8;;
     width: 450px;
-    height: 575px;
-    border-radius: 20px;
+    height: 650px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media screen and (max-width : 499px) {
@@ -45,12 +34,36 @@
     }
 }
 
-#signUpMain h2 {
+#signUpContextHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#signUpContextHeader img {
+    width: 48px;
+    height: 48px;
+}
+
+#signUpContextHeader p {
+    color: #888;
+}
+
+#signUpContextHeader a, #signUpContextHeader a:visited {
+    color: rgb(106 101 255);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#signUpContextHeader a:hover {
+    color: #000;
+}
+
+#signUpContextHeader h2 {
     width: max-content;
     margin: 0 auto;
-    margin-bottom: 40px;
-    margin-top: 20px;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 30px;
 }
 
@@ -63,19 +76,20 @@
     }
 }
 
-.signUpInput label, .signUpInput input {
-    display: block;
+.signUpInput {
+    width: 360px;
+    margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 .signUpInput input {
-    border-radius: 5px;
     font-size: 16px;
-    background: #e8e7e7;
-    border: 1px solid #F1F0E8;
+    background: #F8F8F8;;
     box-sizing: border-box;
     padding: 12px;
     width: 360px;
-    margin: 0 auto;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
 }
 
 @media screen and (max-width : 499px) {
@@ -95,43 +109,35 @@
     }
 }
 
-.signUpInput label {
-    width: 360px;
-    margin: 0 auto;
-    margin-top: 25px;
-    font-weight: bold;
+.signUpInput input:focus {
+    outline: 0;
+    border: 1px solid black;
 }
 
-
-@media screen and (max-width : 499px) {
-    .signUpInput label {
-        width: 90%;
-        max-width: 400px;
-        min-width: 300px;
-        margin-top: 10px;
-        font-size: 13px;
-    }
+#signUpSubmit {
+    display: none;
 }
 
-@media screen and (max-height: 600px) {
-    .signUpInput label {
-        margin-top: 10px;
-        font-size: 13px;
-    }
-}
-
-#signUpForm input[type=submit] {
+#signUpSubmitLabel {
     display: block;
-    background-color: rgba(244, 91, 105, 1);
+    background-color: rgb(106 101 255);
     width: max-content;
-    padding: 10px 40px;
+    padding: 10px 50px;
     margin: 0 auto;
     color: white;
     font-size: 16px;
     font-weight: bold;
-    border: 1px solid rgba(244, 91, 105, 1);
-    border-radius: 10px;
-    margin-top: 40px;
+    border: 1px solid rgb(106 101 255);
+    border-radius: 5px;
+    margin-top: 50px;
+    cursor: pointer;
+    box-shadow: 5px 5px #A294F9;
+    transition-duration: 0.5s;
+}
+
+#signUpSubmitLabel:hover, #signUpSubmitLabel:active {
+    transform: translate(5px, 5px);
+    box-shadow: -5px -5px white;
 }
 
 #signUp #message {
@@ -142,7 +148,7 @@
 }
 
 @media screen and (max-width : 499px) {
-    #signUpForm input[type=submit] {
+    #signUpSubmitLabel {
         margin-top: 20px;
         font-size: 13px;
         padding: 10px 20px;
@@ -166,4 +172,37 @@
     #signUp #message {
         font-size: 13px;
     }
+}
+
+#signUpDialogMain {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    transition-duration: 0.5s;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.visibleSignUpDialog {
+    bottom: 50%; 
+}
+
+.notVisibleSignUpDialog {
+    bottom: 30%;
+}
+
+#signUpDialogMain #button {
+    display: flex;
+    align-self: flex-end;
+}
+
+#signUpDialogMain #button button{
+    padding: 5px;
+    cursor: pointer;
+    margin-right: 10px;
 }

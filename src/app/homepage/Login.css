@@ -1,89 +1,36 @@
 #login {
-    background-color: rgba(244, 91, 105);
+    background: linear-gradient(-90deg, #a1c4fda4 0%, #c2e9fb9d 100%);
     height: 92vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    margin: 0 auto;
-}
-
-@media screen and (max-width : 499px) {
-    #login {
-        height: 95vh;
-    }
-}
-
-@media screen and (max-height: 600px) {
-    #login {
-        height: 100vh;
-        overflow-y: scroll;
-    }
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 #loginMain {
-    background-color: rgba(244, 91, 105);
+    grid-column: 2 / 3;
     margin: 0 auto;
-    width: 900px;
-    height: 500px;
     display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-}
-
-@media screen and (max-width : 499px) {
-    #loginMain {
-        width: 100%;
-        height: 45vh;
-    }
-}
-
-@media screen and (max-height: 600px) {
-    #loginMain {
-        width: 500px;
-        height: 300px;
-        overflow-y: scroll;
-    }
-}
-
-#loginSignUp {
-    width: 50%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-@media screen and (max-width : 850px) {
-    #loginSignUp {
-        width: 95%;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-        margin: 0 auto;
-    }
-}
-
-#loginIntro {
-    width: 50%;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 100%;
     align-items: center;
+}
+
+#loginContext {
+    background-color: #F8F8F8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     box-sizing: border-box;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-left: 2px solid grey;
+    height: 600px;
+    width: 450px;
+    align-items: center;
+    border-radius: 10px;
 }
 
 @media screen and (max-width : 850px) {
     #loginIntro {
         display: none;
     }
-    
 }
 
 .input {
@@ -93,22 +40,15 @@
     margin-top: 5px;
 }
 
-.input label{
-    display: block;
-    font-weight: bold;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
 .input input{
-    border-radius: 5px;
     font-size: 16px;
-    background: #e8e7e7;
+    background: #F8F8F8;
     width: 360px;
-    border: 1px solid #F1F0E8;
     box-sizing: border-box;
     padding: 12px;
     margin: 8px 0;
+    border: 0;
+    border-bottom: 3px solid #efefef;
 }
 
 @media screen and (max-width : 499px) {
@@ -117,14 +57,6 @@
         max-width: 400px;
         min-width: 250px;
     }
- 
-    .input label{
-        max-width: 400px;
-        min-width: 250px;
-        margin-top: 10px;
-        font-size: 13px;
-        width: 100%;
-    }
     
     .input input{
         font-size: 13px;
@@ -135,12 +67,7 @@
     }
 }
 
-@media screen and (max-height: 600px) {
-    .input label{
-        margin-top: 10px;
-        font-size: 13px;
-    }
-    
+@media screen and (max-height: 600px) {    
     .input input{
         font-size: 13px;
         padding: 10px;
@@ -148,39 +75,93 @@
 }
 
 .input input:focus {
-    border: 1px solid black;
+    outline: 0;
+    border-bottom: 3px solid black;
 }
 
-#loginSignUp h2 {
+#loginContextHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+#loginContextHeader h2 {
     margin: 0 auto;
-    margin-bottom: 20px;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 30px;
 }
 
+#loginContextHeader p {
+    color: #888;
+}
+
 @media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #loginSignUp h2 {
+    #loginContextHeader h2 {
         font-size: 20px;
         margin-bottom: 0;
     }
 }
 
-#loginForm input[type=submit] {
+#loginSubmit {
+    display: none;
+}
+
+#labelLoginSubmit {
     display: block;
-    background-color: rgba(244, 91, 105, 1);
+    background-color: rgb(106 101 255);
+    border: 0;
     width: max-content;
-    padding: 10px 155px;
+    padding: 10px 50px;
     margin: 0 auto;
-    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+#labelLoginSubmit span {
     font-size: 16px;
     font-weight: bold;
-    border: 1px solid rgba(244, 91, 105, 1);
-    border-radius: 10px;
-    margin-top: 10px;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+#labelLoginSubmit::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    background-color: black;
+    transition-duration: 0.5s;
+    border-radius: 5px 0 0 5px;
+}
+
+#labelLoginSubmit::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    background-color: black;
+    transition-duration: 0.5s;
+    border-radius: 0 5px 5px 0;
+}
+
+#labelLoginSubmit:hover::after, #labelLoginSubmit:hover::before {
+    width: 50%;
+}
+
+#labelLoginSubmit:hover span {
+    color: white;
 }
 
 @media screen and (max-width : 499px) {
-    #loginForm input[type=submit] {
+    #labelLoginSubmit {
         margin-top: 20px;
         font-size: 13px;
         padding: 10px 20px;
@@ -204,14 +185,19 @@
 }
 
 #loginFormFooter a {
-    color: rgba(244, 91, 105, 1);
+    color: rgb(106 101 255);
     font-size: 16px;
     text-decoration: none;
 }
 
 #loginFormFooter a:visited {
-    color: rgba(244, 91, 105, 1);
+    color: rgb(106 101 255);
 }
+
+#loginFormFooter a:hover {
+    color: black
+}
+
 
 #message {
     width: 360px;
@@ -249,18 +235,28 @@
     }
 }
 
-#loginIntro a {
-    color: rgba(244, 91, 105);
-    font-size: 16px;
-    box-sizing: border-box;
-    font-weight: bold;
-    text-decoration: solid;
-    border-radius: 10px;
-    border: 2px solid rgba(244, 91, 105);
-    padding: 10px 20px;
 
+#loginLogo {
+    width: 32px;
+    height: 32px;
 }
 
-#loginIntro p:nth-child(2) {
-    padding-bottom: 10px;
+#loginContextFooter {
+    margin-top: 50px;
+}
+
+#loginContextFooter a {
+    color: rgb(106 101 255);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#loginContextFooter a:visited {
+    color: rgb(106 101 255);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#loginContextFooter a:hover {
+    color: black;
 }

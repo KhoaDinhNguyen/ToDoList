@@ -22,6 +22,7 @@ const router = createHashRouter(createRoutesFromElements(
         <Route path="login" element={<Login/>}/>
         <Route path="signUp" element={<SignUp/>}/>
         <Route path="forgetPassword" element={<ForgetPassword/>}/>
+        <Route path="*" element={<PageNotFound/>}/>
       </Route>
       <Route path="user/:username" element={<User/>}>
         <Route path="homepage" element={<UserHomepage/>}/>
