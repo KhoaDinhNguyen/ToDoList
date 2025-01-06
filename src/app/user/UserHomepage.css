@@ -1,3 +1,6 @@
+#userHomepage {
+    background-color: #efefef;
+}
 #profileNameHomepage {
     display: flex;
     align-items: center;

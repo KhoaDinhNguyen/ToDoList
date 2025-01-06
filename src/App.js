@@ -1,4 +1,3 @@
-//import logo from './logo.svg';
 import './App.css';
 import { createHashRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import Login from './app/homepage/Login';

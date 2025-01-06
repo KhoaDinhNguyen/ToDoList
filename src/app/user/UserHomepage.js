@@ -16,9 +16,9 @@ function UserHomepage(props){
             </Helmet>
             <div id="profileNameHomepage">
                 <SearchForm/>
+                <CreateProjectForm/>
             </div>
             <div id="userHomepageBody">
-                <CreateProjectForm/>
                 <div id="filterAndSort">
                     <FilterForm/>
                     <SortForm/>

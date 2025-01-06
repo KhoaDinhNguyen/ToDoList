@@ -51,7 +51,6 @@ function CreateProjectForm() {
     return(
         <div id="createProjectForm">
             <div id="projectHeader">
-                <h2>Hello {profileName} !&#128526;</h2>
                 <button onClick={onClickToggleForm} id="openCreateProjectButton" style={{display: convertFromBooleanToDisplay(!createProjectDisplay)}}><span>&#x271A; Create project</span></button>
             </div>
             <form style={{display: convertFromBooleanToDisplay(createProjectDisplay)}} onSubmit={onSubmitCreateProject} id="createProjectFormMain">
