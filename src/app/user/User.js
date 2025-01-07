@@ -8,7 +8,7 @@ import logoPage from '../../img/user/logoPage.png';
 import calendarLogo from '../../img/user/calendarLogo.png';
 import dashboardLogo from '../../img/user/dashboardLogo.png';
 import profileLogo from '../../img/user/profileLogo.png';
-
+import { Footer } from "../homepage/Homepage.js";
 /*------------------------------------- FEATURES -------------------------------------*/
 import { profileNameSlice, projectsSlice, tasksSlice } from "../../features/user/databaseSlice.js";
 import { fetchUserDatabase } from "../../features/user/userAPI.js";
@@ -102,6 +102,7 @@ function User() {
             <div id="userContent">
                 <Outlet/>
             </div>
+            <Footer/>
         </div>
     );
 }

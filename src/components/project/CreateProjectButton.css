@@ -1,0 +1,55 @@
+#openCreateProjectButton {
+    padding: 10px;
+    font-size: 16px;
+    background-image: linear-gradient(to left, #ff5895, #ff529e, #ff4da8, #ff48b3, #ff45be, #f944c8, #f145d2, #e847dc, #d64ce6, #c152ef, #a857f8, #8b5dff);
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 25px;
+    position: relative;
+    border: 2px solid #FFF;
+    transition-duration: 300ms;
+}
+
+#openCreateProjectButton:hover {
+    border: 2px solid #000;
+}
+
+#openCreateProjectButton::before {
+    content: "";
+    background-color: #fff;
+    z-index: 1;
+    position: absolute;
+    transition-duration: 0ms;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    border-radius: 25px;
+}
+
+#openCreateProjectButton:hover::before, #openCreateProjectButton:active::before  {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 25px;
+    transition-duration: 500ms;
+}
+
+#openCreateProjectButton span {
+    z-index: 2;
+    position: relative;
+}
+
+#openCreateProjectButton:hover span, #openCreateProjectButton:active span {
+    color: #000;
+}
+
+
+@media screen and (max-width : 499px) {
+    #openCreateProjectButton {
+        font-size: 12px;
+        padding: 5px;
+    }
+}

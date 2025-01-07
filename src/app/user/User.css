@@ -5,7 +5,7 @@
 }
 
 :root {
-    --width1024Default: 54px;
+    --width1024Default: 200px;
     --width1024Hover: 200px;
     --width850Default: 45px;
     --width850Hover: 200px;
@@ -17,12 +17,12 @@
     --commomRedColor: rgba(244, 91, 105, 1);
 }
 
-#userPage {
-    display: grid;
-    grid-template-columns: var(--width1024Default) 1fr;
-    overflow-y: visible;
-    grid-template-rows: 100%;
-    height: max(100%, 100vh);
+@media screen and (min-width : 499px) {
+    #userPage {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        overflow-y: visible;
+    }
 }
 
 @media screen and (max-width : 499px) {
@@ -33,23 +33,17 @@
 
 #userNavigationBar {
     grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    height: max(100%, 100vh);
-    background-color: #FFF;
+    background-color: #bccef2;
     width: var(--width1024Default);
     overflow-x: clip;
-    transition-duration: 0.3s;
     z-index: 10;
     overflow-y: visible;
-}
-
-#userNavigationBar:hover {
-    width: var(--width1024Hover);
 }
 
 @media screen and (max-width : 499px) {
     #userNavigationBar {
         width: var(--width499Default);
+        transition-duration: 0.3s;
     }
     #userNavigationBar:hover {
         width: var(--width499Hover);
@@ -59,7 +53,6 @@
 #userNavigationBar #companyName {
     background-color: #000;
     overflow-x:clip;
-    width: var(--width1024Default);
     display: flex;
     justify-content: center;
     padding: 10px 0;
@@ -70,11 +63,6 @@
     color: white;
     font-size: 1.5rem;
     font-weight: bold;
-    display: none;
-}
-
-#userNavigationBar:hover #companyName {
-    width: var(--width1024Hover);
 }
 
 @media screen and (max-width : 499px) {
@@ -86,14 +74,6 @@
     }
 }
 
-#userNavigationBar:hover #companyName img {
-    display: none;
-}
-
-#userNavigationBar:hover #companyName h3 {
-    display: block;
-}
-
 /* ============================== PAGE NAVIGATION ============================== */
 /* ------------------------------ DEFAULT ------------------------------ */
 
@@ -101,7 +81,13 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: var(--width1024Default);
+    margin-top: 30px;
+}
+
+#userNavigationBar #pageNavigation ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 @media screen and (max-width : 499px) {
@@ -112,21 +98,21 @@
 
 #userNavigationBar #pageNavigation li {
     list-style-type: none;
-    margin: 25px 0;
-    margin-left: 6px;
-    overflow-x: clip;
+    margin: 10px 0;
+    width: 190px;
 }
 
 #userNavigationBar #pageNavigation a {
     display: flex;
     align-items: center;
     text-decoration: none;
+    width: 100%;
+    padding: 5px;
+    padding-left: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
-#userNavigationBar #pageNavigation a img {
-    padding: 5px;
-    border-radius: 50%;
-}
 
 @media screen and (max-width : 499px) {
     #userPage #pageNavigation a img{
@@ -137,9 +123,8 @@
 
 #userNavigationBar #pageNavigation a p {
     font-weight: 500;
-    color: black;
-    padding: 5px;
-    font-size: 20px;
+    color: #303745;;
+    font-size: 18px;
 }
 
 @media screen and (max-width : 499px) {
@@ -151,46 +136,65 @@
     
 }
 
-#userNavigationBar #pageNavigation a.match img {
-    background-color: #efefef;
-    border: 1px solid #efefef;
+#userNavigationBar #pageNavigation a.match {
+    background-color: #e2eafc;
+    border: 1px solid black;
+    border-right: 0;
 }
 
 
 /* ------------------------------ HOVER ------------------------------ */
-#userNavigationBar:hover #pageNavigation {
-    width: var(--width1024Hover);
-}
-
-#userNavigationBar:hover #pageNavigation nav {
-    width: var(--width1024Hover);
-}
-
-#userNavigationBar:hover #pageNavigation a p {
-    padding-left: 0;
-}
-
-#userNavigationBar:hover #pageNavigation a.match img {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-#userNavigationBar:hover #pageNavigation a.match p {
-    border: 1px solid #efefef;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    color: #C65BCF;
-    background-color: #efefef;
+#userNavigationBar #pageNavigation a.match p {
+    color: #303745;
+    font-weight: 700;
 }
 
 #userContent{
     grid-column: 2 / 3;
-    background-color: var(--backgroundColorMain);
-    height: max(100vh - 50px, 100%);
+    background-color: #e2eafc;
+    min-height: 92vh;
 }
 
 @media screen and (max-width : 499px) {
     #userContent{
         width: 100%;
     }
+}
+
+#userPage footer {
+    grid-column: 1 / 3;
+}
+
+#userPage .companyName {
+    display: flex;
+    align-items: center;
+}
+
+#userPage .companyName img {
+    height: 48px;
+    width: 48px;
+    cursor: pointer;
+}
+
+#userPage .companyName p {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+@media screen and ((max-width : 499px) or (max-height: 600px)) {
+    #userPage #companyName p {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+    
+}
+#userPage footer .companyName p {
+    color: white;
+}
+
+#userPage footer .companyName img {
+    cursor: default;
 }

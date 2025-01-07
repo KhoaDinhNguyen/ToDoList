@@ -9,6 +9,7 @@ function FilterForm() {
     const dispatch = useDispatch();
     const [statusFilter, setStatusFilter] = useState(['pending', 'fulfilled', 'failing']);
     const [importantFilter, setImporantFilter] = useState(false);
+
     const [dateFilter, setDateFilter] = useState(
     {
         timeCreatedFrom : "",
@@ -27,6 +28,7 @@ function FilterForm() {
     }, [statusFilter, dateFilter, dispatch, importantFilter]);
 
     const onChangeStar = () => { setImporantFilter(!importantFilter); }
+
     return (
         <div id="filterForm">
             <h3>Filter</h3>

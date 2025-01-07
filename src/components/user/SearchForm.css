@@ -1,3 +1,19 @@
-#searchForm input:focus {
-    background-color: white;
+#searchForm {
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+#searchString {
+    font-size: 16px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding: 12px;
+    background-color: #fff;
+    outline: 0;
+    border: 2px solid #fff;
+}
+
+#searchString:focus {
+    border: 2px solid orange;
 }

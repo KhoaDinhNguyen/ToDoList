@@ -42,8 +42,33 @@ const searchSlice = createSlice({
     }
 });
 
+const createProjectFormSlice = createSlice({
+    name: "createProjectFor",
+    initialState: false,
+    reducers: {
+        setState(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+const filterAndSortFormSlice = createSlice({
+    name: "filterFormSlice",
+    initialState: false,
+    reducers: {
+        setState(state, action) {
+            return action.payload;
+        },
+        toggle(state) {
+            return !state;
+        }
+    }
+});
+
 export {
     filterSlice,
     sortSlice,
-    searchSlice
+    searchSlice,
+    createProjectFormSlice,
+    filterAndSortFormSlice
 }

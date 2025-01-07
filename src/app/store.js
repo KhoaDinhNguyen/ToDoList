@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { projectsSlice, tasksSlice, profileNameSlice } from "../features/user/databaseSlice";
-import { filterSlice, sortSlice, searchSlice } from "../features/user/utility";
+import { filterSlice, sortSlice, searchSlice, createProjectFormSlice, filterAndSortFormSlice } from "../features/user/utility";
 
 const reducers = {
     [projectsSlice.name] : projectsSlice.reducer,
@@ -10,6 +10,8 @@ const reducers = {
     [filterSlice.name] : filterSlice.reducer,
     [sortSlice.name] : sortSlice.reducer,
     [searchSlice.name] : searchSlice.reducer,
+    [createProjectFormSlice.name]: createProjectFormSlice.reducer,
+    [filterAndSortFormSlice.name] : filterAndSortFormSlice.reducer
 }
 
 const rootReducer = combineReducers(reducers);

@@ -1,28 +1,29 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { projectsSlice } from "../../features/user/databaseSlice";
-import { fetchCreateProject } from "../../features/project/projectAPI";
-import { convertFromBooleanToDisplay, convertDateToISOString } from "../../app/user/User";
+import { useSelector, useDispatch } from "react-redux";
+import { projectsSlice } from "../../features/user/databaseSlice.js";
+import { fetchCreateProject } from "../../features/project/projectAPI.js";
+import { convertFromBooleanToDisplay, convertDateToISOString } from "../../app/user/User.js";
 import { profileNameSlice } from "../../features/user/databaseSlice.js";
-import './CreateProject.css';
+import { useState } from "react";
+import { createProjectFormSlice } from "../../features/user/utility.js";
+import './CreateProjectForm.css';
 
-function CreateProjectForm() {
+function CreateProjectForm () {
     const dispatch = useDispatch();
     const [projectName, setProjectName] = useState("");
     const [projectDescription, setProjectDescription] = useState("");
-    const [createProjectDisplay, setCreateProjectDisplay] = useState(false);
     const [message, setMessage] = useState("");
+    const createProjectFormDisplay = useSelector(state => state[createProjectFormSlice.name]);
+
+    const onChangeProjectName = event => { setProjectName(event.target.value); };
+    const onChangeProjectDescription = event => { setProjectDescription(event.target.value); };
+    const onClickCloseDialog = () => { setMessage(""); };
+    const onClickCloseForm = () => { dispatch(createProjectFormSlice.actions.setState(false)); };
 
     const profileName = useSelector(state => state[profileNameSlice.name]);
 
     const accountName = localStorage.getItem("accountName");
     const today = new Date();
     const todayString = convertDateToISOString(today);
-
-    const onClickToggleForm = () => { setCreateProjectDisplay(!createProjectDisplay); };
-    const onChangeProjectName = event => { setProjectName(event.target.value); };
-    const onChangeProjectDescription = event => { setProjectDescription(event.target.value); };
-    const onClickCloseDialog = () => { setMessage(""); };
 
     const onSubmitCreateProject = event => {
         event.preventDefault();
@@ -39,7 +40,7 @@ function CreateProjectForm() {
                 dispatch(projectsSlice.actions.add(newProject));
                 setProjectName("");
                 setProjectDescription("");
-                setCreateProjectDisplay(false);
+                dispatch(createProjectFormSlice.actions.setState(false));
             } 
         })
         .catch(err => {
@@ -48,40 +49,40 @@ function CreateProjectForm() {
 
     }
 
-    return(
-        <div id="createProjectForm">
-            <div id="projectHeader">
-                <button onClick={onClickToggleForm} id="openCreateProjectButton" style={{display: convertFromBooleanToDisplay(!createProjectDisplay)}}><span>&#x271A; Create project</span></button>
+    return (
+        <>  
+            <div style={{display: convertFromBooleanToDisplay(createProjectFormDisplay)}} id="createProjectForm">
+            <form onSubmit={onSubmitCreateProject} id="createProjectFormMain">
+                    <fieldset>
+                        <legend><span>Create project form</span></legend>
+                        <div id="createProjectInputDiv">
+                            <div className="createProjectInput">
+                                <label htmlFor="projectName">Project's name<span style={{color: "red"}}>&#42;</span></label>
+                                <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName} autoComplete="off" placeholder="Default" minLength="1" maxLength="50"/>
+                            </div>
+                            <div className="createProjectInput">
+                                <label htmlFor="projectDescription">Project's description</label>
+                                <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription} autoComplete="off" placeholder="Create to-do list" minLength="1" maxLength="50"/>
+                            </div>         
+                        </div>
+                        <div id="createProjectButton">
+                            <div id="createProjectButtonCreate">
+                                <input type="submit" name="createNewProject" id="createNewProject"/>
+                                <label htmlFor="createNewProject"><span>New project</span></label>
+                            </div>
+                            <div id="createProjectButtonCancel">
+                                <input type="button" name="cancelNewProject" id="cancelNewProject" onClick={onClickCloseForm}/>
+                                <label htmlFor="cancelNewProject"><span>Cancel</span></label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
-            <form style={{display: convertFromBooleanToDisplay(createProjectDisplay)}} onSubmit={onSubmitCreateProject} id="createProjectFormMain">
-                <fieldset>
-                    <legend><span>Create project form</span></legend>
-                    <div id="createProjectInputDiv">
-                        <div className="createProjectInput">
-                            <label htmlFor="projectName">Project's name<span style={{color: "red"}}>&#42;</span></label>
-                            <input type="text" name="projectName" id="projectName" required onChange={onChangeProjectName} value={projectName} autoComplete="off" placeholder="Default" minLength="1" maxLength="50"/>
-                        </div>
-                        <div className="createProjectInput">
-                            <label htmlFor="projectDescription">Project's description<span style={{color: "red"}}>&#42;</span></label>
-                            <input type="text" name="projectDescription" id="projectDescription" onChange={onChangeProjectDescription} value={projectDescription} autoComplete="off" placeholder="Create to-do list" minLength="1" maxLength="50"/>
-                        </div>         
-                    </div>
-                    <div id="createProjectButton">
-                        <div id="createProjectButtonCreate">
-                            <input type="submit" name="createNewProject" id="createNewProject"/>
-                            <label htmlFor="createNewProject"><span>New project</span></label>
-                        </div>
-                        <div id="createProjectButtonCancel">
-                            <input type="button" name="cancelNewProject" id="cancelNewProject" onClick={onClickToggleForm}/>
-                            <label htmlFor="cancelNewProject"><span>Cancel</span></label>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
             <CreateProjectDialog message={message} onClickCloseDialog={onClickCloseDialog}/>
-        </div>
+        </>
     )
 }
+
 
 function CreateProjectDialog(props) {
     const { message, onClickCloseDialog } = props;
@@ -111,6 +112,6 @@ function CreateProjectDialog(props) {
             </div>
         );
     }
+}
 
-}   
 export default CreateProjectForm;

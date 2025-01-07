@@ -31,7 +31,7 @@ function HomePage() {
     );
 }
 
-function Footer() {
+export function Footer() {
     return (
         <footer>
             <div className="companyName">

@@ -1,7 +1,6 @@
 
 #projectList {
     width: 95%;
-    background-color: var(--taskColor);
     display: flex;
     flex-flow: row wrap;
 }
