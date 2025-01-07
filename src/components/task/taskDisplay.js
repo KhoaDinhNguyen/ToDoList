@@ -8,8 +8,10 @@ import UpdateTask from "./UpdateTask";
 import { convertFromBooleanToDisplay } from "../../app/user/User";
 import editImg from '../../img/user/edit.png';
 import deleteImg from '../../img/user/delete.png';
-import arrowUp from '../../img/user/uparrow.png';
 import { convertDateToISOString } from "../../app/user/User";
+import informationLogo from '../../img/user/informationDisplay.png';
+import editLogo from '../../img/user/editDisplay.png';
+import deleteLogo from '../../img/user/deleteDisplay.png';
 
 function TaskDisplay(props) {
     const { type, task } = props;
@@ -20,6 +22,8 @@ function TaskDisplay(props) {
     const accountName = localStorage.getItem("accountName");
     const [deleteDisplay, setDeleteDisplay] = useState(false);
     const [editDisplay, setEditDisplay] = useState(false);
+    const [taskDescriptionDisplay, setTaskDescriptionDisplay] = useState(false);
+
     const dispatch = useDispatch();
 
     const today = new Date();
@@ -43,6 +47,44 @@ function TaskDisplay(props) {
         setDeleteDisplay(false);
         setTaskDetailDisplay(!taskDetailDisplay);
     };
+
+    const onClickInfo = () => {
+        if (taskDetailDisplay === true && taskDescriptionDisplay === true) {
+            setTaskDescriptionDisplay(false);
+            setTaskDetailDisplay(false);
+        }
+        else if (taskDetailDisplay === false) {
+            setTaskDetailDisplay(true);
+        }
+        setTaskDescriptionDisplay(true);
+        setEditDisplay(false);
+        setDeleteDisplay(false);
+    }
+    const onClickEdit = () => {
+        if (taskDetailDisplay === true && editDisplay === true) {
+            setEditDisplay(false);
+            setTaskDetailDisplay(false);
+        }
+        else if (taskDetailDisplay === false) {
+            setTaskDetailDisplay(true);
+        }
+        setEditDisplay(true);
+        setTaskDescriptionDisplay(false);
+        setDeleteDisplay(false);
+    }
+
+    const onClickDelete = () => {
+        if (taskDetailDisplay === true && deleteDisplay === true) {
+            setDeleteDisplay(false);
+            setTaskDetailDisplay(false);
+        }
+        else if (taskDetailDisplay === false) {
+            setTaskDetailDisplay(true);
+        }
+        setDeleteDisplay(true);
+        setTaskDescriptionDisplay(false);
+        setEditDisplay(false);
+    }
 
     const onClickImportant = (event) => { 
         const newImportantStatus = !currentImportant;
@@ -98,7 +140,11 @@ function TaskDisplay(props) {
             taskDetailDisplay={taskDetailDisplay}
             deleteDisplay={deleteDisplay}
             editDisplay={editDisplay}
-
+            taskDescriptionDisplay={taskDescriptionDisplay}
+            onClickInfo={onClickInfo}
+            onClickEdit={onClickEdit}
+            onClickDelete={onClickDelete}
+            setTaskDetailDisplay={setTaskDetailDisplay}
         />
     );
 }
@@ -128,14 +174,21 @@ function TaskDisplayHomepage(props) {
         finish,
         taskDetailDisplay,
         deleteDisplay,
-        editDisplay
+        editDisplay,
+        taskDescriptionDisplay,
+        onClickEdit,
+        onClickInfo,
+        onClickDelete,
+        setTaskDetailDisplay
     } = props;
     const { taskName, taskTimeDeadline, projectName} = task;
 
     if (finish) {
         return (
-            <li className={`homepageTask ${!taskDetailDisplay ? `${currentStatus}Task` : "homepageTaskDescription"}`}>
-                <div className={!taskDetailDisplay ? "homepageTaskMain" : "homepageTaskMainNonDisplay"}>
+            <li className={`homepageTask ${!taskDetailDisplay ? `` : "homepageTaskDescription"}`}>
+                <div className="importantAndCheckBox">
+                </div>
+                <div className="homepageTaskName">
                     <div className="important">
                         <input type="checkbox" id={`${taskName}_${projectName}_important`} name={`${taskName}_${projectName}_important`} checked={currentImportant} onChange={onClickImportant}/>
                         <label htmlFor={`${taskName}_${projectName}_important`}>
@@ -143,10 +196,14 @@ function TaskDisplayHomepage(props) {
                                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                             </svg>
                         </label>
-                    </div>            
-                    <div className="homepageTaskName" onClick={onChangeTaskDetailDisplay}>
-                        <h4>{taskName}</h4>
-                    </div>
+                    </div>    
+                    <h4>{taskName}</h4>
+                </div>
+                <div className={`homepageStatus ${currentStatus}_Task`}>
+                    <p>{currentStatus}</p>
+                </div>
+                <div className="taskFunction">
+                    <img src={informationLogo} alt="Info" title="Info" onClick={onChangeTaskDetailDisplay}/>
                 </div>
                 <TaskInfoHomepage 
                     task={task} 
@@ -157,6 +214,7 @@ function TaskDisplayHomepage(props) {
                     editDisplay={editDisplay} 
                     setEditDisplay={setEditDisplay}
                     onChangeTaskDetailDisplay={onChangeTaskDetailDisplay}
+                    taskDescriptionDisplay={taskDescriptionDisplay}
                 />
             </li>
         )
@@ -164,7 +222,10 @@ function TaskDisplayHomepage(props) {
 
     return (
         <li className={`homepageTask ${!taskDetailDisplay ? `` : "homepageTaskDescription"}`}>
-            <div className={!taskDetailDisplay ? "homepageTaskMain" : "homepageTaskMainNonDisplay"}>
+            <div className="importantAndCheckBox">
+                <input type="checkbox" name={`${taskName}_${projectName}_Fulfilled`} id={`${taskName}_${projectName}_Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
+            </div>
+            <div className="homepageTaskName">
                 <div className="important">
                     <input type="checkbox" id={`${taskName}_${projectName}_important`} name={`${taskName}_${projectName}_important`} checked={currentImportant} onChange={onClickImportant}/>
                     <label htmlFor={`${taskName}_${projectName}_important`}>
@@ -172,14 +233,16 @@ function TaskDisplayHomepage(props) {
                             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                         </svg>
                     </label>
-                </div>            
-                <div className="homepageTaskName" onClick={onChangeTaskDetailDisplay}>
-                    <h4>{taskName}</h4>
-                    <p className="deadline">Deadline: {taskTimeDeadline.slice(0, 10)}</p>
-                </div>
-                <div className="taskFunction">
-                    <input type="checkbox" name={`${taskName}_${projectName}_Fulfilled`} id={`${taskName}_${projectName}_Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
-                </div>
+                </div>    
+                <h4>{taskName}</h4>
+            </div>
+            <div className={`homepageStatus ${currentStatus}_Task`}>
+                <p>{currentStatus}</p>
+            </div>
+            <div className="taskFunction">
+                <img src={informationLogo} alt="Info" title="Info" onClick={onClickInfo}/>
+                <img src={editLogo} alt="Edit" title="Edit" onClick={onClickEdit}/>
+                <img src={deleteLogo} alt="Delete" title="Delete" onClick={onClickDelete}/>
             </div>
             <TaskInfoHomepage 
                 task={task} 
@@ -190,6 +253,8 @@ function TaskDisplayHomepage(props) {
                 editDisplay={editDisplay} 
                 setEditDisplay={setEditDisplay}
                 onChangeTaskDetailDisplay={onChangeTaskDetailDisplay}
+                taskDescriptionDisplay={taskDescriptionDisplay}
+                setTaskDetailDisplay={setTaskDetailDisplay}
             />
         </li>
     );
@@ -204,17 +269,17 @@ function TaskInfoHomepage(props) {
         setDeleteDisplay, 
         editDisplay, 
         setEditDisplay,
-        onChangeTaskDetailDisplay
+        taskDescriptionDisplay,
+        setTaskDetailDisplay
     } = props; 
 
     const { taskTimeDeadline, taskTimeCreated, taskDescription, taskName, taskStatus} = task;
-    const onClickEdit = () => { setEditDisplay(true) };
-    const onClickDelete = () => { setDeleteDisplay(true); };
+
 
     if (finish) {
         return (
             <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"}`}>
-            <div className="taskInfoDescription">
+            <div className="taskInfoDescription" style={{display: convertFromBooleanToDisplay(taskDescriptionDisplay)}}>
                 <div>
                     <span className="outlineDescription">Task name: </span>
                     <span>{taskName}</span>
@@ -239,20 +304,12 @@ function TaskInfoHomepage(props) {
                     <span className="note">&#9432; Cannot edit or delete finised task</span>
                 </div>
             </div>
-            <div className="taskInfoButton taskFinishInfoButton">
-                <div onClick={onChangeTaskDetailDisplay} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="taskInfoClose">
-                    <figure>
-                        <img src={arrowUp} alt="Close"/>
-                        <figcaption>Close</figcaption>
-                    </figure>
-                </div>
-            </div>
         </div>
         )
     }
     return (
-        <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"} ${deleteDisplay ? "backgroundTaskDelete" : "backgroundTaskNonDelete"}`}>
-            <div className="taskInfoDescription" style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>
+        <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"}`}>
+            <div className="taskInfoDescription" style={{display: convertFromBooleanToDisplay(taskDescriptionDisplay)}}>
                 <div>
                     <span className="outlineDescription">Task name: </span>
                     <span>{taskName}</span>
@@ -274,28 +331,8 @@ function TaskInfoHomepage(props) {
                     <span>{taskStatus}</span>
                 </div>
             </div>
-            <UpdateTask task={task} display={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay}/>
-            <DeleteTask task={task} display={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay}/>
-            <div className="taskInfoButton">
-                <div onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="taskInfoEdit">
-                    <figure>
-                        <img src={editImg} alt="edit"/>
-                        <figcaption>Edit</figcaption>
-                    </figure>
-                </div>
-                <div onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="taskInfoDelete">
-                    <figure>
-                        <img src={deleteImg} alt="delete"/>
-                        <figcaption>Delete</figcaption>
-                    </figure>
-                </div>
-                <div onClick={onChangeTaskDetailDisplay} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="taskInfoClose">
-                    <figure>
-                        <img src={arrowUp} alt="Close"/>
-                        <figcaption>Close</figcaption>
-                    </figure>
-                </div>
-            </div>
+            <UpdateTask task={task} display={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay} setTaskDetailDisplay={setTaskDetailDisplay}/>
+            <DeleteTask task={task} display={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay} setTaskDetailDisplay={setTaskDetailDisplay}/>
         </div>
     )
 }

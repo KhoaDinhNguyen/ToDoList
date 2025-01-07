@@ -113,6 +113,7 @@ function Project(props) {
                 </div>
                 <div className="taskList">
                     <div className="unfinishedListTask">
+                        <p>Active</p>
                         <ul>
                             {listTask}
                         </ul>
@@ -139,6 +140,7 @@ function FinishedTask(props) {
     return (
         <div className="finishedListTask">
             <div className="finishedListTaskButton">
+                <p>Finished</p>
                 <button onClick={onClickFinishedListTaskVisible} >{finishedListTask.length} finished task(s)</button>
             </div>
             <ul className={finishedListTaskVisible ? "finishedListTaskVisible" : "finishedListTaskNonVisible"}>

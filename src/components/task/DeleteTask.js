@@ -5,7 +5,7 @@ import './DeleteTask.css';
 
 function DeleteTask(props) {
     const dispatch = useDispatch();
-    const { task, display, setDeleteDisplay } = props;
+    const { task, display, setDeleteDisplay, setTaskDetailDisplay } = props;
     const { taskName, projectName } = task;
     const accountName = localStorage.getItem("accountName");
 
@@ -23,7 +23,7 @@ function DeleteTask(props) {
             console.log(err);
         })
     }
-    const onClickCancle = () => { setDeleteDisplay(false); };
+    const onClickCancle = () => { setDeleteDisplay(false); setTaskDetailDisplay(false)};
     return (
         <div style={{display: display}}>
             <div className="deletePrompt">

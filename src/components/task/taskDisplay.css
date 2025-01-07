@@ -1,23 +1,24 @@
 .homepageTask {
     list-style-type: none;
     background-color: var(--taskColor);
-    width: 250px;
+    width: 100%;
     margin: 0 auto;
-    margin-bottom: 15px;
-    margin-top: 10px;
     transition-duration: 0.3s;
-    border-radius: 5px;
-    border: 1px solid black;
     position: relative;
     z-index: 5;
-    box-shadow: -3px 3px black;
+    display: grid;
+    grid-template-columns: 50px 1fr 125px 150px;
+    padding: 10px 0;
+    border-bottom: 1px solid #efefef;
 }
 
-.homepageTask:hover {
-    box-shadow: -6px 6px black;
-    transform: translate(3px, -3px);
+.importantAndCheckBox {
+    display: flex;
+    flex-direction: row;
+    grid-column: 1 / 2;
+    margin-left: 25px;
+    align-items: center;
 }
-
 @media screen and (max-width : 499px) {
     .homepageTask {
         width: 225px;
@@ -39,12 +40,36 @@
 }
 
 .homepageTaskName {
-    width: 200px;
-    cursor: pointer;
     overflow-x: auto;
+    grid-column: 2 / 3;
+    display: flex;
+    align-items: center;
 }
 
+.homepageStatus {
+    grid-column: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    border: 1px solid black;
+}
 
+.homepageStatus p {
+    color: #fff;
+}
+
+.pending_Task {
+    background-color: #FF8C00;
+}
+
+.fulfilled_Task {
+    background-color: #50C878;
+}
+
+.failing_Task {
+    background-color: #FF748B;
+}
 .homepageTaskName::-webkit-scrollbar {
     height: 5px;
 }
@@ -58,7 +83,7 @@
 }
 
 .homepageTaskName h4 {
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .fulfilledTask {
@@ -116,12 +141,13 @@
     transition-duration: 0.5s;
 }
 
+/*
 .homepageTask:hover .important label svg {
     width: 25px;
     height: 25px;
     stroke-width: 2px;
 }
-
+*/
 .taskBody:active .important label svg {
     width: 25px;
     height: 25px;
@@ -177,15 +203,22 @@
 /* =========================== TASK FUNCTION =========================== */
 .taskFunction {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    grid-column: 4 / 5;
+}
+
+.taskFunction img {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin-left: 20px;
 }
 
 .changeStatus {
     accent-color: green;
     width: 25px;
     height: 25px;
-    outline: 1px dashed black;
     margin-right: 5px;
     cursor: pointer;
 }
@@ -205,6 +238,7 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: white;
+    grid-column: 1 / 5;
 }
 
 .backgroundTaskDelete {

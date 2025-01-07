@@ -5,7 +5,7 @@ import { tasksSlice } from "../../features/user/databaseSlice";
 import './UpdateTask.css';
 
 function UpdateTask(props) {
-    const { task, display, setEditDisplay } = props;
+    const { task, display, setEditDisplay, setTaskDetailDisplay } = props;
     const { taskName, taskDescription, taskTimeDeadline, taskTimeCreated, projectName} = task;
     const [newTaskName, setNewTaskName] = useState(taskName);
     const [newTaskDescription, setNewTaskDescription] = useState(taskDescription);
@@ -14,7 +14,7 @@ function UpdateTask(props) {
     const accountName = localStorage.getItem('accountName');
     const dispatch = useDispatch();
 
-    const onClickCancle = () => { setEditDisplay(false); }
+    const onClickCancle = () => { setEditDisplay(false); setTaskDetailDisplay(false);}
     const onChangeTaskName = event => { setNewTaskName(event.target.value); }
     const onChangeTaskDescription = event => { setNewTaskDescription(event.target.value); }
     const onChangeTaskDeadline = event => { setNewTaskTimeDeadline(event.target.value); }
@@ -30,6 +30,7 @@ function UpdateTask(props) {
             if (!response.error) {
                 dispatch(tasksSlice.actions.updateInfo({taskName, projectName, accountName, newTaskName, newTaskDescription, newTaskTimeDeadline}));
                 setEditDisplay(false);
+                setTaskDetailDisplay(false);
             }
             else {
                 alert(response.message)

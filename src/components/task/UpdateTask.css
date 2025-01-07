@@ -22,12 +22,14 @@
 .editTaskFormMain input {
     font-size: 14px;
     background-color: #e8e7e7;
-    border: 1px #e8e7e7 solid;
+    border: 2px #e8e7e7 solid;
     width: 120px;
+    outline: 0;
 }
 
 .editTaskFormMain input:focus {
     background-color: white;
+    border: 2px solid orange;
 }
 
 @media screen and (max-width : 499px) {

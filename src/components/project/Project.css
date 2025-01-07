@@ -2,19 +2,18 @@
 #projectList {
     width: 95%;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
+    align-items: center;
 }
 
 .project {
     list-style: none;
-    width: 275px;
-    border: 1px solid black;
+    min-width: 800px;
+    border-left: 5px solid #5A4FCF;
     margin-right: 30px;
     margin-bottom: 20px;
     height: max-content;
-    background-color: #FFE893;
-    border-radius: 20px;
-    background-color: #FFFDF0;
+    background-color: #FFF;
 }
 
 .projectHeader {
@@ -22,15 +21,14 @@
     justify-content: space-between;
     align-items: center;
     background-color: rgba(244, 91, 105);
+    background-color: #b0ebff;
+    background-color: rgb(106 101 255);;
+    background-color: #f9f871;
+    background-color: #7f5069;
+    background-color: #5A4FCF;
     cursor: pointer;
     transition-duration: 0.5s;
     height: 46.67px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.projectHeader:hover {
-    background-color: #10162F;
 }
 
 .projectHeader h3 {
@@ -177,11 +175,6 @@
     .projectFunction button {
         font-size: 12px;
     }
-}
-
-.taskList {
-    max-height: 400px;
-    overflow-y: auto;
 }
 
 .taskList::-webkit-scrollbar {
