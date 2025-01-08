@@ -15,6 +15,11 @@ import './Project.css';
 import editImg from '../../img/user/edit.png';
 import deleteImg from '../../img/user/delete.png';
 import { convertFromBooleanToDisplay } from "../../app/user/User";
+import deleteLogo from '../../img/user/deleteDisplay.png';
+import editLogo from '../../img/user/editDisplay.png';
+import infoLogo from '../../img/user/informationDisplay.png';
+import arrowLink from '../../img/user/arrowLink.png';
+import folder from '../../img/user/folder.png';
 
 function ListProject() {
     const projects = useSelector(state => state[projectsSlice.name]);
@@ -67,6 +72,7 @@ function Project(props) {
     const [infoDisplay, setInfoDisplay] = useState(false);
     const [editDisplay, setEditDisplay] = useState(false);
     const [deleteDisplay, setDeleteDisplay] = useState(false);
+    const [projectDescriptionDisplay, setProjectDescriptionDisplay] = useState(false);
 
     const accountName = localStorage.getItem("accountName");   
 
@@ -79,15 +85,64 @@ function Project(props) {
         setInfoDisplay(!infoDisplay);
     };
 
+    const onClickProjectDescriptionDisplay = () => {
+        if (infoDisplay === true && projectDescriptionDisplay === true) {
+            setInfoDisplay(false);
+            setProjectDescriptionDisplay(false);
+            return;
+        }
+        else if (infoDisplay === false) {
+            setInfoDisplay(true);
+        }
+        setProjectDescriptionDisplay(true);
+        setEditDisplay(false);
+        setDeleteDisplay(false);
+    }
+
+    const onClickEditDisplay = () => {
+        if (infoDisplay === true && editDisplay === true) {
+            setInfoDisplay(false);
+            setEditDisplay(false);
+            return;
+        }
+        else if (infoDisplay === false) {
+            setInfoDisplay(true);
+        }
+        setEditDisplay(true);
+        setProjectDescriptionDisplay(false);
+        setDeleteDisplay(false);
+    }
+
+    const onClickDeleteDisplay = () => {
+        if (infoDisplay === true && deleteDisplay === true) {
+            setInfoDisplay(false);
+            setDeleteDisplay(false);
+            return;
+        }
+        else if (infoDisplay === false) {
+            setInfoDisplay(true);
+        }
+        setDeleteDisplay(true);
+        setProjectDescriptionDisplay(false);
+        setEditDisplay(false);
+    }
+
     return (
         <>
             <li className="project">
                 <div className="projectBody">
-                    <div className="projectHeader" onClick={onClickDisplayProjectInfo}>
+                    <div className="projectHeader">
                         <h3>{projectName}</h3>
+                        <Progress numOfPendingTask={numOfPendingTask} numOfFulfilledTask={numOfFulfilledTask} numOfFailingTask={numOfFailingTask}/>
+                        <div className="projectFunctionButton">
+                            <img src={infoLogo} alt="Info" onClick={onClickProjectDescriptionDisplay}/>
+                            <img src={editLogo} alt="Edit" onClick={onClickEditDisplay}/>
+                            <img src={deleteLogo} alt="Edit" onClick={onClickDeleteDisplay}/>
+                            <img src={arrowLink} alt="Close"/>
+                        </div>
                     </div>
-                    <div className={`projectMain ${!infoDisplay ? "hiddenProject" : "visibleProject"} ${deleteDisplay ? "backgroundDelete": "backgroundNonDelete"}`}>
-                        <div className="projectDescription" style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}}>
+                    <div className={`projectMain ${!infoDisplay ? "hiddenProject" : "visibleProject"}`}>
+                        <div className="projectDescription" style={{display: convertFromBooleanToDisplay(projectDescriptionDisplay)}}>
                             <p><span style={{fontWeight: 500}}>Project name:</span> {projectName}</p>
                             <p><span style={{fontWeight: 500}}>Project description:</span> {projectDescription}</p>
                             <p><span style={{fontWeight: 500}}>Project time created:</span> {projectTimeCreated}</p>
@@ -109,15 +164,9 @@ function Project(props) {
                             </div>
                         </div>
                     </div>
-                    <Progress numOfPendingTask={numOfPendingTask} numOfFulfilledTask={numOfFulfilledTask} numOfFailingTask={numOfFailingTask}/>
                 </div>
                 <div className="taskList">
-                    <div className="unfinishedListTask">
-                        <p>Active</p>
-                        <ul>
-                            {listTask}
-                        </ul>
-                    </div>
+                    <UnfinishedTask listTask={listTask}/>
                     <FinishedTask finishedListTask={finishedListTask}/>
                 </div>
                 <CreateTaskForm projectName={projectName}/>
@@ -126,7 +175,35 @@ function Project(props) {
     );
 }
 
-//export const convertFromBooleanToDisplay = display => display ? "block" : "none";
+function UnfinishedTask (props) {
+    const { listTask } = props;
+    const [listVisible, setListVisible] = useState(true);
+
+    const onClickFinishedListTaskVisible = () => { setListVisible(!listVisible); };
+
+    if (listTask.length === 0) {
+        return <></>
+    }
+
+    return (
+        <>
+            <div className="listTaskHeader">
+                <p className="listTaskTitle">Active</p>
+                <div className="listTaskFunction">
+                    <div>
+                        <p className="numTask">{listTask.length}</p>
+                    </div>
+                    <img src={folder} alt="Open" onClick={onClickFinishedListTaskVisible}/>
+                </div>
+            </div>
+            <ul className={listVisible ? "finishedListTaskVisible" : "finishedListTaskNonVisible"}>
+                {listTask}
+            </ul>
+        </>
+
+    )
+
+}
 function FinishedTask(props) {
     const {finishedListTask} = props;
     const [finishedListTaskVisible, setFinishedListTaskVisible] = useState(false);
@@ -138,15 +215,21 @@ function FinishedTask(props) {
     }
 
     return (
-        <div className="finishedListTask">
-            <div className="finishedListTaskButton">
-                <p>Finished</p>
-                <button onClick={onClickFinishedListTaskVisible} >{finishedListTask.length} finished task(s)</button>
+        <>
+            <div className="listTaskHeader">
+                <p className="listTaskTitle">Finished</p>
+                <div className="listTaskFunction">
+                    <div>
+                        <p className="numTask">{finishedListTask.length}</p>
+                    </div>
+                    <img src={folder} alt="Open" onClick={onClickFinishedListTaskVisible}/>
+                </div>
             </div>
             <ul className={finishedListTaskVisible ? "finishedListTaskVisible" : "finishedListTaskNonVisible"}>
                 {finishedListTask}
             </ul>
-        </div>
+        </>
+
     )
 }
 

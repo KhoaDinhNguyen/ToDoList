@@ -51,12 +51,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 40px;
+    border-radius: 30px;
     border: 1px solid black;
+    height: 20px;
 }
 
 .homepageStatus p {
     color: #fff;
+    font-size: 14px;
 }
 
 .pending_Task {

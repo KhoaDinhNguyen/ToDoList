@@ -6,8 +6,6 @@ import { useDispatch } from "react-redux";
 import { tasksSlice } from "../../features/user/databaseSlice";
 import UpdateTask from "./UpdateTask";
 import { convertFromBooleanToDisplay } from "../../app/user/User";
-import editImg from '../../img/user/edit.png';
-import deleteImg from '../../img/user/delete.png';
 import { convertDateToISOString } from "../../app/user/User";
 import informationLogo from '../../img/user/informationDisplay.png';
 import editLogo from '../../img/user/editDisplay.png';
@@ -52,6 +50,7 @@ function TaskDisplay(props) {
         if (taskDetailDisplay === true && taskDescriptionDisplay === true) {
             setTaskDescriptionDisplay(false);
             setTaskDetailDisplay(false);
+            return;
         }
         else if (taskDetailDisplay === false) {
             setTaskDetailDisplay(true);
@@ -64,6 +63,7 @@ function TaskDisplay(props) {
         if (taskDetailDisplay === true && editDisplay === true) {
             setEditDisplay(false);
             setTaskDetailDisplay(false);
+            return;
         }
         else if (taskDetailDisplay === false) {
             setTaskDetailDisplay(true);
@@ -77,6 +77,7 @@ function TaskDisplay(props) {
         if (taskDetailDisplay === true && deleteDisplay === true) {
             setDeleteDisplay(false);
             setTaskDetailDisplay(false);
+            return;
         }
         else if (taskDetailDisplay === false) {
             setTaskDetailDisplay(true);
@@ -203,7 +204,7 @@ function TaskDisplayHomepage(props) {
                     <p>{currentStatus}</p>
                 </div>
                 <div className="taskFunction">
-                    <img src={informationLogo} alt="Info" title="Info" onClick={onChangeTaskDetailDisplay}/>
+                    <img src={informationLogo} alt="Info" title="Info" onClick={onClickInfo}/>
                 </div>
                 <TaskInfoHomepage 
                     task={task} 

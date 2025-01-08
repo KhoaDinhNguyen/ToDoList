@@ -77,7 +77,7 @@ function CreateTaskForm(props) {
                     <div className="createTaskFunction">
                         <div className="createTaskSubmitButton">
                             <input type="submit" name={`${projectName}_${taskName}_submitButton`} id={`${projectName}_${taskName}_submitButton`} onClick={onClickToggleCreateTaskButton}/>
-                            <label htmlFor={`${projectName}_${taskName}_submitButton`} className="createTaskButton"><span>Create</span></label>
+                            <label htmlFor={`${projectName}_${taskName}_submitButton`} className="createTaskButton"><span>New task</span></label>
                         </div>
                         <div className="createTaskCancelButton">
                             <input type="button" name={`${projectName}_${taskName}_cancelButton`} id={`${projectName}_${taskName}_cancelButton`} onClick={onClickToggleCreateTaskButton}/>

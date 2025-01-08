@@ -17,31 +17,43 @@
 }
 
 .projectHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgba(244, 91, 105);
-    background-color: #b0ebff;
-    background-color: rgb(106 101 255);;
-    background-color: #f9f871;
-    background-color: #7f5069;
+    display: grid;
+    grid-template-columns: 1fr 180px 150px;
     background-color: #5A4FCF;
-    cursor: pointer;
     transition-duration: 0.5s;
-    height: 46.67px;
+    height: 50px;
+    align-items: center;
 }
 
 .projectHeader h3 {
     color: white;
     transition-duration: 0.5s;
-    margin: 0 auto;
     font-size: 25px;
+    font-weight: 400;
+    width: max-content;
+    margin-left: 10px;
+    grid-column: 1 / 2;
 }
 
-.projectHeader:hover h3 {
-    font-size: 30px;
+.projectFunctionButton {
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 5px 10px;
+    cursor: pointer;
+    grid-column: 3 / 4;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: max-content;
+    justify-self: flex-end;
+    margin-right: 5px;
 }
-
+.projectFunctionButton img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
 .projectMain {
     transition-duration: 0.75s;
     transition-property: height;
@@ -189,33 +201,47 @@
     background-color: grey;
 }
 
-.finishedListTaskButton {
+.listTaskHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 2px solid black;
+}
+
+
+.listTaskTitle {
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.listTaskHeader img{
+    margin-right: 20px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.listTaskFunction {
+    display: flex;
+    align-items: center;
+}
+
+.listTaskFunction div {
+    margin-right: 10px;
+    background-color: #89CFF0;
+    padding: 5px;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    align-items: center;
 }
 
-.finishedListTaskButton button {
-    cursor: pointer;
-    width: 150px;
-    background-color: #213555;
-    background-color: #8D0B41;
-    border: 0;
-    color: #fff;
-    font-weight: 600;
-    margin: 0 auto;
-    padding: 5px 0px;
+.numTask {
     font-size: 12px;
-    border-radius: 10px;
-    border: 0px solid black;
-    box-shadow: 0px 5px #8D0B41;
-    transition-duration: 300ms;
-    margin-bottom: 10px;
-}
-
-.finishedListTaskButton button:hover {
-    transform: translate(0px, 5px);
-    box-shadow: 0px 0px white;
+    font-weight: 500;
 }
 
 .finishedListTaskVisible {
@@ -233,6 +259,7 @@
 
 .progress {
     padding: 7px 0px;
+    grid-column: 2 / 3;
 }
 
 .progress table {

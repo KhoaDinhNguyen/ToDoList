@@ -1,7 +1,5 @@
 .createTaskForm {
-    background-color: var(--backgroundColorMain);
-    background-color: #FCFFC1;
-    background-color: #FFFDF0;
+    background-color: #FFF;
     padding-top: 5px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -19,41 +17,38 @@
     width: 100%;
     cursor: pointer;
     margin-top: -10px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    position: relative;
 }
 
-.createTaskForm .openCreateTask:hover {
-    background-color: black;
+
+.createTaskForm .openCreateTask::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    z-index: 2;
+    transition-duration: 0.2s;
 }
 
-.createTaskForm .openCreateTask:active {
-    background-color: black;
+.createTaskForm .openCreateTask:hover::before, .createTaskForm .openCreateTask:active::before {
+    width: 100%;
+    background-image: linear-gradient(to left, #ff5895, #ff529e, #ff4da8, #ff48b3, #ff45be, #f944c8, #f145d2, #e847dc, #d64ce6, #c152ef, #a857f8, #8b5dff);
 }
 
 .createTaskForm .openCreateTask p{
-    background-color: var(--backgroundColorMain);
-    background-color: #FCFFC1;
-    background-color: #FFFDF0;
     border: 0;
-    color: black;
+    color: #000;
     cursor: pointer;
     font-size: 20px;
     padding: 10px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-
+    position: relative;
+    z-index: 3;
 }
 
-.createTaskForm .openCreateTask:hover p{
-    background-color: #3C3D37;
-    color: white;
-    font-weight: 700;
-}
-
-.createTaskForm .openCreateTask:active p{
-    background-color: black;
-    color: white;
+.createTaskForm .openCreateTask:hover p, .createTaskForm .openCreateTask:active p{
+    color: #fff;
     font-weight: 700;
 }
 
@@ -65,16 +60,9 @@
 }
 
 .createTaskFormMain fieldset {
-    border: 3px solid grey;
     border: 0;
-    border-top: 1px solid grey;
     background-color: #fff;
-    border-radius: 10px;
-    border-radius: 0;
     padding-bottom: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    background-color: #FFFDF0;
 }
 
 .createTaskFormMain legend {
@@ -101,12 +89,15 @@
 
 .createTaskForm .createTaskInput input {
     background-color: #e8e7e7;
-    border: 1px #e8e7e7 solid;
+    border: 2px #e8e7e7 solid;
     font-size: 16px;
+    outline: 0;
+    border-radius: 5px;
 }
 
 .createTaskForm .createTaskInput input:focus {
     background-color: #fff;
+    border: 2px orange solid;
 }
 
 
