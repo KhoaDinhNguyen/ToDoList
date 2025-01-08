@@ -97,6 +97,14 @@ body {
     cursor: pointer;
 }
 
+@media screen and (max-width : 499px) {
+    #homepage .companyName img {
+        height: 32px;
+        width: 32px;
+    }
+    
+}
+
 #homepage .companyName p {
     color: black;
     font-size: 1.5rem;
@@ -104,18 +112,22 @@ body {
     margin-left: 10px;
 }
 
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #homepage #companyName p {
-        font-size: 1rem;
-        margin: 0;
-        padding: 0;
+@media screen and (max-width : 499px) {
+    #homepage .companyName p {
+        font-size: 13px;
+        margin-left: 5px;
     }
-    
 }
 
 footer {
     background-color: rgb(7 1 39);
     padding: 50px;
+}
+
+@media screen and (max-width : 499px) {
+    footer {
+        padding: 10px;
+    }
 }
 
 #homepage footer .companyName p {
@@ -133,7 +145,7 @@ footer #contact {
 }
 
 #contactLeft {
-    width: 500px;
+    max-width: 500px;
 }
 
 ::-webkit-scrollbar {

@@ -42,7 +42,7 @@ export function Footer() {
                 <div id="contactLeft">
                     <p>Stay organized and achieve more with MasterTask. Put your productivity on autopilot.</p>
                 </div>
-                <div>
+                <div id="email">
                     <p>khoacode1305@gmail.com</p>
                 </div>
             </div>

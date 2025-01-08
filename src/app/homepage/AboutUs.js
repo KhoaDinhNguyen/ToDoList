@@ -1,6 +1,10 @@
 import { Helmet } from "react-helmet";
 import './AboutUs.css';
 import { useNavigate } from "react-router-dom";
+import todoListImg from '../../img/homepage/todoList.png';
+import calendarImg from '../../img/homepage/calendar.png';
+import dashboardImg from '../../img/homepage/dashboard.png';
+import homepageImg from '../../img/homepage/homepage.png';
 
 function AboutUs() {
     const navigate = useNavigate();
@@ -19,6 +23,11 @@ function AboutUs() {
                             <button onClick={() => { navigate('/homepage/login')}}>Get Started</button>
                         </div>
                     </div>
+                    <div id="introImg">
+                        <div>
+                            <img src={todoListImg} alt="ToDoListImg"/>
+                        </div>
+                    </div>
                 </div>
                 <div id="feature">
                     <h3 className="title">FEATURES</h3>
@@ -32,7 +41,9 @@ function AboutUs() {
                                     <p>A place where users can create, update, delete tasks.</p>
                                 </div>
                             </div>
-                            <div></div>
+                            <div className="featureImg">
+                                <img src={homepageImg} alt="Homepage"/>
+                            </div>
                         </div>
                         <div className="featureItem" id="feature2">
                             <div className="featureItemContent">
@@ -41,7 +52,9 @@ function AboutUs() {
                                     <p>Tasks are organized by deadline supporting users to see upcoming deadline.</p>
                                 </div>
                             </div>
-                            <div></div>
+                            <div className="featureImg">
+                                <img src={dashboardImg} alt="Dashboard"/>
+                            </div>
                         </div>
                         <div className="featureItem" id="feature3">
                             <div className="featureItemContent" >
@@ -50,7 +63,9 @@ function AboutUs() {
                                     <p>Users can see tasks in calendar mode providing an overall view.</p>
                                 </div>
                             </div>
-                            <div></div>
+                            <div className="featureImg">
+                                <img src={calendarImg} alt="Calendar"/>
+                            </div>
                         </div>
                     </div>
                 </div>
