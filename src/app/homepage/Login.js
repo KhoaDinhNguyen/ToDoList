@@ -5,17 +5,45 @@ import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
 import { profileNameSlice } from "../../features/user/databaseSlice";
 import './Login.css';
-import loginLogo from '../../img/homepage/loginPage.png';
+import profileLogo from '../../img/homepage/loginPage.png';
+import loginImg from '../../img/homepage/login.png';
 
-function Login() {
+function Login() {   
+    return (
+        <>  
+            <Helmet>
+                <title>Login | ToDo List</title>
+            </Helmet>
+            <div id="loginPage">
+                <LoginIntro/>
+                <LoginMain/>
+            </div>
+        </>
+    )
+}
+
+function LoginIntro() {
+    return (
+        <div id="loginIntro">
+            <div id="loginIntroContext">
+                <h2>Elevate Your Task Management Effortlessly</h2>
+                <p>Log in to continue the seamless journey with our intuitive app. Safe, secure, and always at your service.</p>
+                <img src={loginImg} alt="Login logo"/>
+            </div>
+        </div>
+    );
+}
+
+function LoginMain() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("NOMESSSAGE");
+    const [message, setMessage] = useState("");
     const [accountName, setAccountName] = useState("");
     const [password, setPassword] = useState("");
     const [displayMessage, setDisplayMessage] = useState("hidden");
 
-    const dispatch = useDispatch();
 
     const onChangeAccountName = event => { setAccountName(event.target.value); }
     const onChangePassword = event => { setPassword(event.target.value); }
@@ -39,7 +67,7 @@ function Login() {
                 setDisplayMessage('visible');
 
                 setTimeout(() => {
-                    setMessage("NOMESSSAGE");
+                    setMessage("");
                     setDisplayMessage('hidden');
                 }, 5000)
             }
@@ -48,44 +76,37 @@ function Login() {
             console.log(err);
         });
     }
-    
+
     return (
-        <>  
-            <Helmet>
-                <title>Login | ToDo List</title>
-            </Helmet>
-            <div id="login">
-                <div id="loginMain">
-                    <div id="loginContext">
-                        <div id="loginContextHeader">
-                            <img src={loginLogo} alt="login logo" id="loginLogo"/>
-                            <h2>Welcome back</h2>
-                            <p>Please enter your details to sign in</p>
-                        </div>
-                        <form onSubmit={onSubmitLogin} id="loginForm">
-                            <div className="input">
-                                <input name="accountNameSignIn" id="accountNameSignIn" type="text" required value={accountName} onChange={onChangeAccountName} autoComplete="off" placeholder="Username"/>
-                            </div>
-                            <div className="input">
-                                <input name="passwordSignIn" id="passwordSignIn" type="password" required value={password} onChange={onChangePassword} autoComplete="off" placeholder="Password"/>
-                            </div>
-                            <div id="loginFormFooter">
-                                <NavLink to="/homepage/forgetPassword">Forgot password?</NavLink>
-                            </div>
-                            <input type="submit" id="loginSubmit" name="loginSubmit"/>
-                            <label htmlFor="loginSubmit" id="labelLoginSubmit"><span>Sign In</span></label>
-                        </form>
-                        <div id="message" style={{visibility: displayMessage}}>
-                            <LoginStatus loading={loading} message={message}/>
-                        </div>
-                        <div id="loginContextFooter">
-                            <p>Don't have an account? <NavLink to="/homepage/signUp">Sign Up</NavLink></p>
-                        </div>
+        <div id="loginMain">
+            <div id="loginMainContext">
+                <div id="loginContextHeader">
+                    <img src={profileLogo} alt="Profile logo" id="loginLogo"/>
+                    <h2>Welcome back</h2>
+                    <p>Please enter your details to sign in</p>
+                </div>
+                <form onSubmit={onSubmitLogin} id="loginForm">
+                    <div className="loginInput">
+                        <input name="accountNameSignIn" id="accountNameSignIn" type="text" required value={accountName} onChange={onChangeAccountName} autoComplete="off" placeholder="Username"/>
                     </div>
+                    <div className="loginInput">
+                        <input name="passwordSignIn" id="passwordSignIn" type="password" required value={password} onChange={onChangePassword} autoComplete="off" placeholder="Password"/>
+                    </div>
+                    <div id="forgetPassword">
+                        <NavLink to="/homepage/forgetPassword">Forgot password?</NavLink>
+                    </div>
+                    <input type="submit" id="loginSubmit" name="loginSubmit"/>
+                    <label htmlFor="loginSubmit" id="labelLoginSubmit"><span>Sign In</span></label>
+                </form>
+                <div id="message" style={{visibility: displayMessage}}>
+                    <LoginStatus loading={loading} message={message}/>
+                </div>
+                <div id="loginContextFooter">
+                    <p>Don't have an account? <NavLink to="/homepage/signUp">Sign Up</NavLink></p>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 
 function LoginStatus(props) {

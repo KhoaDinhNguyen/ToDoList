@@ -7,6 +7,30 @@ import signUpLogo from '../../img/homepage/signupPage.png' ;
 import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+   
+    return (
+        <>  
+            <Helmet>
+                <title>Sign Up | ToDo List</title>
+            </Helmet>
+            <div id="signUp">
+                <SignUpIntro/>
+                <SignUpMain/>
+            </div>
+        </>
+    );
+}
+
+function SignUpIntro() {
+    return (
+        <div id="signUpIntro">
+            <h2>Discover the Future of Scheduling</h2>
+            <p>Unlock your potential with MasterTask, the ultimate tool for productivity. Begin your journey now with a hassle-free sign-up!</p>
+        </div>
+    )
+}
+
+function SignUpMain() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [accountName, setAccountName] = useState("");
@@ -14,10 +38,10 @@ function SignUp() {
     const [password, setPassword] = useState("");
     const [confirmedPassword, setConfirmedPassword] = useState("");
 
-    const onChangeAccountName = (event) => { setAccountName(event.target.value); }
-    const onChangeProfileName = (event) => { setProfileName(event.target.value); }
-    const onChangePassword = (event) => { setPassword(event.target.value); }
-    const onChangeConfirmedPassword = (event) => { setConfirmedPassword(event.target.value); }
+    const onChangeAccountName = event => { setAccountName(event.target.value); };
+    const onChangeProfileName = event => { setProfileName(event.target.value); };
+    const onChangePassword = event => { setPassword(event.target.value); };
+    const onChangeConfirmedPassword = event => { setConfirmedPassword(event.target.value); };
 
     const onSubmitSignIn = async (event) => {
         event.preventDefault();
@@ -53,44 +77,38 @@ function SignUp() {
             })
         }
     }
-    return (
-        <>  
-            <Helmet>
-                <title>Sign Up | ToDo List</title>
-            </Helmet>
-            <div id="signUp">
-                <div id="signUpMain">
-                    <div id="signUpContextHeader">
-                        <img src={signUpLogo} alt="sign up logo"/>
-                        <h2>Create an account</h2>
-                        <p>Already have an account? <NavLink to="/homepage/login">Sign in</NavLink></p>
-                    </div>
-                    <form onSubmit={onSubmitSignIn} id="signUpForm">
-                        <div className="signUpInput">
-                            <input type="text" id="accountNameSignUp" name="accountNameSignUp" value={accountName} onChange={onChangeAccountName} required autoComplete="off" placeholder="Username" title="Only used for login"/>
-                        </div>
-                        <div className="signUpInput">
-                            <input type="text" id="profileNameSignUp" name="profileNameSignUp" value={profileName} onChange={onChangeProfileName} required autoComplete="off" placeholder="Profile name" title="Displayed name in public"/>
-                        </div>
-                        <div className="signUpInput">
-                            <input type="password" id="passwordSignUp" name="passwordSignUp" value={password} onChange={onChangePassword} required autoComplete="off" placeholder="Password"/>
-                        </div>
-                        <div className="signUpInput">
-                            <input type="password" id="confirmedPasswordSignUp" name="confirmedPasswordSignUp" value={confirmedPassword} onChange={onChangeConfirmedPassword} required autoComplete="off" placeholder="Confirmed password"/>
-                        </div>
-                        <input type="submit" value="Sign Up" id="signUpSubmit" name="signUpSubmit"/>
-                        <label htmlFor="signUpSubmit" id="signUpSubmitLabel">Sign Up</label>
-                    </form>
-                    <div id="message" style={{visibility: message === ''? 'hidden' : 'visible'}}>
-                        <SignUpState loading={loading} message={message}/>
-                    </div>
-                </div>
-                <SignUpDialog message={message} setMessage={setMessage}/>
-            </div>
-        </>
-    );
-}
 
+    return (
+        <div id="signUpMain">
+        <div id="signUpContextHeader">
+            <img src={signUpLogo} alt="SignUp logo"/>
+            <h2>Create an account</h2>
+            <p>Already have an account? <NavLink to="/homepage/login">Sign in</NavLink></p>
+        </div>
+        <form onSubmit={onSubmitSignIn} id="signUpForm">
+            <div className="signUpInput">
+                <input type="text" id="accountNameSignUp" name="accountNameSignUp" value={accountName} onChange={onChangeAccountName} required autoComplete="off" placeholder="Username" title="Only used for login"/>
+            </div>
+            <div className="signUpInput">
+                <input type="text" id="profileNameSignUp" name="profileNameSignUp" value={profileName} onChange={onChangeProfileName} required autoComplete="off" placeholder="Profile name" title="Displayed name in public"/>
+            </div>
+            <div className="signUpInput">
+                <input type="password" id="passwordSignUp" name="passwordSignUp" value={password} onChange={onChangePassword} required autoComplete="off" placeholder="Password"/>
+            </div>
+            <div className="signUpInput">
+                <input type="password" id="confirmedPasswordSignUp" name="confirmedPasswordSignUp" value={confirmedPassword} onChange={onChangeConfirmedPassword} required autoComplete="off" placeholder="Confirmed password"/>
+            </div>
+            <input type="submit" value="Sign Up" id="signUpSubmit" name="signUpSubmit"/>
+            <label htmlFor="signUpSubmit" id="signUpSubmitLabel">Sign Up</label>
+        </form>
+        <div id="message" style={{visibility: message === ''? 'hidden' : 'visible'}}>
+            <SignUpState loading={loading} message={message}/>
+        </div>
+        <SignUpDialog message={message} setMessage={setMessage}/>
+
+    </div>
+    )
+}
 function SignUpState(props) {
     const { loading, message } = props; 
 

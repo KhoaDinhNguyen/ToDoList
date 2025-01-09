@@ -19,40 +19,55 @@ body {
     }
 }
 
-#homepage nav {
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #A294F9;
+    border-radius: 10px;
+}
+
+/* ======================== HEADER ======================== */
+header {
     display: flex;
     justify-content: space-between;
-    background-color: #fff;
     box-sizing: border-box;
     background: linear-gradient(-90deg, #a1c4fda4 0%, #c2e9fb9d 100%);
 }
 
-#navList {
+/* ======================== NAVIGATION BAR (TOP-RIGHT CORNER) ======================== */
+nav {
     display: flex;
     align-items: center;
     margin: 0;
     padding: 0;
 }
 
-#navList ul {
+nav ul {
     display: flex;
     justify-content: space-between;
 }
 
-#navList li {
+nav li {
     list-style-type: none;
     box-sizing: border-box;
     margin-right: 30px;
 }
 
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #navList li {
+@media screen and (max-width : 499px) {
+    nav li {
         padding: 3px;
         margin: 0;
     }
 }
 
-#navList li a {
+nav li a {
     font-size: 20px;
     font-weight: 500;
     text-decoration: none;
@@ -60,31 +75,26 @@ body {
 
 }
 
-@media screen and (min-width: 500px) and (max-width : 850) {
-    #navList li a {
-        font-size: 1.5rem;
-        padding: 0;
-    }
-}
-
 @media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #navList li a {
+    nav li a {
         font-size: 1rem;
         padding: 3px;
     }
 }
 
-#navList a.match {
+nav a.active {
     color: rgb(106 101 255);
 }
 
-#navList a.noMatch {
+nav a.nonActive {
     color: rgb(89, 82, 119);
 }
 
-#navList a.noMatch:hover {
+nav a.nonActive:hover {
     color: black;
 }
+
+/* ======================== COMPANY LOGO (TOP-LEFT CORNER) ======================== */
 
 #homepage .companyName {
     display: flex;
@@ -114,10 +124,12 @@ body {
 
 @media screen and (max-width : 499px) {
     #homepage .companyName p {
-        font-size: 13px;
+        font-size: 14px;
         margin-left: 5px;
     }
 }
+
+/* ======================== FOOTER ======================== */
 
 footer {
     background-color: rgb(7 1 39);
@@ -138,25 +150,22 @@ footer {
     cursor: default;
 }
 
-footer #contact {
+footer #footerInfo {
     color: gray;
     display: flex;
     justify-content: space-between;
 }
 
-#contactLeft {
+#footerMessage {
     max-width: 500px;
 }
 
-::-webkit-scrollbar {
-    width: 10px;
-}
-  
-::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #A294F9;
-    border-radius: 10px;
+@media screen and (max-width : 499px) {
+    #footerMessage {
+        font-size: 14px;
+    }
+    
+    #contact {
+        font-size: 14px;
+    }
 }

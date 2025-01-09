@@ -1,9 +1,79 @@
-#login {
+#loginPage {
     background: linear-gradient(-90deg, #a1c4fda4 0%, #c2e9fb9d 100%);
-    height: 92vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 100px 0;
 }
+
+
+@media screen and (max-width : 499px) {
+    #loginPage {
+        display: flex;
+        flex-direction: column;
+        padding: 50px 0;
+    }
+}
+/* ======================== Login Introduction ======================== */
+#loginIntro {
+    grid-column: 1 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width : 499px) {
+    #loginIntro {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width : 499px) {
+    #loginIntroContext {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+#loginIntro h2 {
+    font-size: 35px;
+    width: 300px;
+    color: rgb(14 0 74);
+}
+
+@media screen and (max-width : 499px) {
+    #loginIntro h2 {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width : 850px) {
+    #loginIntro h2 {
+        font-size: 25px;
+    }
+}
+
+#loginIntro p {
+    font-size: 18px;
+    width: 250px; 
+    margin-top: 20px;
+    color: rgb(69 56 120);
+}
+
+@media screen and (max-width : 850px) {
+    #loginIntro p {
+        font-size: 14px;
+    } 
+}
+
+@media screen and (max-width : 499px) {
+    #loginIntro img {
+        width: 128px;
+        height: 128px;
+    }
+}
+
+/* ======================== LOGIN MAIN ======================== */
 
 #loginMain {
     grid-column: 2 / 3;
@@ -15,7 +85,7 @@
     align-items: center;
 }
 
-#loginContext {
+#loginMainContext {
     background-color: #F8F8F8;
     display: flex;
     flex-direction: column;
@@ -28,55 +98,10 @@
 }
 
 @media screen and (max-width : 850px) {
-    #loginIntro {
-        display: none;
+    #loginMainContext {
+        height: 425px;
+        width: 300px;
     }
-}
-
-.input {
-    width: 360px;
-    box-sizing: border-box;
-    margin: 0 auto;
-    margin-top: 5px;
-}
-
-.input input{
-    font-size: 16px;
-    background: #F8F8F8;
-    width: 360px;
-    box-sizing: border-box;
-    padding: 12px;
-    margin: 8px 0;
-    border: 0;
-    border-bottom: 3px solid #efefef;
-}
-
-@media screen and (max-width : 499px) {
-    .input {
-        width: 90%;
-        max-width: 400px;
-        min-width: 250px;
-    }
-    
-    .input input{
-        font-size: 13px;
-        padding: 10px;
-        max-width: 400px;
-        min-width: 250px;
-        width: 100%;
-    }
-}
-
-@media screen and (max-height: 600px) {    
-    .input input{
-        font-size: 13px;
-        padding: 10px;
-    }
-}
-
-.input input:focus {
-    outline: 0;
-    border-bottom: 3px solid black;
 }
 
 #loginContextHeader {
@@ -86,22 +111,77 @@
     margin-bottom: 50px;
 }
 
+@media screen and (max-width : 850px) {
+    #loginContextHeader {
+        margin-bottom: 30px;
+    }
+}
+
+#loginLogo {
+    width: 32px;
+    height: 32px;
+}
+
 #loginContextHeader h2 {
     margin: 0 auto;
     font-weight: 500;
     font-size: 30px;
 }
 
+@media screen and (max-width : 850px) {
+    #loginContextHeader h2 {
+        font-size: 20px;
+    }
+}
+
 #loginContextHeader p {
     color: #888;
 }
 
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
-    #loginContextHeader h2 {
-        font-size: 20px;
-        margin-bottom: 0;
+@media screen and (max-width : 850px) {
+    #loginContextHeader p {
+        font-size: 14px;
     }
 }
+
+/* ======================== LOGIN INPUT ======================== */
+
+.loginInput {
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+@media screen and (max-width : 850px) {
+    .loginInput {
+        width: 275px;
+    }
+}
+
+.loginInput input{
+    font-size: 16px;
+    background: #F8F8F8;
+    width: 360px;
+    padding: 12px;
+    margin: 8px 0;
+    border: 0;
+    border-bottom: 3px solid #efefef;
+}
+
+@media screen and (max-width : 850px) {    
+    .loginInput input{
+        font-size: 14px;
+        padding: 10px;
+        width: 275px;
+    }
+}
+
+.loginInput input:focus {
+    outline: 0;
+    border-bottom: 3px solid black;
+}
+
+
+/* ======================== LOGIN SUBMIT ======================== */
 
 #loginSubmit {
     display: none;
@@ -120,6 +200,12 @@
     position: relative;
 }
 
+@media screen and (max-width : 850px) {
+    #labelLoginSubmit {
+        padding: 10px 30px;
+    }
+}
+
 #labelLoginSubmit span {
     font-size: 16px;
     font-weight: bold;
@@ -127,6 +213,13 @@
     position: relative;
     z-index: 2;
 }
+
+@media screen and (max-width : 850px) {
+    #labelLoginSubmit span {
+        font-size: 14px;
+    }
+}
+
 
 #labelLoginSubmit::before {
     content: "";
@@ -160,44 +253,35 @@
     color: white;
 }
 
-@media screen and (max-width : 499px) {
-    #labelLoginSubmit {
-        margin-top: 20px;
-        font-size: 13px;
-        padding: 10px 20px;
-        
-    }
-}
-
-#loginFormFooter {
+/* ======================== FORGET PASSWORD ======================== */
+#forgetPassword {
     text-align: right;
     width: 360px;
     box-sizing: border-box;
     margin: 0 auto;
 }
 
-@media screen and (max-width : 499px) {
-    #loginFormFooter {
-        max-width: 400px;
-        min-width: 300px;
-        width: 90%;
+@media screen and (max-width : 850px) {
+    #forgetPassword {
+        width: 275px;
     }
 }
 
-#loginFormFooter a {
+#forgetPassword a, #forgetPassword a:visited {
     color: rgb(106 101 255);
     font-size: 16px;
     text-decoration: none;
 }
 
-#loginFormFooter a:visited {
-    color: rgb(106 101 255);
+@media screen and (max-width : 850px) {
+    #forgetPassword a {
+        font-size: 14px;
+    }
 }
 
 #loginFormFooter a:hover {
     color: black
 }
-
 
 #message {
     width: 360px;
@@ -205,56 +289,38 @@
     font-weight: 400;
 }
 
-@media screen and (max-width : 499px) {
-    #loginFormFooter a {
-        font-size: 13px;
-        max-width: 400px;
-        min-width: 250px;
-        width: 90%;
-        margin: 0 auto;
-    }
-
+@media screen and (max-width : 850px) {
     #message {
-        max-width: 400px;
-        min-width: 250px;
-        width: 90%;
-        font-size: 13px;
-        margin: 0 auto;
-
-    }
-}
-
-@media screen and (max-height: 600px) {
-    #loginFormFooter a {
-        font-size: 13px;
-    }
-
-    #message {
-        font-size: 13px;
+        width: 275px;
+        font-size: 14px;
         margin: 0 auto;
     }
 }
 
-
-#loginLogo {
-    width: 32px;
-    height: 32px;
-}
+/* ======================== SIGN UP ======================== */
 
 #loginContextFooter {
     margin-top: 50px;
 }
 
-#loginContextFooter a {
+
+@media screen and (max-width : 850px) {
+    #loginContextFooter {
+        margin-top: 20px;
+        font-size: 14px;
+    }    
+}
+
+#loginContextFooter a, #loginContextFooter a:visited {
     color: rgb(106 101 255);
     text-decoration: none;
     font-weight: 500;
 }
 
-#loginContextFooter a:visited {
-    color: rgb(106 101 255);
-    text-decoration: none;
-    font-weight: 500;
+@media screen and (max-width : 850px) {
+    #loginContextFooter a {
+        font-size: 14px;
+    }
 }
 
 #loginContextFooter a:hover {

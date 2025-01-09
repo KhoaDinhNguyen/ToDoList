@@ -1,3 +1,4 @@
+/* ======================== About Us Introduction (HALF UPPER) ======================== */
 #aboutUsIntro {
     background: linear-gradient(-90deg, #a1c4fda4 0%, #c2e9fb9d 100%);
     color: black;
@@ -14,6 +15,22 @@
     }
 }
 
+/* ======================== About Us Introduction - Content ======================== */
+#introContent {
+    display: flex;
+    grid-column: 1 / 2;
+    text-align: left;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width : 499px) {
+    #introContent div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
 
 .title {
     background: linear-gradient(135deg, rgba(235, 231, 255, 0.3) 0%, rgba(202, 217, 254, 0.3) 18.75%, rgba(218, 208, 255, 0.3) 45.72%, rgba(177, 234, 251, 0.3) 66.99%, rgba(209, 245, 255, 0.3) 100%);
@@ -71,22 +88,7 @@
     }
 }
 
-#introContent {
-    display: flex;
-    grid-column: 1 / 2;
-    text-align: left;
-    flex-direction: column;
-    align-items: center;
-}
-
-@media screen and (max-width : 499px) {
-    #introContent div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
+/* ======================== About Us Introduction - Image ======================== */
 #introImg {
     display: flex;
     grid-column: 2 / 3;
@@ -136,7 +138,7 @@
     }
 }
 
-#feature {
+#aboutUsFeature {
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -144,7 +146,7 @@
     padding: 50px 0px;
 }
 
-#feature h2 {
+#aboutUsFeature h2 {
     font-size: 35px;
     color: rgb(14 0 74);
     margin-top: 20px;
@@ -152,24 +154,25 @@
 }
 
 @media screen and (max-width : 499px) {
-    #feature h2 {
+    #aboutUsFeature h2 {
         font-size: 30px;
     }
 }
 
-#feature > p {
+#aboutUsFeature > p {
     font-size: 18px;
     margin-top: 20px;
     color: rgb(69 56 120);
 }
 
 @media screen and (max-width : 499px) {
-    #feature > p {
+    #aboutUsFeature > p {
         font-size: 14px;
         text-align: center;
     }
 }
 
+/* ======================== About Us Features (HALF LOWER) ======================== */
 #featureList {
     display: flex;
     flex-flow: row wrap;
@@ -201,6 +204,40 @@
 
 .featureItem:hover {
     animation: borderColors 500ms steps(100) forwards;
+}
+
+@keyframes borderColors {
+    0% {
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    }
+    25% {
+      border-top-color: #000;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+  
+    }
+    50% {
+      border-top-color: #000;
+      border-right-color: #000;
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    }
+    75% {
+        border-top-color: #000;
+        border-right-color: #000;
+        border-bottom-color: #000;
+        border-left-color: transparent;
+      }
+    100% {
+      border-top-color: #000;
+      border-right-color: #000;
+      border-bottom-color: #000;
+      border-left-color: #000;
+    }
 }
 
 .featureItemContent {
@@ -278,36 +315,3 @@
     }
 }
 
-@keyframes borderColors {
-    0% {
-      border-top-color: transparent;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-    }
-    25% {
-      border-top-color: #000;
-      border-right-color: transparent;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-  
-    }
-    50% {
-      border-top-color: #000;
-      border-right-color: #000;
-      border-bottom-color: transparent;
-      border-left-color: transparent;
-    }
-    75% {
-        border-top-color: #000;
-        border-right-color: #000;
-        border-bottom-color: #000;
-        border-left-color: transparent;
-      }
-    100% {
-      border-top-color: #000;
-      border-right-color: #000;
-      border-bottom-color: #000;
-      border-left-color: #000;
-    }
-  }
