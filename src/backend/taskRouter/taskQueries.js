@@ -48,7 +48,7 @@ const updateTask = (req, res, next) => {
 const createTask = (req, res, next) => {
     const accountName = req.params.user;
     const {taskName, projectName, taskDescription, taskTimeDeadline} = req.body;
-
+    //console.log(taskTimeDeadline);
     pool.query(`CALL create_task('${taskName}', '${projectName}', '${accountName}', '${taskDescription}', '${taskTimeDeadline}');`, (err, result) => {
         if (err) {
             if (err.message === 'duplicate key value violates unique constraint "tasks_pkey"') {

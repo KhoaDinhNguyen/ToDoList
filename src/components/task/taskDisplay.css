@@ -218,28 +218,36 @@
 }
 
 .changeStatus {
-    accent-color: green;
+    display: none;
+}
+
+.labelCheckboxTask {
     width: 25px;
     height: 25px;
-    margin-right: 5px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
-@media screen and (max-width : 499px) {
-    .changeStatus {
-        width: 15px;
-        height: 15px;
-    }
+.changeStatus:checked + .labelCheckboxTask {
+    background-color: green;
 }
 
+.labelCheckboxTask svg {
+    fill: transparent;
+}
+.changeStatus:checked + .labelCheckboxTask svg {
+    fill: #fff;
+}
 /* =========================== TASK INFO BODY =========================== */
 .taskInfoBody {
     transition-duration: 0.5s;
-    transition-property: height;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: white;
     grid-column: 1 / 5;
 }
 
@@ -396,18 +404,41 @@
     overflow: hidden;
 }
 
-.taskDashboard {
-    display: grid;
-    grid-template-columns: 50px 1fr 50px;
-    width: 100%;
-    padding: 10px 0;
-    border-bottom: 1px solid black;
+#dashboard .changeStatus {
+    margin-right: 0;
+    margin-left: 5px;
 }
 
+.taskDashboard {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition-duration: 0.3s;
+    width: 95%;
+}
+
+.taskDashboard:hover {
+    background-color: #fff;
+    border: 1px solid black;
+    transform: translate(10px, 10px);
+
+}
+.taskDashboardFunction {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.taskNameAndTaskDeadline {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
 .taskDashboard .important {
     display: flex;
-    justify-content: center;
-    grid-column: 1 / 2;
 }
 .taskDashboard .taskName {
     grid-column: 2 / 3;
@@ -433,10 +464,6 @@
     margin-right: 10px;
 }
 
-.taskDashboard .taskStatus {
-    display: flex;
-}
-
 #dashboard .taskInfoBody > div {
     margin-left: 10px;
     margin-top: 5px;
@@ -451,6 +478,16 @@
     font-weight: 500;
 }
 
+#dashboard .taskInfoBody {
+    width: 95%;
+    transition-duration: 0.3s;
+}
+
+.taskDashboard:hover + .taskInfoBody {
+    transform: translate(10px, 10px);
+    background-color: #fff;
+}
+
 @media screen and (max-width : 499px) {
     #dashboard .taskInfoBody p{
         font-size: 12px;
@@ -460,6 +497,7 @@
         height: 120px;
     }
 }
+
 
 /* ===================== CALENDAR ===============================*/
 .dateDetail {

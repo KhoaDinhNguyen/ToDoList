@@ -7,15 +7,14 @@ import { useState } from "react";
 
 function UserDashboard() {
     const tasks = useSelector(state => state[tasksSlice.name]);
-    const [finishedTask, unFinishedTask] = splitTask(tasks);
-    const [finishedTaskVisible, setFinishedTaskVisible] = useState(false);
+    const [finishedTask, unfinishedTask] = splitTask(tasks);
 
     return (
         <>
             <Helmet>
                 <title>Dashboard | ToDo List</title>
             </Helmet>
-            <Dashboard tasks={finishedTaskVisible ? tasks : unFinishedTask} finishedTaskVisible={finishedTaskVisible} setFinishedTaskVisible={setFinishedTaskVisible}/>
+            <Dashboard finishedTask={finishedTask} unfinishedTask={unfinishedTask}/>
         </>
     );
 }

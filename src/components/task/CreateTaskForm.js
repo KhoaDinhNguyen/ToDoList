@@ -24,7 +24,7 @@ function CreateTaskForm(props) {
 
     const onSubmit = event => {
         event.preventDefault();
-
+        
         try {
             fetchTaskCreate(accountName, projectName, taskName, taskDescription, taskTimeDeadline)
             .then(response => {

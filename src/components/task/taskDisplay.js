@@ -21,7 +21,7 @@ function TaskDisplay(props) {
     const [deleteDisplay, setDeleteDisplay] = useState(false);
     const [editDisplay, setEditDisplay] = useState(false);
     const [taskDescriptionDisplay, setTaskDescriptionDisplay] = useState(false);
-
+    console.log(task);
     const dispatch = useDispatch();
 
     const today = new Date();
@@ -123,6 +123,7 @@ function TaskDisplay(props) {
             currentStatus={currentStatus}
             taskDetailDisplay={taskDetailDisplay}
             finish={taskTimeDeadline < todayString}
+            today={props.today}
             />
         );
     }
@@ -225,6 +226,9 @@ function TaskDisplayHomepage(props) {
         <li className={`homepageTask ${!taskDetailDisplay ? `` : "homepageTaskDescription"}`}>
             <div className="importantAndCheckBox">
                 <input type="checkbox" name={`${taskName}_${projectName}_Fulfilled`} id={`${taskName}_${projectName}_Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
+                <label htmlFor={`${taskName}_${projectName}_Fulfilled`} className="labelCheckboxTask">
+                    <svg width="20px" height="20px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M5 16.577l2.194-2.195 5.486 5.484L24.804 7.743 27 9.937l-14.32 14.32z"/></svg>
+                </label>
             </div>
             <div className="homepageTaskName">
                 <div className="important">
@@ -348,14 +352,52 @@ function TaskDisplayDashBoard(props) {
         currentImportant, 
         currentStatus,
         taskDetailDisplay,
-        finish
+        finish,
+        today
     } = props;
-    const { taskName, projectName} = task;
-    console.log(taskDetailDisplay);
-    if (finish) {
+    const { taskName, projectName, taskTimeDeadline} = task;
+    console.log(today);
+
+    if (today) {
         return (
             <li>
-                <div className={`taskDashboard ${currentStatus}Task`}>
+                <div className='taskDashboard'>
+                    <div className="taskDashboardFunction">
+                        <input type="checkbox" name={`${projectName}_${taskName}Fulfilled`} id={`${projectName}_${taskName}Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
+                        <label htmlFor={`${projectName}_${taskName}Fulfilled`} className="labelCheckboxTask">
+                            <svg width="20px" height="20px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M5 16.577l2.194-2.195 5.486 5.484L24.804 7.743 27 9.937l-14.32 14.32z"/></svg>
+                        </label>
+                        <div className="important">
+                            <input type="checkbox" id={`${projectName}_${taskName}_important`} name={`${projectName}_${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
+                            <label htmlFor={`${projectName}_${taskName}_important`}>
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                </svg>
+                            </label>
+                        </div>
+                   </div>
+                   <div className="taskNameAndTaskDeadline" onClick={onChangeTaskDetailDisplay}>
+                        <div className="taskName">
+                            <h4>{taskName}</h4>
+                        </div>
+                        <div className="taskDeadline">
+
+                        </div>
+                   </div>
+                </div>
+                <TaskInfoDashboard task={task} taskDetailDisplay={taskDetailDisplay}/>
+            </li>
+        );
+    }
+
+    return (
+        <li>
+            <div className='taskDashboard'>
+                <div className="taskDashboardFunction">
+                    <input type="checkbox" name={`${projectName}_${taskName}Fulfilled`} id={`${projectName}_${taskName}Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
+                    <label htmlFor={`${projectName}_${taskName}Fulfilled`} className="labelCheckboxTask">
+                        <svg width="20px" height="20px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M5 16.577l2.194-2.195 5.486 5.484L24.804 7.743 27 9.937l-14.32 14.32z"/></svg>
+                    </label>
                     <div className="important">
                         <input type="checkbox" id={`${projectName}_${taskName}_important`} name={`${projectName}_${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
                         <label htmlFor={`${projectName}_${taskName}_important`}>
@@ -364,33 +406,15 @@ function TaskDisplayDashBoard(props) {
                             </svg>
                         </label>
                     </div>
-                    <div className="taskName" onClick={onChangeTaskDetailDisplay}>
-                        <h4>{taskName} -- Project name: {projectName}</h4>
-                    </div>
-                    <div className="taskFunction">
-                    </div>
                 </div>
-                <TaskInfoDashboard task={task} taskDetailDisplay={taskDetailDisplay}/>
-            </li>
-        );
-    }
-    return (
-        <li>
-            <div className="taskDashboard">
-                <div className="important">
-                    <input type="checkbox" id={`${projectName}_${taskName}_important`} name={`${projectName}_${taskName}_important`} checked={currentImportant} onChange={onClickImportant}/>
-                    <label htmlFor={`${projectName}_${taskName}_important`}>
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                        </svg>
-                    </label>
-                </div>
-                <div className="taskName" onClick={onChangeTaskDetailDisplay}>
-                    <h4>{taskName} -- Project name: {projectName}</h4>
-                </div>
-                <div className="taskFunction">
-                    <input type="checkbox" name={`${projectName}_${taskName}Fulfilled`} id={`${projectName}_${taskName}Fulfilled`} className="changeStatus" onChange={onChangeTaskStatus} checked={currentStatus === 'pending' ? false : true}/>
-                </div>
+                   <div className="taskNameAndTaskDeadline" onClick={onChangeTaskDetailDisplay}>
+                        <div className="taskName">
+                            <h4>{taskName}</h4>
+                        </div>
+                        <div className="taskDeadline">
+                            <p>{taskTimeDeadline}</p>
+                        </div>
+                   </div>
             </div>
             <TaskInfoDashboard task={task} taskDetailDisplay={taskDetailDisplay}/>
         </li>
@@ -400,7 +424,7 @@ function TaskDisplayDashBoard(props) {
 function TaskInfoDashboard(props) {
     const { task, taskDetailDisplay } = props;
     const { taskTimeDeadline, taskTimeCreated, taskDescription, projectName, taskName, taskStatus} = task;
-    console.log(taskDetailDisplay);
+
     return (
         <div className={`taskInfoBody ${taskDetailDisplay ? "taskInfoVisible": "taskInfoHidden"}`}>
             <div>

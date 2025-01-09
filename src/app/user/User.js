@@ -47,7 +47,6 @@ function User() {
 
         fetchUserDatabase(accountName)
         .then(response => {
-            console.log(response);
             dispatch(tasksSlice.actions.initialize(response));
             dispatch(projectsSlice.actions.initialize(response));
             dispatch(profileNameSlice.actions.assignName(response[0].profileName));

@@ -62,14 +62,14 @@ const tasksSlice = createSlice({
             state = [];
             for (const data of action.payload) {
                 const { taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant } = data;
-                if (taskName !== null) state.push({ taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant });
+                const taskTimeDeadlineSave = taskTimeDeadline.slice(0, 10);
+                if (taskName !== null) state.push({ taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline: taskTimeDeadline.slice(0, 10), projectName, taskImportant });
             }
             return state;
         },
         add(state, action) {
             const {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant} = action.payload;
-            state.push( {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline, projectName, taskImportant});
-            console.log(taskTimeDeadline);
+            state.push( {taskName, taskStatus, taskDescription, taskTimeCreated, taskTimeDeadline: taskTimeDeadline.slice(0, 10), projectName, taskImportant});
             return state;
         },
         remove(state, action) {
