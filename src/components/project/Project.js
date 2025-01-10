@@ -12,14 +12,20 @@ import { splitTask } from "../../features/task/finishTask";
 import { countTask } from "../../features/task/countTask";
 import UpdateProject from "./UpdateProject";
 import './Project.css';
-import editImg from '../../img/user/edit.png';
-import deleteImg from '../../img/user/delete.png';
 import { convertFromBooleanToDisplay } from "../../app/user/User";
 import deleteLogo from '../../img/user/deleteDisplay.png';
 import editLogo from '../../img/user/editDisplay.png';
 import infoLogo from '../../img/user/informationDisplay.png';
 import arrowLink from '../../img/user/arrowLink.png';
 import folder from '../../img/user/folder.png';
+import { Pie } from "react-chartjs-2";
+import {Chart, ArcElement, CategoryScale, LinearScale, BarElement, Title, PieController, Tooltip, Legend} from 'chart.js'
+Chart.register(ArcElement);
+Chart.register(CategoryScale);
+Chart.register(LinearScale);
+Chart.register(PieController);
+Chart.register(Tooltip);
+
 
 function ListProject() {
     const projects = useSelector(state => state[projectsSlice.name]);
@@ -73,6 +79,7 @@ function Project(props) {
     const [editDisplay, setEditDisplay] = useState(false);
     const [deleteDisplay, setDeleteDisplay] = useState(false);
     const [projectDescriptionDisplay, setProjectDescriptionDisplay] = useState(false);
+    const [taskListDisplay, setTaskListDisplay] = useState(true);
 
     const accountName = localStorage.getItem("accountName");   
 
@@ -84,6 +91,9 @@ function Project(props) {
         setDeleteDisplay(false)
         setInfoDisplay(!infoDisplay);
     };
+    const onClickTaskListDisplay = () => {
+        setTaskListDisplay(!taskListDisplay);
+    }
 
     const onClickProjectDescriptionDisplay = () => {
         if (infoDisplay === true && projectDescriptionDisplay === true) {
@@ -132,13 +142,13 @@ function Project(props) {
             <li className="project">
                 <div className="projectBody">
                     <div className="projectHeader">
-                        <h3>{projectName}</h3>
                         <Progress numOfPendingTask={numOfPendingTask} numOfFulfilledTask={numOfFulfilledTask} numOfFailingTask={numOfFailingTask}/>
+                        <h3>{projectName}</h3>
                         <div className="projectFunctionButton">
                             <img src={infoLogo} alt="Info" onClick={onClickProjectDescriptionDisplay}/>
                             <img src={editLogo} alt="Edit" onClick={onClickEditDisplay}/>
                             <img src={deleteLogo} alt="Edit" onClick={onClickDeleteDisplay}/>
-                            <img src={arrowLink} alt="Close"/>
+                            <img src={arrowLink} alt="Close" onClick={onClickTaskListDisplay}/>
                         </div>
                     </div>
                     <div className={`projectMain ${!infoDisplay ? "hiddenProject" : "visibleProject"}`}>
@@ -149,27 +159,18 @@ function Project(props) {
                         </div>
                         <UpdateProject editDisplay={convertFromBooleanToDisplay(editDisplay)} setEditDisplay={setEditDisplay} project={project}/>
                         <DeleteProject accountName={accountName} projectName={projectName} deleteDisplay={convertFromBooleanToDisplay(deleteDisplay)} setDeleteDisplay={setDeleteDisplay}/>
-                        <div className="projectFunction">
-                            <div onClick={onClickEdit} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="editButton projectButton">
-                                <figure>
-                                    <img src={editImg} alt="Edit"/>
-                                    <figcaption>Edit</figcaption>
-                                </figure>
-                            </div>
-                            <div onClick={onClickDelete} style={{display: convertFromBooleanToDisplay(!editDisplay && !deleteDisplay)}} className="deleteButton projectButton">
-                                <figure>
-                                    <img src={deleteImg} alt="Delete"/>
-                                    <figcaption>Delete</figcaption>
-                                </figure>
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div className="taskList">
-                    <UnfinishedTask listTask={listTask}/>
-                    <FinishedTask finishedListTask={finishedListTask}/>
+                <div className={`${taskListDisplay === true ? 'visibleTaskListDisplay' : 'hideTaskListDisplay'} taskListDisplay`}>
+                    <div>
+                        <div className="taskList">
+                            <UnfinishedTask listTask={listTask}/>
+                            <FinishedTask finishedListTask={finishedListTask}/>
+                        </div>
+                        <CreateTaskForm projectName={projectName}/>
+                    </div>
                 </div>
-                <CreateTaskForm projectName={projectName}/>
+
             </li>
         </>
     );
@@ -233,29 +234,61 @@ function FinishedTask(props) {
     )
 }
 
+
 function Progress(props) {
     const { numOfFulfilledTask, numOfPendingTask, numOfFailingTask} = props;
-
     const numOfTask = numOfFulfilledTask + numOfPendingTask + numOfFailingTask;
-    
+
     if (numOfTask === 0) {
-        return  (
-            <div className="progress emptyProgress">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>No tasks</td>
-                        </tr>
-                    </tbody>
-                </table>
+        return (
+            <div className="pieChartHomepage">
+                <Pie
+                    data={{
+                        labels: [],
+                        datasets: [{
+                            data: [1],
+                            backgroundColor: [
+                                '#000',
+                            ],
+                            hoverOffset: 4
+                        }]
+                    }}
+                    options={{
+                        maintainAspectRatio: true,
+                        events: []
+                    }}
+                />
             </div>
         );
     }
-
+    /*
     const pendingPercent = Math.floor(numOfPendingTask / numOfTask * 100);
     const fulfilledPercent = Math.floor(numOfFulfilledTask / numOfTask * 100);
     const failingPercent = Math.floor(numOfFailingTask / numOfTask * 100);
+    */
+    return (
+        <div className="pieChartHomepage">
+            <Pie
+                data={{
+                    labels: [],
+                    datasets: [{
+                        data: [numOfPendingTask, numOfFulfilledTask, numOfFailingTask],
+                        backgroundColor: [
+                            '#FF8C00',
+                            '#50C878',
+                            '#FF748B'
+                        ],
+                        hoverOffset: 4
+                    }]
+                }}
+                options={{
+                    maintainAspectRatio: true,
+                }}
+            />
+        </div>
+    )
 
+    /*
     return (
         <div className="progress nonEmptyProgress">
             <table>
@@ -268,7 +301,7 @@ function Progress(props) {
                 </tbody>
             </table>
         </div>
-    );
+    );*/
     
 }
 export default ListProject;

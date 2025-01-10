@@ -5,7 +5,7 @@
 }
 
 :root {
-    --width1024Default: 200px;
+    --width1024Default: 100px;
     --width1024Hover: 200px;
     --width850Default: 45px;
     --width850Hover: 200px;
@@ -15,6 +15,10 @@
     --backgroundColorMain: #fff;
     --taskColor: #fff;
     --commomRedColor: rgba(244, 91, 105, 1);
+}
+
+#userPage {
+    background-color: #e2eafc;
 }
 
 @media screen and (min-width : 499px) {
@@ -33,11 +37,19 @@
 
 #userNavigationBar {
     grid-column: 1 / 2;
-    background-color: #bccef2;
-    width: var(--width1024Default);
+    background-color: #7b71cc;
+    width: 80px;
     overflow-x: clip;
     z-index: 10;
-    overflow-y: visible;
+    height: 600px;
+    position: fixed;
+    margin-top: 25px;
+    margin-left: 10px;
+    border-radius: 20px;
+}
+
+#userNavigationBarHeader {
+    border-bottom: 1px solid #efefef;
 }
 
 @media screen and (max-width : 499px) {
@@ -52,18 +64,22 @@
 
 #userNavigationBar #companyName {
     background-color: #000;
-    overflow-x:clip;
     display: flex;
     justify-content: center;
-    padding: 10px 0;
-    height: 50px;
+    padding: 5px;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-#userNavigationBar #companyName h3 {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
+#userNavigationBar #companyName img {
+    width: 25px;
+    height: 25px;
 }
+
 
 @media screen and (max-width : 499px) {
     #userNavigationBar #companyName {
@@ -81,7 +97,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 #userNavigationBar #pageNavigation ul {
@@ -99,56 +115,27 @@
 #userNavigationBar #pageNavigation li {
     list-style-type: none;
     margin: 10px 0;
-    width: 190px;
 }
 
 #userNavigationBar #pageNavigation a {
     display: flex;
     align-items: center;
     text-decoration: none;
-    width: 100%;
-    padding: 5px;
-    padding-left: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    padding: 15px;
+    border-radius: 20px;
 }
 
 
-@media screen and (max-width : 499px) {
-    #userPage #pageNavigation a img{
-        width: 36px;
-        height: 36px;
-    }
-}
-
-#userNavigationBar #pageNavigation a p {
-    font-weight: 500;
-    color: #303745;;
-    font-size: 18px;
-}
-
-@media screen and (max-width : 499px) {
-    #userNavigationBar #pageNavigation a p {
-        padding: 6.5px;
-        font-size: 1rem;
-        height: 36px;
-    }
-    
+#userNavigationBar #pageNavigation a:hover {
+    background-color: #000;
 }
 
 #userNavigationBar #pageNavigation a.match {
-    background-color: #e2eafc;
-    border: 1px solid black;
+    background-color: #6247aa;
     border-right: 0;
 }
 
-
 /* ------------------------------ HOVER ------------------------------ */
-#userNavigationBar #pageNavigation a.match p {
-    color: #303745;
-    font-weight: 700;
-}
-
 #userContent{
     grid-column: 2 / 3;
     background-color: #e2eafc;

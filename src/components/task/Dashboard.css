@@ -59,6 +59,10 @@
     border-radius: 20px;
 }
 
+#numFinishedTask p, #numUnfinishedTask p {
+    font-size: 20px;
+}
+
 #numUnfinishedTask {
     grid-column: 3 / 4;
     grid-row: 1 / 2;
@@ -73,6 +77,10 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 20px;
+}
+
+#numPendingTask p, #numFulfilledTask p, #numFailingTask p {
+    font-size: 20px;
 }
 
 #numPendingTask {

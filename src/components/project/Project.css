@@ -18,7 +18,8 @@
 
 .projectHeader {
     display: grid;
-    grid-template-columns: 1fr 180px 150px;
+    grid-template-columns: 1fr 50px 150px;
+    grid-template-columns: 50px 1fr 150px;
     background-color: #5A4FCF;
     transition-duration: 0.5s;
     height: 50px;
@@ -31,7 +32,13 @@
     font-size: 25px;
     font-weight: 400;
     width: max-content;
-    margin-left: 10px;
+    grid-column: 2 / 3;
+}
+
+.pieChartHomepage {
+    width: 45px;
+    position: relative;
+    bottom: 5px;
     grid-column: 1 / 2;
 }
 
@@ -39,7 +46,6 @@
     background-color: #fff;
     border-radius: 25px;
     padding: 5px 10px;
-    cursor: pointer;
     grid-column: 3 / 4;
     height: 30px;
     display: flex;
@@ -53,6 +59,7 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
+    cursor: pointer;
 }
 .projectMain {
     transition-duration: 0.75s;
@@ -313,3 +320,21 @@
 .zeroPercent {
     display: none;
 }
+
+.taskListDisplay {
+    display: grid; 
+    transition: 0.5s grid-template-rows ease;
+}
+
+.hideTaskListDisplay {
+    grid-template-rows: 0fr;
+}
+
+.visibleTaskListDisplay {
+    grid-template-rows: 1fr;
+}
+
+.taskListDisplay > div {
+    overflow: hidden;
+}
+

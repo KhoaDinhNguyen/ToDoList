@@ -79,3 +79,16 @@
     justify-content: flex-end;
     margin-right: 5px;
 }
+
+
+.pageActive {
+    margin-top: 30px;
+}
+
+.pageActive p {
+    color: rgb(69 56 120);
+}
+
+.pageActive h2 {
+    color: rgb(14 0 74);
+}

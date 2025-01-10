@@ -21,7 +21,7 @@ function TaskDisplay(props) {
     const [deleteDisplay, setDeleteDisplay] = useState(false);
     const [editDisplay, setEditDisplay] = useState(false);
     const [taskDescriptionDisplay, setTaskDescriptionDisplay] = useState(false);
-    console.log(task);
+
     const dispatch = useDispatch();
 
     const today = new Date();

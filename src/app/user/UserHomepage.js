@@ -11,26 +11,34 @@ import './UserHomepage.css';
 import FilterAndSortForm from "../../components/user/FilterAndSort.js";
 
 function UserHomepage(props){
+
     return (
-        <div id="userHomepage">
+        <>
             <Helmet>
                 <title>Homepage | ToDo List</title>
             </Helmet>
-            <div id="userHomepageHeader">
-                <FilterButton/>
-                <SearchForm/>
-                <CreateProjectButton/>
-            </div>
-            <div id="userHomepageTool">
-                <CreateProjectForm/>
-                <FilterAndSortForm/>
-            </div>
-            <div id="userHomepageBody">
-                <div id="userHomepageMain">
-                    <ListProject/>
+            <div id="userHomepage">
+                <div className="pageActive">
+                    <p>To-do List Application</p>
+                    <h2>Homepage</h2>
+                </div>
+                <div id="userHomepageHeader">
+                    <FilterButton/>
+                    <SearchForm/>
+                    <CreateProjectButton/>
+                </div>
+                <div id="userHomepageTool">
+                    <CreateProjectForm/>
+                    <FilterAndSortForm/>
+                </div>
+                <div id="userHomepageBody">
+                    <div id="userHomepageMain">
+                        <ListProject/>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
+
     );
 }
 

@@ -3,7 +3,16 @@ import './Dashboard.css';
 import { useState } from "react";
 import { convertFromBooleanToDisplay, convertDateToISOString } from "../../app/user/User";
 import { Bar, Pie } from "react-chartjs-2";
-import Chart from 'chart.js/auto';
+import { sortTask } from "../../features/task/sortTask";
+import {Chart, ArcElement, CategoryScale, LinearScale, BarElement, Title, PieController, Tooltip, Legend} from 'chart.js'
+Chart.register(ArcElement);
+Chart.register(CategoryScale);
+Chart.register(LinearScale);
+Chart.register(BarElement);
+Chart.register(Title);
+Chart.register(PieController);
+Chart.register(Tooltip);
+Chart.register(Legend);
 
 function Dashboard(props) {
     const { finishedTask, unfinishedTask } = props;
@@ -22,13 +31,19 @@ function Dashboard(props) {
     const numFulfilledTask = totalNumTask - numFailingTask - numPendingTask;
 
     return (
-        <div id="dashboard">
-            <TodayTask todayTask={todayTask}/>
-            <UpcomingTask upcommingTask={upcommingTask}/>
-            <Statistic totalNumTask={totalNumTask} numFinishedTask={numFinishedTask} numUnfinishedTask={numUnfinishedTask} numPendingTask={numPendingTask} numFailingTask={numFailingTask} numFulfilledTask={numFulfilledTask}/>
-            <DashboardChart totalNumTask={totalNumTask} numFinishedTask={numFinishedTask} numUnfinishedTask={numUnfinishedTask} numPendingTask={numPendingTask} numFailingTask={numFailingTask} numFulfilledTask={numFulfilledTask}/>
-        </div>
-    )
+        <>
+            <div className="pageActive">
+                <p>To-do List Application</p>
+                <h2>Dashboard</h2>
+            </div>
+            <div id="dashboard">
+                <TodayTask todayTask={todayTask}/>
+                <UpcomingTask upcommingTask={upcommingTask}/>
+                <Statistic totalNumTask={totalNumTask} numFinishedTask={numFinishedTask} numUnfinishedTask={numUnfinishedTask} numPendingTask={numPendingTask} numFailingTask={numFailingTask} numFulfilledTask={numFulfilledTask}/>
+                <DashboardChart totalNumTask={totalNumTask} numFinishedTask={numFinishedTask} numUnfinishedTask={numUnfinishedTask} numPendingTask={numPendingTask} numFailingTask={numFailingTask} numFulfilledTask={numFulfilledTask}/>
+            </div>
+        </>
+    );
 }
 
 function TodayTask(props) {
@@ -71,8 +86,9 @@ function UpcomingTask(props) {
         )
     }
     const upcommingTaskList = [];
+    const upcommingTaskSort = sortTask(upcommingTask, {sortTimeCreated: undefined, sortTaskName: undefined, sortTimeDeadline: true});
 
-    for (const task of upcommingTask) {
+    for (const task of upcommingTaskSort) {
         const { projectName, taskName} = task;
         upcommingTaskList.push(<TaskDisplay key={`${projectName}${taskName}`} task={task} type="dashboard" today={false}/>)
     }

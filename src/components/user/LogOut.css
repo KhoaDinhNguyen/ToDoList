@@ -1,57 +1,23 @@
-#userNavigationBar #pageNavigation #logOut {
+#userNavigationBarFooter {
+    margin-top: 120px;
+    border-top: 1px solid #efefef;
     display: flex;
-    margin-left: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+#userNavigationBarFooter #logOut {
+    display: flex;
     cursor: pointer;
     align-items: center;
-    background-color: rgba(244, 91, 105);
+    justify-content: center;
     border: 0;
-    margin-top: 100px;
-    overflow-x: hidden;
-    width: var(--width1024Hover);
+    background: transparent;
+    padding: 15px;
+    border-radius: 20px;
+    margin-top: 10px;
 }
 
-@media screen and (max-width : 499px) {
-    #userNavigationBar #pageNavigation #logOut {
-        margin-top: 50px;
-    }
-}
-
-#userNavigationBar #pageNavigation #logOut img {
-    padding: 5px;
-    border-radius: 50%;
-}
-
-@media screen and (max-width : 499px) {
-    #userNavigationBar #pageNavigation #logOut img {
-        height: 36px;
-        width: 36px;
-    }
-}
-
-
-#userNavigationBar #pageNavigation #logOut p {
-    font-weight: 500;
-    color: black;
-    padding: 5px;
-    font-size: 1.5rem;
-    border: 2px solid rgba(244, 91, 105);
-}
-
-@media screen and (max-width : 499px) {
-    #userNavigationBar #pageNavigation #logOut p {
-        font-size: 1rem;
-    }
-}
-
-#userNavigationBar #pageNavigation #logOut:hover img {
-    background-color: beige;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-#userNavigationBar #pageNavigation #logOut:hover p {
-    background-color: beige;
-    border: 2px solid beige;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+#userNavigationBarFooter #logOut:hover {
+    background-color: #000;
 }
