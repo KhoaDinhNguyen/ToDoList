@@ -356,7 +356,6 @@ function TaskDisplayDashBoard(props) {
         today
     } = props;
     const { taskName, projectName, taskTimeDeadline} = task;
-    console.log(today);
 
     if (today) {
         return (
@@ -468,9 +467,7 @@ function TaskDisplayCalendar(props) {
                         <p>{currentStatus}</p>
                     </div>
                 </div>
-                <button onClick={onChangeTaskDetailDisplay} className="taskInfoDisplayButton">&#9776;</button>
             </div>
-            <TaskInfoCalender task={task} taskDetailDisplay={taskDetailDisplay}/>
         </li>
     );
 }

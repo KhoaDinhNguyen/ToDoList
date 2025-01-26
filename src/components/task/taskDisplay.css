@@ -501,10 +501,8 @@
 
 /* ===================== CALENDAR ===============================*/
 .dateDetail {
-    margin: 10px 0;
-    border: 2px #40A2D8 solid;
-    width: max-content;
     padding: 5px;
+    color: #fff;
 }
 
 .taskCalendarBody {
@@ -519,11 +517,7 @@
     justify-content: space-between;
 }
 
-@media screen and (max-width : 499px) {
-    .dateDetail {
-        width: 100%;
-    }
-    
+@media screen and (max-width : 499px) {   
     .taskCalendarBody {
         width: 100%;
         justify-content: space-evenly;
@@ -540,7 +534,7 @@
 }
 
 .taskCalendarBody h4, .taskCalendarDescription span {
-    font-weight: 500;
+    font-weight: 300;
 }
 
 @media screen and (max-width : 499px) {

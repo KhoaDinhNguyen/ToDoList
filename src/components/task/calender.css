@@ -1,58 +1,53 @@
 #calendarPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 500px 500px;
+    justify-content: center;
 }
 
-#calendarPage h3 {
-    background-color: var(--commomRedColor);
-    width: 100%;
-    padding: 5px;
-    font-size: 25px;
-    color: white;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#dateDisplayTask {
+    grid-column: 1 / 2;
+    background-color: #7364d2;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+#calendarTaskDate {
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    font-weight: 300;
+    font-size: 32px;
+}
+#dateDisplayTask li{
+    list-style: none;
+}
+
+#calendarMain {
+    background-color: #fff;
+    grid-column: 2 / 3;
 }
 
 #calendarHeader {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 20px;
     align-items: center;
 }
 
+#calendarFunction {
+    display: flex;
+    align-items: center;
+}
+
 .calendarButton {
-    height: 40px;
-    width: 40px;
     cursor: pointer;
-    background-color: var(--commomRedColor);
     text-align: center;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 26px;
-    font-weight: 700;
 }
 
 @media screen and (max-width : 499px) {
     #calendarHeader p{
         font-size: 15px;
     }
-    
-    .calendarButton {
-        height: 25px;
-        width: 25px;
-    }
-
-}
-
-.calendarButton:nth-child(1) {
-    margin-right: 10px;
-}
-
-.calendarButton:nth-child(3) {
-    margin-left: 10px;
 }
 
 #calendarMonth {
@@ -61,11 +56,11 @@
 }
 
 #calendar {
-    width: 90%;
+    width: 500px;
     margin: 0 auto;
-    border-collapse: collapse;
     margin-top: 10px;
     table-layout: fixed;
+    border-spacing: 20px;
 }
 
 @media screen and (max-width : 499px) {
@@ -77,12 +72,22 @@
 .dateOfMonth {
     margin: 0;
     padding: 0;
-    border: 1px solid black;
     text-overflow: ellipsis;
-    box-sizing: border-box;
-    height: 100px;
-    cursor: pointer;
+    height: 50px;
     overflow: auto;
+    border-radius: 10px;
+    border: 1px solid transparent;
+}
+
+.dateExist {
+    cursor: pointer;
+
+}
+.dateExist:hover {
+    border-color: #000;
+}
+.taskExist {
+    background-color: #c8b6ff;
 }
 
 @media screen and (max-width : 499px) {
@@ -91,16 +96,6 @@
     }
 }
 
-
-.dateOfMonth:hover {
-    background-color: rgb(192, 192, 192);
-}
-
-.dateOfMonth:hover h4{
-    color: white;
-}
-
-
 #dateOfWeek {
     text-align: center;
 }
@@ -108,7 +103,7 @@
 #dateOfWeek td{
     font-weight: 500;
     font-size: 18px;
-    color: grey;
+    color: black;
 }
 
 @media screen and (max-width : 499px) {
@@ -120,8 +115,8 @@
 .dateOfMonthListTask h4 {
     font-weight: 500;
     font-size: 20px;
-    margin-left: 10px;
-    color: grey;
+    color: #000;
+    text-align: center;
 }
 
 .calendarTask {
@@ -157,12 +152,4 @@
 #calendarPage .calendarFailing {
     text-decoration: line-through;
     color: #f98053;
-}
-
-#dateDisplayTask {
-    width: 90%;
-}
-
-#dateDisplayTask li{
-    list-style: none;
 }
