@@ -1,6 +1,6 @@
 import { FilterStatusFrom } from "./FilterStatusForm";
 import { FilterDateForm } from "./FilterDateForm";
-import { filterSlice } from "../../features/user/utility";
+import { filterStatusSlice, filterImportantSlice, filterTimeCreatedFromSlice, filterTimeCreatedToSlice, filterTimeDeadlineFromSlice, filterTimeDeadlineToSlice } from "../../features/user/utility";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import './FilterForm.css';
@@ -19,12 +19,15 @@ function FilterForm() {
     });
 
     useEffect(() => {
-        const filter = {
-            statusFilter,
-            dateFilter,
-            importantFilter
-        }
-        dispatch(filterSlice.actions.apply(filter));
+        const { timeCreatedFrom, timeCreatedTo, timeDeadlineFrom, timeDeadlineTo } = dateFilter;
+
+        dispatch(filterStatusSlice.actions.apply(statusFilter));
+        dispatch(filterImportantSlice.actions.apply(importantFilter));
+        dispatch(filterTimeCreatedFromSlice.actions.apply(timeCreatedFrom));
+        dispatch(filterTimeCreatedToSlice.actions.apply(timeCreatedTo));
+        dispatch(filterTimeDeadlineFromSlice.actions.apply(timeDeadlineFrom));
+        dispatch(filterTimeDeadlineToSlice.actions.apply(timeDeadlineTo));
+
     }, [statusFilter, dateFilter, dispatch, importantFilter]);
 
     const onChangeStar = () => { setImporantFilter(!importantFilter); }

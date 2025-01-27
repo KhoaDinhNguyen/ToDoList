@@ -1,7 +1,22 @@
+/*
+    Library
+*/
 import { useState } from "react";
-import { fetchUpdateProject } from "../../features/project/projectAPI";
 import { useDispatch } from "react-redux";
+
+/*
+    Slices
+*/
 import { projectsSlice, tasksSlice } from "../../features/user/databaseSlice";
+
+/*
+    Helper function
+*/
+import { fetchUpdateProject } from "../../features/project/projectAPI";
+
+/*
+    Stylesheet
+*/
 import './UpdateProject.css';
 
 function UpdateProject (props) {

@@ -26,7 +26,6 @@ export const convertDateToISOString = (day) => {
     let dateString = `${date}`;
     if (dateString.length === 1) dateString = `0${dateString}`;
 
-    //console.log(`${year}-${monthString}-${dateString}`);
     return `${year}-${monthString}-${dateString}`;
 }
 function User() {

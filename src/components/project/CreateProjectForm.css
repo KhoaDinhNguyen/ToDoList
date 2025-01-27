@@ -1,7 +1,8 @@
 #createProjectFormMain {
-    width: 60%;
+    width: 800px;
     margin-top: 5px;
     justify-self: center;
+    margin-bottom: 20px;
 }
 
 #createProjectFormMain fieldset{

@@ -1,16 +1,13 @@
 
-#projectList {
-    width: 95%;
+#listProject {
     display: flex;
     flex-flow: column wrap;
-    align-items: center;
 }
 
 .project {
     list-style: none;
     min-width: 800px;
     border-left: 5px solid #5A4FCF;
-    margin-right: 30px;
     margin-bottom: 20px;
     height: max-content;
     background-color: #FFF;
@@ -18,12 +15,18 @@
 
 .projectHeader {
     display: grid;
-    grid-template-columns: 1fr 50px 150px;
     grid-template-columns: 50px 1fr 150px;
     background-color: #5A4FCF;
     transition-duration: 0.5s;
     height: 50px;
     align-items: center;
+}
+
+.pieChartHomepage {
+    width: 45px;
+    position: relative;
+    bottom: 5px;
+    grid-column: 1 / 2;
 }
 
 .projectHeader h3 {
@@ -35,32 +38,25 @@
     grid-column: 2 / 3;
 }
 
-.pieChartHomepage {
-    width: 45px;
-    position: relative;
-    bottom: 5px;
-    grid-column: 1 / 2;
-}
-
 .projectFunctionButton {
     background-color: #fff;
     border-radius: 25px;
     padding: 5px 10px;
     grid-column: 3 / 4;
-    height: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: max-content;
-    justify-self: flex-end;
     margin-right: 5px;
 }
+
 .projectFunctionButton img {
     width: 20px;
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
 }
+
 .projectMain {
     transition-duration: 0.75s;
     transition-property: height;
@@ -80,13 +76,13 @@
     }
 }
 
-.hiddenProject {
+.hiddenProjectExpansion {
     height: 0px;
     visibility: hidden;
     opacity: 0;
 }
 
-.visibleProject {
+.visibleProjectExpansion {
     border: 2px dashed gray;
     opacity: 1;
     height: 175px;
@@ -94,118 +90,9 @@
 }
 
 @media screen and (max-width : 499px) {
-    .visibleProject {
+    .visibleProjectExpansion {
         height: 150px;
     }
-}
-
-.backgroundNonDelete {
-    background-color: #FFF0E5;
-    background-color: white;
-}
-
-.backgroundDelete {
-    background-color: antiquewhite;
-}
-
-.projectFunction {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    height: 40px;
-}
-
-.projectButton {
-    box-shadow: 5px 5px black;
-    transition-duration: 500ms;
-    border-radius: 5px;
-    padding: 5px;
-    cursor: pointer;
-    height: max-content;
-}
-
-.projectButton:hover {
-    box-shadow: 0px 0px white;
-    margin-top: 5px;
-    margin-left: 5px;
-}
-
-.projectButton:active {
-    box-shadow: 0px 0px white;
-    margin-top: 5px;
-    margin-left: 5px;
-}
-
-.editButton {
-    background-color: #008FFF;
-}
-
-.deleteButton {
-    background-color: #F86363;
-}
-
-.projectButton figure {
-    display: flex;
-    align-items: center;
-}
-
-.projectButton img {
-    height: 24px;
-    width: 24px;
-}
-
-.projectButton figcaption {
-    font-size: 18px;
-    color: white;
-    font-weight: 500;
-}
-
-@media screen and (max-width : 499px) {
-    .projectFunction {
-        margin-top: 20px;
-    }
-
-    .projectFunction img {
-        height: 16px;
-        width: 16px;
-    }
-    
-    .projectFunction figcaption {
-        font-size: 12px;
-    }
-    
-}
-
-.projectFunction button {
-    background-color: #000;
-    border: 0;
-    padding: 10px;
-    font-size: 16px;
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-@media screen and (max-width : 499px) {
-    .projectFunction button {
-        font-size: 12px;
-    }
-}
-
-.taskList::-webkit-scrollbar {
-    width: 5px;
-}
-  
-.taskList::-webkit-scrollbar-track {
-    background-color: #000;
-}
-
-.taskList::-webkit-scrollbar-thumb {
-    background-color: grey;
 }
 
 .listTaskHeader {
@@ -215,7 +102,6 @@
     padding: 10px 0;
     border-top: 2px solid black;
 }
-
 
 .listTaskTitle {
     margin-left: 20px;
@@ -264,63 +150,6 @@
     transition-duration: 500ms;
 }
 
-.progress {
-    padding: 7px 0px;
-    grid-column: 2 / 3;
-}
-
-.progress table {
-    width: 180px;
-    margin: 0 auto;
-    height: 20px;
-    border-collapse: collapse;
-    border-radius: 1em;
-}
-
-.progress table td {
-    font-size: 12px;
-    text-align: center;
-    font-weight: 500;
-}
-
-.emptyProgress table td {
-    border-radius: 10px;
-    background-color: white;
-    background-color: #213555;
-    background-color: black;
-    color: white;
-}
-
-.nonEmptyProgress table td {
-    color: white;
-}
-
-.nonEmptyProgress table tbody td:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-.nonEmptyProgress table tbody td:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.failingProcess {
-    background-color: #F72C5B;
-}
-
-.pendingProcess {
-    background-color: #FF8000;
-}
-
-.fulfilledProcess {
-    background-color: #5CB338;
-}
-
-.zeroPercent {
-    display: none;
-}
-
 .taskListDisplay {
     display: grid; 
     transition: 0.5s grid-template-rows ease;
@@ -337,4 +166,3 @@
 .taskListDisplay > div {
     overflow: hidden;
 }
-

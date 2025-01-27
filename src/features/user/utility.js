@@ -1,16 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const filterSlice = createSlice({
-    name: "filter",
-    initialState: {
-        statusFilter: ['pending', 'fulfilled', 'failing'],
-        dateFilter: {
-            timeCreatedFrom : "",
-            timeCreatedTo: "",
-            timeDeadlineFrom: "",
-            timeDeadlineTo: ""
-        }
-    },
+const filterStatusSlice = createSlice({
+    name: "filterStatus",
+    initialState: ['pending', 'fulfilled', 'failing'],
     reducers: {
         apply(state, action) {
             return action.payload;
@@ -18,13 +10,80 @@ const filterSlice = createSlice({
     }
 });
 
-const sortSlice = createSlice({
-    name: "sort",
-    initialState: {
-        sortTaskName: undefined,
-        sortTimeCreated: undefined,
-        sortTimeDeadline: true
-    },
+const filterImportantSlice = createSlice({
+    name: "filterImportantSlice",
+    initialState: false,
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+const filterTimeCreatedFromSlice = createSlice({
+    name: "filterTimeCreatedForm",
+    initialState: "",
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+const filterTimeCreatedToSlice = createSlice({
+    name: "filterTimeCreatedTo",
+    initialState: "",
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+const filterTimeDeadlineFromSlice = createSlice({
+    name: "filterTimeDeadlineForm",
+    initialState: "",
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+const filterTimeDeadlineToSlice = createSlice({
+    name: "filterTimeDeadlineTo",
+    initialState: "",
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+
+const sortTaskNameSlice = createSlice({
+    name: "sortTaskNameSlice",
+    initialState: null,
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+const sortTimeCreatedSlice = createSlice({
+    name: "sortTimeCreated",
+    initialState: null,
+    reducers: {
+        apply(state, action) {
+            return action.payload;
+        }
+    }
+});
+
+const sortTimeDeadlineSlice = createSlice({
+    name: "sortTimeDeadline",
+    initialState: true,
     reducers: {
         apply(state, action) {
             return action.payload;
@@ -66,8 +125,15 @@ const filterAndSortFormSlice = createSlice({
 });
 
 export {
-    filterSlice,
-    sortSlice,
+    filterImportantSlice,
+    filterStatusSlice,
+    filterTimeCreatedFromSlice,
+    filterTimeCreatedToSlice,
+    filterTimeDeadlineFromSlice,
+    filterTimeDeadlineToSlice,
+    sortTaskNameSlice,
+    sortTimeCreatedSlice,
+    sortTimeDeadlineSlice,
     searchSlice,
     createProjectFormSlice,
     filterAndSortFormSlice

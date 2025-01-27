@@ -1,5 +1,5 @@
 /*------------------------------------- COMPONENTS -------------------------------------*/
-import ListProject from "../../components/project/Project.js";
+import ProjectList from "../../components/project/Project.js";
 import CreateProjectButton from "../../components/project/CreateProjectButton.js";
 import FilterForm from "../../components/user/FilterForm.js";
 import SortForm from "../../components/user/SortForm.js";
@@ -33,7 +33,7 @@ function UserHomepage(props){
                 </div>
                 <div id="userHomepageBody">
                     <div id="userHomepageMain">
-                        <ListProject/>
+                        <ProjectList/>
                     </div>
                 </div>
             </div>

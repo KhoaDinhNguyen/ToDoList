@@ -32,7 +32,7 @@
 
 
 #statusFilter input[type=checkbox]:checked {
-    accent-color: rgba(244, 91, 105);
+    accent-color: #0077b6;
     
 }
 #statusFilter {
@@ -71,8 +71,8 @@
 #clearDate {
     display: block;
     color: white;
-    background-color: #8D0B41;
-    box-shadow: 0px 5px #8D0B41;
+    background-color: #023e8a;
+    box-shadow: 0px 5px #023e8a;
     border: 0;
     padding: 5px;
     margin-top: 10px;
@@ -91,7 +91,7 @@
 
 #clearDate:hover, #clearDate:active {
     transform: translate(0, 5px);
-    box-shadow: 0px 0px #8D0B41;
+    box-shadow: 0px 0px #023e8a;
 }
 
 #starFilter {

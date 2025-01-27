@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { sortSlice } from "../../features/user/utility";
+import { sortTaskNameSlice, sortTimeCreatedSlice, sortTimeDeadlineSlice } from "../../features/user/utility";
+//import { sortTaskNameSlice } from "../../features/user/utility";
 import './SortForm.css';
 
 function SortForm() {
@@ -73,9 +74,9 @@ function SortForm() {
 
     useEffect(() => {
         const sort = {
-            sortTimeCreated: undefined,
-            sortTaskName: undefined,
-            sortTimeDeadline: undefined
+            sortTimeCreated: null,
+            sortTaskName: null,
+            sortTimeDeadline: null
         };
         if (taskNameASC) sort.sortTaskName = true;
         else if (taskNameDESC) sort.sortTaskName = false;
@@ -85,7 +86,10 @@ function SortForm() {
 
         if (timeDeadlineASC) sort.sortTimeDeadline = true;
         else if (timeDeadlineDESC) sort.sortTimeDeadline = false;
-        dispatch(sortSlice.actions.apply(sort));
+
+        dispatch(sortTaskNameSlice.actions.apply(sort.sortTaskName));
+        dispatch(sortTimeCreatedSlice.actions.apply(sort.sortTimeCreated));
+        dispatch(sortTimeDeadlineSlice.actions.apply(sort.sortTimeDeadline));
 
     },[taskNameASC, taskNameDESC, timeCreatedASC, timeCreatedDESC, timeDeadlineASC, timeDeadlineDESC, dispatch]);
 
