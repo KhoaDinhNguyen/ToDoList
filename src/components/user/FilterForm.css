@@ -14,6 +14,19 @@
     }  
 }
 
+@media screen and (max-width : 499px) {
+    #filterForm h3{
+        font-size: 16px;
+    }  
+}
+
+@media screen and (max-width : 499px) {
+    #filterForm h4{
+        font-size: 12px;
+    }  
+}
+
+
 /* ================================== STATUS FILTER ================================== */
 
 #statusFilter input[type=checkbox] {
@@ -42,6 +55,7 @@
 #statusFilter h4 {
     margin-bottom: -5px;
 }
+
 #statusList {
     display: flex;
     margin: 5px 0;
@@ -84,7 +98,7 @@
 
 @media screen and (max-width : 499px) {
     #clearDate {
-        font-size: 12px;
+        font-size: 10px;
     }
 }
 

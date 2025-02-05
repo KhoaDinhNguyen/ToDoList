@@ -12,11 +12,21 @@
     }
 }
 
-
 #sortForm {
     margin-left: 10px;
     margin-top: 10px;
 }
+
+@media screen and (max-width : 499px) {
+    #sortForm h4{
+        font-size: 12px;
+    }
+
+    #sortForm h3{
+        font-size: 16px;
+    }  
+}
+
 
 #sortForm .statusBox {
     display: flex;
@@ -71,7 +81,7 @@
 
 @media screen and (max-width : 499px) {
     #clearSort {
-        font-size: 12px;
+        font-size: 10px;
     }
 }
 

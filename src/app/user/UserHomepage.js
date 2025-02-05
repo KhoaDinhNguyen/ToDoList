@@ -1,8 +1,6 @@
 /*------------------------------------- COMPONENTS -------------------------------------*/
 import ProjectList from "../../components/project/Project.js";
 import CreateProjectButton from "../../components/project/CreateProjectButton.js";
-import FilterForm from "../../components/user/FilterForm.js";
-import SortForm from "../../components/user/SortForm.js";
 import SearchForm from "../../components/user/SearchForm.js";
 import { Helmet } from "react-helmet";
 import CreateProjectForm from "../../components/project/CreateProjectForm.js";

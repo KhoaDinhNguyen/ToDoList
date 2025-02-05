@@ -29,37 +29,52 @@
     }
 }
 
-@media screen and (max-width : 499px) {
+@media screen and (max-width : 850px) {
     #userPage {
-        grid-template-columns: var(--width499Default) 1fr;
+        display: block;
     }
 }
 
 #userNavigationBar {
     grid-column: 1 / 2;
+    position: absolute;
+    z-index: 999;
+}
+
+@media screen and (max-width : 850px) {
+    #userNavigationBar {
+        height: 450px;
+    }
+}
+
+#userNavigationBarBody {
     background-color: #7b71cc;
     width: 80px;
-    overflow-x: clip;
-    z-index: 10;
     height: 600px;
-    position: fixed;
+    position: absolute;
     margin-top: 25px;
     margin-left: 10px;
     border-radius: 20px;
+    transition-duration: 0.5s;
+
 }
+
+@media screen and (max-width : 850px) {
+    #userNavigationBarBody {
+        width: 60px;
+        height: 375px;
+        margin-left: 10px;
+    }
+}
+
 
 #userNavigationBarHeader {
     border-bottom: 1px solid #efefef;
 }
 
-@media screen and (max-width : 499px) {
-    #userNavigationBar {
-        width: var(--width499Default);
-        transition-duration: 0.3s;
-    }
-    #userNavigationBar:hover {
-        width: var(--width499Hover);
-    }
+
+#userNavigationBar {
+    transition-duration: 0.3s;
 }
 
 #userNavigationBar #companyName {
@@ -75,20 +90,27 @@
     margin-bottom: 20px;
 }
 
+@media screen and (max-width : 850px) {
+    #userNavigationBar #companyName {
+        width: 30px;
+        height: 30px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
 #userNavigationBar #companyName img {
     width: 25px;
     height: 25px;
 }
 
-
-@media screen and (max-width : 499px) {
-    #userNavigationBar #companyName {
-        width: var(--width499Default);
-    }
-    #userNavigationBar:hover #companyName {
-        width: var(--width499Hover);
+@media screen and (max-width : 850px) {
+    #userNavigationBar #companyName img {
+        width: 15px;
+        height: 15px;
     }
 }
+
 
 /* ============================== PAGE NAVIGATION ============================== */
 /* ------------------------------ DEFAULT ------------------------------ */
@@ -98,6 +120,7 @@
     justify-content: space-between;
     flex-direction: column;
     margin-top: 20px;
+    position: relative;
 }
 
 #userNavigationBar #pageNavigation ul {
@@ -106,15 +129,15 @@
     align-items: flex-end;
 }
 
-@media screen and (max-width : 499px) {
-    #userNavigationBar #pageNavigation {
-        width: var(--width499Default);
-    }
-}
-
 #userNavigationBar #pageNavigation li {
     list-style-type: none;
     margin: 10px 0;
+}
+
+@media screen and (max-width : 850px) {
+    #userNavigationBar #pageNavigation li {
+        margin: 5px 0;
+    }
 }
 
 #userNavigationBar #pageNavigation a {
@@ -125,6 +148,19 @@
     border-radius: 20px;
 }
 
+@media screen and (max-width : 850px) {
+    #userNavigationBar #pageNavigation a {
+        padding: 10px;
+        border-radius: 10px;
+    }
+}
+
+@media screen and (max-width : 850px) {
+    #userNavigationBar #pageNavigation a svg{
+        width: 20px;
+        height: 20px;
+    }
+}
 
 #userNavigationBar #pageNavigation a:hover {
     background-color: #000;
@@ -142,7 +178,7 @@
     min-height: 92vh;
 }
 
-@media screen and (max-width : 499px) {
+@media screen and (max-width : 850px) {
     #userContent{
         width: 100%;
     }
@@ -170,7 +206,7 @@
     margin-left: 10px;
 }
 
-@media screen and ((max-width : 499px) or (max-height: 600px)) {
+@media screen and ((max-width : 850px) or (max-height: 600px)) {
     #userPage #companyName p {
         font-size: 1rem;
         margin: 0;
@@ -184,4 +220,50 @@
 
 #userPage footer .companyName img {
     cursor: default;
+}
+
+#displayNavigationBarFunction {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width : 850px) {
+    #displayNavigationBarFunction {
+        top: 50%;
+        left: 75%;
+    }
+
+    #displayNavigationBarFunction svg {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.navigationBarDisplay #userNavigationBarBody {
+    opacity: 1;
+    visibility: visible;
+    left: 0%;
+}
+
+.nonNavigationBarDisplay #userNavigationBarBody {
+    opacity: 0;
+    visibility: hidden;
+    left: -10%;
+}
+
+
+#user header {
+    background: none ;
+    background-color: rgb(7 1 39);
+    padding: 5px 0px;
+}
+
+@media screen and (max-width : 850px){
+    .pageActive p{
+        font-size: 16px;
+    }
+
+    .pageActive h2{
+        font-size: 20px;
+    }
 }

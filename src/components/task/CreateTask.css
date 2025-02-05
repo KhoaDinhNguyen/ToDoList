@@ -8,7 +8,6 @@
 
 @media screen and (max-width : 499px) {
     .createTaskForm {
-        margin: 5px 0;
         width: 100%;
     }
 }
@@ -54,7 +53,7 @@
 
 @media screen and (max-width : 499px) {
     .createTaskForm .openCreateTask p{
-        font-size: 12px;
+        font-size: 14px;
         margin-left: 5px;
     }
 }

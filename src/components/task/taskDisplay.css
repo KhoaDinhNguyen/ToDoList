@@ -12,6 +12,12 @@
     border-bottom: 1px solid #efefef;
 }
 
+@media screen and (max-width : 499px) {
+    .homepageTask {
+        grid-template-columns: 30px 1fr 50px 70px;
+    }
+}
+
 .importantAndCheckBox {
     display: flex;
     flex-direction: row;
@@ -19,16 +25,26 @@
     margin-left: 25px;
     align-items: center;
 }
+
 @media screen and (max-width : 499px) {
-    .homepageTask {
-        width: 225px;
+    .importantAndCheckBox {
+        position: relative;
+        margin-left: 10px;
+        top: 1px;
     }
+
+    .importantAndCheckBox label {
+        width: 15px;
+        height: 15px;
+    }
+    
 }
 
 .homepageTaskBody {
     position: relative;
     z-index: 6;
 }
+
 .homepageTaskMain {
     display: flex;
     justify-content: flex-start;
@@ -61,6 +77,13 @@
     font-size: 14px;
 }
 
+
+@media screen and (max-width : 499px) {
+    .homepageStatus p {
+        font-size: 10px;
+    }
+}
+
 .pending_Task {
     background-color: #FF8C00;
 }
@@ -86,6 +109,12 @@
 
 .homepageTaskName h4 {
     font-weight: 400;
+}
+
+@media screen and (max-width : 499px) {
+    .homepageTaskName h4 {
+        font-size: 12px;
+    }
 }
 
 .fulfilledTask {
@@ -124,6 +153,13 @@
     width: 25px;
     margin: 0 5px;
 }
+
+@media screen and (max-width : 499px) {
+    .important {
+        width: 15px;
+    }
+}
+
 .important input[type="checkbox"]{
     visibility: hidden;
     width: 0;
@@ -143,6 +179,12 @@
     transition-duration: 0.5s;
 }
 
+@media screen and (max-width : 499px) {
+    .important label svg {
+        width: 15px;
+        height: 15px;
+    }
+}
 /*
 .homepageTask:hover .important label svg {
     width: 25px;
@@ -167,16 +209,6 @@
 .taskStatus {
     display: flex;
     align-items: center;
-}
-
-.checkbox {
-    width: 10px;
-    height: 10px;
-    border: 1.5px solid black;
-    border-radius: 50%;
-    position: relative;
-    top: 2px;
-    margin-right: 3px;
 }
 
 @media screen and (max-width : 499px) {
@@ -217,6 +249,13 @@
     margin-left: 20px;
 }
 
+@media screen and (max-width : 499px) {
+    .taskFunction img {
+        height: 15px;
+        width: 15px;
+        margin-left: 5px;
+    }
+}
 .changeStatus {
     display: none;
 }

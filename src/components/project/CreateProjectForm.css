@@ -5,6 +5,12 @@
     margin-bottom: 20px;
 }
 
+@media screen and (max-width : 850px) {
+    #createProjectFormMain {
+        width: 90%;
+    }    
+}
+
 #createProjectFormMain fieldset{
     border: 2px solid black;
     border-radius: 5px;
@@ -37,7 +43,7 @@
     #createProjectFormMain legend {
         margin-left: 10px;
         padding: 10px;
-        font-size: 14px;
+        font-size: 12px;
     }
 }
 
@@ -88,7 +94,7 @@
     
     #createProjectForm .createProjectInput input{
         font-size: 12px;
-        width: 200px;
+        width: 90%;
     }
 }
 
@@ -97,6 +103,12 @@
     justify-self: flex-end;
     display: flex;
     margin-bottom: 10px;
+}
+
+@media screen and (max-width : 499px) {
+    #createProjectForm #createProjectButton {
+        margin-top: 20px;
+    }
 }
 
 #createProjectForm #createProjectButton label{
@@ -108,8 +120,8 @@
 }
 
 @media screen and (max-width : 499px) {
-    #createProjectForm #createProjectButton input{
-        padding: 10px;
+    #createProjectForm #createProjectButton label {
+        padding: 5px;
         font-size: 12px;
     }
 }

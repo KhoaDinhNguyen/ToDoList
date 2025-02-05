@@ -13,6 +13,18 @@
     background-color: #FFF;
 }
 
+@media screen and (max-width: 499px) {
+    .project {
+        min-width: 300px;
+    }
+}
+
+@media screen and (min-width: 499px) and (max-width : 850px) {
+    .project {
+        min-width: 500px;
+    }
+}
+
 .projectHeader {
     display: grid;
     grid-template-columns: 50px 1fr 150px;
@@ -22,11 +34,23 @@
     align-items: center;
 }
 
+@media screen and (max-width: 499px) {
+    .projectHeader {
+        grid-template-columns: 40px 1fr 115px;
+    }
+}
+
 .pieChartHomepage {
     width: 45px;
     position: relative;
     bottom: 5px;
     grid-column: 1 / 2;
+}
+
+@media screen and (max-width: 499px) {
+    .pieChartHomepage {
+        width: 35px;
+    }
 }
 
 .projectHeader h3 {
@@ -36,6 +60,12 @@
     font-weight: 400;
     width: max-content;
     grid-column: 2 / 3;
+}
+
+@media screen and (max-width: 499px) {
+    .projectHeader h3 {
+        font-size: 20px;
+    }
 }
 
 .projectFunctionButton {
@@ -55,6 +85,16 @@
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 499px) {
+    .projectFunctionButton img {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+    
 }
 
 .projectMain {
@@ -101,6 +141,12 @@
     align-items: center;
     padding: 10px 0;
     border-top: 2px solid black;
+}
+
+@media screen and (max-width : 499px) {
+    .listTaskHeader {
+        padding: 5px 0;
+    }
 }
 
 .listTaskTitle {

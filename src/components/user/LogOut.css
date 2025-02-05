@@ -6,6 +6,12 @@
     align-items: center;
 }
 
+@media screen and (max-width : 850px) {
+    #userNavigationBarFooter {
+        margin-top: 20px;
+    }
+}
+
 #userNavigationBarFooter #logOut {
     display: flex;
     cursor: pointer;
@@ -17,6 +23,14 @@
     border-radius: 20px;
     margin-top: 10px;
 }
+
+@media screen and (max-width : 850px) {
+    #userNavigationBarFooter #logOut {
+        padding: 10px;
+        margin-top: 0px;
+    }
+}
+
 
 #userNavigationBarFooter #logOut:hover {
     background-color: #000;

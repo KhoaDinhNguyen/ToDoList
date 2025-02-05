@@ -11,6 +11,15 @@
     transition-duration: 300ms;
 }
 
+@media screen and (max-width : 499px) {
+    #openCreateProjectButton {
+        padding: 10px 5px;
+        font-size: 12px;
+    }
+    
+}
+
+
 #openCreateProjectButton:hover {
     border: 2px solid #000;
 }
@@ -44,12 +53,4 @@
 
 #openCreateProjectButton:hover span, #openCreateProjectButton:active span {
     color: #000;
-}
-
-
-@media screen and (max-width : 499px) {
-    #openCreateProjectButton {
-        font-size: 12px;
-        padding: 5px;
-    }
 }
