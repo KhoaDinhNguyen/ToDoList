@@ -14,8 +14,6 @@
 */
 
 function sortTask(tasks, sortTaskName, sortTimeCreated, sortTimeDeadline) {
-    console.log(sortTaskName + " " + sortTimeCreated + " " + sortTimeDeadline);
-
     for (let i = 1; i < tasks.length; ++i) {
         const key = tasks[i];
         let j = i - 1;

@@ -203,7 +203,7 @@ function DashboardChart(props) {
                             'Failing'
                         ],
                         datasets: [{
-                        label: 'My First Dataset',
+                        label: 'Number of tasks',
                         data: [numPendingTask, numFulfilledTask, numFailingTask],
                         backgroundColor: [
                             '#FF8C00',

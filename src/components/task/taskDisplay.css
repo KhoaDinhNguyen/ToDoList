@@ -457,6 +457,7 @@
     border: 1px solid transparent;
     transition-duration: 0.3s;
     width: 95%;
+    align-items: center;
 }
 
 .taskDashboard:hover {
@@ -468,6 +469,7 @@
 .taskDashboardFunction {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .taskNameAndTaskDeadline {
@@ -485,11 +487,21 @@
 }
 
 @media screen and (max-width : 499px) {
-    .taskDashboard .taskName {
+    .taskDashboard .taskName, .taskDashboard p {
         font-size: 12px;
     }
 
     .taskDashboard .important label svg {
+        height: 15px;
+        width: 15px;
+    }
+
+    .taskDashboard .labelCheckboxTask {
+        height: 15px;
+        width: 15px;
+    }
+
+    .taskDashboard .labelCheckboxTask svg {
         height: 15px;
         width: 15px;
     }

@@ -54,7 +54,7 @@ function CreateTaskForm(props) {
     return (
         <div className="createTaskForm">
             <div className="openCreateTask" style={{display: convertFromBooleanToDisplay(!createTaskFormDisplay)}} onClick={onClickToggleCreateTaskButton}>
-                <p>&#x1F7A3; Create new task</p>
+                <p>+ Create new task</p>
             </div>
             <form style={{display: convertFromBooleanToDisplay(createTaskFormDisplay)}} onSubmit={onSubmit} className="createTaskFormMain">
                 <fieldset>
