@@ -34,11 +34,8 @@ const findAccountNameExist = (req, res, next) => {
 
 const validateAccountName = async (req, res, next) => {
     const {password, accountName} = req.body;
-
     try {
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const match = await bcrypt.compare(password, hashedPassword);
+        const match = await bcrypt.compare(password, res.password);
         if (match) {
             pool.query(`SELECT * FROM users WHERE name = '${accountName}'`, (_, result) => {
                 res.status(200).json({ ...result.rows[0], message: 'Found', error: false});
@@ -60,7 +57,7 @@ const createAccount = async (req, res, next) => {
     try {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        pool.query(`CALL create_user('${accountName}', '${profileName}', '${password}')`, (err, result) => {
+        pool.query(`CALL create_user('${accountName}', '${profileName}', '${hashedPassword}')`, (err, result) => {
             if (err) {
                 res.status(400).json({message: err.message, error: true});
             }
